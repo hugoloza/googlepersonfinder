@@ -1,0 +1,1273 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-17 18:33-0700\n"
+"PO-Revision-Date: 2010-03-24 10:09-0800\n"
+"Last-Translator: weloc <info@welocalize.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Copyright 2010 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#: create.py:45
+msgid ""
+"The Given name and Family name are both required.  Please go back and try "
+"again."
+msgstr "Både förnamn och efternamn måste anges. Gå tillbaka och försök igen."
+
+#: create.py:48
+#, fuzzy
+msgid "Name is required.  Please go back and try again."
+msgstr "Meddelande måste anges. Gå tillbaka och försök igen."
+
+#: create.py:51
+msgid "The Original author's name is required.  Please go back and try again."
+msgstr ""
+"Den ursprungliga författarens namn måste anges. Gå tillbaka och försök igen."
+
+#: create.py:53
+msgid ""
+"Your name is required in the \"Source\" section.  Please go back and try "
+"again."
+msgstr "Ditt namn måste anges under Källa. Gå tillbaka och försök igen."
+
+#: create.py:57 multiview.py:74 view.py:78
+msgid "Message is required. Please go back and try again."
+msgstr "Meddelande måste anges. Gå tillbaka och försök igen."
+
+#: create.py:59 view.py:87
+msgid ""
+"Please check that you have been in contact with the person after the "
+"earthquake, or change the \"Status of this person\" field."
+msgstr ""
+"Markera att du har varit i kontakt med personen efter jordbävningen eller "
+"ändra fältet Personens status."
+
+#: create.py:66
+msgid ""
+"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
+"date.  Please go back and try again."
+msgstr ""
+"Det ursprungliga överföringsdatumet har inte formatet ÅÅÅÅ-MM-DD eller så är "
+"det ett datum som inte finns. Gå tillbaka och försök igen."
+
+#: create.py:68
+msgid "Date cannot be in the future.  Please go back and try again."
+msgstr "Datumet får inte vara i framtiden. Gå tillbaka och försök igen."
+
+#: create.py:74
+msgid ""
+"Photo uploaded is in an unrecognized format.  Please go back and try again."
+msgstr "Det överförda fotots format är okänt. Gå tillbaka och försök igen."
+
+#: create.py:95
+msgid "The provided image is too large.  Please upload a smaller one."
+msgstr "Den bifogade bilden är för stor. Överför en mindre bild."
+
+#: create.py:99
+msgid ""
+"There was a problem processing the image.  Please try a different image."
+msgstr ""
+"Ett problem uppstod när bilden skulle bearbetas. Försök med en annan bild."
+
+#: delete.py:60
+msgid "The record has been deleted."
+msgstr ""
+
+#: delete.py:63
+msgid "The authorization code was invalid."
+msgstr ""
+
+#: delete.py:71
+#, python-format
+msgid "Deletion request for %(given_name)s %(family_name)s"
+msgstr ""
+
+#: delete.py:76
+#, python-format
+msgid ""
+"\n"
+"We have received a deletion request for a missing person record at\n"
+"%(domain_name)s.\n"
+"\n"
+"Your e-mail address was entered as the author of this record, so we\n"
+"are contacting you to confirm whether you want to delete it.\n"
+"\n"
+"To delete this record, use this link:\n"
+"\n"
+"    %(delete_url)s\n"
+"\n"
+"To view the record, use this link:\n"
+"\n"
+"    %(view_url)s\n"
+"\n"
+msgstr ""
+
+#: delete.py:99
+msgid ""
+"An e-mail message with a deletion code has been sent.  The code will expire "
+"in one day."
+msgstr ""
+
+#: multiview.py:79 view.py:82
+msgid ""
+"Your name is required in the \"About you\" section.  Please go back and try "
+"again."
+msgstr "Ditt namn måste anges under Om dig. Gå tillbaka och försök igen."
+
+#: utils.py:167
+msgid "female"
+msgstr "kvinna"
+
+#: utils.py:168
+msgid "male"
+msgstr "man"
+
+#: utils.py:169
+msgid "other"
+msgstr "annat"
+
+#: utils.py:181 utils.py:202
+msgid "Unspecified"
+msgstr "Ospecificerat"
+
+#: utils.py:182
+msgid "I am seeking information"
+msgstr "Jag söker information"
+
+#: utils.py:183
+msgid "I am this person"
+msgstr "Jag är den här personen"
+
+#: utils.py:185
+msgid "I have received information that this person is alive"
+msgstr "Jag har fått information om att personen lever"
+
+#: utils.py:186
+msgid "I have reason to think this person is missing"
+msgstr "Jag har anledning att tro att personen saknas"
+
+#: utils.py:187
+msgid "I have received information that this person is dead"
+msgstr "Jag har fått information om att personen är död"
+
+#: utils.py:203
+msgid "Someone is seeking information"
+msgstr "Någon söker information"
+
+#: utils.py:204
+msgid "This person has posted a message"
+msgstr "Personen har lagt upp ett meddelande"
+
+#: utils.py:206
+msgid "Someone has received information that this person is alive"
+msgstr "Någon har fått information om att personen lever"
+
+#: utils.py:207
+msgid "Someone has reported that this person is missing"
+msgstr "Någon har rapporterat att personen saknas"
+
+#: utils.py:209
+msgid "Someone has received information that this person is dead"
+msgstr "Någon har fått information om att personen är död"
+
+#: utils.py:558
+msgid ""
+"There was an error processing your request.  Sorry for the inconvenience.  "
+"Our administrators will investigate the source of the problem, but please "
+"check that the format of your request is correct."
+msgstr ""
+"Ett fel uppstod när din begäran bearbetades. Vi ber om ursäkt för eventuella "
+"besvär. Våra administratörer kommer att undersöka källan till problemet, men "
+"kontrollera gärna att begärans format är korrekt."
+
+#: templates/add_note.html:29
+msgid "Tell us the status of this person"
+msgstr "Berätta för oss vad personens status är"
+
+#: templates/add_note.html:31 templates/results.html:127
+msgid "Mark records as duplicate"
+msgstr "Markera poster som dubbletter"
+
+#: templates/add_note.html:39
+msgid "Status of this person"
+msgstr "Personens status"
+
+#: templates/add_note.html:60
+msgid "Message (required)"
+msgstr "Meddelande (måste anges)"
+
+#: templates/add_note.html:64
+msgid "A message for this person or others seeking this person"
+msgstr ""
+"Ett meddelande till personen eller till andra som söker efter honom eller "
+"henne"
+
+#: templates/add_note.html:66
+msgid "Please explain why you think these are the same person"
+msgstr "Förklara varför du tror att de är samma person"
+
+#: templates/add_note.html:84 templates/view.html:357
+msgid "Last known location"
+msgstr "Senast kända vistelseort"
+
+#: templates/add_note.html:87
+msgid ""
+"Type an address or open the map below and indicate the location by moving "
+"the pin."
+msgstr ""
+"Skriv en adress eller öppna kartan nedan och ange plats genom att flytta "
+"nålen."
+
+#: templates/add_note.html:103 templates/view.html:367
+msgid "Show Map"
+msgstr "Visa karta"
+
+#: templates/add_note.html:108 templates/view.html:372
+msgid "Hide Map"
+msgstr "Dölj karta"
+
+#: templates/add_note.html:125
+#, fuzzy
+msgid ""
+"Have you personally talked with this person AFTER the disaster? (required)"
+msgstr ""
+"Har du personligen talat med personen EFTER jordbävningen (måste anges)?"
+
+#: templates/add_note.html:135
+msgid "Yes"
+msgstr "Ja"
+
+#: templates/add_note.html:143
+msgid "No"
+msgstr "Nej"
+
+#: templates/add_note.html:154
+msgid "Missing person's current contact information"
+msgstr "Den saknade personens nuvarande kontaktuppgifter"
+
+#: templates/add_note.html:157
+msgid "How can this person be reached now?"
+msgstr "Hur kan personen nås nu?"
+
+#: templates/add_note.html:163
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: templates/add_note.html:174
+msgid "E-mail address"
+msgstr "E-postadress"
+
+#: templates/add_note.html:190
+msgid "About you (required)"
+msgstr "Om dig (måste anges)"
+
+#: templates/add_note.html:193
+msgid "How others who are interested in this person can contact you"
+msgstr "Så kan andra som vill ha information om personen nå dig"
+
+#: templates/add_note.html:200 templates/create.html:254
+msgid "Your name"
+msgstr "Ditt namn"
+
+#: templates/add_note.html:210 templates/create.html:268
+msgid "Your phone number"
+msgstr "Ditt telefonnummer"
+
+#: templates/add_note.html:220 templates/create.html:282
+msgid "Your e-mail address"
+msgstr "Din e-postadress"
+
+#: templates/add_note.html:236
+msgid "Yes, these are the same person"
+msgstr "Ja, de är samma person"
+
+#: templates/add_note.html:238 templates/create.html:330
+msgid "Save this record"
+msgstr "Spara den här posten"
+
+#: templates/add_note.html:241
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: templates/admin.html:20
+msgid "Administration"
+msgstr "Administration"
+
+#: templates/admin.html:23 templates/reveal.html:24
+#, python-format
+msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
+msgstr "Du är inloggad som <span class=\"email\">%(email)s</span>."
+
+#: templates/admin.html:24
+#, fuzzy, python-format
+msgid "<a href=\"%(logout_url)s\">Sign out</a>"
+msgstr "<a href=\"%(logout_url)s\">Logga ut</a>"
+
+#: templates/admin.html:26
+#, fuzzy, python-format
+msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
+msgstr ""
+"Du är inte inloggad för närvarande. <a href=\"%(login_url)s\">Logga in</a>"
+
+#: templates/base.html:34
+msgid "Google Person Finder"
+msgstr "Google Person Finder"
+
+#: templates/base.html:71 templates/base.html.py:90
+msgid "Person Finder"
+msgstr "Person Finder"
+
+#: templates/base.html:102 templates/developers.html:205
+#: templates/embed.html:45 templates/view.html:250
+msgid "Back to start"
+msgstr "Tillbaka till början"
+
+#: templates/base.html:108
+msgid ""
+"PLEASE NOTE: All data entered will be available to the public and viewable "
+"and usable by anyone.  Google does not review or verify the accuracy of this "
+"data."
+msgstr ""
+"OBSERVERA: Alla data som anges är offentliga och kan ses och användas av vem "
+"som helst. Google varken granskar eller kontrollerar att uppgifterna stämmer."
+
+#: templates/base.html:114
+msgid "Embed this tool on your site"
+msgstr "Bädda in det här verktyget på din webbplats"
+
+#: templates/base.html:118
+msgid "Developers"
+msgstr "Utvecklare"
+
+#: templates/base.html:121
+msgid "Terms of Service"
+msgstr "Användarvillkor"
+
+#: templates/create.html:32
+msgid "Identify who you have information about"
+msgstr "Identifiera personen som du har information om"
+
+#: templates/create.html:34
+msgid "Identify who you are looking for"
+msgstr "Identifiera personen som du efter"
+
+#: templates/create.html:41
+msgid "Name (required)"
+msgstr "Namn (måste anges)"
+
+#: templates/create.html:44
+msgid "What is this person's name?"
+msgstr "Vad heter personen?"
+
+#: templates/create.html:51 templates/create.html.py:81
+#: templates/multiview.html:47 templates/multiview.html.py:67
+#: templates/query_form.html:30 templates/query_form.html.py:66
+#: templates/view.html:44 templates/view.html.py:60
+msgid "Family name"
+msgstr "Efternamn"
+
+#: templates/create.html:65 templates/multiview.html:58
+#: templates/query_form.html:47 templates/view.html:51
+msgid "Given name"
+msgstr "Förnamn"
+
+#: templates/create.html:67 templates/multiview.html:42
+#: templates/multiview.html.py:60 templates/query_form.html:49
+#: templates/view.html:40 templates/view.html.py:53
+msgid "Name"
+msgstr "Namn"
+
+#: templates/create.html:97
+msgid "Home Address"
+msgstr "Hemadress"
+
+#: templates/create.html:100
+msgid "Where is this person from?"
+msgstr "Varifrån kommer personen?"
+
+#: templates/create.html:106 templates/multiview.html:77
+#: templates/view.html:94
+msgid "Street name"
+msgstr "Gatunamn"
+
+#: templates/create.html:108
+msgid "Street name only, no number"
+msgstr "Bara gatans namn, inte husnummer"
+
+#: templates/create.html:123 templates/multiview.html:81
+#: templates/view.html:98
+msgid "Neighborhood"
+msgstr "Område"
+
+#: templates/create.html:132 templates/multiview.html:85
+#: templates/view.html:102
+msgid "City"
+msgstr "Stad"
+
+#: templates/create.html:142 templates/multiview.html:89
+#: templates/view.html:106
+msgid "Province or state"
+msgstr "Provins eller delstat"
+
+#: templates/create.html:154 templates/multiview.html:94
+#: templates/view.html:111
+msgid "Postal or zip code"
+msgstr "Postnummer"
+
+#: templates/create.html:169
+msgid "Description"
+msgstr "Beskrivning"
+
+#: templates/create.html:172
+msgid "Describe how to identify this person."
+msgstr "Beskriv hur personen kan identifieras."
+
+#: templates/create.html:187 templates/multiview.html:117
+#: templates/view.html:140
+msgid "Photo"
+msgstr "Fotografi"
+
+#: templates/create.html:190
+msgid "If you have a photo of this person, upload it or enter its URL address."
+msgstr ""
+"Om du har ett foto av personen kan du överföra det eller ange en webbadress "
+"till fotot."
+
+#: templates/create.html:198
+msgid "URL"
+msgstr "Webbadress"
+
+#: templates/create.html:210
+msgid "Upload"
+msgstr "Överför"
+
+#: templates/create.html:223
+msgid "Source of this record (required)"
+msgstr "Postens källa (måste anges)"
+
+#: templates/create.html:226
+msgid "Where did this information come from?"
+msgstr "Varifrån fick du informationen?"
+
+#: templates/create.html:237
+msgid "This is a new record."
+msgstr "Det här är en ny post."
+
+#: templates/create.html:245
+msgid "This record is copied from another source."
+msgstr "Den här posten har kopierats från en annan källa."
+
+#: templates/create.html:258
+msgid "Original author's name"
+msgstr "Den ursprunglige författarens namn"
+
+#: templates/create.html:272 templates/multiview.html:143
+#: templates/view.html:163
+msgid "Author's phone number"
+msgstr "Författarens telefonnummer"
+
+#: templates/create.html:286 templates/multiview.html:159
+#: templates/view.html:176
+msgid "Author's e-mail address"
+msgstr "Författarens e-postadress"
+
+#: templates/create.html:296
+msgid "URL of original record"
+msgstr "Den ursprungliga postens webbadress"
+
+#: templates/create.html:306 templates/multiview.html:185
+#: templates/view.html:197
+msgid "Original posting date"
+msgstr "Ursprungligt överföringsdatum"
+
+#: templates/create.html:308
+msgid "Enter as YYYY-MM-DD"
+msgstr "Ange i formatet ÅÅÅÅ-MM-DD"
+
+#: templates/create.html:317 templates/multiview.html:189
+#: templates/view.html:201
+msgid "Original site name"
+msgstr "Den ursprungliga webbplatsens namn"
+
+#: templates/delete.html:24
+#, python-format
+msgid ""
+"\n"
+"      Really delete the record for %(first_name)s %(last_name)s?\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:30
+#, python-format
+msgid ""
+"\n"
+"    You can\n"
+"    <a href=\"%(view_url)s\">view the record</a> or\n"
+"    <a href=\"%(save_url)s\">right-click this link to save a copy</a>\n"
+"    before deleting the record.\n"
+"  "
+msgstr ""
+
+#: templates/delete.html:37
+msgid "The following items will be deleted:"
+msgstr ""
+
+#: templates/delete.html:48
+msgid "Yes, delete the record"
+msgstr ""
+
+#: templates/delete.html:54
+#, python-format
+msgid ""
+"\n"
+"      Request deletion of %(first_name)s %(last_name)s\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:61
+#, python-format
+msgid ""
+"\n"
+"      Note that this record was not originally created on this site!\n"
+"      This record originally came from\n"
+"      <a href=\"http://%(source_domain)s/\"><strong>%(source_name)s</"
+"strong></a>.\n"
+"      You can delete the copy on this site,\n"
+"      but you may need to notify <strong>%(source_name)s</strong></a>\n"
+"      to prevent them from posting the same record again later.\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:73
+#, python-format
+msgid ""
+"\n"
+"      The record for <strong>%(first_name)s %(last_name)s</strong>\n"
+"      has the e-mail address %(email)s as the author of the record.\n"
+"      You can send a deletion code to %(email)s,\n"
+"      which can be used to delete this record.\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:82
+msgid "Send a deletion code"
+msgstr ""
+
+#: templates/delete.html:85
+#, python-format
+msgid ""
+"\n"
+"      The record for <strong>%(first_name)s %(last_name)s</strong>\n"
+"      has no e-mail address for the author of the record.\n"
+"    "
+msgstr ""
+
+#: templates/developers.html:21 templates/embed.html:21
+msgid "Embedding the Application"
+msgstr "Bädda in programmet"
+
+#: templates/developers.html:23 templates/embed.html:22
+msgid "Copy and paste the following HTML code to put this tool on your site"
+msgstr ""
+"Kopiera och klistra in följande HTML-kod om du vill ha verktyget på din "
+"webbplats"
+
+#: templates/developers.html:31
+msgid "This gadget is made available under the"
+msgstr "Den här gadgeten är tillgänglig enligt"
+
+#: templates/developers.html:32 templates/embed.html:34
+msgid "Apache 2.0 license"
+msgstr "Apache 2.0-licensen"
+
+#: templates/developers.html:34
+msgid ""
+"Any data you receive by collaborating with Google in connection with the "
+"gadget is shared under a "
+msgstr ""
+"Alla data du tar emot när du samarbetar med Google i samband med gadgeten "
+"delas enligt en "
+
+#: templates/developers.html:35
+msgid "Creative Commons license"
+msgstr "Creative Commons-licens"
+
+#: templates/developers.html:38
+msgid "Feedback and Discussion"
+msgstr "Feedback och diskussion"
+
+#: templates/developers.html:40
+msgid ""
+"To provide feedback on the People Finder application or to ask questions of "
+"the developers or other users, please join the "
+msgstr ""
+"Om du vill lämna feedback om People Finder eller ställa frågor till "
+"utvecklarna eller andra användare anmäler du dig till vår "
+
+#: templates/developers.html:42
+msgid "mailing list."
+msgstr "e-postlista."
+
+#: templates/developers.html:45
+msgid "Downloading Data"
+msgstr "Hämta data"
+
+#: templates/developers.html:47
+msgid ""
+"The Person Finder application stores and exports records using the People "
+"Finder Interchange Format (PFIF), which is based on XML."
+msgstr ""
+"I Person Finder sparas och exporteras poster i formatet PFIF (People Finder "
+"Interchange Format), som är XML-baserat."
+
+#: templates/developers.html:48
+msgid "Documentation on the format is available here:"
+msgstr "Dokumentation om formatet finns här:"
+
+#: templates/developers.html:51
+msgid "PFIF 1.2 Specification"
+msgstr "Specifikation för PFIF 1.2"
+
+#: templates/developers.html:53
+msgid "PFIF 1.2 example document"
+msgstr "Exempeldokument i PFIF 1.2"
+
+#: templates/developers.html:55
+msgid "PFIF 1.1 Specification"
+msgstr "Specifikation för PFIF 1.1"
+
+#: templates/developers.html:57
+msgid "PFIF 1.1 example document"
+msgstr "Exempeldokument i PFIF 1.1"
+
+#: templates/developers.html:59
+msgid "PFIF FAQ and Implementation Guidelines"
+msgstr "Vanliga frågor om PFIF och riktlinjer för implementering"
+
+#: templates/developers.html:61
+msgid "XML Specification"
+msgstr "Specifikation för XML"
+
+#: templates/developers.html:65
+msgid "Person Finder now supports PFIF 1.2."
+msgstr "Person Finder stöder nu PFIF 1.2."
+
+#: templates/developers.html:68
+msgid "There are several ways to download records from our database:"
+msgstr "Det finns flera sätt att hämta poster från vår databas:"
+
+#: templates/developers.html:70
+msgid "Atom Feeds"
+msgstr "Atom-feeds"
+
+#: templates/developers.html:72
+msgid "PFIF 1.2 person and note feeds are available here:"
+msgstr "Person- och anteckningsfeeds för PFIF 1.2 finns här:"
+
+#: templates/developers.html:76
+msgid ""
+"By default, these feeds return the most recently added person records or "
+"note records in reverse chronological order."
+msgstr ""
+"Som standard returnerar dessa feeds de senast tillagda personposterna eller "
+"anteckningsposterna i omvänd kronologisk ordning."
+
+#: templates/developers.html:77
+msgid "These query parameters are supported:"
+msgstr "Följande frågeparametrar stöds:"
+
+#: templates/developers.html:80
+msgid "Return up to the specified number of results (maximum 200)."
+msgstr "Returnera upp till ett angivet antal resultat (högst 200)."
+
+#: templates/developers.html:82
+msgid ""
+"Skip the specified number of records before returning the next "
+"<code>max_results</code> results."
+msgstr ""
+"Hoppa över ett angivet antal poster och returnera nästa <code>max_results</"
+"code> resultat."
+
+#: templates/developers.html:84
+msgid ""
+"Return only results with an <code>entry_date</code> greater than or equal to "
+"the specified timestamp, which should be in <code>yyyy-mm-ddThh:mm:ssZ</"
+"code> format.  If this parameter is specified, results will be returned in "
+"forward chronological order."
+msgstr ""
+"Returnera bara resultat vars <code>entry_date</code> är större än eller lika "
+"med den angivna tidsstämpeln, som ska ha formatet <code>yyyy-mm-ddThh:mm:"
+"ssZ</code>. Om den här parametern anges returneras resultatet i kronologisk "
+"ordning."
+
+#: templates/developers.html:86
+msgid ""
+"Return only notes for this person record.  This parameter is only valid for "
+"the note feed."
+msgstr ""
+"Returnera bara anteckningar för den här personposten. Parametern gäller bara "
+"anteckningsfeeden."
+
+#: templates/developers.html:90
+msgid ""
+"You can use the <code>person_record_id</code> parameter to subscribe to a "
+"feed of notes on a specific person."
+msgstr ""
+"Du kan använda parametern <code>person_record_id</code> om du vill "
+"prenumerera på en feed med anteckningar om en specifik person."
+
+#: templates/developers.html:93
+msgid ""
+"If you need to keep another database synchronized with the Google Person "
+"Finder database, you can use the <code>min_entry_date</code> and <code>skip</"
+"code> parameters to produce incremental updates."
+msgstr ""
+"Om du behöver synkronisera en annan databas med Google Person Finder-"
+"databasen kan du använda parametrarna <code>min_entry_date</code> och "
+"<code>skip</code> för att skapa inkrementella uppdateringar."
+
+#: templates/developers.html:94
+msgid ""
+"Use the latest <code>entry_date</code> you have previously received from "
+"Google Person Finder as the <code>min_entry_date</code> for your first "
+"request."
+msgstr ""
+"Använd det senaste <code>entry_date</code> du har fått från Google Person "
+"Finder som <code>min_entry_date</code> för din första begäran."
+
+#: templates/developers.html:95
+msgid ""
+"Then take the latest <code>entry_date</code> in the batch you receive, and "
+"use it as the <code>min_entry_date</code> for your next request."
+msgstr ""
+"Ta sedan det senaste <code>entry_date</code> i resultaten du får och använd "
+"som <code>min_entry_date</code> för nästa begäran."
+
+#: templates/developers.html:96
+msgid ""
+"Use the <code>skip</code> parameter to skip the records you already received "
+"that have the same <code>entry_date</code>."
+msgstr ""
+"Använd parametern <code>skip</code> om du vill hoppa över poster du redan "
+"har fått och som har samma <code>entry_date</code>."
+
+#: templates/developers.html:97
+msgid ""
+"This algorithm is implemented by the download_feed.py script, which is "
+"provided in the open source release of Google Person Finder (see below)."
+msgstr ""
+"Algoritmen implementeras av skriptet download_feed.py, som finns i versionen "
+"av Google Person Finder med öppen källkod (se nedan)."
+
+#: templates/developers.html:99
+msgid "Individual Person Record API"
+msgstr "Programmeringsgränssnitt för individuella personposter"
+
+#: templates/developers.html:101
+msgid ""
+"If you know the PFIF person_record_id of a person, you can fetch the "
+"person's PFIF record (with notes) in XML format, at the following URL:"
+msgstr ""
+"Om du känner till en persons person_record_id i PFIF, kan du hämta personens "
+"PFIF-post (med anteckningar) i XML-format på följande webbadress:"
+
+#: templates/developers.html:104
+#, fuzzy
+msgid ""
+"The above URL returns a PFIF 1.2 document.  For PFIF 1.1, use the following "
+"URL:"
+msgstr ""
+"Av kompatibilitetsskäl returnerar ovanstående webbadress ett dokument i PFIF "
+"1.1. Använd följande webbadress om du vill ha PFIF 1.2:"
+
+#: templates/developers.html:108
+msgid "Uploading Data"
+msgstr "Överföra data"
+
+#: templates/developers.html:110
+msgid ""
+"You can also push one or more PFIF records to the Person Finder by posting "
+"an XML file to the following URL:"
+msgstr ""
+"Du kan också skicka en eller flera PFIF-poster till Person Finder genom att "
+"överföra en XML-fil till följande webbadress:"
+
+#: templates/developers.html:114
+msgid "Both PFIF 1.1 and 1.2 are accepted."
+msgstr "Både PFIF 1.1 och PFIF 1.2 kan användas."
+
+#: templates/developers.html:115
+msgid "To obtain an auth_key, please contact"
+msgstr "Du får en auth_key om du kontaktar"
+
+#: templates/developers.html:117
+msgid ""
+"You will need to tell them which PFIF source domain you will be using the "
+"key for, and the key can only be used to upload person records whose "
+"person_record_id is prefixed with that domain."
+msgstr ""
+"Du måste ange vilken PFIF-källdomän du ska använda nyckeln till. Nyckeln kan "
+"bara användas för att överföra personposter vars person_record_id har den "
+"domänens prefix."
+
+#: templates/developers.html:120
+msgid ""
+"Once you have prepared an XML file, the following command-line can be used "
+"to upload it:"
+msgstr ""
+"När du har förberett en XML-fil kan du överföra den med följande kommandorad:"
+
+#: templates/developers.html:125
+msgid ""
+"The XML document can contain &lt;pfif:person&gt; elements with nested &lt;"
+"pfif:note&gt; elements."
+msgstr ""
+"XML-dokumentet får innehålla &lt;pfif:person&gt; elements with nested &lt;"
+"pfif:note&gt; element."
+
+#: templates/developers.html:126
+msgid "To understand the proper XML format, see the"
+msgstr "En närmare beskrivning av XML-formatet finns i"
+
+#: templates/developers.html:128
+msgid ""
+"We recommend that you upload a single record or a small number of records as "
+"a test, retrieve the records using the Individual Person Record API (/api/"
+"read), and view the records on the site to verify that the results are what "
+"you expected."
+msgstr ""
+"Vi rekommenderar att du överför en enda post eller ett mindre antal poster "
+"som ett test, hämtar posterna med gränssnittet för individuella personposter "
+"(/api/read) och visar posterna på webbplatsen så att du kan kontrollera att "
+"resultatet är som det ska."
+
+#: templates/developers.html:129
+msgid ""
+"Pay careful attention to the handling of accented letters, note text, source "
+"URLs, and photo URLs (if you have them)."
+msgstr ""
+"Var noga med hur du hanterar bokstäver med accenter, anteckningstext, "
+"källadresser och fotoadresser (om du har sådana)."
+
+#: templates/developers.html:132
+msgid ""
+"Due to the size limitation on POST requests, you should split up files into "
+"batches of 100 &lt;pfif:person&gt; elements."
+msgstr ""
+"På grund av storleksbegränsningar i POST-begäranden måste du dela upp filer "
+"i delar med högst 100 &lt;pfif:person&gt; element."
+
+#: templates/developers.html:133
+msgid ""
+"If you encounter an error, or need to correct problems in a previous upload, "
+"it is safe to upload the same records again.  Records will replace existing "
+"records with the same person_record_id or note_record_id."
+msgstr ""
+"Om du stöter på ett fel eller behöver korrigera problem i en tidigare "
+"överföring kan du överföra samma poster igen. Posterna ersätter befintliga "
+"poster med samma person_record_id eller note_record_id."
+
+#: templates/developers.html:136
+msgid "The response will be an XML document like this:"
+msgstr "Svaret blir ett XML-dokument som ser ut ungefär så här:"
+
+#: templates/developers.html:159
+msgid ""
+"Each &lt;status:write> element describes one batch of writes.  &lt;status:"
+"record_type> is the type of the batch.  &lt;status:parsed> says how many XML "
+"records were successfully parsed.  &lt;status:written> says how many were "
+"written to the datastore.  In the above example, 1 person and 1 note were "
+"successfully written."
+msgstr ""
+"Varje &lt;status:write>-element beskriver en grupp med skrivningar. &lt;"
+"status:record_type> är gruppens typ. &lt;status:parsed> visar hur många XML-"
+"poster som kunde läsas. &lt;status:written> visar hur många som skrevs till "
+"databasen. I exemplet ovan skrevs en person och en anteckning."
+
+#: templates/developers.html:161
+msgid "When there are problems it will look like this:"
+msgstr "Om det uppstår problem ser det ut så här:"
+
+#: templates/developers.html:187
+msgid ""
+"Each &lt;status:skipped> entry describes the reason why a particular record "
+"was skipped, and includes the record ID if one was given."
+msgstr ""
+"I varje &lt;status:skipped>-inlägg anges varför en viss post hoppats över "
+"och post-ID anges om det finns."
+
+#: templates/developers.html:189
+msgid ""
+"When you upload person or note records, you will be replacing any existing "
+"records with the same record ID.  It should be safe to upload the same data "
+"multiple times while you fix formatting problems."
+msgstr ""
+"När du överför person- eller anteckningsposter ersätter du alla befintliga "
+"poster med samma post-ID. Det går att överföra samma data flera gånger när "
+"du åtgärdar formateringsproblem."
+
+#: templates/developers.html:192
+msgid "Source Code"
+msgstr "Källkod"
+
+#: templates/developers.html:202 templates/embed.html:42
+msgid "Close window"
+msgstr "Stäng fönster"
+
+#: templates/embed.html:30
+msgid "Or add to your site as a"
+msgstr "Eller lägg till på din webbplats som en"
+
+#: templates/embed.html:32
+msgid "Google Gadget"
+msgstr "Google-gadget"
+
+#: templates/embed.html:34
+msgid "These gadgets are made available under the"
+msgstr "Dessa gadgetar är tillgängliga enligt"
+
+#: templates/embed.html:37
+msgid "More information for developers can now be found"
+msgstr "Mer information för utvecklare finns nu"
+
+#: templates/embed.html:38
+msgid "here"
+msgstr "här"
+
+#: templates/main.html:22
+msgid "What is your situation?"
+msgstr "Vad är ditt ärende?"
+
+#: templates/main.html:28 templates/query_form.html:20
+msgid "I'm looking for someone"
+msgstr "Jag letar efter någon"
+
+#: templates/main.html:33 templates/query_form.html:13
+msgid "I have information about someone"
+msgstr "Jag har information om någon"
+
+#: templates/main.html:39
+#, python-format
+msgid "Currently tracking about %(num_people)s records."
+msgstr "Spårar för närvarande ungefär %(num_people)s poster."
+
+#: templates/multiview.html:37
+msgid "Compare these records"
+msgstr "Jämför dessa poster"
+
+#: templates/multiview.html:73 templates/results.html:85
+#: templates/view.html:91
+msgid "Home address"
+msgstr "Hemadress"
+
+#: templates/multiview.html:101 templates/view.html:125
+msgid "Other information"
+msgstr "Annan information"
+
+#: templates/multiview.html:135 templates/view.html:156
+msgid "Source of this record"
+msgstr "Postens källa"
+
+#: templates/multiview.html:139 templates/view.html:159
+msgid "Author's name"
+msgstr "Författarens namn"
+
+#: templates/multiview.html:151 templates/multiview.html.py:167
+#: templates/view.html:170 templates/view.html.py:183 templates/view.html:280
+#: templates/view.html.py:291 templates/view.html:334
+#: templates/view.html.py:349
+msgid "(click to reveal)"
+msgstr "(klicka om du vill visa)"
+
+#: templates/multiview.html:176 templates/view.html:190
+msgid "Original URL"
+msgstr "Ursprunglig webbadress"
+
+#: templates/multiview.html:180 templates/view.html:193
+msgid "Link"
+msgstr "Länk"
+
+#: templates/query_form.html:15
+msgid "Enter the person's given and family names."
+msgstr "Ange personens förnamn och efternamn."
+
+#: templates/query_form.html:17
+#, fuzzy
+msgid "Enter the person's name."
+msgstr "Ange personens förnamn och efternamn."
+
+#: templates/query_form.html:21
+msgid "Enter the person's name or parts of the name."
+msgstr "Ange personens namn eller delar av namnet."
+
+#: templates/query_form.html:96
+msgid ""
+"More than 100 results; only showing the first 100.  Try entering more of the "
+"name"
+msgstr ""
+"Mer än 100 resultat. Bara de första 100 visas. Försök med att ange mer av "
+"namnet"
+
+#: templates/query_form.html:104 templates/query_form.html.py:111
+#: templates/query_form.html:114
+msgid "Search for this person"
+msgstr "Sök efter personen"
+
+#: templates/query_form.html:106
+msgid "Provide information about this person"
+msgstr "Ange information om personen"
+
+#: templates/results.html:23
+msgid "Search Results for"
+msgstr "Sökresultat för"
+
+#: templates/results.html:28
+msgid "Records Similar to"
+msgstr "Poster som liknar"
+
+#: templates/results.html:33 templates/results.html.py:43
+msgid "There is one existing record with a similar name."
+msgstr "Det finns en befintlig post med ett liknande namn."
+
+#: templates/results.html:35
+msgid "There are some existing records with similar names."
+msgstr "Det finns några befintliga poster med liknande namn."
+
+#: templates/results.html:37
+msgid "Please check whether it matches the person you were planning to report."
+msgstr "Kontrollera om den matchar personen du tänkte rapportera."
+
+#
+#: templates/results.html:45
+#, python-format
+msgid "There are %(num_results)s existing records with similar names."
+msgstr "Det finns %(num_results)s befintliga poster med liknande namn."
+
+#: templates/results.html:49
+msgid "Click here to view results."
+msgstr "Klicka här om du vill visa resultaten."
+
+#: templates/results.html:53
+msgid "To view or add information, select a name below."
+msgstr "Välj namnet nedan om du vill visa eller lägga till information."
+
+#: templates/results.html:54
+msgid "Switch to duplicate marking mode"
+msgstr "Byt till dubblettmarkeringsläge"
+
+#: templates/results.html:55
+msgid "Switch to normal view mode"
+msgstr "Byt till normalt visningsläge"
+
+#: templates/results.html:103 templates/view.html:312
+msgid "Status"
+msgstr "Status"
+
+#: templates/results.html:105
+msgid "Has been in contact with someone"
+msgstr "Har varit i kontakt med någon"
+
+#: templates/results.html:107
+msgid "Unknown"
+msgstr "Okänd"
+
+#: templates/results.html:120
+msgid "Select up to 3 records to mark as duplicate:"
+msgstr "Välj upp till tre poster att markera som dubbletter:"
+
+#: templates/results.html:128
+msgid "Records selected"
+msgstr "valda poster"
+
+#: templates/results.html:138
+msgid ""
+"If none of these records match the person you had in mind, you can click "
+"below to create a new record."
+msgstr ""
+"Om ingen av dessa poster matchar personen du menar kan du klicka nedan och "
+"skapa en ny post."
+
+#: templates/results.html:142
+msgid "No results found for"
+msgstr "Det finns inga resultat för"
+
+#: templates/results.html:145
+msgid "We have nothing matching your search."
+msgstr "Vi har ingenting som matchar din sökning."
+
+#: templates/results.html:149 templates/small-create.html:23
+msgid "Follow this link to create a new record"
+msgstr "Följ den här länken om du vill skapa en ny post"
+
+#: templates/results.html:164 templates/small-create.html:20
+msgid "Create a new record for"
+msgstr "Skapa en ny post för"
+
+#: templates/results.html:166
+msgid "Create a new record for a missing person"
+msgstr "Skapa en ny post för en saknad person"
+
+#: templates/reveal.html:21
+msgid "Show sensitive information"
+msgstr "Visa känslig information"
+
+#: templates/reveal.html:30
+msgid "Proceed"
+msgstr "Fortsätt"
+
+#: templates/reveal.html:33
+#, python-format
+msgid ""
+"To see this sensitive information, you have to <a href=\"%(login_url)s"
+"\">sign in</a>."
+msgstr ""
+"Om du vill visa den känsliga informationen måste du <a href=\"%(login_url)s"
+"\">logga in</a>."
+
+#: templates/view.html:36
+msgid "Identifying information"
+msgstr "Identifieringsinformation"
+
+#: templates/view.html:69
+msgid "Physical characteristics"
+msgstr "Fysiska kännetecken"
+
+#: templates/view.html:72
+msgid "Sex"
+msgstr "Kön"
+
+#: templates/view.html:78
+msgid "Date of birth"
+msgstr "Födelsedatum"
+
+#: templates/view.html:83
+msgid "Age"
+msgstr "Ålder"
+
+#: templates/view.html:116
+msgid "Home country"
+msgstr "Hemland"
+
+#: templates/view.html:214
+msgid "Possible duplicates"
+msgstr "Möjliga dubbletter"
+
+#: templates/view.html:246
+msgid "Back to results list"
+msgstr "Tillbaka till resultatlistan"
+
+#: templates/view.html:257
+msgid "Status updates for this person"
+msgstr "Statusuppdateringar för personen"
+
+#: templates/view.html:262
+msgid "Posted by"
+msgstr "Upplagt av"
+
+#: templates/view.html:266
+msgid "(unknown)"
+msgstr "(okänt)"
+
+#: templates/view.html:268
+msgid "on"
+msgstr "på"
+
+#: templates/view.html:270
+msgid "at"
+msgstr "kl."
+
+#: templates/view.html:275
+msgid "E-mail"
+msgstr "E-postadress"
+
+#: templates/view.html:286
+msgid "Phone"
+msgstr "Telefon"
+
+#: templates/view.html:304
+msgid "This record is a duplicate of"
+msgstr "Den här posten är en dubblett av"
+
+#: templates/view.html:321
+msgid "Missing person has been in contact with someone"
+msgstr "Den saknade personen har varit i kontakt med någon"
+
+#: templates/view.html:327
+msgid "Missing person's current e-mail address"
+msgstr "Den saknade personens nuvarande e-postadress"
+
+#: templates/view.html:342
+msgid "Missing person's current phone number"
+msgstr "Den saknade personens nuvarande telefonnummer"
+
+#: templates/view.html:394
+msgid "No status updates have been posted"
+msgstr "Inga statusuppdateringar har gjorts"
+
+#: templates/view.html:405
+#, fuzzy
+msgid "Request deletion of this record"
+msgstr "Postens källa"
+
+#~ msgid "View this record"
+#~ msgstr "Visa den här posten"
+
+#~ msgid "Other resources:"
+#~ msgstr "Ytterligare resurser:"
+
+#~ msgid "Haiti Relief Wiki"
+#~ msgstr "Haiti Relief Wiki"
+
+#~ msgid "Google Person Finder Blog"
+#~ msgstr "Bloggen för Google Person Finder"
+
+#~ msgid "Google Person Finder: Haiti Earthquake"
+#~ msgstr "Google Person Finder: jordbävningen i Haiti"
+
+#~ msgid "Person Finder: Haiti Earthquake"
+#~ msgstr "Person Finder: jordbävningen i Haiti "
+
+#~ msgid "Daily Snapshot"
+#~ msgstr "Daglig ögonblicksbild"
+
+#~ msgid ""
+#~ "You can download a daily snapshot of all the data formatted in PFIF XML."
+#~ msgstr ""
+#~ "Du kan hämta en daglig ögonblicksbild av alla data i PFIF XML-formatet."
+
+#~ msgid "These snapshots are in PFIF 1.2."
+#~ msgstr "Ögonblicksbilderna är i PFIF 1.2."
+
+#~ msgid ""
+#~ "Each zip file contains one XML document with just the person records, and "
+#~ "another XML document with just the note records."
+#~ msgstr ""
+#~ "Varje ZIP-fil innehåller ett XML-dokument med bara personposterna och ett "
+#~ "annat XML-dokument med bara anteckningsposterna."
+
+#~ msgid ""
+#~ "To protect user privacy, these snapshots omit the date of birth, e-mail "
+#~ "address, and telephone number fields.  The omitted information can be "
+#~ "viewed interactively on the pages on this site."
+#~ msgstr ""
+#~ "För att skydda användarens integritet utelämnas fälten för födelsedatum, "
+#~ "e-postadress och telefonnummer. Den utelämnade informationen kan visas "
+#~ "interaktivt på webbplatsen."
+
+#~ msgid "or"
+#~ msgstr "eller"
