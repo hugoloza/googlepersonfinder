@@ -1,0 +1,64 @@
+{% comment %}
+Copyright 2010 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% load i18n %}
+{% extends "base.html" %}
+{% block content %}
+<div>
+
+  <h2>
+    {% blocktrans with person.first_name|escape as first_name and person.last_name|escape as last_name %}
+      Really delete the record for {{first_name}} {{last_name}}?
+    {% endblocktrans %}
+  </h2>
+
+  <p>
+  {% blocktrans with view_url|escape as view_url and save_url|escape as save_url %}
+    You can
+    <a href="{{view_url}}">view the record</a> or
+    <a href="{{save_url}}">right-click this link to save a copy</a>
+    before deleting the record.
+  {% endblocktrans %}
+
+  <p>{% trans "The following items will be deleted:" %}
+  <ul>
+  {% for entity in entities %}
+    <li>{{entity.kind|escape}} {{entity.key.id_or_name|escape}}
+  {% endfor %}
+  </ul>
+
+  <form method="post" action="/delete">
+    {% trans "Reason for deletion:" %}
+    <select name="reason_for_deletion">
+      <option value="unspecified">
+        {% trans "I prefer not to specify." %}</option>
+      <option value="found_missing_person">
+        {% trans "It put me in touch with the person I was looking for." %}
+        </option>
+      <option value="spam">
+        {% trans "I have received spam as a result of this post." %}
+        </option>
+    </select>
+    <br/><br/>
+    {{env.subdomain_field_html}}
+    {{captcha_html}}
+    <br/>
+    <input type="hidden" name="id" value="{{person.record_id|escape}}">
+    <input type="submit" value="{% trans "Yes, delete the record" %}">
+  </form>
+
+</div>
+{% endblock %}
