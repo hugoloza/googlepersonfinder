@@ -18,14 +18,21 @@ limitations under the License.
 {% extends "base.html" %}
 {% block content %}
 <div>
-  <h2>{% trans "Show sensitive information" %}</h2>
+  <h2>
+    {% if note.hidden %}
+      {% trans "Are you sure you want to unmark this note as spam?" %}
+    {% else %}
+      {% trans "Are you sure you want to mark this note as spam?" %}
+    {% endif %}
+  </h2>
+  <p>The note contains the following text:</p>
+  <p>&ldquo;{{note.text.strip|escape|linebreaksbr}}&rdquo;</p>
   <p>
-    <form method="post" action="/reveal">
+    <form method="post" action="/flag_note">
       {{env.subdomain_field_html}}
       {{captcha_html}}
-      <input type="hidden" name="target" value="{{params.target|escape}}">
-      <input type="hidden" name="content_id" value="{{params.content_id|escape}}">
-      <input type="submit" value="{% trans "Proceed" %}">
+      <input type="hidden" name="id" value="{{note.record_id|escape}}">
+      <input type="submit" value="{% trans "Yes, update the note" %}">
     </form>
 </div>
 {% endblock %}
