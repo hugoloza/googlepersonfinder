@@ -1,0 +1,920 @@
+# Copyright 2010 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-29 15:59-0500\n"
+"PO-Revision-Date: 2010-03-24 10:09-0800\n"
+"Last-Translator: weloc <info@welocalize.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Copyright 2010 Google Inc.
+#: create.py:47
+msgid ""
+"The Given name and Family name are both required.  Please go back and try "
+"again."
+msgstr ""
+"Нужно обязательно указать имя и фамилию. Вернитесь и повторите попытку."
+
+#: create.py:50
+#, fuzzy
+msgid "Name is required.  Please go back and try again."
+msgstr "Сообщение является обязательным. Вернитесь назад и повторите попытку."
+
+#: create.py:53
+msgid "The Original author's name is required.  Please go back and try again."
+msgstr ""
+"Имя исходного автора является обязательным. Вернитесь назад и повторите "
+"попытку."
+
+#: create.py:55
+msgid ""
+"Your name is required in the \"Source\" section.  Please go back and try "
+"again."
+msgstr ""
+"Нужно обязательно указать имя в разделе \"Источник\". Вернитесь и повторите "
+"попытку."
+
+#: create.py:59 multiview.py:75 view.py:87
+msgid "Message is required. Please go back and try again."
+msgstr ""
+"Нужно обязательно ввести текст сообщения. Вернитесь и повторите попытку."
+
+#: create.py:61 view.py:96
+msgid ""
+"Please check that you have been in contact with the person after the "
+"earthquake, or change the \"Status of this person\" field."
+msgstr ""
+"Укажите, что вы вступали в контакт с этим человеком после землетрясения, "
+"либо измените поле \"Статус этого человека\"."
+
+#: create.py:68
+msgid ""
+"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
+"date.  Please go back and try again."
+msgstr ""
+"Исходная дата публикации указана не в формате ГГГГ-ММ-ДД или не существует. "
+"Вернитесь назад и повторите попытку."
+
+#: create.py:70
+msgid "Date cannot be in the future.  Please go back and try again."
+msgstr ""
+"Дата не может находиться в будущем. Вернитесь назад и повторите попытку."
+
+#: create.py:76
+msgid ""
+"Photo uploaded is in an unrecognized format.  Please go back and try again."
+msgstr ""
+"Отправленное фото имеет неизвестный формат. Вернитесь назад и повторите "
+"попытку."
+
+#: create.py:97
+msgid "The provided image is too large.  Please upload a smaller one."
+msgstr ""
+"Указанное изображение слишком велико. Загрузите изображение меньшего размера."
+
+#: create.py:101
+msgid ""
+"There was a problem processing the image.  Please try a different image."
+msgstr "Ошибка обработки изображения. Попробуйте другое изображение."
+
+#: delete.py:60
+msgid "The record has been deleted."
+msgstr ""
+
+#: delete.py:63
+msgid "The authorization code was invalid."
+msgstr ""
+
+#: delete.py:71
+#, python-format
+msgid "Deletion request for %(given_name)s %(family_name)s"
+msgstr ""
+
+#: delete.py:76
+#, python-format
+msgid ""
+"\n"
+"We have received a deletion request for a missing person record at\n"
+"%(domain_name)s.\n"
+"\n"
+"Your e-mail address was entered as the author of this record, so we\n"
+"are contacting you to confirm whether you want to delete it.\n"
+"\n"
+"To delete this record, use this link:\n"
+"\n"
+"    %(delete_url)s\n"
+"\n"
+"To view the record, use this link:\n"
+"\n"
+"    %(view_url)s\n"
+"\n"
+msgstr ""
+
+#: delete.py:99
+msgid ""
+"An e-mail message with a deletion code has been sent.  The code will expire "
+"in one day."
+msgstr ""
+
+#: multiview.py:79 view.py:91
+msgid ""
+"Your name is required in the \"About you\" section.  Please go back and try "
+"again."
+msgstr ""
+"Нужно обязательно указать свое имя в разделе \"О себе\". Вернитесь и "
+"повторите попытку."
+
+#: utils.py:177
+msgid "female"
+msgstr "женский"
+
+#: utils.py:178
+msgid "male"
+msgstr "мужской"
+
+#: utils.py:179
+msgid "other"
+msgstr "другой"
+
+#: utils.py:191 utils.py:212
+msgid "Unspecified"
+msgstr "Не указано"
+
+#: utils.py:192
+msgid "I am seeking information"
+msgstr "Я ищу информацию"
+
+#: utils.py:193
+msgid "I am this person"
+msgstr "Я этот человек"
+
+#: utils.py:195
+msgid "I have received information that this person is alive"
+msgstr "У меня есть данные, что этот человек жив"
+
+#: utils.py:196
+msgid "I have reason to think this person is missing"
+msgstr "У меня есть основания считать, что этот человек пропал без вести"
+
+#: utils.py:197
+msgid "I have received information that this person is dead"
+msgstr "У меня есть данные, что этот человек мертв"
+
+#: utils.py:213
+msgid "Someone is seeking information"
+msgstr "Кто-то ищет информацию"
+
+#: utils.py:214
+msgid "This person has posted a message"
+msgstr "Этот человек отправил сообщение"
+
+#: utils.py:216
+msgid "Someone has received information that this person is alive"
+msgstr "Кто-то получил информацию, что этот человек жив"
+
+#: utils.py:217
+msgid "Someone has reported that this person is missing"
+msgstr "Кто-то сообщил, что этот человек пропал без вести"
+
+#: utils.py:219
+msgid "Someone has received information that this person is dead"
+msgstr "Кто-то получил информацию, что этот человек мертв"
+
+#: utils.py:583
+msgid ""
+"There was an error processing your request.  Sorry for the inconvenience.  "
+"Our administrators will investigate the source of the problem, but please "
+"check that the format of your request is correct."
+msgstr ""
+"Ошибка обработки запроса. Приносим извинения за неудобства. Наши "
+"администраторы выяснят источник ошибки, но все-таки проверьте формат своего "
+"запроса."
+
+#: templates/add_note.html:29
+msgid "Tell us the status of this person"
+msgstr "Сообщите нам статус этого человека"
+
+#: templates/add_note.html:31 templates/results.html:127
+msgid "Mark records as duplicate"
+msgstr "Отметить записи как повторяющиеся"
+
+#: templates/add_note.html:39
+msgid "Status of this person"
+msgstr "Статус этого человека"
+
+#: templates/add_note.html:60
+msgid "Message (required)"
+msgstr "Сообщение (обязательное поле)"
+
+#: templates/add_note.html:64
+msgid "A message for this person or others seeking this person"
+msgstr "Сообщение для этого человека либо для тех, кто его ищет"
+
+#: templates/add_note.html:66
+msgid "Please explain why you think these are the same person"
+msgstr "Объясните, почему вы считаете, что это один и тот же человек"
+
+#: templates/add_note.html:84 templates/view.html:357
+msgid "Last known location"
+msgstr "Последнее известное местоположение"
+
+#: templates/add_note.html:87
+msgid ""
+"Type an address or open the map below and indicate the location by moving "
+"the pin."
+msgstr ""
+"Введите адрес или откройте карту и укажите местоположение, переместив "
+"булавку."
+
+#: templates/add_note.html:103 templates/view.html:367
+msgid "Show Map"
+msgstr "Показать карту"
+
+#: templates/add_note.html:108 templates/view.html:372
+msgid "Hide Map"
+msgstr "Скрыть карту"
+
+#: templates/add_note.html:125
+#, fuzzy
+msgid ""
+"Have you personally talked with this person AFTER the disaster? (required)"
+msgstr ""
+"Общались ли Вы лично с этим человеком ПОСЛЕ землетрясения? (обязательное "
+"поле)"
+
+#: templates/add_note.html:135
+msgid "Yes"
+msgstr "Да"
+
+#: templates/add_note.html:143
+msgid "No"
+msgstr "Нет"
+
+#: templates/add_note.html:154
+msgid "Missing person's current contact information"
+msgstr "Текущая контактная информация пропавшего человека"
+
+#: templates/add_note.html:157
+msgid "How can this person be reached now?"
+msgstr "Как теперь связаться с этим человеком?"
+
+#: templates/add_note.html:163
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: templates/add_note.html:174
+msgid "E-mail address"
+msgstr "Адрес эл. почты"
+
+#: templates/add_note.html:190
+msgid "About you (required)"
+msgstr "О себе (обязательное поле)"
+
+#: templates/add_note.html:193
+msgid "How others who are interested in this person can contact you"
+msgstr ""
+"Как другие люди, которые интересуются этим человеком, могут связаться с вами?"
+
+#: templates/add_note.html:200 templates/create.html:254
+msgid "Your name"
+msgstr "Ваше имя"
+
+#: templates/add_note.html:210 templates/create.html:268
+msgid "Your phone number"
+msgstr "Ваш номер телефона"
+
+#: templates/add_note.html:220 templates/create.html:282
+msgid "Your e-mail address"
+msgstr "Ваш адрес эл. почты"
+
+#: templates/add_note.html:236
+msgid "Yes, these are the same person"
+msgstr "Да, это один и тот же человек"
+
+#: templates/add_note.html:238 templates/create.html:330
+msgid "Save this record"
+msgstr "Сохранить запись"
+
+#: templates/add_note.html:241
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/admin.html:20
+msgid "Administration"
+msgstr "Администрация"
+
+#: templates/admin.html:23 templates/reveal.html:24
+#, python-format
+msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
+msgstr "Вы вошли под именем <span class=\"email\">%(email)s</span>."
+
+#: templates/admin.html:24
+#, fuzzy, python-format
+msgid "<a href=\"%(logout_url)s\">Sign out</a>"
+msgstr "<a href=\"%(logout_url)s\">Выйти</a>"
+
+#: templates/admin.html:26
+#, fuzzy, python-format
+msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
+msgstr "Вход не выполнен. <a href=\"%(login_url)s\">Войти</a>"
+
+#: templates/admin_dashboard.html:51
+msgid "Dashboard"
+msgstr ""
+
+#: templates/base.html:34
+msgid "Google Person Finder"
+msgstr "Google Person Finder"
+
+#: templates/base.html:71 templates/base.html.py:90
+msgid "Person Finder"
+msgstr "Person Finder"
+
+#: templates/base.html:102 templates/embed.html:42 templates/view.html:250
+msgid "Back to start"
+msgstr "К началу"
+
+#: templates/base.html:108
+msgid ""
+"PLEASE NOTE: All data entered will be available to the public and viewable "
+"and usable by anyone.  Google does not review or verify the accuracy of this "
+"data."
+msgstr ""
+"ВНИМАНИЕ! Все введенные данные будут открыты для общего просмотра и "
+"использования. Google не проверяет и не подтверждает точность этих данных."
+
+#: templates/base.html:117
+msgid "Embed this tool on your site"
+msgstr "Встроить этот инструмент на свой веб-сайт"
+
+#: templates/base.html:122
+msgid "Developers"
+msgstr "Разработчикам"
+
+#: templates/base.html:125
+msgid "Terms of Service"
+msgstr "Условия предоставления услуг"
+
+#: templates/create.html:32
+msgid "Identify who you have information about"
+msgstr "Укажите, о ком у вас есть данные"
+
+#: templates/create.html:34
+msgid "Identify who you are looking for"
+msgstr "Укажите, кого вы ищете"
+
+#: templates/create.html:41
+msgid "Name (required)"
+msgstr "Имя (обязательное поле)"
+
+#: templates/create.html:44
+msgid "What is this person's name?"
+msgstr "Как зовут этого человека?"
+
+#: templates/create.html:51 templates/create.html.py:81
+#: templates/multiview.html:47 templates/multiview.html.py:67
+#: templates/query_form.html:30 templates/query_form.html.py:66
+#: templates/view.html:44 templates/view.html.py:60
+msgid "Family name"
+msgstr "Фамилия"
+
+#: templates/create.html:65 templates/multiview.html:58
+#: templates/query_form.html:47 templates/view.html:51
+msgid "Given name"
+msgstr "Имя"
+
+#: templates/create.html:67 templates/multiview.html:42
+#: templates/multiview.html.py:60 templates/query_form.html:49
+#: templates/view.html:40 templates/view.html.py:53
+msgid "Name"
+msgstr "Имя"
+
+#: templates/create.html:97
+msgid "Home Address"
+msgstr "Домашний адрес"
+
+#: templates/create.html:100
+msgid "Where is this person from?"
+msgstr "Откуда этот человек?"
+
+#: templates/create.html:106 templates/multiview.html:94
+#: templates/view.html:94
+msgid "Street name"
+msgstr "Название улицы"
+
+#: templates/create.html:108
+msgid "Street name only, no number"
+msgstr "Только название улицы (без номера)"
+
+#: templates/create.html:123 templates/multiview.html:98
+#: templates/view.html:98
+msgid "Neighborhood"
+msgstr "Район"
+
+#: templates/create.html:132 templates/multiview.html:102
+#: templates/view.html:102
+msgid "City"
+msgstr "Город"
+
+#: templates/create.html:142 templates/multiview.html:106
+#: templates/view.html:106
+msgid "Province or state"
+msgstr "Область или штат"
+
+#: templates/create.html:154 templates/multiview.html:111
+#: templates/view.html:111
+msgid "Postal or zip code"
+msgstr "Почтовый индекс"
+
+#: templates/create.html:169
+msgid "Description"
+msgstr "Описание"
+
+#: templates/create.html:172
+msgid "Describe how to identify this person."
+msgstr "Опишите, как узнать этого человека."
+
+#: templates/create.html:187 templates/multiview.html:134
+#: templates/view.html:140
+msgid "Photo"
+msgstr "Фото"
+
+#: templates/create.html:190
+msgid "If you have a photo of this person, upload it or enter its URL address."
+msgstr ""
+"Если у вас есть фотография этого человека, загрузите ее или введите ее URL."
+
+#: templates/create.html:198
+msgid "URL"
+msgstr "URL"
+
+#: templates/create.html:210
+msgid "Upload"
+msgstr "Загрузить"
+
+#: templates/create.html:223
+msgid "Source of this record (required)"
+msgstr "Источник этой записи (обязательное поле)"
+
+#: templates/create.html:226
+msgid "Where did this information come from?"
+msgstr "Откуда поступила эта информация?"
+
+#: templates/create.html:237
+msgid "This is a new record."
+msgstr "Это новая запись."
+
+#: templates/create.html:245
+msgid "This record is copied from another source."
+msgstr "Эта запись скопирована из другого источника."
+
+#: templates/create.html:258
+msgid "Original author's name"
+msgstr "Имя автора источника"
+
+#: templates/create.html:272 templates/multiview.html:160
+#: templates/view.html:163
+msgid "Author's phone number"
+msgstr "Номер телефона автора"
+
+#: templates/create.html:286 templates/multiview.html:176
+#: templates/view.html:176
+msgid "Author's e-mail address"
+msgstr "Адрес эл. почты автора"
+
+#: templates/create.html:296
+msgid "URL of original record"
+msgstr "URL источника"
+
+#: templates/create.html:306 templates/multiview.html:202
+#: templates/view.html:197
+msgid "Original posting date"
+msgstr "Исходный веб-сайт"
+
+#: templates/create.html:308
+msgid "Enter as YYYY-MM-DD"
+msgstr "(в формате ГГГГ-ММ-ДД)"
+
+#: templates/create.html:317 templates/multiview.html:206
+#: templates/view.html:201
+msgid "Original site name"
+msgstr "Исходный веб-сайт"
+
+#: templates/delete.html:24
+#, python-format
+msgid ""
+"\n"
+"      Really delete the record for %(first_name)s %(last_name)s?\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:30
+#, python-format
+msgid ""
+"\n"
+"    You can\n"
+"    <a href=\"%(view_url)s\">view the record</a> or\n"
+"    <a href=\"%(save_url)s\">right-click this link to save a copy</a>\n"
+"    before deleting the record.\n"
+"  "
+msgstr ""
+
+#: templates/delete.html:37
+msgid "The following items will be deleted:"
+msgstr ""
+
+#: templates/delete.html:48
+msgid "Yes, delete the record"
+msgstr ""
+
+#: templates/delete.html:54
+#, python-format
+msgid ""
+"\n"
+"      Request deletion of %(first_name)s %(last_name)s\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:61
+#, python-format
+msgid ""
+"\n"
+"      The record for <strong>%(first_name)s %(last_name)s</strong>\n"
+"      has the e-mail address %(email)s as the author of the record.\n"
+"      You can send a deletion code to %(email)s,\n"
+"      which can be used to delete this record.\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:70
+msgid "Send a deletion code"
+msgstr ""
+
+#: templates/delete.html:75
+#, python-format
+msgid ""
+"\n"
+"        Note that this record was not originally created on this site!\n"
+"        This record originally came from\n"
+"        <a href=\"http://%(source_domain)s/\"><strong>%(source_name)s</"
+"strong></a>.\n"
+"        You can delete the copy on this site,\n"
+"        but you may need to notify <strong>%(source_name)s</strong></a>\n"
+"        to prevent them from posting the same record again later.\n"
+"      "
+msgstr ""
+
+#: templates/delete.html:85
+#, python-format
+msgid ""
+"\n"
+"      Sorry, we cannot send out a deletion code\n"
+"      because the record for <strong>%(first_name)s %(last_name)s</strong>\n"
+"      has no e-mail address for the author of the record.\n"
+"    "
+msgstr ""
+
+#: templates/delete.html:93
+#, python-format
+msgid ""
+"\n"
+"        Note that this record was not originally created on this site!\n"
+"        This record originally came from\n"
+"        <a href=\"http://%(source_domain)s/\"><strong>%(source_name)s</"
+"strong></a>.\n"
+"        You may wish to contact <strong>%(source_name)s</strong></a>\n"
+"        to request the deletion of the original record.\n"
+"      "
+msgstr ""
+
+#: templates/embed.html:21
+msgid "Embedding the Application"
+msgstr "Встраивание приложения"
+
+#: templates/embed.html:22
+msgid "Copy and paste the following HTML code to put this tool on your site"
+msgstr ""
+"Чтобы внедрить этот инструмент на свой веб-сайт, можно скопировать и "
+"вставить следующий HTML-код"
+
+#: templates/embed.html:30
+#, python-format
+msgid ""
+"Or add to your site as a %(gadget_link_html)sGoogle Gadget%(link_end_html)s."
+msgstr ""
+
+#: templates/embed.html:32
+#, fuzzy, python-format
+msgid ""
+"These gadgets are made available under the %(apache_link_html)sApache 2.0 "
+"license%(link_end_html)s."
+msgstr "Гаджет предоставляется по"
+
+#: templates/embed.html:35
+#, fuzzy, python-format
+msgid ""
+"More information for developers can now be found %(developers_link_html)shere"
+"%(link_end_html)s."
+msgstr "Дополнительные сведения для разработчиков можно найти"
+
+#: templates/embed.html:39
+msgid "Close window"
+msgstr "Закрыть окно"
+
+#: templates/main.html:22
+msgid "What is your situation?"
+msgstr "Расскажите о своей ситуации"
+
+#: templates/main.html:28 templates/query_form.html:20
+msgid "I'm looking for someone"
+msgstr "Я ищу человека"
+
+#: templates/main.html:33 templates/query_form.html:13
+msgid "I have information about someone"
+msgstr "У меня есть информация о человеке"
+
+#: templates/main.html:40
+#, fuzzy
+msgid "Currently tracking fewer than 5 records."
+msgstr "Примерное количество отслеживаемых записей: %(num_people)s."
+
+#: templates/main.html:42
+#, python-format
+msgid "Currently tracking about %(num_people)s records."
+msgstr "Примерное количество отслеживаемых записей: %(num_people)s."
+
+#: templates/multiview.html:37
+msgid "Compare these records"
+msgstr "Сравните эти записи"
+
+#: templates/multiview.html:73 templates/view.html:69
+msgid "Physical characteristics"
+msgstr "Физические характеристики"
+
+#: templates/multiview.html:77 templates/view.html:72
+msgid "Sex"
+msgstr "Пол"
+
+#: templates/multiview.html:81 templates/view.html:78
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: templates/multiview.html:85 templates/view.html:83
+msgid "Age"
+msgstr "Возраст"
+
+#: templates/multiview.html:90 templates/results.html:85
+#: templates/view.html:91
+msgid "Home address"
+msgstr "Домашний адрес"
+
+#: templates/multiview.html:118 templates/view.html:125
+msgid "Other information"
+msgstr "Другая информация"
+
+#: templates/multiview.html:152 templates/view.html:156
+msgid "Source of this record"
+msgstr "Источник этой записи"
+
+#: templates/multiview.html:156 templates/view.html:159
+msgid "Author's name"
+msgstr "Имя автора"
+
+#: templates/multiview.html:168 templates/multiview.html.py:184
+#: templates/view.html:170 templates/view.html.py:183 templates/view.html:280
+#: templates/view.html.py:291 templates/view.html:334
+#: templates/view.html.py:349
+msgid "(click to reveal)"
+msgstr "(нажмите, чтобы узнать)"
+
+#: templates/multiview.html:193 templates/view.html:190
+msgid "Original URL"
+msgstr "Исходный URL"
+
+#: templates/multiview.html:197 templates/view.html:193
+msgid "Link"
+msgstr "Ссылка"
+
+#: templates/query_form.html:15
+msgid "Enter the person's given and family names."
+msgstr "Введите имя и фамилию этого человека."
+
+#: templates/query_form.html:17
+#, fuzzy
+msgid "Enter the person's name."
+msgstr "Введите имя и фамилию человека."
+
+#: templates/query_form.html:21
+msgid "Enter the person's name or parts of the name."
+msgstr "Введите имя (полностью или первые несколько букв)."
+
+#: templates/query_form.html:96
+msgid ""
+"More than 100 results; only showing the first 100.  Try entering more of the "
+"name"
+msgstr ""
+"Найдено больше 100 результатов, показаны только первые 100. Попробуйте "
+"ввести больше символов в имени."
+
+#: templates/query_form.html:104 templates/query_form.html.py:111
+#: templates/query_form.html:114
+msgid "Search for this person"
+msgstr "Найти этого человека"
+
+#: templates/query_form.html:106
+msgid "Provide information about this person"
+msgstr "Предоставить данные об этом человеке"
+
+#: templates/results.html:23
+msgid "Search Results for"
+msgstr "Результаты поиска по запросу"
+
+#: templates/results.html:28
+msgid "Records Similar to"
+msgstr "Похожие записи"
+
+#: templates/results.html:33 templates/results.html.py:43
+msgid "There is one existing record with a similar name."
+msgstr "Есть одна существующая запись с похожим именем."
+
+#: templates/results.html:35
+msgid "There are some existing records with similar names."
+msgstr " Есть несколько записей с похожими именами."
+
+#: templates/results.html:37
+msgid "Please check whether it matches the person you were planning to report."
+msgstr ""
+"Проверьте, относятся ли они к тому человеку, о котором вы собирались "
+"сообщить."
+
+#
+#: templates/results.html:45
+#, python-format
+msgid "There are %(num_results)s existing records with similar names."
+msgstr "Есть ряд существующих записей (%(num_results)s) с похожими именами."
+
+#: templates/results.html:49
+msgid "Click here to view results."
+msgstr "Нажмите здесь, чтобы просмотреть результаты."
+
+#: templates/results.html:53
+msgid "To view or add information, select a name below."
+msgstr "Выберите имя, чтобы просмотреть или добавить информацию."
+
+#: templates/results.html:54
+msgid "Switch to duplicate marking mode"
+msgstr "Переключиться в режим выбора повторений"
+
+#: templates/results.html:55
+msgid "Switch to normal view mode"
+msgstr "Переключиться в режим просмотра"
+
+#: templates/results.html:103 templates/view.html:312
+msgid "Status"
+msgstr "Статус"
+
+#: templates/results.html:105
+msgid "Has been in contact with someone"
+msgstr "Выходил на связь"
+
+#: templates/results.html:107
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: templates/results.html:120
+msgid "Select up to 3 records to mark as duplicate:"
+msgstr "Выберите не более 3 повторяющихся записей:"
+
+#: templates/results.html:128
+msgid "Records selected"
+msgstr "Выбрано записей"
+
+#: templates/results.html:138
+msgid ""
+"If none of these records match the person you had in mind, you can click "
+"below to create a new record."
+msgstr ""
+"Если ни одна из этих записей не относится к человеку, которого вы имеете в "
+"виду, нажмите приведенную ниже кнопку, чтобы добавить запись."
+
+#: templates/results.html:142
+msgid "No results found for"
+msgstr "Нет результатов по запросу "
+
+#: templates/results.html:145
+msgid "We have nothing matching your search."
+msgstr " Не найдено записей, соответствующих вашему поиску."
+
+#: templates/results.html:149 templates/small-create.html:23
+msgid "Follow this link to create a new record"
+msgstr "Перейдите по ссылке, чтобы создать новую запись"
+
+#: templates/results.html:164 templates/small-create.html:20
+msgid "Create a new record for"
+msgstr "Добавить запись об этом человеке:"
+
+#: templates/results.html:166
+msgid "Create a new record for a missing person"
+msgstr "Добавить запись о пропавшем человеке"
+
+#: templates/reveal.html:21
+msgid "Show sensitive information"
+msgstr "Показать конфиденциальную информацию"
+
+#: templates/reveal.html:30
+msgid "Proceed"
+msgstr "Продолжить"
+
+#: templates/reveal.html:33
+#, python-format
+msgid ""
+"To see this sensitive information, you have to <a href=\"%(login_url)s"
+"\">sign in</a>."
+msgstr ""
+"Чтобы просмотреть конфиденциальную информацию, <a href=\"%(login_url)s"
+"\">войдите в систему</a>."
+
+#: templates/view.html:36
+msgid "Identifying information"
+msgstr "Идентификационная информация"
+
+#: templates/view.html:116
+msgid "Home country"
+msgstr "Гражданство"
+
+#: templates/view.html:214
+msgid "Possible duplicates"
+msgstr "Возможные повторения"
+
+#: templates/view.html:246
+msgid "Back to results list"
+msgstr "Назад к списку результатов"
+
+#: templates/view.html:257
+msgid "Status updates for this person"
+msgstr "Обновления статуса для этого человека"
+
+#: templates/view.html:262
+msgid "Posted by"
+msgstr "Опубликовано пользователем"
+
+#: templates/view.html:266
+msgid "(unknown)"
+msgstr "(неизвестно)"
+
+#: templates/view.html:268
+msgid "on"
+msgstr " "
+
+#: templates/view.html:270
+msgid "at"
+msgstr "в"
+
+#: templates/view.html:275
+msgid "E-mail"
+msgstr "Адрес электронной почты"
+
+#: templates/view.html:286
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/view.html:304
+msgid "This record is a duplicate of"
+msgstr "Эта запись совпадает с"
+
+#: templates/view.html:321
+#, fuzzy
+msgid "This person has been in contact with someone"
+msgstr "Пропавший человек выходил на связь"
+
+#: templates/view.html:327
+msgid "Missing person's current e-mail address"
+msgstr "Текущий адрес электронной почты пропавшего человека"
+
+#: templates/view.html:342
+msgid "Missing person's current phone number"
+msgstr "Текущий номер телефона пропавшего человека"
+
+#: templates/view.html:394
+msgid "No status updates have been posted"
+msgstr "Статус не обновлялся"
+
+#: templates/view.html:405
+#, fuzzy
+msgid "Request deletion of this record"
+msgstr "Источник этой записи"
