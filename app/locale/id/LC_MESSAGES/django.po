@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-06 00:44-0500\n"
+"POT-Creation-Date: 2010-12-08 21:34-0500\n"
 "PO-Revision-Date: 2010-03-24 10:09-0800\n"
 "Last-Translator: weloc <info@welocalize.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,7 +84,7 @@ msgid ""
 "There was a problem processing the image.  Please try a different image."
 msgstr "Ada masalah saat memroses gambar. Coba gambar lain."
 
-#: delete.py:78
+#: delete.py:76
 #, python-format
 msgid ""
 "\n"
@@ -97,21 +97,21 @@ msgid ""
 "    %(site_url)s\n"
 msgstr ""
 
-#: delete.py:88
+#: delete.py:86
 #, fuzzy
 msgid "You are the author of this record"
 msgstr "Sumber data ini"
 
-#: delete.py:91
+#: delete.py:89
 #, fuzzy
 msgid "You added a note to this record"
 msgstr "Sumber data ini"
 
-#: delete.py:97
+#: delete.py:95
 msgid "[Person Finder] Deletion notification for "
 msgstr ""
 
-#: delete.py:113
+#: delete.py:111
 msgid "The record has been deleted."
 msgstr ""
 
