@@ -25,6 +25,8 @@ from google.appengine.ext import db
 import indexing
 import pfif
 import prefix
+import re
+
 
 # The domain name of this application.  The application hosts multiple
 # repositories, each at a subdomain of this domain.
@@ -57,8 +59,20 @@ def filter_by_prefix(query, key_name_prefix):
     max_key = db.Key.from_path(root_kind, key_name_prefix + u'\uffff')
     return query.filter('__key__ >=', min_key).filter('__key__ <=', max_key)
 
-
 # ==== Other utilities =====================================================
+# This function is here to avoid the circular dependency which would have 
+# resulted if it was in utils
+def is_valid_email(email):
+    """Validates email address on correct spelling, 
+    returns True on correct, False on incorrect, None on empty string"""
+    if not email:
+        return None
+    pattern = re.compile(r"(?:^|\s)[-a-z0-9_.%$+]+@(?:[-a-z0-9]+\.)+"+
+                         "[a-z]{2,6}(?:\s|$)", re.IGNORECASE)
+    if pattern.match(email): 
+        return True
+    else:
+        return False
 
 def get_properties_as_dict(db_obj):
     """Returns a dictionary containing all (dynamic)* properties of db_obj."""
@@ -201,6 +215,10 @@ class Person(Base):
     author_name = db.StringProperty(default='', multiline=True)
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
+    
+    # list of email addresses who wish to receive instant notifications when a
+    # note is added to this person record
+    subscribed_persons = db.StringListProperty()
 
     # source_date is the original creation time; it should not change.
     source_name = db.StringProperty(default='')
@@ -285,6 +303,20 @@ class Person(Base):
         # setup old indexing
         if 'old' in which_indexing:
             prefix.update_prefix_properties(self)
+            
+    def add_subscriber(self, email):
+        """Add subscriber to list if it doesn't exist, 
+        returns True on success, False on invalid email,
+        None if person already subscribed"""
+        email = email.strip()
+        if is_valid_email(email) == True:
+            if not email in self.subscribed_persons:
+                self.subscribed_persons.append(email)
+                return True
+            else:
+                return None
+        else:
+            return False        
 
 #old indexing
 prefix.add_prefix_properties(
@@ -493,7 +525,7 @@ class StaticSiteMapInfo(db.Model):
     static_sitemaps = db.StringListProperty()
     static_sitemaps_generation_time = db.DateTimeProperty(required=True)
     shard_size_seconds = db.IntegerProperty(default=90)
-    
+
 class SiteMapPingStatus(db.Model):
     """Tracks the last shard index that was pinged to the search engine."""
     search_engine = db.StringProperty(required=True)

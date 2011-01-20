@@ -1,6 +1,5 @@
 #!/usr/bin/python2.5
 # Copyright 2010 Google Inc.
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -31,6 +30,7 @@ import urlparse
 import django.conf
 import django.utils.html
 from google.appengine.api import images
+from google.appengine.api import mail
 from google.appengine.api import memcache
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -295,7 +295,8 @@ def strip(string):
     return string.strip()
 
 def validate_yes(string):
-    return (string.strip().lower() == 'yes') and 'yes' or ''
+    return (string.strip().lower() == 'yes' or string.strip().lower() == 'on')\
+         and 'yes' or ''
 
 def validate_role(string):
     return (string.strip().lower() == 'provide') and 'provide' or 'seek'
@@ -486,7 +487,10 @@ class Handler(webapp.RequestHandler):
         'operation': strip,
         'confirm': validate_yes,
         'key': strip,
-        'subdomain_new': strip
+        'subdomain_new': strip,
+        'notify_person': validate_yes,
+        'email_subscr' : strip,
+        'is_receive_updates' : validate_yes,
     }
 
     def redirect(self, url, **params):
@@ -547,6 +551,18 @@ class Handler(webapp.RequestHandler):
             self.render('templates/message.html', cls='error', message=message)
         except:
             self.response.out.write(message)
+        self.terminate_response()
+     
+    def info(self, code, message='', message_html=''):        
+        try:
+            if message_html != '':
+                self.render('templates/message.html', cls='info', message_html=message_html)
+            else:
+                if not message:
+                    message = 'OK %d: %s' % (code, httplib.responses.get(code))
+                self.render('templates/message.html', cls='info', message=message)            
+        except Exception, e:
+            self.response.out.write(e)
         self.terminate_response()
 
     def terminate_response(self):
@@ -697,8 +713,8 @@ class Handler(webapp.RequestHandler):
         # (b) For forms, use a plain path like "/view" for the ACTION and
         #     include {{env.subdomain_field_html}} inside the form element.
         subdomain_field_html = (
-            '<input type="hidden" name="subdomain" value="%s">' %
-            self.request.get('subdomain', ''))
+            '<input type="hidden" name="subdomain" id="subdomain_field_html" '+
+                'value="%s">' % self.request.get('subdomain', ''))
 
         # Put common subdomain-specific template variables in self.env.
         self.env.subdomain = self.subdomain

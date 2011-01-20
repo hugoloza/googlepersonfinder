@@ -224,14 +224,14 @@ limitations under the License.
                           <input name="author_email" id="author_email" size="20">
                         </td>
                       </tr>
+                          {% include "subscribe.html" %}                
                     </table>
                   </td>
                 </tr>
                 {% endif %}
                 <tr>
                   <td align=left class="submit">
-                    <input type="submit"
-                      value="{% spaceless %}
+                    <input type="submit" value="{% spaceless %}
                         {% if markdup %}
                           {% trans "Yes, these are the same person" %}
                         {% else %}
