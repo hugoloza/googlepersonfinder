@@ -25,6 +25,7 @@ from google.appengine.ext import db
 import indexing
 import pfif
 import prefix
+import re
 
 # The domain name of this application.  The application hosts multiple
 # repositories, each at a subdomain of this domain.
@@ -57,8 +58,20 @@ def filter_by_prefix(query, key_name_prefix):
     max_key = db.Key.from_path(root_kind, key_name_prefix + u'\uffff')
     return query.filter('__key__ >=', min_key).filter('__key__ <=', max_key)
 
-
 # ==== Other utilities =====================================================
+# This function is here to avoid the circular dependency which would have
+# resulted if it was in utils
+def is_valid_email(email):
+    """Validates email address on correct spelling,
+    returns True on correct, False on incorrect, None on empty string"""
+    if not email:
+        return None
+    pattern = re.compile(r"(?:^|\s)[-a-z0-9_.%$+]+@(?:[-a-z0-9]+\.)+"+
+                         "[a-z]{2,6}(?:\s|$)", re.IGNORECASE)
+    if pattern.match(email):
+        return True
+    else:
+        return False
 
 def get_properties_as_dict(db_obj):
     """Returns a dictionary containing all (dynamic)* properties of db_obj."""
@@ -113,7 +126,7 @@ class Base(db.Model):
     whose key names are partitioned using the subdomain as a prefix."""
 
     # Even though the subdomain is part of the key_name, it is also stored
-    # redundantly as a separate property so it can be indexed and queried upon. 
+    # redundantly as a separate property so it can be indexed and queried upon.
     subdomain = db.StringProperty(required=True)
 
     @classmethod
@@ -202,6 +215,11 @@ class Person(Base):
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
 
+    # list of 'lang:email' for those who wish to receive instant notifications
+    # to their email address in their language when a note is added to this
+    # person record
+    subscribers = db.StringListProperty()
+
     # source_date is the original creation time; it should not change.
     source_name = db.StringProperty(default='')
     source_date = db.DateTimeProperty()
@@ -244,7 +262,7 @@ class Person(Base):
 
     def create_tombstone(self, **kwargs):
         return clone_to_new_type(self, PersonTombstone, **kwargs)
- 
+
     def get_person_record_id(self):
         return self.record_id
     person_record_id = property(get_person_record_id)
@@ -286,6 +304,35 @@ class Person(Base):
         if 'old' in which_indexing:
             prefix.update_prefix_properties(self)
 
+    def add_subscriber(self, language, email):
+        """Add subscriber to this person record if it doesn't exist,
+        returns True on success, False on invalid email,
+        None if person already subscribed"""
+        email = email.strip()
+        if is_valid_email(email) == True:
+            subscription = '%s:%s' % (language, email)
+            if not subscription in self.subscribers:
+                self.subscribers.append(subscription)
+                return True
+            else:
+                return None
+        else:
+            return False
+
+    def remove_subscriber(self, email):
+      """Remove a subscriber from this person record. Returns True if
+      successful, False otherwise"""
+      for sub_lang, sub_email in self.get_subscribers():
+          if email == sub_email:
+              self.subscribers.remove('%s:%s' % (sub_lang, sub_email))
+              return True
+      return False
+
+    def get_subscribers(self):
+        """Returns a list of (lang, email) tuples for each subscriber
+        to updates for this person"""
+        return [tuple(sub.split(':', 1)) for sub in self.subscribers]
+
 #old indexing
 prefix.add_prefix_properties(
     Person, 'first_name', 'last_name', 'home_street', 'home_neighborhood',
@@ -324,7 +371,7 @@ class Note(Base):
 
     def create_tombstone(self, **kwargs):
         return clone_to_new_type(self, NoteTombstone, **kwargs)
- 
+
     def get_note_record_id(self):
         return self.record_id
     note_record_id = property(get_note_record_id)
@@ -348,9 +395,9 @@ class Authorization(db.Model):
     """Authorization tokens.  Key name: subdomain + ':' + auth_key."""
 
     # Even though the subdomain is part of the key_name, it is also stored
-    # redundantly as a separate property so it can be indexed and queried upon. 
+    # redundantly as a separate property so it can be indexed and queried upon.
     subdomain = db.StringProperty(required=True)
-    
+
     # If this field is non-empty, this authorization token allows the client
     # to write records with this original domain.
     domain_write_permission = db.StringProperty()
@@ -493,7 +540,7 @@ class StaticSiteMapInfo(db.Model):
     static_sitemaps = db.StringListProperty()
     static_sitemaps_generation_time = db.DateTimeProperty(required=True)
     shard_size_seconds = db.IntegerProperty(default=90)
-    
+
 class SiteMapPingStatus(db.Model):
     """Tracks the last shard index that was pinged to the search engine."""
     search_engine = db.StringProperty(required=True)

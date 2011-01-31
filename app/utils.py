@@ -299,6 +299,9 @@ def strip(string):
 def validate_yes(string):
     return (string.strip().lower() == 'yes') and 'yes' or ''
 
+def validate_checkbox(string):
+    return (string.strip().lower() == 'on') and 'yes' or ''
+
 def validate_role(string):
     return (string.strip().lower() == 'provide') and 'provide' or 'seek'
 
@@ -485,7 +488,9 @@ class Handler(webapp.RequestHandler):
         'confirm': validate_yes,
         'key': strip,
         'subdomain_new': strip,
-        'utcnow': validate_timestamp
+        'utcnow': validate_timestamp,
+        'subscribe_email' : strip,
+        'subscribe' : validate_checkbox,
     }
 
     def redirect(self, url, **params):
@@ -553,6 +558,20 @@ class Handler(webapp.RequestHandler):
             self.render('templates/message.html', cls='error', message=message)
         except:
             self.response.out.write(message)
+        self.terminate_response()
+
+    def info(self, code, message='', message_html=''):
+        try:
+            if message_html:
+                self.render('templates/message.html', cls='info',
+                            message_html=message_html)
+            else:
+                if not message:
+                    message = 'OK %d: %s' % (code, httplib.responses.get(code))
+                self.render('templates/message.html', cls='info',
+                            message=message)
+        except Exception, e:
+            self.response.out.write(e)
         self.terminate_response()
 
     def terminate_response(self):
@@ -778,7 +797,7 @@ class Handler(webapp.RequestHandler):
             self.render('templates/message.html', cls='deactivation',
                         message_html=self.config.deactivation_message_html)
             self.terminate_response()
-        
+
     def is_test_mode(self):
         """Returns True if the request is in test mode. Request is considered
         to be in test mode if the remote IP address is the localhost and if

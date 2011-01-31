@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-27 10:41-0800\n"
+"POT-Creation-Date: 2011-01-31 14:17-0500\n"
 "PO-Revision-Date: 2010-03-24 10:09-0800\n"
 "Last-Translator: weloc <info@welocalize.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,11 +45,11 @@ msgid ""
 "again."
 msgstr "اسمك مطلوب في قسم \"المصدر\".  الرجاء الرجوع وإعادة المحاولة."
 
-#: create.py:61 multiview.py:76 view.py:94
+#: create.py:61 multiview.py:76 view.py:97
 msgid "Message is required. Please go back and try again."
 msgstr "الرسالة مطلوبة. الرجاء الرجوع وإعادة المحاولة."
 
-#: create.py:63 view.py:103
+#: create.py:63 view.py:106
 msgid ""
 "Please check that you have been in contact with the person after the "
 "earthquake, or change the \"Status of this person\" field."
@@ -92,7 +92,7 @@ msgstr ""
 msgid "The record has been deleted."
 msgstr ""
 
-#: multiview.py:80 view.py:98
+#: multiview.py:80 view.py:101
 msgid ""
 "Your name is required in the \"About you\" section.  Please go back and try "
 "again."
@@ -103,6 +103,50 @@ msgstr "اسمك مطلوب في القسم \"نبذة عنك\".  الرجاء �
 msgid ""
 "[Person Finder] Record restoration notice for \"%(first_name)s %(last_name)s"
 "\""
+msgstr ""
+
+#: subscribe.py:46
+#, python-format
+msgid "Person Finder: Status update for %(given_name)s %(family_name)s"
+msgstr ""
+
+#: subscribe.py:80
+msgid "Person Finder: You are subscribed to status updates for "
+msgstr ""
+
+#: subscribe.py:137
+msgid "Invalid e-mail address. Please try again."
+msgstr ""
+
+#: subscribe.py:144
+#, fuzzy, python-format
+msgid "Return to the record for %(given_name)s %(family_name)s."
+msgstr "أدخل الاسم الأول للشخص واسم عائلته."
+
+#: subscribe.py:149
+msgid "Your are already subscribed. "
+msgstr ""
+
+#: subscribe.py:169
+#, fuzzy, python-format
+msgid "Return to the record for %(given_name)s %(family_name)s"
+msgstr "أدخل الاسم الأول للشخص واسم عائلته."
+
+#: subscribe.py:174
+msgid "Your are successfully subscribed."
+msgstr ""
+
+#: unsubscribe.py:29
+#, fuzzy
+msgid "This link is invalid."
+msgstr "هذا السجل نسخة مكررة من"
+
+#: unsubscribe.py:38
+msgid "Your are successfully unsubscribed."
+msgstr ""
+
+#: unsubscribe.py:40
+msgid "You are already unsubscribed."
 msgstr ""
 
 #: utils.py:186
@@ -162,43 +206,43 @@ msgstr "لقد أبلغ شخص ما أن هذا الشخص مفقود"
 msgid "Someone has received information that this person is dead"
 msgstr "لقد تلقى شخص ما معلومات تفيد بأن هذا الشخص مات"
 
-#: utils.py:644
+#: utils.py:663
 msgid "Type the two words:"
 msgstr ""
 
-#: utils.py:645
+#: utils.py:664
 msgid "Type what you hear:"
 msgstr ""
 
-#: utils.py:646
+#: utils.py:665
 msgid "Play the sound again"
 msgstr ""
 
-#: utils.py:647
+#: utils.py:666
 msgid "Download the sound as MP3"
 msgstr ""
 
-#: utils.py:648
+#: utils.py:667
 msgid "Get a visual challenge"
 msgstr ""
 
-#: utils.py:649
+#: utils.py:668
 msgid "Get an audio challenge"
 msgstr ""
 
-#: utils.py:650
+#: utils.py:669
 msgid "Get a new challenge"
 msgstr ""
 
-#: utils.py:651
+#: utils.py:670
 msgid "Help"
 msgstr ""
 
-#: utils.py:652
+#: utils.py:671
 msgid "Incorrect.  Try again."
 msgstr ""
 
-#: utils.py:668
+#: utils.py:687
 msgid ""
 "There was an error processing your request.  Sorry for the inconvenience.  "
 "Our administrators will investigate the source of the problem, but please "
@@ -232,6 +276,7 @@ msgid "Please explain why you think these are the same person"
 msgstr "الرجاء توضيح سبب اعتقادك أن هؤلاء يمثلون الشخص نفسه"
 
 #: templates/add_note.html:84 templates/note.html:138
+#: templates/person_status_update_email.txt:13
 msgid "Last known location"
 msgstr "آخر موقع معروف للشخص المفقود"
 
@@ -299,24 +344,24 @@ msgstr "رقم هاتفك"
 msgid "Your e-mail address"
 msgstr "عنوان بريدك الإلكتروني"
 
-#: templates/add_note.html:236
+#: templates/add_note.html:237
 msgid "Yes, these are the same person"
 msgstr "نعم، يمثل هؤلاء الشخص نفسه"
 
-#: templates/add_note.html:238 templates/create.html:331
+#: templates/add_note.html:239 templates/create.html:332
 msgid "Save this record"
 msgstr "حفظ هذا السجل"
 
-#: templates/add_note.html:242 templates/delete.html:56
-#: templates/flag_note.html:62
+#: templates/add_note.html:243 templates/delete.html:56
+#: templates/flag_note.html:62 templates/subscribe_captcha.html:43
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: templates/add_note.html:246 templates/create.html:335
+#: templates/add_note.html:247 templates/create.html:336
 msgid "Please fill in all the required fields."
 msgstr ""
 
-#: templates/add_note.html:250 templates/create.html:339
+#: templates/add_note.html:251 templates/create.html:340
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
 "true, please also select 'Yes' to indicate that you have contacted this "
@@ -355,7 +400,7 @@ msgstr "Google Person Finder"
 msgid "Person Finder"
 msgstr "Person Finder"
 
-#: templates/base.html:109 templates/embed.html:42 templates/view.html:271
+#: templates/base.html:109 templates/embed.html:42 templates/view.html:280
 msgid "Back to start"
 msgstr "الرجوع إلى البداية"
 
@@ -577,6 +622,36 @@ msgstr ""
 msgid "Yes, delete the record"
 msgstr ""
 
+#: templates/deletion_email_for_note_author.txt:4
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of a note on this record.\n"
+msgstr ""
+
+#: templates/deletion_email_for_person_author.txt:4
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of this record.\n"
+"\n"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s "
+"days:\n"
+"\n"
+"    %(restore_url)s\n"
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently deleted.\n"
+msgstr ""
+
 #: templates/embed.html:21
 msgid "Embedding the Application"
 msgstr "تضمين التطبيق"
@@ -765,15 +840,16 @@ msgstr "البريد الإلكتروني"
 msgid "Phone"
 msgstr "الهاتف"
 
-#: templates/note.html:85
+#: templates/note.html:85 templates/person_status_update_email.txt:10
 msgid "This record is a duplicate of"
 msgstr "هذا السجل نسخة مكررة من"
 
-#: templates/note.html:93 templates/results.html:103
+#: templates/note.html:93 templates/person_status_update_email.txt:11
+#: templates/results.html:103
 msgid "Status"
 msgstr "الحالة"
 
-#: templates/note.html:102
+#: templates/note.html:102 templates/person_status_update_email.txt:12
 #, fuzzy
 msgid "This person has been in contact with someone"
 msgstr "الشخص المفقود كان على اتصال بشخص ما"
@@ -785,6 +861,26 @@ msgstr "عنوان البريد الإلكتروني الحالي للشخص ا�
 #: templates/note.html:123
 msgid "Missing person's current phone number"
 msgstr "رقم الهاتف الحالي للشخص المفقود"
+
+#: templates/person_status_update_email.txt:4
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at %"
+"(site_url)s:"
+msgstr ""
+
+#: templates/person_status_update_email.txt:16
+#, python-format
+msgid "You can view the full record at %(view_url)s"
+msgstr ""
+
+#: templates/person_status_update_email.txt:19
+#, python-format
+msgid ""
+"You received this notification because you are subscribed.\n"
+"To unsubscribe, follow this link: %(unsubscribe_link)s"
+msgstr ""
 
 #: templates/query_form.html:15
 msgid "Enter the person's given and family names."
@@ -813,6 +909,20 @@ msgstr "البحث عن هذا الشخص"
 #: templates/query_form.html:106
 msgid "Provide information about this person"
 msgstr "تقديم معلومات عن هذا الشخص"
+
+#: templates/restoration_email.txt:4
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"(which was previously deleted) has restored the record.  To view the\n"
+"record, follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
 
 #: templates/restore.html:22
 msgid "Are you sure you want to restore this record from deletion?"
@@ -910,6 +1020,45 @@ msgstr "عرض المعلومات الحساسة"
 msgid "Proceed"
 msgstr "متابعة"
 
+#: templates/subscribe.html:21 templates/view.html:267
+#, fuzzy
+msgid "Subscribe to updates about this person"
+msgstr "تحديثات الحالة لهذا الشخص"
+
+#: templates/subscribe_captcha.html:22
+#, python-format
+msgid "Subscribe to updates about %(first_name)s %(last_name)s"
+msgstr ""
+
+#: templates/subscribe_captcha.html:24
+msgid "Please confirm your email address to subscribe to email updates"
+msgstr ""
+
+#: templates/subscribe_captcha.html:26
+msgid "Please enter your email address to subscribe to email updates"
+msgstr ""
+
+#: templates/subscribe_captcha.html:30
+#, fuzzy
+msgid "Your email:"
+msgstr "عنوان بريدك الإلكتروني"
+
+#: templates/subscribe_captcha.html:40
+msgid "Subscribe"
+msgstr ""
+
+#: templates/subscription_confirmation_email.txt:4
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to status updates for \"%(first_name)s %(last_name)s\" "
+"at %(site_url)s.\n"
+"\n"
+"You can view the full record at %(view_url)s\n"
+"\n"
+"To unsubscribe, follow this link: %(unsubscribe_link)s\n"
+msgstr ""
+
 #: templates/view.html:57
 msgid "Identifying information"
 msgstr "معلومات تحديد الهوية"
@@ -922,25 +1071,29 @@ msgstr "مسقط الرأس"
 msgid "Possible duplicates"
 msgstr "النتائج المكررة المحتملة"
 
-#: templates/view.html:267
+#: templates/view.html:276
 msgid "Back to results list"
 msgstr "الرجوع إلى قائمة النتائج"
 
-#: templates/view.html:278
+#: templates/view.html:287
 msgid "Status updates for this person"
 msgstr "تحديثات الحالة لهذا الشخص"
 
-#: templates/view.html:285
+#: templates/view.html:294
 msgid "No status updates have been posted"
 msgstr "لم يتم نشر أي تحديثات للحالة"
 
-#: templates/view.html:297
+#: templates/view.html:306
 #, fuzzy
 msgid "Delete this record"
 msgstr "حفظ هذا السجل"
 
 #~ msgid "Someone is seeking information"
 #~ msgstr "يسعى شخص ما للحصول على معلومات"
+
+#, fuzzy
+#~ msgid "Last known location:"
+#~ msgstr "آخر موقع معروف للشخص المفقود"
 
 #, fuzzy
 #~ msgid "You are the author of this record"
@@ -950,6 +1103,17 @@ msgstr "حفظ هذا السجل"
 #~ msgid "You added a note to this record"
 #~ msgstr "مصدر هذا السجل"
 
+#~ msgid "Unknown"
+#~ msgstr "غير معروف"
+
+#, fuzzy
+#~ msgid "Last known location: %s"
+#~ msgstr "آخر موقع معروف للشخص المفقود"
+
+#, fuzzy
+#~ msgid "Subscribe to updates about this person:"
+#~ msgstr "تحديثات الحالة لهذا الشخص"
+
 #, fuzzy
 #~ msgid ""
 #~ "These gadgets are made available under the %(apache_link_html|safe)"
@@ -958,9 +1122,6 @@ msgstr "حفظ هذا السجل"
 
 #~ msgid "Has been in contact with someone"
 #~ msgstr "كان على اتصال مع شخص ما"
-
-#~ msgid "Unknown"
-#~ msgstr "غير معروف"
 
 #, fuzzy
 #~ msgid "I have received spam as a result of this post."

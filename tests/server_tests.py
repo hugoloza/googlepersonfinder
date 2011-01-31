@@ -630,7 +630,7 @@ class PersonNoteTests(TestsBase):
         self.s.submit(search_form, query='_test_first_name')
         assert_params()
         self.verify_results_page(1, all_have=(['_test_first_name']),
-                                 some_have=(['_test_first_name']), 
+                                 some_have=(['_test_first_name']),
                                  status=(['Someone has received information that this person is alive']))
 
         # Submit the create form with complete information
@@ -1682,7 +1682,7 @@ class PersonNoteTests(TestsBase):
         self.s.submit(self.s.doc.first('form'),
                       found='yes',
                       text='this is text for first person',
-                      author_name='_search_note_author_name')        
+                      author_name='_search_note_author_name')
         # Add a 2nd person with same firstname but different lastname.
         self.go('/create?subdomain=haiti')
         self.s.submit(self.s.doc.first('form'),
@@ -1693,12 +1693,12 @@ class PersonNoteTests(TestsBase):
         self.s.submit(self.s.doc.first('form'),
                       found='yes',
                       text='this is text for second person',
-                      author_name='_search_note_2nd_author_name')        
+                      author_name='_search_note_2nd_author_name')
 
         config.set_for_subdomain('haiti', search_auth_key_required=True)
         try:
             # Make a search without a key, it should fail as config requires
-            # a search_key. 
+            # a search_key.
             doc = self.go('/api/search?subdomain=haiti' +
                           '&q=_search_lastname')
             assert self.s.status == 403
@@ -1716,7 +1716,7 @@ class PersonNoteTests(TestsBase):
             assert self.s.status not in [403,404]
             # Make sure we return the first record and not the 2nd one.
             assert '_search_first_name' in doc.content
-            assert '_search_2ndlastname' not in doc.content 
+            assert '_search_2ndlastname' not in doc.content
             # Check we also retrieved the first note and not the second one.
             assert '_search_note_author_name' in doc.content
             assert '_search_note_2nd_author_name' not in doc.content
@@ -2653,7 +2653,7 @@ class PersonNoteTests(TestsBase):
             author_email='test2@example.com',
             person_record_id='test.google.com/person.123',
             text='Testing'
-        ))       
+        ))
         assert Person.get('haiti', 'test.google.com/person.123')
         assert Note.get('haiti', 'test.google.com/note.456')
         assert not NoteFlag.all().get()
@@ -2704,6 +2704,154 @@ class PersonNoteTests(TestsBase):
 
         # Make sure that a second NoteFlag was created
         assert len(NoteFlag.all().fetch(10)) == 2
+
+    def test_send_notifications_and_unsubscribe(self):
+        """Tests sending email notification on status updating
+        and subscribing to the notifications, and unsubscribing"""
+        init_author_email = 'test@example.com'
+        first_subscribed_user = 'example1@example.com'
+        updated_status_email = 'exam%ple2@example.com'
+
+        db.put(Person(
+            key_name='haiti:test.google.com/person.123',
+            subdomain='haiti',
+            author_name='_test_author_name',
+            author_email=init_author_email,
+            first_name='_test_first_name',
+            last_name='_test_last_name',
+            entry_date=datetime.datetime.utcnow(),
+            subscribers=['fr:' + first_subscribed_user]
+        ))
+        db.put(Note(
+            key_name='haiti:test.google.com/note.456',
+            subdomain='haiti',
+            person_record_id='test.google.com/person.123',
+            text='Testing'
+        ))
+
+        # Must reset the MailThread queue _before_ making any requests
+        # to the server, else risk errantly deleting messages
+        MailThread.messages = []
+
+        # Visit the page and add a message about the person
+        # Now subscribe param is checked
+        doc = self.go('/view?subdomain=haiti&id=test.google.com/person.123')
+        button = doc.firsttag('input', value='Save this record')
+        doc = self.s.submit(button, {'text': 'sample text',
+                                     'status': 'information_sought',
+                                     'author_name': 'author_name',
+                                     'author_email': updated_status_email,
+                                     'subscribe': 'on',
+                                     'subdomain': 'haiti',
+                                     'id': 'test.google.com/person.123',
+                                     'query': ''})
+
+        # Test user forwarding to page with captcha
+        assert 'iframe' in doc.content
+        assert 'recaptcha_response_field' in doc.content
+
+        # Now subscribe param is unchecked
+        doc = self.go('/view?subdomain=haiti&id=test.google.com/person.123')
+        button = doc.firsttag('input', value='Save this record')
+        doc = self.s.submit(button, {'text': 'more text',
+                                     'author_name': 'author_name',
+                                     'author_email': updated_status_email,
+                                     'subdomain': 'haiti',
+                                     'id': 'test.google.com/person.123',
+                                     'query': ''})
+
+        # Now user shouldn't be forwarded to the page with captcha
+        assert 'iframe' not in doc.content
+        assert 'recaptcha_response_field' not in doc.content
+
+        start = time.time()
+        while len(MailThread.messages) < 2 and time.time() - start < 10:
+            time.sleep(0.1)
+
+        assert len(MailThread.messages) == 2
+
+        message = MailThread.messages[0]
+        assert message['to'] == [first_subscribed_user]
+        assert 'do-not-reply@' in message['from']
+        assert '_test_first_name _test_last_name' in message['data']
+        assert 'recherche des informations' in message['data']
+        assert 'sample text' in message['data']
+        assert 'view?id=test.google.com%2Fperson.123' in message['data']
+
+        # Test the unsubscribe link in the email
+        unsub_url = re.search('(/unsubscribe.*)', message['data']).group(1)
+        doc = self.go(unsub_url)
+        assert 'successfully unsubscribed' in doc.content
+        person = Person.get('haiti', 'test.google.com/person.123')
+        assert ('fr', first_subscribed_user) not in person.get_subscribers()
+
+    def test_subscribe(self):
+        """Tests subscribing to notifications on status updating"""
+        db.put(Person(
+            key_name='haiti:test.google.com/person.111',
+            subdomain='haiti',
+            author_name='_test_author_name',
+            author_email='test@example.com',
+            first_name='_test_first_name',
+            last_name='_test_last_name',
+            entry_date=datetime.datetime.utcnow()
+        ))
+        d = self.go('/create?subdomain=haiti')
+        doc = self.s.submit(d.first('form'),
+                      first_name='_test_first',
+                      last_name='_test_last',
+                      author_name='_test_author',
+                      subscribe='on')
+
+        assert 'Subscribe to updates about _test_first _test_last' in doc.text
+
+        # Try to continue with empty email. Get an error.
+        button = doc.firsttag('input', value='Subscribe')
+        doc = self.s.submit(button)
+        assert 'Invalid e-mail address. Please try again.' in doc.text
+
+        subscribe_email = 'testsubscribe@example.com'
+
+        # Try to continue with an invalid captcha response. Get redirected
+        # back to the same page.
+        button = doc.firsttag('input', value='Subscribe')
+        doc = self.s.submit(button, subscribe_email=subscribe_email)
+        assert 'iframe' in doc.content
+        assert 'recaptcha_response_field' in doc.content
+        person = Person.get('haiti', 'test.google.com/person.111')
+        assert ('en', subscribe_email) not in person.get_subscribers()
+
+        # Tests as if captcha is valid. The success message must appear
+        # and email must be added
+        url = '/subscribe?subdomain=haiti&id=test.google.com/person.111&' + \
+              'test_mode=yes'
+        doc = self.s.submit(button, url=url, paramdict = {'subscribe_email':
+                                                          subscribe_email})
+        assert 'successfully subscribed. ' in doc.text
+        assert '_test_first_name _test_last_name' in doc.text
+
+        person = Person.get('haiti', 'test.google.com/person.111')
+
+        assert ('en', subscribe_email) in person.get_subscribers()
+
+        # Tests subscribing already subscribed person
+        url = '/subscribe?subdomain=haiti&id=test.google.com/person.111&' + \
+              'test_mode=yes'
+        doc = self.s.submit(button, url=url, paramdict = {'subscribe_email':
+                                                          subscribe_email})
+
+        assert 'already subscribed. ' in doc.text
+        assert 'for _test_first_name _test_last_name' in doc.text
+
+        # Tests subscribing with invalid email
+        url = '/subscribe?subdomain=haiti&id=test.google.com/person.111&' + \
+              'test_mode=yes'
+        invalid_email = 'test@example'
+        doc = self.s.submit(button, url=url, paramdict = {'subscribe_email':
+                                                          invalid_email})
+        person = Person.get('haiti', 'test.google.com/person.111')
+        assert ('en', invalid_email) not in person.get_subscribers()
+        assert 'Invalid e-mail address. Please try again.' in doc.text
 
     def test_config_use_family_name(self):
         # use_family_name=True
