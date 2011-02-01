@@ -14,6 +14,9 @@
 # limitations under the License.
 
 import reveal
+from string import Template
+
+from google.appengine.api import mail
 
 import model
 import utils
