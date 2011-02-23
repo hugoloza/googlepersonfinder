@@ -45,7 +45,8 @@ class View(Handler):
 
         # Get the notes and duplicate links.
         try:
-            notes = person.get_notes()
+            # we force this to be a list so we can iterate over it below.
+            notes = list(person.get_notes())
         except datastore_errors.NeedIndexError:
             notes = []
         person.sex_text = get_person_sex_text(person)
