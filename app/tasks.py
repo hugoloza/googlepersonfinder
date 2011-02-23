@@ -13,6 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+import delete
+import sys
+from utils import *
+from model import *
 from datetime import timedelta
 import time
 
@@ -26,33 +31,30 @@ import utils
 
 FETCH_LIMIT = 100
 
+class DeleteExpired(Handler):
+    """Scan the Person table looking for expired records to delete.
 
-class ClearTombstones(utils.Handler):
-    """Scans the tombstone table, deleting each record and associated entities
-    if their TTL has expired. The TTL is declared in app/delete.py as
-    TOMBSTONE_TTL_DAYS."""
-    subdomain_required = False # Run at the root domain, not a subdomain.
+    Records whose expiration date has passed more than the 
+    grace period will be converted to tombstone state, otherwise we 
+    set the is_expired flag to filter them from other results.
+    """
+    subdomain_required = False
+    
+    # 3 days grace from expiration to deletion.
+    expiration_grace = datetime.timedelta(3,0,0) 
 
     def get(self):
-        def get_notes_by_person_tombstone(tombstone, limit=200):
-            return model.NoteTombstone.get_by_tombstone_record_id(
-                tombstone.subdomain, tombstone.record_id, limit=limit)
-        # Only delete tombstones more than 3 days old
-        time_boundary = utils.get_utcnow() - \
-            timedelta(days=delete.TOMBSTONE_TTL_DAYS)
-        query = model.PersonTombstone.all().filter('timestamp <', time_boundary)
-        for tombstone in query:
-            notes = get_notes_by_person_tombstone(tombstone)
-            while notes:
-                db.delete(notes)
-                notes = get_notes_by_person_tombstone(tombstone)
-            if (hasattr(tombstone, 'photo_url') and
-                tombstone.photo_url[:10] == '/photo?id='):
-                photo = model.Photo.get_by_id(
-                    int(tombstone.photo_url.split('=', 1)[1]))
+        query = Person.get_past_due_records()
+        for person in query:
+            if get_utcnow() - person.expiry_date > self.expiration_grace: 
+                db.delete(person.get_notes())
+                photo = person.get_photo()
                 if photo:
                     db.delete(photo)
-            db.delete(tombstone)
+                person.convert_to_tombstone()
+                person.put()
+            elif not person.is_expired:
+                person.mark_for_delete()
 
 
 def run_count(make_query, update_counter, counter, cpu_megacycles):
@@ -132,7 +134,7 @@ class CountPerson(CountBase):
         counter.increment('sex=' + (person.sex or ''))
         counter.increment('home_country=' + (person.home_country or ''))
         counter.increment('photo=' + (person.photo_url and 'present' or ''))
-        counter.increment('num_notes=%d' % len(person.get_notes()))
+        counter.increment('num_notes=%d' % len(list(person.get_notes())))
         counter.increment('status=' + (person.latest_status or ''))
         counter.increment('found=' + found)
 
@@ -157,6 +159,7 @@ class CountNote(CountBase):
 
 
 if __name__ == '__main__':
-    utils.run((CountPerson.URL, CountPerson),
-              (CountNote.URL, CountNote),
-              ('/tasks/clear_tombstones', ClearTombstones))
+    run((CountPerson.URL, CountPerson),
+        (CountNote.URL, CountNote),
+        ('/tasks/delete_expired', DeleteExpired))
+

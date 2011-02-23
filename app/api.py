@@ -48,7 +48,8 @@ class Read(utils.Handler):
             return self.error(400, 'Missing id parameter')
         person = model.Person.get(self.subdomain, record_id)
         if not person:
-            return self.error(404, 'No person record with ID %s' % record_id)
+            return self.error(404,
+                              'No person record with ID %s' % record_id)
         notes = model.Note.get_by_person_record_id(self.subdomain, record_id)
 
         self.response.headers['Content-Type'] = 'application/xml'

@@ -87,6 +87,7 @@ class Create(Handler):
             return self.error(400, _('Photo uploaded is in an unrecognized format.  Please go back and try again.'))
 
         photo_url = self.params.photo_url
+        photo = None
         if photo_obj:
             if max(photo_obj.width, photo_obj.height) <= MAX_IMAGE_DIMENSION:
                 # No resize needed.  Keep the same size but add a
@@ -113,7 +114,7 @@ class Create(Handler):
 
             photo = Photo(bin_data = sanitized_photo)
             photo.put()
-            photo_url = self.get_url('/photo', id=str(photo.key().id()))
+            photo_url = photo.get_url(self)
 
         other = ''
         if self.params.description:
@@ -152,6 +153,7 @@ class Create(Handler):
             source_date=source_date,
             source_name=source_name,
             photo_url=photo_url,
+            photo_id=photo,
             other=other
         )
         person.update_index(['old', 'new'])
