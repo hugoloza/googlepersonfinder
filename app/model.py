@@ -25,6 +25,9 @@ from google.appengine.ext import db
 import indexing
 import pfif
 import prefix
+import re
+import sys
+import utils
 
 # The domain name of this application.  The application hosts multiple
 # repositories, each at a subdomain of this domain.
@@ -56,9 +59,6 @@ def filter_by_prefix(query, key_name_prefix):
     min_key = db.Key.from_path(root_kind, key_name_prefix)
     max_key = db.Key.from_path(root_kind, key_name_prefix + u'\uffff')
     return query.filter('__key__ >=', min_key).filter('__key__ <=', max_key)
-
-
-# ==== Other utilities =====================================================
 
 def get_properties_as_dict(db_obj):
     """Returns a dictionary containing all (dynamic)* properties of db_obj."""
@@ -105,7 +105,11 @@ class Subdomain(db.Model):
     entity, with no parent, whose existence just indicates the existence of
     a subdomain.  Key name: unique subdomain name.  In the UI, each subdomain
     appears to be an independent instance of the application."""
-    pass  # No properties for now; only the key_name is significant.
+    # No properties for now; only the key_name is significant.
+
+    @staticmethod
+    def list():
+        return [subdomain.key().name() for subdomain in Subdomain.all()]
 
 
 class Base(db.Model):
@@ -113,13 +117,36 @@ class Base(db.Model):
     whose key names are partitioned using the subdomain as a prefix."""
 
     # Even though the subdomain is part of the key_name, it is also stored
-    # redundantly as a separate property so it can be indexed and queried upon. 
+    # redundantly as a separate property so it can be indexed and queried upon.
     subdomain = db.StringProperty(required=True)
+    # we can't do range filters on expiry_date cleanly,
+    # so we have a tasks that marks expired records explicitly
+    # and we use is_expired to filter.  Note that we need the default
+    # value to ensure that all entities are eligible for filtering.
+    is_expired = db.BooleanProperty(required=False, default=False)
 
     @classmethod
-    def all_in_subdomain(cls, subdomain):
+    def all(cls, keys_only=False, filter_expired=True):
+        """Return all records marked as expired.
+        
+        keys_only = True is incompatible with filter_expired = True.
+        Args:
+          keys_only if true, return only the keys.  
+          filter_expired if true, return only unexpired person records.
+        Return:
+          query object for the result if filter_expired is true, o/w the usual
+          all query.
+        """
+        everything = super(Base, cls).all(keys_only=keys_only)
+        if filter_expired:
+            everything.filter("is_expired =", False)
+        return everything
+
+    @classmethod
+    def all_in_subdomain(cls, subdomain, filter_expired=True):
         """Gets a query for all entities in a given subdomain's repository."""
-        return cls.all().filter('subdomain =', subdomain)
+        return cls.all(filter_expired=filter_expired).filter(
+            'subdomain =', subdomain)
 
     def get_record_id(self):
         """Returns the record ID of this record."""
@@ -141,9 +168,11 @@ class Base(db.Model):
         return not self.is_original()
 
     @classmethod
-    def get(cls, subdomain, record_id):
+    def get(cls, subdomain, record_id, filter_expired=True):
         """Gets the entity with the given record_id in a given repository."""
-        return cls.get_by_key_name(subdomain + ':' + record_id)
+        record = cls.get_by_key_name(subdomain + ':' + record_id)
+        if record and not (filter_expired and record.is_expired):
+            return record
 
     @classmethod
     def create_original(cls, subdomain, **kwargs):
@@ -169,23 +198,6 @@ class Base(db.Model):
         key_name = subdomain + ':' + record_id
         return cls(key_name=key_name, subdomain=subdomain, **kwargs)
 
-class PersonTombstone(db.Expando):
-    """Expando placeholder for a to-be-deleted Person object. Expando values
-    are used to store all currently existing properties of the Person object
-    at the time the tombstone is created."""
-    timestamp = db.DateTimeProperty(auto_now_add=True)
-
-class NoteTombstone(db.Expando):
-    """Expando placeholder for a to-be-deleted Note object. Expando values are
-    used to store all currently existing properties of the Note object at the
-    time the tombstone is created."""
-    timestamp = db.DateTimeProperty(auto_now_add=True)
-
-    @staticmethod
-    def get_by_tombstone_record_id(subdomain, person_record_id, limit=200):
-        """Retrieve NoteTombstones for a PersonTombstone's record_id."""
-        return NoteTombstone.all().filter('subdomain =', subdomain).filter(
-            'person_record_id =', person_record_id).fetch(limit)
 
 # All fields are either required, or have a default value.  For property
 # types that have a false value, the default is the false value.  For types
@@ -193,7 +205,10 @@ class NoteTombstone(db.Expando):
 
 class Person(Base):
     """The datastore entity kind for storing a PFIF person record.  Never call
-    Person() directly; use Person.create_clone() or Person.create_original()."""
+    Person() directly; use Person.create_clone() or Person.create_original().
+
+    Make sure to zero out any new required fields in convert_to_tombstone.
+    """
 
     # entry_date should update every time a record is created or re-imported.
     entry_date = db.DateTimeProperty(required=True)
@@ -220,8 +235,8 @@ class Person(Base):
     home_state = db.StringProperty(default='')
     home_postal_code = db.StringProperty(default='')
     home_country = db.StringProperty(default='')
-    photo_url = db.TextProperty(default='')
     other = db.TextProperty(default='')
+
 
     # The following properties are not part of the PFIF data model; they are
     # cached on the Person for efficiency.
@@ -244,17 +259,38 @@ class Person(Base):
     _fields_to_index_properties = ['first_name', 'last_name']
     _fields_to_index_by_prefix_properties = ['first_name', 'last_name']
 
-    def create_tombstone(self, **kwargs):
-        return clone_to_new_type(self, PersonTombstone, **kwargs)
- 
+    photo_url = db.TextProperty(default='')
+    # if photo_id is set, then photo_url is a reference to the local photo.
+    photo_id = db.ReferenceProperty(default=None)
+    
+    @staticmethod
+    def get_past_due_records():
+        """Return all person records with expiry_date in the past.
+        
+        Returns:
+          All Person objects, including the ones where is_expired is true.
+        """
+        return Person.all(filter_expired=False).filter(
+            'expiry_date <', utils.get_utcnow())
+
     def get_person_record_id(self):
         return self.record_id
     person_record_id = property(get_person_record_id)
 
-    def get_notes(self, note_limit=200):
+    def get_notes(self, filter_expired=True):
         """Retrieves the Notes for this Person."""
         return Note.get_by_person_record_id(
-            self.subdomain, self.record_id, limit=note_limit)
+            self.subdomain, self.record_id, filter_expired=filter_expired)
+
+    def get_photo(self):
+        """Get the photo from local store."""
+        # automagic dereference.
+        return self.photo_id 
+
+    def get_subscriptions(self, subscription_limit=200):
+        """Retrieves the Subscriptions for this Person."""
+        return Subscription.get_by_person_record_id(
+            self.subdomain, self.record_id, limit=subscription_limit)
 
     def get_linked_persons(self, note_limit=200):
         """Retrieves the Persons linked (as duplicates) to this Person."""
@@ -264,6 +300,42 @@ class Person(Base):
             if person:
                 linked_persons.append(person)
         return linked_persons
+
+    def get_associated_emails(self):
+        """Get all the e-mail addresses to notify."""
+        email_addresses = set([note.author_email for note in self.get_notes()])
+        email_addresses.add(self.author_email)
+        return email_addresses
+
+    def mark_for_delete(self, delete=True):
+        """Mark as deleted for future expiration by the DeleteExpired task.
+
+        use delete = False to unmark.
+
+        Warning - this will commit to the db.
+        """
+        self.is_expired = delete
+        self.entry_date = utils.get_utcnow()
+        notes = self.get_notes(filter_expired=delete)
+        for note in notes:
+            note.is_expired = delete
+            db.put(note)
+        self.put() # TODO(lschumacher): photos don't have expiration currently.
+
+    def convert_to_tombstone(self):
+        """Zero out all the fields except is_expired and expiry_date.  
+
+        Caller is expected to save if desired.."""
+        # set required entry_date field
+        props = self.properties()
+        for p in props:
+            # filter out the index fields, since appengine handles those.
+            if not p == 'expiry_date':
+                prop = props[p]
+                if not prop.required: 
+                    self.__setattr__(p, None)
+        self.entry_date = utils.get_utcnow()
+        self.is_expired = True
 
     def update_from_note(self, note):
         """Updates any necessary fields on the Person to reflect a new Note."""
@@ -324,20 +396,34 @@ class Note(Base):
     # initially hidden from display upon loading a record page.
     hidden = db.BooleanProperty(default=False)
 
-    def create_tombstone(self, **kwargs):
-        return clone_to_new_type(self, NoteTombstone, **kwargs)
- 
     def get_note_record_id(self):
         return self.record_id
     note_record_id = property(get_note_record_id)
+    
+    FETCH_LIMIT=200
 
     @staticmethod
-    def get_by_person_record_id(subdomain, person_record_id, limit=200):
-        """Retrieve notes for a person record, ordered by source_date."""
-        query = Note.all_in_subdomain(subdomain)
-        query = query.filter('person_record_id =', person_record_id)
-        query = query.order('source_date')
-        return query.fetch(limit)
+    def get_by_person_record_id(subdomain, person_record_id, 
+                                filter_expired=True):
+        """Iterator for all notes for a person record ordered by source_date."""
+        
+        # empty query has cursor == ''
+        cursor = ''
+        while True:
+            # this bit of premature optimization fetches all the records in
+            # limit sized chunks.
+            query = Note.all_in_subdomain(subdomain, 
+                                          filter_expired=filter_expired)
+            query.filter('person_record_id =', person_record_id)
+            query.order('source_date')
+            if cursor:
+                query.with_cursor(cursor)
+            for note in query.fetch(Note.FETCH_LIMIT):
+                yield note
+            if cursor == query.cursor(): 
+                # we made no progress, so query is done.
+                return
+            cursor = query.cursor()            
 
 
 class Photo(db.Model):
@@ -345,14 +431,17 @@ class Photo(db.Model):
     bin_data = db.BlobProperty()
     date = db.DateTimeProperty(auto_now_add=True)
 
+    def get_url(self, handler):
+        return handler.get_url('/photo', force_secure=True,
+                               id=str(self.id()))
 
 class Authorization(db.Model):
     """Authorization tokens.  Key name: subdomain + ':' + auth_key."""
 
     # Even though the subdomain is part of the key_name, it is also stored
-    # redundantly as a separate property so it can be indexed and queried upon. 
+    # redundantly as a separate property so it can be indexed and queried upon.
     subdomain = db.StringProperty(required=True)
-    
+
     # If this field is non-empty, this authorization token allows the client
     # to write records with this original domain.
     domain_write_permission = db.StringProperty()
@@ -480,8 +569,9 @@ class NoteFlag(db.Model):
     spam = db.BooleanProperty(required=True)
     reason_for_report = db.StringProperty()
 
-class PersonFlag(db.Model):
+class PersonAction(db.Model):
     """Tracks deletion / restoration of person records."""
+    person_record_id = db.StringProperty(required=True)
     # True if the record is being deleted, False if
     # the record is being restored
     is_delete = db.BooleanProperty(required=True)
@@ -490,12 +580,41 @@ class PersonFlag(db.Model):
     # reason_for_report should always be present when is_delete == True
     reason_for_report = db.StringProperty()
 
+class Subscription(db.Model):
+    """Subscription to notifications when a note is added to a person record"""
+    subdomain = db.StringProperty(required=True)
+    person_record_id = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    language = db.StringProperty(required=True)
+    timestamp = db.DateTimeProperty(auto_now_add=True)
+
+    @staticmethod
+    def create(subdomain, record_id, email, language):
+        """Creates a new Subscription"""
+        key_name = '%s:%s:%s' % (subdomain, record_id, email)
+        return Subscription(key_name=key_name, subdomain=subdomain,
+                            person_record_id=record_id,
+                            email=email, language=language)
+
+    @staticmethod
+    def get(subdomain, record_id, email):
+        """Gets the entity with the given record_id in a given repository."""
+        key_name = '%s:%s:%s' % (subdomain, record_id, email)
+        return Subscription.get_by_key_name(key_name)
+
+    @staticmethod
+    def get_by_person_record_id(subdomain, person_record_id, limit=200):
+        """Retrieve subscriptions for a person record."""
+        query = Subscription.all().filter('subdomain =', subdomain)
+        query = query.filter('person_record_id =', person_record_id)
+        return query.fetch(limit)
+
 class StaticSiteMapInfo(db.Model):
     """Holds static sitemaps file info."""
     static_sitemaps = db.StringListProperty()
     static_sitemaps_generation_time = db.DateTimeProperty(required=True)
     shard_size_seconds = db.IntegerProperty(default=90)
-    
+
 class SiteMapPingStatus(db.Model):
     """Tracks the last shard index that was pinged to the search engine."""
     search_engine = db.StringProperty(required=True)

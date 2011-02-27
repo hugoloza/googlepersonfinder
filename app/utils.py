@@ -194,6 +194,16 @@ def get_person_sex_text(person):
     """Returns the UI text for a person's sex field."""
     return PERSON_SEX_TEXT.get(person.sex or '')
 
+# UI text for the expiry field when displayinga person.
+PERSON_EXPIRY_TEXT = {
+    '-1': _('Unspecified'),
+    '30': _('About 1 month (30 days) from now'),
+    '60': _('About 2 months (60 days) from now'),
+    '90': _('About 3 months (90 days) from now'),
+    '180': _('About 6 months (180 days) from now'),
+    '360': _('About 1 year (360 days) from now'),
+}
+
 # UI text for the status field when posting or displaying a note.
 NOTE_STATUS_TEXT = {
     # This dictionary must have an entry for '' that gives the default text.
@@ -299,6 +309,9 @@ def strip(string):
 def validate_yes(string):
     return (string.strip().lower() == 'yes') and 'yes' or ''
 
+def validate_checkbox(string):
+    return (string.strip().lower() == 'on') and 'yes' or ''
+
 def validate_role(string):
     return (string.strip().lower() == 'provide') and 'provide' or 'seek'
 
@@ -310,6 +323,15 @@ def validate_sex(string):
     if string:
         string = string.strip().lower()
     return string in pfif.PERSON_SEX_VALUES and string or ''
+
+def validate_expiry(value):
+    """Validates that the 'expiry_option' parameter is a positive integer;
+    otherwise returns -1 which represents the 'unspecified' status."""
+    try:
+        value = int(value)
+    except:
+        return -1
+    return value > 0 and value or -1
 
 APPROXIMATE_DATE_RE = re.compile(r'^\d{4}(-\d\d)?(-\d\d)?$')
 
@@ -456,6 +478,7 @@ class Handler(webapp.RequestHandler):
         'source_date': strip,
         'source_name': strip,
         'description': strip,
+        'expiry_option': validate_expiry,
         'dupe_notes': validate_yes,
         'id': strip,
         'text': strip,
@@ -489,7 +512,9 @@ class Handler(webapp.RequestHandler):
         'confirm': validate_yes,
         'key': strip,
         'subdomain_new': strip,
-        'utcnow': validate_timestamp
+        'utcnow': validate_timestamp,
+        'subscribe_email' : strip,
+        'subscribe' : validate_checkbox,
     }
 
     def redirect(self, url, **params):
@@ -550,11 +575,19 @@ class Handler(webapp.RequestHandler):
             os.path.join(ROOT, 'templates', name), values)
 
     def error(self, code, message=''):
-        webapp.RequestHandler.error(self, code)
-        if not message:
-            message = 'Error %d: %s' % (code, httplib.responses.get(code))
+        self.info(code, message, style='error')
+
+    def info(self, code, message='', message_html='', style='info'):
+        is_error = 400 <= code < 600
+        if is_error:
+            webapp.RequestHandler.error(self, code)
+        else:
+            self.response.set_status(code)
+        if not message and not message_html:
+            message = '%d: %s' % (code, httplib.responses.get(code))
         try:
-            self.render('templates/message.html', cls='error', message=message)
+            self.render('templates/message.html', cls=style,
+                        message=message, message_html=message_html)
         except:
             self.response.out.write(message)
         self.terminate_response()
@@ -575,6 +608,7 @@ class Handler(webapp.RequestHandler):
         lang = (self.params.lang or
                 self.request.cookies.get('django_language', None) or
                 django.conf.settings.LANGUAGE_CODE)
+        lang = urllib.quote(lang)
         self.response.headers.add_header(
             'Set-Cookie', 'django_language=%s' % lang)
         django.utils.translation.activate(lang)
@@ -582,7 +616,7 @@ class Handler(webapp.RequestHandler):
         self.response.headers.add_header('Content-Language', lang)
         return lang, rtl
 
-    def get_url(self, path, **params):
+    def get_url(self, path, force_secure=False, **params):
         """Constructs the absolute URL for a given path and query parameters,
         preserving the current 'subdomain', 'small', and 'style' parameters."""
         for name in ['subdomain', 'small', 'style']:
@@ -591,6 +625,8 @@ class Handler(webapp.RequestHandler):
         if params:
             path += ('?' in path and '&' or '?') + urlencode(params)
         scheme, netloc, _, _, _ = urlparse.urlsplit(self.request.url)
+        if force_secure:
+            scheme = 'https'
         return scheme + '://' + netloc + path
 
     def get_subdomain(self):
@@ -719,6 +755,14 @@ class Handler(webapp.RequestHandler):
         self.env.statuses = [Struct(value=value, text=NOTE_STATUS_TEXT[value])
                              for value in pfif.NOTE_STATUS_VALUES]
 
+        # Expiry option field values (durations)
+        expiry_keys = PERSON_EXPIRY_TEXT.keys().sort()
+        self.env.expiry_options = [
+            Struct(value=value, text=PERSON_EXPIRY_TEXT[value])
+            for value in sorted(PERSON_EXPIRY_TEXT.keys(),
+                                key=int)
+            ]
+
         # Check for SSL (unless running on localhost for development).
         if self.https_required and self.env.domain != 'localhost':
             scheme = urlparse.urlparse(self.request.url)[0]
@@ -784,7 +828,7 @@ class Handler(webapp.RequestHandler):
             self.render('templates/message.html', cls='deactivation',
                         message_html=self.config.deactivation_message_html)
             self.terminate_response()
-        
+
     def is_test_mode(self):
         """Returns True if the request is in test mode. Request is considered
         to be in test mode if the remote IP address is the localhost and if
