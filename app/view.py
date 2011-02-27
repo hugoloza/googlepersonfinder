@@ -21,6 +21,7 @@ from model import *
 from utils import *
 import prefix
 import reveal
+import subscribe
 
 from django.utils.translation import ugettext as _
 
@@ -44,7 +45,8 @@ class View(Handler):
 
         # Get the notes and duplicate links.
         try:
-            notes = person.get_notes()
+            # we force this to be a list so we can iterate over it below.
+            notes = list(person.get_notes())
         except datastore_errors.NeedIndexError:
             notes = []
         person.sex_text = get_person_sex_text(person)
@@ -75,6 +77,11 @@ class View(Handler):
             query=self.params.query,
             first_name=self.params.first_name,
             last_name=self.params.last_name)
+        feed_url = self.get_url(
+            '/feeds/note',
+            person_record_id=self.params.id,
+            subdomain=self.subdomain)
+        subscribe_url = self.get_url('/subscribe', id=self.params.id)
         self.render('templates/view.html',
                     person=person,
                     notes=notes,
@@ -85,7 +92,9 @@ class View(Handler):
                     admin=users.is_current_user_admin(),
                     dupe_notes_url=dupe_notes_url,
                     results_url=results_url,
-                    reveal_url=reveal_url)
+                    reveal_url=reveal_url,
+                    feed_url=feed_url,
+	            subscribe_url=subscribe_url)
 
     def post(self):
         if not self.params.text:
@@ -123,10 +132,19 @@ class View(Handler):
         person = Person.get(self.subdomain, self.params.id)
         if person:
             person.update_from_note(note)
+            # Send notification to all people
+            # who subscribed to updates on this person
+            subscribe.send_notifications(person, note, self)
+
             entities_to_put.append(person)
 
         # Write one or both entities to the store.
         db.put(entities_to_put)
+
+        # If user wants to subscribe to updates, redirect to the subscribe page
+        if self.params.subscribe:
+            return self.redirect('/subscribe', id=person.record_id,
+                                 subscribe_email=self.params.author_email)
 
         # Redirect to this page so the browser's back button works properly.
         self.redirect('/view', id=self.params.id, query=self.params.query)

@@ -18,12 +18,13 @@ from datetime import datetime
 from google.appengine.ext import db
 import unittest
 import model
-from utils import get_utcnow
+from utils import get_utcnow, set_utcnow_for_test
 
 class ModelTests(unittest.TestCase):
     '''Test the loose odds and ends.'''
 
     def setUp(self):
+        set_utcnow_for_test(datetime(2010, 1, 1))
         self.p1 = model.Person.create_original(
             'haiti',
             first_name='John',
@@ -40,6 +41,7 @@ class ModelTests(unittest.TestCase):
             source_date=datetime(2010, 1, 1),
             source_name='Source Name',
             entry_date=datetime(2010, 1, 1),
+            expiry_date=datetime(2010, 2, 1),
             other='')
         self.p2 = model.Person.create_original(
             'haiti',
@@ -49,6 +51,7 @@ class ModelTests(unittest.TestCase):
             home_city='Tel Aviv',
             home_state='Israel',
             entry_date=datetime(2010, 1, 1),
+            expiry_date=datetime(2010, 3, 1),
             other='')
         self.key_p1 = db.put(self.p1)
         self.key_p2 = db.put(self.p2)
@@ -154,9 +157,9 @@ class ModelTests(unittest.TestCase):
 
     def test_note(self):
         assert self.n1_1.is_clone() == False
-
-        assert self.p1.get_notes()[0].record_id == self.n1_1.record_id
-        assert self.p1.get_notes()[1].record_id == self.n1_2.record_id
+        notes = self.p1.get_notes()
+        assert notes.next().record_id == self.n1_1.record_id
+        assert notes.next().record_id == self.n1_2.record_id
         assert self.p1.get_linked_persons()[0].record_id == self.p2.record_id
         assert self.p2.get_linked_persons() == []
 
@@ -164,6 +167,45 @@ class ModelTests(unittest.TestCase):
             self.n1_1.record_id
         assert model.Note.get('haiti', self.n1_2.record_id).record_id == \
             self.n1_2.record_id
+
+    def test_subscription(self):
+        sd = 'haiti'
+        email1 = 'one@example.com'
+        email2 = 'two@example.com'
+        s1 = model.Subscription.create(sd, self.p1.record_id, email1, 'fr')
+        s2 = model.Subscription.create(sd, self.p1.record_id, email2, 'en')
+        key_s1 = db.put(s1)
+        key_s2 = db.put(s2)
+
+        assert model.Subscription.get(sd, self.p1.record_id, email1) is not None
+        assert model.Subscription.get(sd, self.p1.record_id, email2) is not None
+        assert model.Subscription.get(sd, self.p2.record_id, email1) is None
+        assert model.Subscription.get(sd, self.p2.record_id, email2) is None
+        assert len(self.p1.get_subscriptions()) == 2
+        assert len(self.p2.get_subscriptions()) == 0
+
+        s3 = model.Subscription.create(sd, self.p1.record_id, email2, 'ar')
+        key_s3 = db.put(s3)
+        assert len(self.p1.get_subscriptions()) == 2
+        assert model.Subscription.get(
+            sd, self.p1.record_id, email2).language == 'ar'
+        db.delete([key_s1, key_s2, key_s3])
+
+    def test_expiration(self):
+        """Make sure person records expire at the appropriate time."""
+        def assertExpired(expired_count):
+            expired = model.Person.get_past_due_records()
+            self.assertEquals(expired_count, len([p for p in expired]))
+        assertExpired(0)
+        set_utcnow_for_test(datetime(2010, 2, 15))
+        assertExpired(1)
+        set_utcnow_for_test(datetime(2010,3,15))
+        assertExpired(2)
+
+    def test_mark_for_delete(self):
+        """Make sure mark for delete kills everything."""
+        # TODO(lschumacher)
+        pass
 
 if __name__ == '__main__':
     unittest.main()
