@@ -247,19 +247,19 @@ def format_sitemaps_datetime(dt):
         dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
     return integer_dt.isoformat() + '+00:00'
 
-def to_utf8(string):
+def encode(string, encoding='utf-8'):
     """If Unicode, encode to UTF-8; if 8-bit string, leave unchanged."""
     if isinstance(string, unicode):
-        string = string.encode('utf-8')
+        string = string.encode(encoding)
     return string
 
-def urlencode(params):
+def urlencode(params, encoding='utf-8'):
     """Apply UTF-8 encoding to any Unicode strings in the parameter dict.
     Leave 8-bit strings alone.  (urllib.urlencode doesn't support Unicode.)"""
     keys = params.keys()
     keys.sort()  # Sort the keys to get canonical ordering
     return urllib.urlencode([
-        (to_utf8(key), to_utf8(params[key]))
+        (encode(key, encoding), encode(params[key], encoding))
         for key in keys if isinstance(params[key], basestring)])
 
 def set_url_param(url, param, value):
@@ -434,6 +434,13 @@ class Handler(webapp.RequestHandler):
     # Handlers to enable even for deactivated subdomains can set this to True.
     ignore_deactivation = False
 
+    # Non utf-8 encodings to parse query params for. This will enable a set of
+    # hacks to get around webapp idiosyncracies when dealing with these
+    # encodings, so keep restricted to subdomain to minimize the hackery.
+    custom_subdomain_encodings = {
+        'japan': ('shift_jis',),
+        }
+
     auto_params = {
         'lang': strip,
         'query': strip,
@@ -574,8 +581,21 @@ class Handler(webapp.RequestHandler):
         self.response.out.write(text.encode(self.charset, 'replace'))
 
     def select_charset(self):
+        # We have two separate charset test params
+        # charset (singular) specifies a single charset to use; it is returned
+        # immediately
+        # charsets (plural) specifies a list of charsets to use, and the logic
+        # below selects the most appropriate one
+
+        # Allow overriding with single charset
+        # Note we may need this before self.params is available
+        if self.request.get('charset', None):
+            return self.request.get('charset', '').strip()
+
         # Get a list of the charsets that the client supports.
-        charsets = (self.params.charsets or  # allow override for testing
+        # self.params.charsets may be missing if this is called before
+        # parameters are parsed.
+        charsets = (getattr(self.params, 'charsets', None) or
                     self.request.accept_charset.best_matches())
 
         # Always prefer UTF-8 if the client supports it.
@@ -620,15 +640,19 @@ class Handler(webapp.RequestHandler):
             if self.request.get(name) and name not in params:
                 params[name] = self.request.get(name)
         if params:
-            path += ('?' in path and '&' or '?') + urlencode(params)
+            path += ('?' in path and '&' or '?') + urlencode(params,
+                                                             self.charset)
         scheme, netloc, _, _, _ = urlparse.urlsplit(self.request.url)
         return scheme + '://' + netloc + path
 
     def get_subdomain(self):
         """Determines the subdomain of the request."""
 
-        # The 'subdomain' query parameter always overrides the hostname.
-        if self.request.get('subdomain'):
+        # The 'subdomain' query parameter always overrides the hostname,
+        # unless it's erronously parsed from a strange encoding like
+        # shift_jis, which parses the empty string as a single NULL character
+        if (self.request.get('subdomain') and
+            len(self.request.get('subdomain')) > 1):
             return self.request.get('subdomain')
 
         levels = self.request.headers.get('Host', '').split('.')
@@ -736,6 +760,17 @@ class Handler(webapp.RequestHandler):
                 user_agent=self.request.headers.get('User-Agent'),
                 ip_address=self.request.remote_addr).put()
 
+        # We need to select the charset in order to parse and validate the
+        # query parameters, but this gets tricky since the query parameters
+        # can also override the charset, so we check again after parsing to see
+        # if we need to override
+        self.charset = self.select_charset()
+
+        # Specify custom encoding for request param parsing if set
+        if self.charset in self.custom_subdomain_encodings.get(self.subdomain,
+                                                               ()):
+            self.request.charset = self.charset
+
         # Validate query parameters.
         for name, validator in self.auto_params.items():
             try:
@@ -745,6 +780,12 @@ class Handler(webapp.RequestHandler):
                 setattr(self.params, name, validator(None))
                 return self.error(400, 'Invalid parameter %s: %s' % (name, e))
 
+        # If charsets was passed explicitly as a query param, try to select
+        # again with that list
+        if self.params.charsets:
+            self.charset = self.select_charset()
+        self.set_content_type('text/html')  # add charset to Content-Type header
+
         if self.params.flush_cache:
             # Useful for debugging and testing.
             memcache.flush_all()
@@ -753,10 +794,6 @@ class Handler(webapp.RequestHandler):
 
         # Activate localization.
         lang, rtl = self.select_locale()
-
-        # Choose a charset for the response.
-        self.charset = self.select_charset()
-        self.set_content_type('text/html')  # add charset to Content-Type header
 
         # Put common non-subdomain-specific template variables in self.env.
         self.env.charset = self.charset
