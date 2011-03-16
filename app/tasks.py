@@ -184,7 +184,20 @@ class UpdateStatus(CountBase):
         if status != person.latest_status:
             person.latest_status = status
             person.latest_status_source_date = status_source_date
-        person.put()                                                            
+        person.put()
+
+
+class Reindex(CountBase):
+    """A handler for re-indexing Persons."""
+    SCAN_NAME = 'reindex'
+    URL = '/tasks/count/reindex'
+
+    def make_query(self):
+        return Person.all().filter('subdomain =', self.subdomain)
+
+    def update_counter(self, counter, person):
+        person.update_index(['old', 'new'])
+        person.put()
 
 
 if __name__ == '__main__':
@@ -192,4 +205,5 @@ if __name__ == '__main__':
         (CountNote.URL, CountNote),
         (UpdateStatus.URL, UpdateStatus),
         (UnreviewNote.URL, UnreviewNote),
-        ('/tasks/clear_tombstones', ClearTombstones))
+        ('/tasks/clear_tombstones', ClearTombstones),
+        (Reindex.URL, Reindex))
