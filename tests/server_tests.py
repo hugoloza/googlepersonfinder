@@ -1,4 +1,5 @@
 #!/usr/bin/python2.5
+# encoding: utf-8
 # Copyright 2010 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -746,6 +747,8 @@ class PersonNoteTests(TestsBase):
                       source_url='_test_source_url',
                       first_name='_test_first_name',
                       last_name='_test_last_name',
+                      alternate_first_names='_test_alternate_first_names',
+                      alternate_last_names='_test_alternate_last_names',
                       sex='female',
                       date_of_birth='1955',
                       age='52',
@@ -761,6 +764,8 @@ class PersonNoteTests(TestsBase):
         self.verify_details_page(0, details={
             'Given name:': '_test_first_name',
             'Family name:': '_test_last_name',
+            'Alternate given names:': '_test_alternate_first_names',
+            'Alternate family names:': '_test_alternate_last_names',
             'Sex:': 'female',
             # 'Date of birth:': '1955',  # currently hidden
             'Age:': '52',
@@ -854,6 +859,8 @@ class PersonNoteTests(TestsBase):
         self.s.submit(self.s.doc.first('form'),
                       first_name='ABCD EFGH',
                       last_name='IJKL MNOP',
+                      alternate_first_names='QRST UVWX',
+                      alternate_last_names='YZ01 2345',
                       author_name='author_name')
 
         # Try a middle-name match.
@@ -871,6 +878,90 @@ class PersonNoteTests(TestsBase):
         # Try a multiword match.
         self.s.submit(search_form, query='MNOP IJK ABCD EFG')
         self.verify_results_page(1, all_have=(['ABCD EFGH']))
+
+        # Try an alternate-name prefix non-match.
+        self.s.submit(search_form, query='QRS')
+        self.verify_results_page(0)
+
+        # Try a multiword match on an alternate name.
+        self.s.submit(search_form, query='ABCD EFG QRST UVWX')
+        self.verify_results_page(1, all_have=(['ABCD EFGH']))
+
+    def test_indexing_japanese_names(self):
+        """Index Japanese person's names and make sure they are searchable."""
+
+        # Shorthand to assert the correctness of our URL
+        def assert_params(url=None):
+            assert_params_conform(
+                url or self.s.url, {'role': 'seek'}, {'small': 'yes'})
+
+        Subdomain(key_name='japan-test').put()
+        # Kanji's are segmented character by character.
+        config.set_for_subdomain('japan-test', min_query_word_length=1)
+        config.set_for_subdomain('japan-test', use_family_name=True)
+        config.set_for_subdomain('japan-test', family_name_first=True)
+        config.set_for_subdomain('japan-test', show_alternate_names=True)
+
+        # Start on the home page and click the "I'm looking for someone" button
+        self.go('/?subdomain=japan-test')
+        search_page = self.s.follow('I\'m looking for someone')
+        search_form = search_page.first('form')
+        assert 'Search for this person' in search_form.content
+
+        # Try a search, which should yield no results.
+        self.s.submit(search_form, query='山田 太郎')
+        assert_params()
+        self.verify_results_page(0)
+        assert_params()
+        self.verify_unsatisfactory_results()
+        assert_params()
+
+        # Submit the create form with a valid first and last name.
+        self.s.submit(self.s.doc.first('form'),
+                      last_name='山田',
+                      first_name='太郎',
+                      alternate_last_names='やまだ',
+                      alternate_first_names='たろう',
+                      author_name='author_name')
+
+        # Try a last name match.
+        self.s.submit(search_form, query='山田')
+        self.verify_results_page(1, all_have=([u'山田 太郎',
+                                               u'やまだ たろう']))
+
+        # Try a full name prefix match.
+        self.s.submit(search_form, query='山田太')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try a full name match, where first and last names are not segmented.
+        self.s.submit(search_form, query='山田太郎')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try an alternate last name match.
+        self.s.submit(search_form, query='やまだ')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try an alternate name match with first name and last name segmented.
+        self.s.submit(search_form, query='やまだ たろう')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try an alternate name match without first name and last name
+        # segmented.
+        self.s.submit(search_form, query='やまだたろう')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try an alternate name prefix match, but we don't index prefixes for
+        # alternate names.
+        self.s.submit(search_form, query='やまだたろ')
+        self.verify_results_page(0)
+
+        # Try an alternate last name match with katakana variation.
+        self.s.submit(search_form, query='ヤマダ')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
+
+        # Try an alternate last name match with romaji variation.
+        self.s.submit(search_form, query='YAMADA')
+        self.verify_results_page(1, all_have=([u'山田 太郎']))
 
     def test_have_information_regular(self):
         """Follow the "I have information" flow on the regular-sized embed."""
@@ -948,6 +1039,8 @@ class PersonNoteTests(TestsBase):
                       source_url='_test_source_url',
                       first_name='_test_first_name',
                       last_name='_test_last_name',
+                      alternate_first_names='_test_alternate_first_names',
+                      alternate_last_names='_test_alternate_last_names',
                       sex='male',
                       date_of_birth='1970-01',
                       age='30-40',
@@ -970,6 +1063,8 @@ class PersonNoteTests(TestsBase):
         self.verify_details_page(1, details={
             'Given name:': '_test_first_name',
             'Family name:': '_test_last_name',
+            'Alternate given names:': '_test_alternate_first_names',
+            'Alternate family names:': '_test_alternate_last_names',
             'Sex:': 'male',
             # 'Date of birth:': '1970-01',  # currently hidden
             'Age:': '30-40',
@@ -1005,6 +1100,8 @@ class PersonNoteTests(TestsBase):
             entry_date=utils.get_utcnow(),
             first_name='_first_name_1',
             last_name='_last_name_1',
+            alternate_first_names='_alternate_first_names_1',
+            alternate_last_names='_alternate_last_names_1',
             sex='male',
             date_of_birth='1970-01-01',
             age='31-41',
@@ -1018,6 +1115,8 @@ class PersonNoteTests(TestsBase):
             entry_date=utils.get_utcnow(),
             first_name='_first_name_2',
             last_name='_last_name_2',
+            alternate_first_names='_alternate_first_names_2',
+            alternate_last_names='_alternate_last_names_2',
             sex='male',
             date_of_birth='1970-02-02',
             age='32-42',
@@ -1031,6 +1130,8 @@ class PersonNoteTests(TestsBase):
             entry_date=utils.get_utcnow(),
             first_name='_first_name_3',
             last_name='_last_name_3',
+            alternate_first_names='_alternate_first_names_3',
+            alternate_last_names='_alternate_last_names_3',
             sex='male',
             date_of_birth='1970-03-03',
             age='33-43',
@@ -1044,6 +1145,9 @@ class PersonNoteTests(TestsBase):
         assert '_first_name_1' in doc.content
         assert '_first_name_2' in doc.content
         assert '_first_name_3' in doc.content
+        assert '_alternate_first_names_1' in doc.content
+        assert '_alternate_first_names_2' in doc.content
+        assert '_alternate_first_names_3' in doc.content
         assert '31-41' in doc.content
         assert '32-42' in doc.content
         assert '33-43' in doc.content
@@ -1545,6 +1649,8 @@ class PersonNoteTests(TestsBase):
             author_phone='_read_author_phone',
             first_name='_read_first_name',
             last_name='_read_last_name',
+            alternate_first_names='_read_alternate_first_names',
+            alternate_last_names='_read_alternate_last_names',
             sex='female',
             date_of_birth='1970-01-01',
             age='40-50',
@@ -1722,6 +1828,8 @@ class PersonNoteTests(TestsBase):
             author_phone='_read_author_phone',
             first_name='_read_first_name',
             last_name='_read_last_name',
+            alternate_first_names='_read_alternate_first_names',
+            alternate_last_names='_read_alternate_last_names',
             sex='female',
             date_of_birth='1970-01-01',
             age='40-50',
@@ -1975,6 +2083,8 @@ class PersonNoteTests(TestsBase):
             author_phone='_feed_author_phone',
             first_name='_feed_first_name',
             last_name='_feed_last_name',
+            alternate_first_names='_feed_alternate_first_names',
+            alternate_last_names='_feed_alternate_last_names',
             sex='male',
             date_of_birth='1975',
             age='30-40',
@@ -3060,10 +3170,18 @@ class PersonNoteTests(TestsBase):
         assert d.first('label', for_='last_name').text.strip() == 'Family name:'
         assert d.firsttag('input', name='first_name')
         assert d.firsttag('input', name='last_name')
+        assert d.first('label', for_='alternate_first_names').text.strip() == \
+            'Alternate given names:'
+        assert d.first('label', for_='alternate_last_names').text.strip() == \
+            'Alternate family names:'
+        assert d.firsttag('input', name='alternate_first_names')
+        assert d.firsttag('input', name='alternate_last_names')
 
         self.s.submit(d.first('form'),
                       first_name='_test_first',
                       last_name='_test_last',
+                      alternate_first_names='_test_alternate_first',
+                      alternate_last_names='_test_alternate_last',
                       author_name='_test_author')
         person = Person.all().get()
         d = self.go('/view?id=%s&subdomain=haiti' % person.record_id)
@@ -3072,6 +3190,14 @@ class PersonNoteTests(TestsBase):
         assert f[0].first('td', class_='field').text.strip() == '_test_first'
         assert f[1].first('td', class_='label').text.strip() == 'Family name:'
         assert f[1].first('td', class_='field').text.strip() == '_test_last'
+        assert f[2].first('td', class_='label').text.strip() == \
+            'Alternate given names:'
+        assert f[2].first('td', class_='field').text.strip() == \
+            '_test_alternate_first'
+        assert f[3].first('td', class_='label').text.strip() == \
+            'Alternate family names:'
+        assert f[3].first('td', class_='field').text.strip() == \
+            '_test_alternate_last'
         person.delete()
 
         # use_family_name=False
@@ -3111,9 +3237,23 @@ class PersonNoteTests(TestsBase):
         family_input = doc.firsttag('input', name='last_name')
         assert family_input.start < given_input.start
 
+        alternate_given_label = doc.first('label', for_='alternate_first_names')
+        alternate_family_label = doc.first('label', for_='alternate_last_names')
+        assert alternate_given_label.text.strip() == 'Alternate given names:'
+        assert alternate_family_label.text.strip() == 'Alternate family names:'
+        assert alternate_family_label.start < alternate_given_label.start
+
+        alternate_given_input = doc.firsttag(
+            'input', name='alternate_first_names')
+        alternate_family_input = doc.firsttag(
+            'input', name='alternate_last_names')
+        assert alternate_family_input.start < alternate_given_input.start
+
         self.s.submit(doc.first('form'),
                       first_name='_test_first',
                       last_name='_test_last',
+                      alternate_first_names='_test_alternate_first',
+                      alternate_last_names='_test_alternate_last',
                       author_name='_test_author')
         person = Person.all().get()
         doc = self.go('/view?id=%s&subdomain=china' % person.record_id)
@@ -3122,6 +3262,14 @@ class PersonNoteTests(TestsBase):
         assert f[0].first('td', class_='field').text.strip() == '_test_last'
         assert f[1].first('td', class_='label').text.strip() == 'Given name:'
         assert f[1].first('td', class_='field').text.strip() == '_test_first'
+        assert f[2].first('td', class_='label').text.strip() == \
+            'Alternate family names:'
+        assert f[2].first('td', class_='field').text.strip() == \
+            '_test_alternate_last'
+        assert f[3].first('td', class_='label').text.strip() == \
+            'Alternate given names:'
+        assert f[3].first('td', class_='field').text.strip() == \
+            '_test_alternate_first'
         person.delete()
 
         # family_name_first=False
@@ -3136,10 +3284,24 @@ class PersonNoteTests(TestsBase):
         family_input = doc.firsttag('input', name='last_name')
         assert family_input.start > given_input.start
 
+        alternate_given_label = doc.first('label', for_='alternate_first_names')
+        alternate_family_label = doc.first('label', for_='alternate_last_names')
+        assert alternate_given_label.text.strip() == 'Alternate given names:'
+        assert alternate_family_label.text.strip() == 'Alternate family names:'
+        assert alternate_family_label.start > alternate_given_label.start
+
+        alternate_given_input = doc.firsttag(
+            'input', name='alternate_first_names')
+        alternate_family_input = doc.firsttag(
+            'input', name='alternate_last_names')
+        assert alternate_family_input.start > alternate_given_input.start
+
         self.s.submit(doc.first('form'),
-                                    first_name='_test_first',
-                                    last_name='_test_last',
-                                    author_name='_test_author')
+                      first_name='_test_first',
+                      last_name='_test_last',
+                      alternate_first_names='_test_alternate_first',
+                      alternate_last_names='_test_alternate_last',
+                      author_name='_test_author')
         person = Person.all().get()
         doc = self.go('/view?id=%s&subdomain=haiti' % person.record_id)
         f = doc.first('table', class_='fields').all('tr')
@@ -3147,6 +3309,69 @@ class PersonNoteTests(TestsBase):
         assert f[0].first('td', class_='field').text.strip() == '_test_first'
         assert f[1].first('td', class_='label').text.strip() == 'Family name:'
         assert f[1].first('td', class_='field').text.strip() == '_test_last'
+        assert f[2].first('td', class_='label').text.strip() == \
+            'Alternate given names:'
+        assert f[2].first('td', class_='field').text.strip() == \
+            '_test_alternate_first'
+        assert f[3].first('td', class_='label').text.strip() == \
+            'Alternate family names:'
+        assert f[3].first('td', class_='field').text.strip() == \
+            '_test_alternate_last'
+        person.delete()
+
+    def test_config_show_alternate_names(self):
+        # show_alternate_names=True
+        config.set_for_subdomain('haiti', show_alternate_names=True)
+        d = self.go('/create?subdomain=haiti')
+        assert d.first('label', for_='alternate_first_names').text.strip() == \
+            'Alternate given names:'
+        assert d.first('label', for_='alternate_last_names').text.strip() == \
+            'Alternate family names:'
+        assert d.firsttag('input', name='alternate_first_names')
+        assert d.firsttag('input', name='alternate_last_names')
+
+        self.s.submit(d.first('form'),
+                      first_name='_test_first',
+                      last_name='_test_last',
+                      alternate_first_names='_test_alternate_first',
+                      alternate_last_names='_test_alternate_last',
+                      author_name='_test_author')
+        person = Person.all().get()
+        d = self.go('/view?id=%s&subdomain=haiti' % person.record_id)
+        f = d.first('table', class_='fields').all('tr')
+        assert f[2].first('td', class_='label').text.strip() == \
+            'Alternate given names:'
+        assert f[2].first('td', class_='field').text.strip() == \
+            '_test_alternate_first'
+        assert f[3].first('td', class_='label').text.strip() == \
+            'Alternate family names:'
+        assert f[3].first('td', class_='field').text.strip() == \
+            '_test_alternate_last'
+        person.delete()
+
+        # show_alternate_names=False
+        config.set_for_subdomain('pakistan', show_alternate_names=False)
+        d = self.go('/create?subdomain=pakistan')
+        assert not d.all('label', for_='alternate_first_names')
+        assert not d.all('label', for_='alternate_last_names')
+        assert not d.alltags('input', name='alternate_first_names')
+        assert not d.alltags('input', name='alternate_last_names')
+        assert 'Alternate given names' not in d.text
+        assert 'Alternate family names' not in d.text
+
+        self.s.submit(d.first('form'),
+                      first_name='_test_first',
+                      last_name='_test_last',
+                      alternate_first_names='_test_alternate_first',
+                      alternate_last_names='_test_alternate_last',
+                      author_name='_test_author')
+        person = Person.all().get()
+        d = self.go(
+            '/view?id=%s&subdomain=pakistan' % person.record_id)
+        assert 'Alternate given names' not in d.text
+        assert 'Alternate family names' not in d.text
+        assert '_test_alternate_first' not in d.text
+        assert '_test_alternate_last' not in d.text
         person.delete()
 
     def test_config_use_postal_code(self):
@@ -3211,6 +3436,7 @@ class ConfigTests(TestsBase):
             keywords='foo, bar',
             use_family_name='false',
             family_name_first='false',
+            show_alternate_names='false',
             use_postal_code='false',
             min_query_word_length='1',
             map_default_zoom='6',
@@ -3225,6 +3451,7 @@ class ConfigTests(TestsBase):
         assert cfg.keywords == 'foo, bar'
         assert not cfg.use_family_name
         assert not cfg.family_name_first
+        assert not cfg.show_alternate_names
         assert not cfg.use_postal_code
         assert cfg.min_query_word_length == 1
         assert cfg.map_default_zoom == 6
@@ -3240,6 +3467,7 @@ class ConfigTests(TestsBase):
             keywords='spam, ham',
             use_family_name='true',
             family_name_first='true',
+            show_alternate_names='true',
             use_postal_code='true',
             min_query_word_length='2',
             map_default_zoom='7',
@@ -3254,6 +3482,7 @@ class ConfigTests(TestsBase):
         assert cfg.keywords == 'spam, ham'
         assert cfg.use_family_name
         assert cfg.family_name_first
+        assert cfg.show_alternate_names
         assert cfg.use_postal_code
         assert cfg.min_query_word_length == 2
         assert cfg.map_default_zoom == 7
