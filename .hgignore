@@ -1,0 +1,6 @@
+syntax: glob
+*.pyc
+.*.sw?
+*~
+*.timestamp
+app/locale/*/LC_MESSAGES/django.mo
