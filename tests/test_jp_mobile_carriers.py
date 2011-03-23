@@ -87,12 +87,12 @@ class JpMobileCarriersTests(unittest.TestCase):
                   '<A HREF="http://dengon.softbank.ne.jp/J?n=HaCr05">' +
                   'To Soft Bank BBS</A><BR>' +
                   '</body></html>')
-        scraped_url = jp_mobile_carriers.scrape_redirect_url(scrape)
+        scraped_url = jp_mobile_carriers.extract_redirect_url(scrape)
         assert (scraped_url == 'http://dengon.softbank.ne.jp/J?n=HaCr05')
         scrape2 = ('<html><head></head><body>' +
                    '08011112222<br>No messages for this number.' +
                    '</body></html>')
-        scraped_url2 = jp_mobile_carriers.scrape_redirect_url(scrape2)
+        scraped_url2 = jp_mobile_carriers.extract_redirect_url(scrape2)
         assert scraped_url2 == None
 
     def test_get_docomo_post_data(self):
