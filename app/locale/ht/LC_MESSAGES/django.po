@@ -1,0 +1,1222 @@
+# Copyright 2010 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2000-01-01 00:00-0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"The Given name and Family name are both required.  Please go back and try "
+"again."
+msgstr ""
+"Premye non ak non fanmi ou obligatwa. Tanpri tounen sou paj ou te ye a epi "
+"eseye ankò"
+
+#, fuzzy
+msgid "Name is required.  Please go back and try again."
+msgstr "Mesaj obligatwa. Tanpri tounen sou paj ou te ye a epi eseye ankò."
+
+msgid "The Original author's name is required.  Please go back and try again."
+msgstr ""
+"Non otè orijinal la obligatwa. Tanpri tounen sou paj ou te ye aa epi eseye "
+"ankò."
+
+msgid ""
+"Your name is required in the \"Source\" section.  Please go back and try "
+"again."
+msgstr ""
+"Non ou obligatwa pou ou ekri nan seksyon \"De ou menm\". Tanpri tounen sou "
+"paj ou te ye a epi eseye ankò"
+
+msgid "Message is required. Please go back and try again."
+msgstr "Mesaj obligatwa. Tanpri tounen sou paj ou te ye a epi eseye ankò."
+
+msgid ""
+"Please check that you have been in contact with the person after the "
+"earthquake, or change the \"Status of this person\" field."
+msgstr ""
+"Tanpri cheke ke ou antre an kontak avèk moun sa aprè tranbleman tè a, oswa "
+"chanje valè \"Stati moun sa\"."
+
+msgid ""
+"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
+"date.  Please go back and try again."
+msgstr ""
+"Dat ou poste mesaj la pa nan fòma ANE - MWA- JOU, oswa li pa egziste.T "
+"Tanpri tounen sou paj ou te ye a epi eseye ankò"
+
+msgid "Date cannot be in the future.  Please go back and try again."
+msgstr "Dat lan pa kapab nan lavni. Tanpri retounen e eseye ankò."
+
+msgid ""
+"Photo uploaded is in an unrecognized format.  Please go back and try again."
+msgstr ""
+"Nou pa rekonèt fòma imaj/foto ou voye a. Tanpri tounen sou paj ou te ye a "
+"epi eseye ankò"
+
+msgid "The provided image is too large.  Please upload a smaller one."
+msgstr "Imaj ou telechaje a twò gwo, tanpri telechaje yon lòt ki pi piti."
+
+msgid ""
+"There was a problem processing the image.  Please try a different image."
+msgstr "Genyen yo erè ak foto sa, tanpri eseye mete yon lòt."
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+msgstr ""
+
+msgid "The record has been deleted."
+msgstr ""
+
+msgid ""
+"Your name is required in the \"About you\" section.  Please go back and try "
+"again."
+msgstr ""
+"Non ou obligatwa pou ou ekri nan seksyon \"De ou menm\". Tanpri tounen sou "
+"paj ou te ye a epi eseye ankò"
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(first_name)s %(last_name)s"
+"\""
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] You are subscribed to status updates for %(given_name)s "
+"%(family_name)s"
+msgstr ""
+
+msgid "Invalid e-mail address. Please try again."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Return to the record for %(given_name)s %(family_name)s."
+msgstr "Antre non moun nan ak tout non fanmi li"
+
+msgid "You are already subscribed. "
+msgstr ""
+
+msgid "You have successfully subscribed."
+msgstr ""
+
+#, fuzzy
+msgid "This link is invalid."
+msgstr "Dosye sa se doub de"
+
+msgid "You have successfully unsubscribed."
+msgstr ""
+
+msgid "You are already unsubscribed."
+msgstr ""
+
+msgid "female"
+msgstr "fi"
+
+msgid "male"
+msgstr "gason"
+
+msgid "other"
+msgstr "lòt"
+
+msgid "Unspecified"
+msgstr "Pa spesifie"
+
+msgid "I am seeking information"
+msgstr "Map chèche enfòmasyon"
+
+msgid "I am this person"
+msgstr "Mwen se moun sa"
+
+msgid "I have received information that this person is alive"
+msgstr "Mwen gen nouvèl ke moun sa an vi"
+
+msgid "I have reason to think this person is missing"
+msgstr "Mwen gen rezon pou'm kwè ke yo poko jwenn moun sa"
+
+msgid "I have received information that this person is dead"
+msgstr "Mwen resevwa nouvèl ke moun sa mouri"
+
+#, fuzzy
+msgid "Someone is seeking information about this person"
+msgstr "Bay enfomasyon moun sa"
+
+msgid "This person has posted a message"
+msgstr "Moun sa poste mesaj yon mesaj"
+
+msgid "Someone has received information that this person is alive"
+msgstr "Gen yon moun ki resevwa enfòmasyon ke moun sa an vii"
+
+msgid "Someone has reported that this person is missing"
+msgstr "Gen yon moun ki rapòte ke yo poko jwenn moun sa"
+
+msgid "Someone has received information that this person is dead"
+msgstr "Gen yon moun ki resevwa enfòmasyon ke moun sa mouri"
+
+msgid "Type the two words:"
+msgstr ""
+
+msgid "Type what you hear:"
+msgstr ""
+
+msgid "Play the sound again"
+msgstr ""
+
+#, fuzzy
+msgid "Download the sound as MP3"
+msgstr "Telechaje nouvo enfomasyon"
+
+msgid "Get a visual challenge"
+msgstr ""
+
+msgid "Get an audio challenge"
+msgstr ""
+
+msgid "Get a new challenge"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Incorrect.  Try again."
+msgstr ""
+
+msgid ""
+"There was an error processing your request.  Sorry for the inconvenience.  "
+"Our administrators will investigate the source of the problem, but please "
+"check that the format of your request is correct."
+msgstr ""
+"Te gen yon erè nan tretman demann ou an.  Nou regrèt anpil pou enkonvenyan "
+"sa a.  Administratè nou yo pral egzaminen kote pwoblèm lan soti, men "
+"verifye, tanpri, si fòma demann ou an korèk."
+
+msgid "There is no record for the specified id."
+msgstr ""
+
+msgid "Tell us the status of this person"
+msgstr "Ba nou enfòmasyon sou moun sa a"
+
+msgid "Mark records as duplicate"
+msgstr "Make dosye kom doub"
+
+msgid "Status of this person"
+msgstr "Ki dènye nouvèl sou moun sa"
+
+msgid "Message (required)"
+msgstr "Mesaj (obligatwa)"
+
+msgid "A message for this person or others seeking this person"
+msgstr "Yon mesaj pou moun sa a oswa pou lòt moun ki ap chechè moun sa a"
+
+msgid "Please explain why you think these are the same person"
+msgstr "Tanpri eksplike poukisa ou panse moun sa yo menm moun"
+
+msgid "Last known location"
+msgstr "Denye kote li te ye"
+
+msgid ""
+"Type an address or open the map below and indicate the location by moving "
+"the pin."
+msgstr ""
+"Tape adrès la oubyen ouvri kat la epi itilize pin nan pou ou ka montre kote "
+"adrès la chita sou kat la"
+
+msgid "Show Map"
+msgstr "Montre kat la"
+
+msgid "Hide Map"
+msgstr "Kache kat la"
+
+#, fuzzy
+msgid ""
+"Have you personally talked with this person AFTER the disaster? (required)"
+msgstr "Eske ou pale ak moun sa a APRÈ tranbleman tè a? (obligatwa)"
+
+msgid "Yes"
+msgstr "Wi"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Missing person's current contact information"
+msgstr "Ki dènye enfòmasyon ou genyen pou kontakte moun ki manke a"
+
+msgid "How can this person be reached now?"
+msgstr "Kouman nou ka kominike ak moun sa konnyen a"
+
+msgid "Phone number"
+msgstr "Nimewo telefòn"
+
+msgid "E-mail address"
+msgstr "Email"
+
+msgid "About you (required)"
+msgstr "Enfòmasyon sou ou menm (obligatwa)"
+
+msgid "How others who are interested in this person can contact you"
+msgstr "Kouman lòt moun ki enterese nan moun sa a ka kontakte ou"
+
+msgid "Your name"
+msgstr "Non ou"
+
+msgid "Your phone number"
+msgstr "Nimewo telefòn ou"
+
+msgid "Your e-mail address"
+msgstr "Email ou"
+
+msgid "Yes, these are the same person"
+msgstr "Wi, moun sa yo se menm"
+
+msgid "Save this record"
+msgstr "Sere dosye sa a"
+
+msgid "Cancel"
+msgstr "Anile"
+
+msgid "Please fill in all the required fields."
+msgstr ""
+
+msgid ""
+"The status you selected indicates that you are this person.  If this is "
+"true, please also select 'Yes' to indicate that you have contacted this "
+"person."
+msgstr ""
+
+msgid "Administration"
+msgstr ""
+
+#, python-format
+msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
+msgstr "Aktyèlman, ou konekte kòm <span class=\"email\">%(email)s</span>."
+
+#, python-format
+msgid "<a href=\"%(logout_url)s\">Sign out</a>"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
+msgstr "Ou pa konekte aktyèlman.  <a href=\"%(login_url)s\">Sign in</a>."
+
+msgid "Google Person Finder"
+msgstr "Google Chèche Moun"
+
+msgid "Person Finder"
+msgstr "Chèche Moun"
+
+msgid "Back to start"
+msgstr "Retounen sou komansman"
+
+msgid ""
+"PLEASE NOTE: All data entered will be available to the public and viewable "
+"and usable by anyone.  Google does not review or verify the accuracy of this "
+"data."
+msgstr ""
+"ATANSYON: Tout enfòmasyon ou mete ap la pou tout piblik la wè e nenpòt moun "
+"ka itilize li.  Google pa revize ni verifye sous de enfòmasyon yo."
+
+msgid "Embed this tool on your site"
+msgstr "Afiche zouti sa sou sit ou"
+
+msgid "Developers"
+msgstr "Développeurs"
+
+msgid "Terms of Service"
+msgstr "Kontra"
+
+msgid "Identify who you have information about"
+msgstr "Idantifye sou ki moun ou genyen enfòmasyon"
+
+msgid "Identify who you are looking for"
+msgstr "Idantifye ki moun ou ap chèche"
+
+msgid "Name (required)"
+msgstr "Non (obligatwa)"
+
+msgid "What is this person's name?"
+msgstr "Kouman moun lan rele?"
+
+msgid "Family name"
+msgstr "Non fanmi li"
+
+msgid "Given name"
+msgstr "Premye non li"
+
+msgid "Name"
+msgstr "Non"
+
+#, fuzzy
+msgid "Alternate family names"
+msgstr "Non fanmi li"
+
+msgid "Alternate given names"
+msgstr ""
+
+#, fuzzy
+msgid "Alternate names"
+msgstr "Non lari a"
+
+msgid "Home Address"
+msgstr "Adrès lakay li"
+
+msgid "Where is this person from?"
+msgstr "Ki kote moun sa a sòti?"
+
+msgid "Street name"
+msgstr "Non lari a"
+
+msgid "Street name only, no number"
+msgstr "Non lari a sèlman,  pa ekri nimewo kay la"
+
+msgid "Neighborhood"
+msgstr "Katye"
+
+msgid "City"
+msgstr "Vil"
+
+msgid "Province or state"
+msgstr "Pwovens oswa depatman"
+
+msgid "Postal or zip code"
+msgstr "Nimewo postal"
+
+msgid "Description"
+msgstr "Deskripsyon"
+
+msgid "Describe how to identify this person."
+msgstr "Dekri kouman ou ta idantifye moun sa a."
+
+msgid "Photo"
+msgstr "Foto"
+
+msgid "If you have a photo of this person, upload it or enter its URL address."
+msgstr "Si ou genyen foto moun sa ajoute li oswa bay URL la."
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Upload"
+msgstr "Ajoute"
+
+msgid "Source of this record (required)"
+msgstr "Sous de enfomasyon (obligatwa)"
+
+msgid "Where did this information come from?"
+msgstr "Kote enfòmasyon sa a sòti? "
+
+msgid "This is a new record."
+msgstr "Sa a se yon nouvo dosye."
+
+msgid "This record is copied from another source."
+msgstr "Nou kopye dosye sa de yon lòt sous de enfomasyon."
+
+msgid "Original author's name"
+msgstr "Non otè orijinal a"
+
+msgid "Author's phone number"
+msgstr "Nimewo telefòn otè a"
+
+msgid "Author's e-mail address"
+msgstr "Adrès elektwonik otè a"
+
+msgid "URL of original record"
+msgstr "Dosye orijinal URL la"
+
+msgid "Original posting date"
+msgstr "Dat afichaj orijinal la"
+
+msgid "Enter as YYYY-MM-DD"
+msgstr "Mete tankou ANE–MWA-JOU"
+
+msgid "Original site name"
+msgstr "Non orijinal sit la"
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(first_name)s "
+"%(last_name)s\"?\n"
+"    "
+msgstr ""
+
+msgid ""
+"\n"
+"      If you proceed with deletion,\n"
+"      this record will no longer be searchable or viewable on this site.\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      This record is a copy of a record from another source.\n"
+"      You can delete the record here,\n"
+"      but please be aware that\n"
+"      we might later receive another copy of it from the original source.\n"
+"\n"
+"      <p>\n"
+"      If you would like it permanently deleted,\n"
+"      please contact the original source.\n"
+"      You can view the original record at\n"
+"      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"You can <a target=\"_blank\" href=\"%(view_url)s\">view the record</a> "
+"before deleting it."
+msgstr ""
+
+msgid "Reason for deletion:"
+msgstr ""
+
+msgid "I do not want my information online anymore."
+msgstr ""
+
+#, fuzzy
+msgid "I have received spam."
+msgstr "Mwen resevwa nouvèl ke moun sa mouri"
+
+#, fuzzy
+msgid "This record is inappropriate."
+msgstr "Dosye sa se doub de"
+
+#, fuzzy
+msgid "This record is spam."
+msgstr "Dosye sa se doub de"
+
+msgid "This record has served its purpose."
+msgstr ""
+
+msgid "Yes, delete the record"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of a note on this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of this record.\n"
+"\n"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s "
+"days:\n"
+"\n"
+"    %(restore_url)s\n"
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently deleted.\n"
+msgstr ""
+
+msgid "Embedding the Application"
+msgstr "Intégration de l'application"
+
+msgid "Copy and paste the following HTML code to put this tool on your site"
+msgstr ""
+"Copier et coller le code HTML suivant pour mettre cet outil sur votre site "
+"web"
+
+#, python-format
+msgid ""
+"Or add to your site as a %(gadget_link_html)sGoogle Gadget%(link_end_html)s."
+msgstr ""
+
+#, fuzzy, python-format
+msgid ""
+"These gadgets are made available under the %(apache_link_html)sApache 2.0 "
+"license%(link_end_html)s."
+msgstr "Ce gadget est disponible sous la "
+
+#, fuzzy, python-format
+msgid ""
+"More information for developers can now be found %(developers_link_html)shere"
+"%(link_end_html)s."
+msgstr "Konyen an ou ka jwen plis enfòmasyon pou developè"
+
+msgid "Close window"
+msgstr "Fèmen fenèt la"
+
+msgid "Are you sure this note isn't spam?"
+msgstr ""
+
+msgid "Are you sure you want to mark this note as spam?"
+msgstr ""
+
+msgid "The reason this note is being marked as spam:"
+msgstr ""
+
+msgid "I prefer not to specify."
+msgstr ""
+
+msgid "This note is spam."
+msgstr ""
+
+#, fuzzy
+msgid "This note is inappropriate."
+msgstr "Dosye sa se doub de"
+
+#, fuzzy
+msgid "I have received spam due to this note."
+msgstr "Mwen resevwa nouvèl ke moun sa mouri"
+
+msgid "This note is incorrect or untrue."
+msgstr ""
+
+msgid "Yes, update the note"
+msgstr ""
+
+msgid "What is your situation?"
+msgstr "Nan ki sitiyasyon ou ye?"
+
+msgid "I'm looking for someone"
+msgstr "Mwen ap chèche yon moun"
+
+msgid "I have information about someone"
+msgstr "Mwen genyen enfòmasyon sou yon moun"
+
+#, python-format
+msgid "Currently tracking about %(num_people)s records."
+msgstr "Alèkile, n'ap pouswiv anviwon %(num_people)s dosye."
+
+msgid "Compare these records"
+msgstr "Kompare dosye sa yo"
+
+msgid "Physical characteristics"
+msgstr "Karaktè fizik"
+
+msgid "Sex"
+msgstr "Fi oswa Gason"
+
+msgid "Date of birth"
+msgstr "Dat nesans"
+
+msgid "Age"
+msgstr "Laj"
+
+msgid "Home address"
+msgstr "Adrès lakay"
+
+msgid "Other information"
+msgstr "Lòt enfomasyon"
+
+msgid "Source of this record"
+msgstr "Sere dosye sa a"
+
+msgid "Author's name"
+msgstr "Non otè a"
+
+msgid "(click to reveal)"
+msgstr "(klike a montre)"
+
+msgid "Original URL"
+msgstr "URL orijinal"
+
+msgid "Link"
+msgstr "Lyen"
+
+msgid "Posted by"
+msgstr "Moun ki afiche li a"
+
+msgid "(unknown)"
+msgstr "(enkoni)"
+
+msgid "on"
+msgstr ""
+
+msgid "at"
+msgstr ""
+
+msgid "This note has been marked as spam."
+msgstr ""
+
+msgid "Reveal note"
+msgstr ""
+
+msgid "Hide note"
+msgstr ""
+
+msgid "Not spam"
+msgstr ""
+
+msgid "Report spam"
+msgstr ""
+
+msgid "E-mail"
+msgstr "Email"
+
+msgid "Phone"
+msgstr "Nimewo telefòn"
+
+msgid "This record is a duplicate of"
+msgstr "Dosye sa se doub de"
+
+msgid "Status"
+msgstr "Eta"
+
+#, fuzzy
+msgid "This person has been in contact with someone"
+msgstr "Moun nou poko jwenn nan antre an kontak avèk yon lot moun"
+
+msgid "Missing person's current e-mail address"
+msgstr "Email aktyèl moun ki manke a"
+
+msgid "Missing person's current phone number"
+msgstr "Telefòn aktyèl moun ki manke nan"
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at "
+"%(site_url)s:"
+msgstr ""
+
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Dosye sa se doub de"
+
+#, python-format
+msgid "You can view the full record at %(view_url)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"You received this notification because you have subscribed to updates on "
+"this person.\n"
+"To unsubscribe, follow this link: %(unsubscribe_link)s"
+msgstr ""
+
+msgid "Enter the person's given and family names."
+msgstr "Antre non moun nan ak tout non fanmi li"
+
+#, fuzzy
+msgid "Enter the person's name."
+msgstr "Antre non moun nan ak tout non fanmi li"
+
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Antre non moun nan oswa yo pati nan non li."
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
+msgid "Enter the person's name or parts of the name."
+msgstr "Antre non moun nan oswa yo pati nan non li."
+
+msgid ""
+"More than 100 results; only showing the first 100.  Try entering more of the "
+"name"
+msgstr ""
+"Plis ke 100 rezilta; selman montre premye 100 rezilta yo. Eseye antre plis "
+"sou non an"
+
+msgid "Provide information about this person"
+msgstr "Bay enfomasyon moun sa"
+
+msgid "Search for this person"
+msgstr "Chèche moun sa"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"(which was previously deleted) has restored the record.  To view the\n"
+"record, follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+
+msgid "Are you sure you want to restore this record from deletion?"
+msgstr ""
+
+#, fuzzy
+msgid "Yes, restore this record"
+msgstr "Sere dosye sa a"
+
+msgid "Search Results for"
+msgstr "Rezilta rechèch pou"
+
+msgid "Records Similar to"
+msgstr "Dosye sanble a"
+
+msgid "There is one existing record with a similar name."
+msgstr "Gen yon dosye ki egziste ki sanble ak non sa."
+
+msgid "There are some existing records with similar names."
+msgstr "Gen kèlke dosye ki egziste ki sanble ak non sa yo."
+
+msgid "Please check whether it matches the person you were planning to report."
+msgstr "Tanpri gade pou ou wè si li match moun ou ta pral repòte a."
+
+#, python-format
+msgid "There are %(num_results)s existing records with similar names."
+msgstr "Gen %(num_results)s dosye ki egziste ak mem non yo."
+
+msgid "Click here to view results."
+msgstr "Peze la po ka wè resilta."
+
+msgid "To view or add information, select a name below."
+msgstr "Pou ou sa wè oswa ajoute enfomasyon, chawzi youn nan non ki anba yo."
+
+msgid "Switch to duplicate marking mode"
+msgstr "Chanje pou mòd make doub"
+
+msgid "Switch to normal view mode"
+msgstr "Chanje pou mòd we nòmal"
+
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Moun ki afiche li a"
+
+msgid "Select up to 3 records to mark as duplicate:"
+msgstr "Seleksyone jiska 3 dosye pou make kòm doub:"
+
+msgid "Records selected"
+msgstr "Dosye seleksyone"
+
+msgid ""
+"If none of these records match the person you had in mind, you can click "
+"below to create a new record."
+msgstr ""
+"Si okenn nan dosye sa yo pa match moun ou an, ou met pezesou bouton anba la "
+"pou ou sa kreye yon nouvo dosye."
+
+msgid "No results found for"
+msgstr "Pa gen okenn rezilta pou"
+
+msgid "We have nothing matching your search."
+msgstr "Nou pa jwen anyen ki match rechèch ou a."
+
+msgid "Follow this link to create a new record"
+msgstr "Suiv lyen sa pou kreye yon nouvo dosye"
+
+msgid "Create a new record for"
+msgstr "Kreye yon nouvo dosye pou"
+
+msgid "Create a new record for a missing person"
+msgstr "Kreye yon nouvo dosye pou yon moun ki manke"
+
+msgid "Show sensitive information"
+msgstr "Montre enfòmasyon ki sansib"
+
+msgid "Proceed"
+msgstr "Kontinye"
+
+#, fuzzy
+msgid "Subscribe to updates about this person"
+msgstr "Ki dènye nouvèl sou moun sa"
+
+#, python-format
+msgid "Subscribe to updates about %(first_name)s %(last_name)s"
+msgstr ""
+
+msgid "Please confirm your e-mail address to subscribe to updates"
+msgstr ""
+
+msgid "Please enter your e-mail address to subscribe to updates"
+msgstr ""
+
+#, fuzzy
+msgid "Your e-mail address:"
+msgstr "Email ou"
+
+msgid "Subscribe"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to status updates for \"%(first_name)s %(last_name)s\" "
+"at %(site_url)s.\n"
+"\n"
+"You can view the full record at %(view_url)s\n"
+"\n"
+"To unsubscribe, follow this link: %(unsubscribe_link)s\n"
+msgstr ""
+
+msgid "Identifying information"
+msgstr "Enfomasyon pou idantifikasyon"
+
+msgid "Home country"
+msgstr "Peyi kote ou moun"
+
+msgid "Possible duplicates"
+msgstr "Nou genyen dosye ki matche moun sa, li posib ke se menm moun nan"
+
+msgid "Back to results list"
+msgstr "Retounen sou komansman"
+
+msgid "Status updates for this person"
+msgstr "Ki dènye nouvèl sou moun sa"
+
+msgid "No status updates have been posted"
+msgstr "Pa gen okenn nouvèl ki afiche"
+
+#, fuzzy
+msgid "Delete this record"
+msgstr "Sere dosye sa a"
+
+#, fuzzy
+#~ msgid "Currently tracking fewer than 5 records."
+#~ msgstr "Alèkile, n'ap pouswiv anviwon %(num_people)s dosye."
+
+#~ msgid "Someone is seeking information"
+#~ msgstr "Yon moun ap chache enfòmasyonn"
+
+#, fuzzy
+#~ msgid "You are the author of this record"
+#~ msgstr "Sere dosye sa a"
+
+#, fuzzy
+#~ msgid "You added a note to this record"
+#~ msgstr "Sere dosye sa a"
+
+#, fuzzy
+#~ msgid ""
+#~ "These gadgets are made available under the %(apache_link_html|safe)"
+#~ "sApache 2.0 license%(link_end_html|safe)s."
+#~ msgstr "Ce gadget est disponible sous la "
+
+#~ msgid "Has been in contact with someone"
+#~ msgstr "Li antre kontak avèk yon moun"
+
+#~ msgid "Unknown"
+#~ msgstr "Pa Konnen"
+
+#, fuzzy
+#~ msgid "I have received spam as a result of this post."
+#~ msgstr "Mwen resevwa nouvèl ke moun sa mouri"
+
+#, fuzzy
+#~ msgid ""
+#~ "Any data you receive by collaborating with Google in connection with the "
+#~ "gadget is shared under a %(cc_link_html)sCreative Commons license"
+#~ "%(link_end_html)s."
+#~ msgstr ""
+#~ "Toutes les données que vous recevez en collaborant avec Google par ce "
+#~ "Gadget sont partagées sous la "
+
+#~ msgid "Feedback and Discussion"
+#~ msgstr "Commentaires et discussion"
+
+#, fuzzy
+#~ msgid ""
+#~ "To provide feedback on the People Finder application or to ask questions "
+#~ "of the developers or other users, please join the "
+#~ "%(googlegroup_email_html)s mailing list."
+#~ msgstr ""
+#~ "Pour donner votre avis sur l’application PeopleFinder ou poser des "
+#~ "questions aux développeurs ou autres utilisateurs, rejoignez le groupe de "
+#~ "discussion "
+
+#~ msgid "Downloading Data"
+#~ msgstr "Téléchargement de données"
+
+#, fuzzy
+#~ msgid ""
+#~ "The Person Finder application stores and exports records using the People "
+#~ "Finder Interchange Format (PFIF), which is based on XML."
+#~ msgstr ""
+#~ "L’application Person Finder stocke et exporte les enregistrements en "
+#~ "utilisant le format XML People Finder Interchange Format (PFIF). La "
+#~ "documentation de ce format est disponible ici:"
+
+#~ msgid "PFIF 1.2 Specification"
+#~ msgstr "Spesifikasyon PFIF 1.2"
+
+#~ msgid "PFIF 1.2 example document"
+#~ msgstr "Dokiman egzanp de PFIF 1.2"
+
+#~ msgid "PFIF 1.1 Specification"
+#~ msgstr "Spesifikasyon PFIF 1.1"
+
+#~ msgid "PFIF 1.1 example document"
+#~ msgstr "Dokiman egzanp de PFIF 1.1"
+
+#~ msgid "PFIF FAQ and Implementation Guidelines"
+#~ msgstr "FAQ PFIF et guide d’implémentation"
+
+#~ msgid "XML Specification"
+#~ msgstr "Spécification XML"
+
+#~ msgid "There are several ways to download records from our database:"
+#~ msgstr ""
+#~ "Il y a plusieurs façons de télécharger les enregistrements de notre base "
+#~ "de données:"
+
+#~ msgid "Individual Person Record API"
+#~ msgstr "API pour accéder à l’enregistrement d’une personne"
+
+#~ msgid ""
+#~ "If you know the PFIF person_record_id of a person, you can fetch the "
+#~ "person's PFIF record (with notes) in XML format, at the following URL:"
+#~ msgstr ""
+#~ "Si vous connaissez l’identifiant PFIF person_record_id d’une personne, "
+#~ "vous pouvez récupérer la totalité des informations PFIF (commentaires "
+#~ "inclus) au format XML en utilisant l’URL suivante:"
+
+#~ msgid "Uploading Data"
+#~ msgstr "Mise en ligne de données"
+
+#~ msgid ""
+#~ "You can also push one or more PFIF records to the Person Finder by "
+#~ "posting an XML file to the following URL:"
+#~ msgstr ""
+#~ "Vous pouvez également ajouter un ou plusieurs enregistrements PFIF au "
+#~ "Person Finder en soumettant un fichier XML à l’adresse URL suivante:"
+
+#, fuzzy
+#~ msgid "To obtain an auth_key, please contact %(authkey_email_html)s."
+#~ msgstr "Pour obtenir une clé d’autorisation (auth_key), contactez"
+
+#~ msgid ""
+#~ "You will need to tell them which PFIF source domain you will be using the "
+#~ "key for, and the key can only be used to upload person records whose "
+#~ "person_record_id is prefixed with that domain."
+#~ msgstr ""
+#~ "Vous aurez besoin de leur indiquer le domaine source PFIF qui sera "
+#~ "utilisé pour cette clé; et celle-ci pourra uniquement être utilisée pour "
+#~ "faire des envois sur le serveur des données dont le champ "
+#~ "person_record_id est préfixé par ce domaine."
+
+#~ msgid ""
+#~ "Once you have prepared an XML file, the following command-line can be "
+#~ "used to upload it:"
+#~ msgstr ""
+#~ "Une fois que vous avez préparé un fichier XML, la ligne de commande "
+#~ "suivante peut être utilisée pour l’envoyer sur le serveur:"
+
+#~ msgid ""
+#~ "The XML document can contain &lt;pfif:person&gt; elements with nested &lt;"
+#~ "pfif:note&gt; elements."
+#~ msgstr ""
+#~ "Le document XML peut contenir les éléments &lt;pfif:person&gt; avec des "
+#~ "éléments &lt;pfif:note&gt; imbriqués."
+
+#, fuzzy
+#~ msgid ""
+#~ "To understand the proper XML format, see the %(pfif_link_html)sPFIF "
+#~ "example document%(link_end_html)s"
+#~ msgstr "Pour comprendre ce format XML, lire le fichier d’exemple: "
+
+#~ msgid ""
+#~ "We recommend that you upload a single record or a small number of records "
+#~ "as a test, retrieve the records using the Individual Person Record API (/"
+#~ "api/read), and view the records on the site to verify that the results "
+#~ "are what you expected."
+#~ msgstr ""
+#~ "Nous recommandons d’envoyer  un seul enregistrement ou un petit nombre "
+#~ "d’enregistrements comme test puis de récupérer les enregistrements en "
+#~ "utilisant le Individual Person Record API (/api/read) et de vérifier que "
+#~ "les enregistrements qui apparaissent sur le site sont ceux attendus."
+
+#~ msgid ""
+#~ "Pay careful attention to the handling of accented letters, note text, "
+#~ "source URLs, and photo URLs (if you have them)."
+#~ msgstr ""
+#~ "Vérifiez attentivement la conversion des lettres accentuées, des notes "
+#~ "textuelles, des URL sources et des URL vers des photos (si vous en avez)."
+
+#~ msgid ""
+#~ "Due to the size limitation on POST requests, you should split up files "
+#~ "into batches of 100 &lt;pfif:person&gt; elements."
+#~ msgstr ""
+#~ "À cause de la limitation de taille des requêtes POST, vous devez séparer "
+#~ "les fichiers en groupes de 100 éléments &lt;pfif:person&gt;."
+
+#~ msgid ""
+#~ "If you encounter an error, or need to correct problems in a previous "
+#~ "upload, it is safe to upload the same records again.  Records will "
+#~ "replace existing records with the same person_record_id or note_record_id."
+#~ msgstr ""
+#~ "Si vous rencontrez une erreur, ou avez besoin de corriger un problème sur "
+#~ "un envoi précédent, il est possible de renvoyer les mêmes "
+#~ "enregistrements. Ceux-ci remplaceront les enregistrements existants qui "
+#~ "ont le même person_record_id ou note_record_id."
+
+#~ msgid "The response will be an XML document like this:"
+#~ msgstr "La réponse sera un document XML comme celui-ci:"
+
+#~ msgid ""
+#~ "Each &lt;status:write> element describes one batch of writes.  &lt;status:"
+#~ "record_type> is the type of the batch.  &lt;status:parsed> says how many "
+#~ "XML records were successfully parsed.  &lt;status:written> says how many "
+#~ "were written to the datastore.  In the above example, 1 person and 1 note "
+#~ "were successfully written."
+#~ msgstr ""
+#~ "Chaque élément &lt;status:write> décrit un groupe d’écritures. &lt;status:"
+#~ "record_type> est le type du groupe. &lt;status:parsed> représente le "
+#~ "nombre d’enregistrements XML qui ont été correctement analysés. &lt;"
+#~ "status:written> représente le nombre d’enregistrements  qui ont été "
+#~ "écrits dans la base de données. Dans l’exemple précédent, 1 personne et 1 "
+#~ "commentaire ont été correctement écrits."
+
+#~ msgid "When there are problems it will look like this:"
+#~ msgstr "En cas de problèmes, le document ressemblera à ceci:"
+
+#~ msgid ""
+#~ "Each &lt;status:skipped> entry describes the reason why a particular "
+#~ "record was skipped, and includes the record ID if one was given."
+#~ msgstr ""
+#~ "Chaque entrée &lt;status:skipped> décrit la raison pour laquelle un "
+#~ "enregistrement particulier n’a pas été importé et inclut l’ID de "
+#~ "l’enregistrement si l’enregistrement contient un ID. "
+
+#~ msgid ""
+#~ "When you upload person or note records, you will be replacing any "
+#~ "existing records with the same record ID.  It should be safe to upload "
+#~ "the same data multiple times while you fix formatting problems."
+#~ msgstr ""
+#~ "Quand vous envoyez sur le serveur un enregistrement sur une personne ou "
+#~ "un commentaire,  vous remplacerez tout enregistrement existant ayant le "
+#~ "même ID. Il est toutefois acceptable d’envoyer les mêmes données "
+#~ "plusieurs fois si vous corrigez des problèmes de format."
+
+#~ msgid ""
+#~ "To see this sensitive information, you have to <a href=\"%(login_url)s"
+#~ "\">sign in</a>."
+#~ msgstr ""
+#~ "Pou ou sa wè enfòmasyon ki sansib, ou dwe idantifye tèt ou <a href="
+#~ "\"%(login_url)s\">sign in</a>."
+
+#, fuzzy
+#~ msgid "Request deletion of this record"
+#~ msgstr "Sere dosye sa a"
+
+#, fuzzy
+#~ msgid "These gadgets are made available under the"
+#~ msgstr "Ce gadget est disponible sous la "
+
+#~ msgid "Apache 2.0 license"
+#~ msgstr "Lisans Apache 2.0"
+
+#~ msgid "here"
+#~ msgstr "la"
+
+#~ msgid "Creative Commons license"
+#~ msgstr "Lisans Creative Commons"
+
+#~ msgid "mailing list."
+#~ msgstr "."
+
+#~ msgid "View this record"
+#~ msgstr "Egzamine dosye sa"
+
+#~ msgid "Other resources:"
+#~ msgstr "Autres ressources (disponibles en anglais):"
+
+#~ msgid "Haiti Relief Wiki"
+#~ msgstr "Wiki Secours de Haiti"
+
+#~ msgid "Google Person Finder Blog"
+#~ msgstr "Blogue Person Finder de Google"
+
+#~ msgid "Google Person Finder: Haiti Earthquake"
+#~ msgstr "Google Chèche Moun: Tranbleman Tè an Ayiti"
+
+#~ msgid "Person Finder: Haiti Earthquake"
+#~ msgstr "Chèche Moun: Tranbleman Tè an Ayiti"
+
+#~ msgid "Daily Snapshot"
+#~ msgstr "Rapport journalier"
+
+#~ msgid ""
+#~ "You can download a daily snapshot of all the data formatted in PFIF XML."
+#~ msgstr ""
+#~ "Vous pouvez télécharger un rapport journalier complet de toutes les "
+#~ "données au format PFIF XML."
+
+#~ msgid "or"
+#~ msgstr "ou"
+
+#~ msgid ""
+#~ "Enter at least the first two letters of the person's given and family "
+#~ "names."
+#~ msgstr "Antre o mwen de premye lèt non moun nan ak tout non fanmi li"
+
+#~ msgid ""
+#~ "If you are running a similar people-finding service, we would like to "
+#~ "share data with you.  All data exchange is in"
+#~ msgstr ""
+#~ "Si ou ap ofri yon sèvis pou ede chèche moun, nou ta renmen pataje "
+#~ "enfòmasyon avèk ou.   Tout echanj enfòmasyon fèt nan"
+
+#~ msgid "format."
+#~ msgstr "fòma."
+
+#~ msgid ""
+#~ "Please only download our entire database once.  After that, specify how "
+#~ "long it has been since last download so we can give you just the "
+#~ "updates.  Note: because of how PFIF works, we will retransmit the person "
+#~ "data for old people with new notes.  Also note that we are only including "
+#~ "data we collected ourselves, to avoid cycles and exponential blowup."
+#~ msgstr ""
+#~ "Li inpotan pou telechaje tout dokiman an on sel fwa.  Apre sa, fe konnen "
+#~ "denye fwa out e telechajel. Sa ap pèmèt nou ba ou denye infomasyon nou "
+#~ "genyen.  NB: paske se jan system PFIF la mache, nou retransmèt enfomasyon "
+#~ "ke ou konnen deja ak tout nouvo enfomasyon.  Nou vle ou konnen tou ke nou "
+#~ "Sèlman bay infomason ke nou pèsonelman jwenn pou evite okenn konfizyon."
+
+#~ msgid "Download all data"
+#~ msgstr "Telechaje tout dokiman"
+
+#~ msgid "Last downloaded"
+#~ msgstr "Dènye fwa ou telechaje"
+
+#~ msgid "seconds ago"
+#~ msgstr "sa fe kèlke sekond"
+
+#~ msgid ""
+#~ "The same HTTP connections exposed here are suitable for regular automatic "
+#~ "updates.  Just use a script instead of a browser.  We recommend polling "
+#~ "every minute or so, and setting the secondsago value slightly higher than "
+#~ "the polling interval."
+#~ msgstr ""
+#~ "Menm koneksyon HTTP ki ekspose la yo ka mache pou mizajou otomatik "
+#~ "regulie.sèlman itilize skript la o lie de browser a. Nou konseye'w "
+#~ "polling plis ou mwen chak minit, e setting yo kèlke sekond de sa valè yon "
+#~ "tijan pi wò keintèval polling la."
+
+#~ msgid "Mark duplicate records"
+#~ msgstr "Make dosye doub"
