@@ -1,0 +1,147 @@
+{% load i18n %}
+
+{% comment %} This is a temporary hack to direct search request to full text
+search frontend if subdomain is japan.  In case the full text search backend is
+slow in response, the frontend will redirect the request to the default
+http://japan.person-finder.appspot.com/results.
+{% endcomment %}
+{% if config.japan_redirect_search_queries %}
+  {% ifequal env.subdomain 'japan' %}
+    {% comment %} Currently only Japanese and Engligh are supported. {% endcomment %}
+    {% ifequal env.lang 'ja' %}
+      <form method="get" action="http://japan-person-finder-search-stg.appspot.com/results">
+      <input type="hidden" name="lang" value="{{env.lang}}">
+    {% else %}
+      {% ifequal env.lang 'en' %}
+        <form method="get" action="http://japan-person-finder-search-stg.appspot.com/results">
+        <input type="hidden" name="lang" value="{{env.lang}}">
+      {% else %}
+        <form method="get" action="/results">
+      {% endifequal %}
+    {% endifequal %}
+  {% else %}
+    <form method="get" action="/results">
+  {% endifequal %}
+{% else %}
+  <form method="get" action="/results">
+{% endif %}
+  {{env.subdomain_field_html|safe}}
+  <input type="hidden" name="role" value="{{params.role}}">
+  <input type="hidden" name="small" value="{{params.small}}">
+  <input type="hidden" name="style" value="{{params.style}}">
+  <table class="query" align="center">
+    <tr>
+      <td class="instructions {{params.error}}" colspan="2">
+        {% ifequal params.role 'provide' %}
+          <h3 class="sub_title">{% trans "I have information about someone" %}</h3>
+            {% if env.use_family_name %}
+              {% trans "Enter the person's given and family names." %}
+            {% else %}
+              {% trans "Enter the person's name." %}
+            {% endif %}
+        {% else %}
+          <h3 class="sub_title">{% trans "I'm looking for someone" %}</h3>
+          {% if env.jp_mobile_carrier_redirect %}
+            {% trans "Enter the person's name, parts of the name, or mobile phone number." %}
+            <br><span class="hint">{% blocktrans %}For a person name, Person Finder returns matching records in the database. For a mobile phone number, redirects you to messages registered to the mobile carrier.{% endblocktrans %}</span>
+            {% if show_jp_171_suggestion %}
+              <br><br>{% blocktrans %}For phones other than mobile phones, please use 171 service provided by NTT.{% endblocktrans %}
+            {% endif %}
+          {% else %}
+            {% trans "Enter the person's name or parts of the name." %}
+          {% endif %}
+        {% endifequal %}
+      </td>
+    </tr>
+
+    {% ifequal params.role 'provide' %}
+      {% if env.use_family_name and env.family_name_first %}
+        <tr>
+          <td class="label">
+            <label for="last_name">{% trans "Family name" %}:</label>
+          </td>
+          <td class="field">
+            {% ifequal params.style "facebook" %}
+              <input id="last_name" name="last_name"
+                  value="{{params.last_name}}" size=10>
+            {% else %}
+              <input id="last_name" name="last_name"
+                  value="{{params.last_name}}" size=20>
+            {% endifequal %}
+          </td>
+        </tr>
+      {% endif %}
+        <tr>
+          <td class="label">
+            <label for="first_name">
+              {% if env.use_family_name %}
+                {% trans "Given name" %}:
+              {% else %}
+                {% trans "Name" %}:
+              {% endif %}
+            </label>
+          </td>
+          <td class="field">
+            {% ifequal params.style "facebook" %}
+              <input id="first_name" name="first_name"
+                  value="{{params.first_name}}" size=10>
+            {% else %}
+            <input id="first_name" name="first_name"
+                value="{{params.first_name}}" size=20>
+            {% endifequal %}
+          </td>
+        </tr>
+      {% if env.use_family_name and not env.family_name_first %}
+        <tr>
+          <td class="label">
+            <label for="last_name">{% trans "Family name" %}:</label>
+          </td>
+          <td class="field">
+            {% ifequal params.style "facebook" %}
+              <input id="last_name" name="last_name"
+                  value="{{params.last_name}}" size=10>
+            {% else %}
+              <input id="last_name" name="last_name"
+                  value="{{params.last_name}}" size=20>
+            {% endifequal %}
+          </td>
+        </tr>
+      {% endif %}
+    {% else %}
+      <tr>
+        <td class="field">
+          {% ifequal params.style "facebook" %}
+            <input id="query" name="query"
+                value="{{params.query}}" size=10>
+          {% else %}
+            <input id="query" name="query"
+                value="{{params.query}}" size=40>
+          {% endifequal %}
+        </td>
+      </tr>
+    {% endifequal %}
+
+    <tr>
+     {% ifequal num_results 100 %}
+      <td class="warning">
+        {% trans "More than 100 results; only showing the first 100.  Try entering more of the name" %}
+      </td>
+     {% endifequal %}
+    </tr>
+    <tr>
+      <td colspan=2 class="submit" align="center">
+        {% ifequal params.role 'provide' %}
+          <input type="submit" value="{% trans "Provide information about this person" %}">
+        {% else %}
+          {% ifequal params.style "facebook" %}
+            <div style="margin-left: -70px"
+            <input type="submit" value="{% trans "Search for this person" %}">
+            </div>
+          {% else %}
+            <input type="submit" value="{% trans "Search for this person" %}">
+          {% endifequal %}
+        {% endifequal %}
+      </td>
+    </tr>
+  </table>
+</form>
