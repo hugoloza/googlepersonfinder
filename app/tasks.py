@@ -96,8 +96,8 @@ class CountBase(utils.Handler):
 
     def add_task(self, subdomain):
         """Queues up a task for an individual subdomain."""  
-        timestamp = utils.get_utcnow().strftime('%Y%m%d-%H%M%S')
-        task_name = '%s-%s-%s' % (subdomain, self.SCAN_NAME, timestamp)
+        task_name = '%s-%s-%s' % (
+            subdomain, self.SCAN_NAME, int(time.time()*1000))
         taskqueue.add(name=task_name, method='GET', url=self.URL,
                       params={'subdomain': subdomain})
 
@@ -153,8 +153,65 @@ class CountNote(CountBase):
             'location=' + (note.last_known_location and 'present' or ''))
 
 
+class AddReviewedProperty(CountBase):
+    """Sets 'reviewed' to False on all notes that have no 'reviewed' property.
+    This task is for migrating datastores that were created before the
+    'reviewed' property existed; 'reviewed' has to be set to False so that
+    the Notes will be indexed."""
+    SCAN_NAME = 'unreview-note'
+    URL = '/tasks/count/unreview_note'
+
+    def make_query(self):
+        return Note.all().filter('subdomain =', self.subdomain)
+
+    def update_counter(self, counter, note):
+        if not note.reviewed:
+            note.reviewed = False
+            note.put()
+        
+
+class UpdateStatus(CountBase):
+    """This task looks for Person records with the status 'believed_dead',
+    checks for the last non-hidden Note, and updates the status if necessary.
+    This is designed specifically to address bogus 'believed_dead' notes that
+    are flagged as spam.  (This is a cleanup task, not a counting task.)"""
+    SCAN_NAME = 'update-status'
+    URL = '/tasks/count/update_status'
+
+    def make_query(self):
+        return Person.all().filter('subdomain =', self.subdomain
+                          ).filter('latest_status =', 'believed_dead')
+
+    def update_counter(self, counter, person):
+        status = None
+        status_source_date = None
+        for note in person.get_notes():
+            if note.status and not note.hidden:
+                status = note.status
+                status_source_date = note.source_date
+        if status != person.latest_status:
+            person.latest_status = status
+            person.latest_status_source_date = status_source_date
+        person.put()
+
+
+class Reindex(CountBase):
+    """A handler for re-indexing Persons."""
+    SCAN_NAME = 'reindex'
+    URL = '/tasks/count/reindex'
+
+    def make_query(self):
+        return Person.all().filter('subdomain =', self.subdomain)
+
+    def update_counter(self, counter, person):
+        person.update_index(['old', 'new'])
+        person.put()
+
+
 if __name__ == '__main__':
     utils.run((CountPerson.URL, CountPerson),
               (CountNote.URL, CountNote),
-              (DeleteExpired.URL, DeleteExpired))
+              (DeleteExpired.URL, DeleteExpired),
+              (UpdateStatus.URL, UpdateStatus),
+              (Reindex.URL, Reindex))
 

@@ -107,9 +107,9 @@ class Subdomain(db.Model):
     appears to be an independent instance of the application."""
     # No properties for now; only the key_name is significant.
 
-    @staticmethod
-    def list():
-        return [subdomain.key().name() for subdomain in Subdomain.all()]
+    @classmethod
+    def list(cls):
+        return [subdomain.key().name() for subdomain in cls.all()]
 
 
 class Base(db.Model):
@@ -122,8 +122,15 @@ class Base(db.Model):
 
     # We can't use an inequality filter on expiry_date (together with other
     # inequality filters), so we use a periodic task to set the is_expired flag
-    # on expired records, and filter using the flag.  Note that we must provide
-    # a default value to ensure that all entities are eligible for filtering.
+    # on expired records, and filter using the flag.  A record's life cycle is:
+    #
+    # 1. Record is created with some expiry_date.
+    # 2. expiry_date passes.
+    # 3. tasks.DeleteExpired sets is_expired to True; record vanishes from UI.
+    # 4. delete.EXPIRED_TTL_DAYS days pass.
+    # 5. tasks.DeleteExpired wipes the record.
+    
+    # We set default=False to ensure all entities are indexed by is_expired.
     # NOTE: is_expired should ONLY be modified in Person.put_expiry_flags().
     is_expired = db.BooleanProperty(required=False, default=False)
 
@@ -230,6 +237,12 @@ class Person(Base):
     full_name = db.StringProperty()
     first_name = db.StringProperty()
     last_name = db.StringProperty()
+    # alternate_{first|last}_name field may contain any additional names that do
+    # not fit into first_name or last_name.  What those additional names mean
+    # varies across languages (e.g. in Japanese, users are directed to input
+    # readings (phonetic representations) of their names.)
+    alternate_first_names = db.StringProperty(default='')
+    alternate_last_names = db.StringProperty(default='')
     sex = db.StringProperty(default='', choices=pfif.PERSON_SEX_VALUES)
     date_of_birth = db.StringProperty(default='')  # YYYY, YYYY-MM, YYYY-MM-DD
     age = db.StringProperty(default='')  # NN or NN-MM
@@ -418,6 +431,9 @@ class Note(Base):
     # initially hidden from display upon loading a record page.
     hidden = db.BooleanProperty(default=False)
 
+    # True if the note has been reviewed for spam content at /admin/review.
+    reviewed = db.BooleanProperty(default=False)
+
     def get_note_record_id(self):
         return self.record_id
     note_record_id = property(get_note_record_id)
@@ -450,6 +466,7 @@ class Photo(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
 
 
+
 class Authorization(db.Model):
     """Authorization tokens.  Key name: subdomain + ':' + auth_key."""
 
@@ -474,6 +491,14 @@ class Authorization(db.Model):
     # by utils.filter_sensitive_fields).
     search_permission = db.BooleanProperty()
 
+    # If this flag is true, this authorization token allows the client to use
+    # the API to subscribe any e-mail address to updates on any person.
+    subscribe_permission = db.BooleanProperty()
+
+    # If this flag is true, notes written with this authorization token are
+    # marked as "reviewed" and won't show up in admin's review list.
+    mark_notes_reviewed = db.BooleanProperty()
+
     # Bookkeeping information for humans, not used programmatically.
     contact_name = db.StringProperty()
     contact_email = db.StringProperty()
@@ -497,6 +522,21 @@ class Secret(db.Model):
     secret = db.BlobProperty()
 
 
+def encode_count_name(count_name):
+    """Encode a name to printable ASCII characters so it can be safely
+    used as an attribute name for the datastore."""
+    encoded = []
+    append = encoded.append
+    for ch in map(ord, count_name):
+        if ch == 92:
+            append('\\\\')
+        elif 33 <= ch <= 126:
+            append(chr(ch))
+        else:
+            append('\\u%04x' % ch)
+    return ''.join(encoded)
+
+
 class Counter(db.Expando):
     """Counters hold partial and completed results for ongoing counting tasks.
     To see how this is used, check out tasks.py.  A single Counter object can
@@ -512,15 +552,15 @@ class Counter(db.Expando):
     last_key = db.StringProperty(default='')  # if non-empty, count is partial
 
     # Each Counter also has a dynamic property for each accumulator; all such
-    # properties are named "count_" followed by a count_name.
-
+    # properties are named "count_" followed by a count_name.  The count_name
+    # is encoded to ensure all its characters are printable ASCII.
     def get(self, count_name):
         """Gets the specified accumulator from this counter object."""
-        return getattr(self, 'count_' + count_name, 0)
+        return getattr(self, 'count_' + encode_count_name(count_name), 0)
 
     def increment(self, count_name):
         """Increments the given accumulator on this Counter object."""
-        prop_name = 'count_' + count_name
+        prop_name = 'count_' + encode_count_name(count_name)
         setattr(self, prop_name, getattr(self, prop_name, 0) + 1)
 
     @classmethod
@@ -528,6 +568,7 @@ class Counter(db.Expando):
         """Gets the latest finished count for the given subdomain and name.
         'name' should be in the format scan_name + '.' + count_name."""
         scan_name, count_name = name.split('.')
+        count_name = encode_count_name(count_name)
         counter_key = subdomain + ':' + scan_name
 
         # Get the counts from memcache, loading from datastore if necessary.
@@ -575,21 +616,6 @@ class Counter(db.Expando):
         return counter
 
 
-class UserActionLog(db.Model):
-    """Logs user actions and their reasons."""
-    time = db.DateTimeProperty(required=True)
-    action = db.StringProperty(
-        required=True, choices=['delete', 'restore', 'hide', 'unhide'])
-    entity_kind = db.StringProperty(required=True)
-    entity_key_name = db.StringProperty(required=True)
-    reason = db.StringProperty()  # should be present when action is 'delete'
-
-    @classmethod
-    def put_new(cls, action, entity, reason=''):
-        cls(time=utils.get_utcnow(), action=action, entity_kind=entity.kind(),
-            entity_key_name=entity.key().name(), reason=reason).put()
-
-
 class Subscription(db.Model):
     """Subscription to notifications when a note is added to a person record"""
     subdomain = db.StringProperty(required=True)
@@ -618,6 +644,45 @@ class Subscription(db.Model):
         query = Subscription.all().filter('subdomain =', subdomain)
         query = query.filter('person_record_id =', person_record_id)
         return query.fetch(limit)
+
+
+class UserActionLog(db.Expando):
+    """Logs user actions."""
+    time = db.DateTimeProperty(required=True)
+    action = db.StringProperty(required=True, choices=[
+        'delete', 'restore', 'hide', 'unhide', 'mark_dead', 'mark_alive'])
+    entity_kind = db.StringProperty(required=True)
+    entity_key_name = db.StringProperty(required=True)
+    detail = db.TextProperty()
+    ip_address = db.StringProperty()
+
+    @classmethod
+    def put_new(cls, action, entity, detail='', ip_address=''):
+        """Adds an entry to the UserActionLog.  'action' is the action that
+        the user performed, 'entity' is the entity that was operated on, and
+        'detail' is a string containing any other details."""
+        kind = entity.kind()
+        entry = cls(
+            time=utils.get_utcnow(), action=action, entity_kind=kind,
+            entity_key_name=entity.key().name(), detail=detail,
+            ip_address=ip_address)
+        for name in entity.properties():  # copy the properties of the entity
+            value = getattr(entity, name)
+            if isinstance(value, db.Model):
+                value = value.key()
+            setattr(entry, kind + '_' + name, value)
+        entry.put()
+
+
+class UserAgentLog(db.Model):
+    """Logs information about the user agent."""
+    timestamp = db.DateTimeProperty(auto_now=True)
+    subdomain = db.StringProperty()
+    user_agent = db.StringProperty()
+    lang = db.StringProperty()
+    accept_charset = db.StringProperty()
+    ip_address = db.StringProperty()
+    sample_rate = db.FloatProperty()
 
 
 class StaticSiteMapInfo(db.Model):

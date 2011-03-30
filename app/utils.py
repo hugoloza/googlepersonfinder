@@ -22,6 +22,7 @@ import logging
 import model
 import os
 import pfif
+import random
 import re
 import time
 import traceback
@@ -224,8 +225,6 @@ def get_note_status_text(note):
 
 
 # UI text for the rolled-up status when displaying a person.
-# This is intended for the results page; it's not yet used but the strings
-# are in here so we can get the translations started.
 PERSON_STATUS_TEXT = {
     # This dictionary must have an entry for '' that gives the default text.
     '': _('Unspecified'),
@@ -258,19 +257,19 @@ def format_sitemaps_datetime(dt):
         dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
     return integer_dt.isoformat() + '+00:00'
 
-def to_utf8(string):
-    """If Unicode, encode to UTF-8; if 8-bit string, leave unchanged."""
+def encode(string, encoding='utf-8'):
+    """If unicode, encode to encoding; if 8-bit string, leave unchanged."""
     if isinstance(string, unicode):
-        string = string.encode('utf-8')
+        string = string.encode(encoding)
     return string
 
-def urlencode(params):
-    """Apply UTF-8 encoding to any Unicode strings in the parameter dict.
+def urlencode(params, encoding='utf-8'):
+    """Apply encoding to any Unicode strings in the parameter dict.
     Leave 8-bit strings alone.  (urllib.urlencode doesn't support Unicode.)"""
     keys = params.keys()
     keys.sort()  # Sort the keys to get canonical ordering
     return urllib.urlencode([
-        (to_utf8(key), to_utf8(params[key]))
+        (encode(key, encoding), encode(params[key], encoding))
         for key in keys if isinstance(params[key], basestring)])
 
 def set_url_param(url, param, value):
@@ -304,24 +303,25 @@ def anchor(href, body):
 # false value.  For types with no false value, the default is None.
 
 def strip(string):
-    return string.strip()
+    # Trailing nulls appear in some strange character encodings like Shift-JIS.
+    return string.strip().rstrip('\0')
 
 def validate_yes(string):
-    return (string.strip().lower() == 'yes') and 'yes' or ''
+    return (strip(string).lower() == 'yes') and 'yes' or ''
 
 def validate_checkbox(string):
-    return (string.strip().lower() == 'on') and 'yes' or ''
+    return (strip(string).lower() == 'on') and 'yes' or ''
 
 def validate_role(string):
-    return (string.strip().lower() == 'provide') and 'provide' or 'seek'
+    return (strip(string).lower() == 'provide') and 'provide' or 'seek'
 
 def validate_int(string):
-    return string and int(string.strip())
+    return string and int(strip(string))
 
 def validate_sex(string):
     """Validates the 'sex' parameter, returning a canonical value or ''."""
     if string:
-        string = string.strip().lower()
+        string = strip(string).lower()
     return string in pfif.PERSON_SEX_VALUES and string or ''
 
 def validate_expiry(value):
@@ -337,7 +337,7 @@ APPROXIMATE_DATE_RE = re.compile(r'^\d{4}(-\d\d)?(-\d\d)?$')
 
 def validate_approximate_date(string):
     if string:
-        string = string.strip()
+        string = strip(string)
         if APPROXIMATE_DATE_RE.match(string):
             return string
     return ''
@@ -347,7 +347,7 @@ AGE_RE = re.compile(r'^\d+(-\d+)?$')
 def validate_age(string):
     """Validates the 'age' parameter, returning a canonical value or ''."""
     if string:
-        string = string.strip()
+        string = strip(string)
         if AGE_RE.match(string):
             return string
     return ''
@@ -357,7 +357,7 @@ def validate_status(string):
     status strings or ''.  Note that '' is always used as the Python value
     to represent the 'unspecified' status."""
     if string:
-        string = string.strip().lower()
+        string = strip(string).lower()
     return string in pfif.NOTE_STATUS_VALUES and string or ''
 
 DATETIME_RE = re.compile(r'^(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)Z$')
@@ -371,12 +371,8 @@ def validate_datetime(string):
     raise ValueError('Bad datetime: %r' % string)
 
 def validate_timestamp(string):
-    try: 
-        # Its all tz'less once you're in time() land.
-        # the key is the roundtrip via TestsBase.set_utcnow in server_tests.py.
-        # The invariant is:
-        #   dt == datetime.utcfromtimestamp(calendar.timegm(dt.utctimetuple()))
-        return string and datetime.utcfromtimestamp(float(string))
+    try:
+        return string and datetime.utcfromtimestamp(float(strip(string)))
     except:
         raise ValueError('Bad timestamp %s' % string)
 
@@ -392,9 +388,10 @@ def validate_image(bytestring):
 
 def validate_version(string):
     """Version, if present, should be in pfif versions."""
-    if string and string not in pfif.PFIF_VERSIONS:
+    if string and strip(string) not in pfif.PFIF_VERSIONS:
         raise ValueError('Bad pfif version: %s' % string)
     return string
+
 
 # ==== Other utilities =========================================================
 
@@ -437,6 +434,14 @@ def get_utcnow():
     global _utcnow_for_test
     return _utcnow_for_test or datetime.utcnow()
 
+def get_local_message(local_messages, lang, default_message):
+    """Return a localized message for lang where local_messages is a dictionary
+    mapping language codes and localized messages, or return default_message if
+    no such message is found."""
+    if not isinstance(local_messages, dict):
+        return default_message
+    return local_messages.get(lang, local_messages.get('en', default_message))
+
 # ==== Base Handler ============================================================
 
 class Struct:
@@ -462,6 +467,8 @@ class Handler(webapp.RequestHandler):
         'query': strip,
         'first_name': strip,
         'last_name': strip,
+        'alternate_first_names': strip,
+        'alternate_last_names': strip,
         'sex': validate_sex,
         'date_of_birth': validate_approximate_date,
         'age': validate_age,
@@ -513,22 +520,26 @@ class Handler(webapp.RequestHandler):
         'key': strip,
         'subdomain_new': strip,
         'utcnow': validate_timestamp,
-        'subscribe_email' : strip,
-        'subscribe' : validate_checkbox,
+        'subscribe_email': strip,
+        'subscribe': validate_checkbox,
     }
 
     def redirect(self, url, **params):
         if re.match('^[a-z]+:', url):
             if params:
-                url += '?' + urlencode(params)
+                url += '?' + urlencode(params, self.charset)
         else:
             url = self.get_url(url, **params)
         return webapp.RequestHandler.redirect(self, url)
 
     def cache_key_for_request(self):
-        # Use the whole url as the key.  We make sure the lang is included or
-        # the old language may be sticky.
-        return set_url_param(self.request.url, 'lang', self.params.lang)
+        # Use the whole URL as the key, ensuring that lang is included.
+        # We must use the computed lang (self.env.lang), not the query
+        # parameter (self.params.lang).
+        url = set_url_param(self.request.url, 'lang', self.env.lang)
+
+        # Include the charset in the key, since the <meta> tag can differ.
+        return set_url_param(url, 'charsets', self.charset)
 
     def render_from_cache(self, cache_time, key=None):
         """Render from cache if appropriate. Returns true if done."""
@@ -559,6 +570,7 @@ class Handler(webapp.RequestHandler):
             return
         values['env'] = self.env  # pass along application-wide context
         values['params'] = self.params  # pass along the query parameters
+        values['config'] = self.config  # pass along the configuration
         # TODO(kpy): Remove "templates/" from all template names in calls
         # to this method, and have this method call render_to_string instead.
         response = webapp.template.render(os.path.join(ROOT, name), values)
@@ -599,16 +611,44 @@ class Handler(webapp.RequestHandler):
         self.post = lambda *args: None
 
     def write(self, text):
-        self.response.out.write(text)
+        """Sends text to the client using the charset from initialize()."""
+        self.response.out.write(text.encode(self.charset, 'replace'))
+
+    def select_charset(self):
+        # Get a list of the charsets that the client supports.
+        if self.request.get('charsets'): # allow override for testing
+            charsets = self.request.get('charsets').split(',')
+        else:
+            charsets = self.request.accept_charset.best_matches()
+
+        # Always prefer UTF-8 if the client supports it.
+        for charset in charsets:
+            if charset.lower().replace('_', '-') in ['utf8', 'utf-8']:
+                return charset
+
+        # Otherwise, look for a requested charset that Python supports.
+        for charset in charsets:
+            try:
+                'xyz'.encode(charset, 'replace')
+                return charset
+            except:
+                continue
+
+        # If Python doesn't know any of the requested charsets, use UTF-8.
+        return 'utf-8'
 
     def select_locale(self):
         """Detect and activate the appropriate locale.  The 'lang' query
         parameter has priority, then the django_language cookie, then the
-        default setting."""
+        first language in the language menu, then the default setting."""
+        default_lang = (self.config and
+                        self.config.language_menu_options and
+                        self.config.language_menu_options[0])
         lang = (self.params.lang or
                 self.request.cookies.get('django_language', None) or
+                default_lang or
                 django.conf.settings.LANGUAGE_CODE)
-        lang = urllib.quote(lang)
+        lang = re.sub('[^A-Za-z-]', '', lang)
         self.response.headers.add_header(
             'Set-Cookie', 'django_language=%s' % lang)
         django.utils.translation.activate(lang)
@@ -618,12 +658,15 @@ class Handler(webapp.RequestHandler):
 
     def get_url(self, path, scheme=None, **params):
         """Constructs the absolute URL for a given path and query parameters,
-        preserving the current 'subdomain', 'small', and 'style' parameters."""
+        preserving the current 'subdomain', 'small', and 'style' parameters.
+        Parameters are encoded using the same character encoding (i.e.
+        self.charset) used to deliver the document."""
         for name in ['subdomain', 'small', 'style']:
             if self.request.get(name) and name not in params:
                 params[name] = self.request.get(name)
         if params:
-            path += ('?' in path and '&' or '?') + urlencode(params)
+            separator = ('?' in path) and '&' or '?'
+            path += separator + urlencode(params, self.charset)
         current_scheme, netloc, _, _, _ = urlparse.urlsplit(self.request.url)
         if netloc.split(':')[0] == 'localhost':
             scheme = 'http'  # HTTPS is not available during testing
@@ -632,9 +675,9 @@ class Handler(webapp.RequestHandler):
     def get_subdomain(self):
         """Determines the subdomain of the request."""
 
-        # The 'subdomain' query parameter always overrides the hostname.
-        if self.request.get('subdomain'):
-            return self.request.get('subdomain')
+        # The 'subdomain' query parameter always overrides the hostname
+        if strip(self.request.get('subdomain', '')):
+            return strip(self.request.get('subdomain'))
 
         levels = self.request.headers.get('Host', '').split('.')
         if levels[-2:] == ['appspot', 'com'] and len(levels) >= 4:
@@ -712,6 +755,20 @@ class Handler(webapp.RequestHandler):
             'of the problem, but please check that the format of your '
             'request is correct.'))
 
+    def set_content_type(self, type):
+        self.response.headers['Content-Type'] = \
+            '%s; charset=%s' % (type, self.charset)
+
+    def to_local_time(self, date):
+        """Converts a datetime object to the local time configured for the
+        current subdomain.  For convenience, returns None if date is None."""
+        # TODO(kpy): This only works for subdomains that have a single fixed
+        # time zone offset and never use Daylight Saving Time.
+        if date:
+            if self.config.time_zone_offset:
+                return date + timedelta(0, 3600*self.config.time_zone_offset)
+            return date
+
     def initialize(self, *args):
         webapp.RequestHandler.initialize(self, *args)
         self.params = Struct()
@@ -721,6 +778,23 @@ class Handler(webapp.RequestHandler):
         for name in self.request.headers.keys():
             if name.lower().startswith('x-appengine'):
                 logging.debug('%s: %s' % (name, self.request.headers[name]))
+
+        # Determine the subdomain.
+        self.subdomain = self.get_subdomain()
+
+        # Get the subdomain-specific configuration.
+        self.config = self.subdomain and config.Configuration(self.subdomain)
+
+        # Choose a charset for encoding the response.
+        # We assume that any client that doesn't support UTF-8 will specify a
+        # preferred encoding in the Accept-Charset header, and will use this
+        # encoding for content, query parameters, and form data.  We make this
+        # assumption across all subdomains.
+        # (Some Japanese mobile phones support only Shift-JIS and expect
+        # content, parameters, and form data all to be encoded in Shift-JIS.)
+        self.charset = self.select_charset()
+        self.request.charset = self.charset
+        self.set_content_type('text/html')  # add charset to Content-Type header
 
         # Validate query parameters.
         for name, validator in self.auto_params.items():
@@ -740,7 +814,19 @@ class Handler(webapp.RequestHandler):
         # Activate localization.
         lang, rtl = self.select_locale()
 
+        # Log the User-Agent header.
+        sample_rate = float(
+            self.config and self.config.user_agent_sample_rate or 0)
+        if random.random() < sample_rate:
+            model.UserAgentLog(
+                subdomain=self.subdomain, sample_rate=sample_rate,
+                user_agent=self.request.headers.get('User-Agent'), lang=lang,
+                accept_charset=self.request.headers.get('Accept-Charset', ''),
+                ip_address=self.request.remote_addr).put()
+
         # Put common non-subdomain-specific template variables in self.env.
+        self.env.charset = self.charset
+        self.env.url = set_url_param(self.request.url, 'lang', lang)
         self.env.netloc = urlparse.urlparse(self.request.url)[1]
         self.env.domain = self.env.netloc.split(':')[0]
         self.env.parent_domain = self.get_parent_domain()
@@ -769,9 +855,6 @@ class Handler(webapp.RequestHandler):
             if scheme != 'https':
                 return self.error(403, 'HTTPS is required.')
 
-        # Determine the subdomain.
-        self.subdomain = self.get_subdomain()
-
         # Check for an authorization key.
         self.auth = None
         if self.subdomain and self.params.key:
@@ -787,9 +870,6 @@ class Handler(webapp.RequestHandler):
         if not model.Subdomain.get_by_key_name(self.subdomain):
             return self.error(404, 'No such domain.')
 
-        # Get the subdomain-specific configuration.
-        self.config = config.Configuration(self.subdomain)
-
         # To preserve the subdomain properly as the user navigates the site:
         # (a) For links, always use self.get_url to get the URL for the HREF.
         # (b) For forms, use a plain path like "/view" for the ACTION and
@@ -800,11 +880,12 @@ class Handler(webapp.RequestHandler):
 
         # Put common subdomain-specific template variables in self.env.
         self.env.subdomain = self.subdomain
-        titles = self.config.subdomain_titles or {}
-        self.env.subdomain_title = titles.get(lang, titles.get('en', '?'))
+        self.env.subdomain_title = get_local_message(
+                self.config.subdomain_titles, lang, '?')
         self.env.keywords = self.config.keywords
         self.env.family_name_first = self.config.family_name_first
         self.env.use_family_name = self.config.use_family_name
+        self.env.use_alternate_names = self.config.use_alternate_names
         self.env.use_postal_code = self.config.use_postal_code
         self.env.map_default_zoom = self.config.map_default_zoom
         self.env.map_default_center = self.config.map_default_center
@@ -813,9 +894,28 @@ class Handler(webapp.RequestHandler):
         self.env.subdomain_field_html = subdomain_field_html
         self.env.main_url = self.get_url('/')
         self.env.embed_url = self.get_url('/embed')
-        self.env.main_page_custom_html = self.config.main_page_custom_html
-        self.env.results_page_custom_html = self.config.results_page_custom_html
-        self.env.view_page_custom_html = self.config.view_page_custom_html
+
+        # TODO(ryok): The following if statements are necessary only during the
+        # transition of {main|results}_page_custom_html(s) options from the old
+        # plain text format to the new i18n'ed dictionary format.  Remove these
+        # once the transition is complete.
+        if self.config.main_page_custom_html:
+            self.env.main_page_custom_html = self.config.main_page_custom_html
+        else:
+            self.env.main_page_custom_html = get_local_message(
+                self.config.main_page_custom_htmls, lang, '')
+        if self.config.results_page_custom_html:
+            self.env.results_page_custom_html = \
+                self.config.results_page_custom_html
+        else:
+            self.env.results_page_custom_html = get_local_message(
+                self.config.results_page_custom_htmls, lang, '')
+        if self.config.view_page_custom_html:
+            self.env.view_page_custom_html = \
+                self.config.view_page_custom_html
+        else:
+            self.env.view_page_custom_html = get_local_message(
+                self.config.view_page_custom_htmls, lang, '')
 
         # Provide the contents of the language menu.
         self.env.language_menu = [
@@ -839,6 +939,11 @@ class Handler(webapp.RequestHandler):
         post_is_test_mode = validate_yes(self.request.get('test_mode', ''))
         client_is_localhost = os.environ['REMOTE_ADDR'] == '127.0.0.1'
         return post_is_test_mode and client_is_localhost
+
+    def head(self, **kwargs):
+        """Default implementation for a HEAD request."""
+        self.get(**kwargs)
+        self.response.body = ''
 
 
 def run(*mappings, **kwargs):
