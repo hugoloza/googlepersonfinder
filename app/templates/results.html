@@ -26,7 +26,16 @@ limitations under the License.
 
   {% ifequal params.role 'provide' %}
     <h1>{% trans "Records Similar to" %}:
-      {{params.query}}</h1>
+      {% if env.use_family_name %}
+        {% if env.family_name_first %}
+          {{params.last_name}} {{params.first_name}}
+        {% else %}
+          {{params.first_name}} {{params.last_name}}
+        {% endif %}
+      {% else %}
+        {{params.first_name}}
+      {% endif %}
+    </h1>
     <p>
     {% if not params.small %}
       {% ifequal num_results 1 %}
@@ -79,6 +88,19 @@ limitations under the License.
               {% else %}
                 {{result.first_name}}
               {% endif %}
+              {% if env.use_alternate_names %}
+              {% if result.alternate_first_names or result.alternate_last_names %}
+                {% if env.use_family_name %}
+                  {% if env.family_name_first %}
+                    ({{result.alternate_last_names}} {{result.alternate_first_names}})
+                  {% else %}
+                    ({{result.alternate_first_names}} {{result.alternate_last_names}})
+                  {% endif %}
+                {% else %}
+                  ({{result.alternate_first_names}})
+                {% endif %}
+              {% endif %}
+              {% endif %}
             </span>
             <ul>
               {% if result.home_street or result.home_neighborhood or result.home_city or result.home_state or result.home_postal_code %}
@@ -105,6 +127,11 @@ limitations under the License.
                   {{ result.latest_note_status }}
                 </span>
               </li>
+              {% if result.provider_name %}
+	      <li>
+                {% trans "Provided by:" %} {{result.provider_name}}
+              </li>
+              {% endif %}
             </ul>
             <span class="tracking">
               ID: {{result.record_id}}

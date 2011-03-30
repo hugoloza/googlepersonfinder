@@ -139,6 +139,8 @@ class Create(Handler):
             expiry_date=expiry_date,
             first_name=self.params.first_name,
             last_name=self.params.last_name,
+            alternate_first_names=self.params.alternate_first_names,
+            alternate_last_names=self.params.alternate_last_names,
             sex=self.params.sex,
             date_of_birth=self.params.date_of_birth,
             age=self.params.age,
@@ -178,6 +180,12 @@ class Create(Handler):
                 phone_of_found_person=self.params.phone_of_found_person)
             person.update_from_note(note)
             entities_to_put.append(note)
+
+            # Specially log 'believed_dead'.
+            if note.status == 'believed_dead':
+                detail = person.first_name + ' ' + person.last_name
+                UserActionLog.put_new(
+                    'mark_dead', note, detail, self.request.remote_addr)
 
         # Write one or both entities to the store.
         db.put(entities_to_put)

@@ -56,33 +56,51 @@ def get_sender(handler):
     domain = handler.env.parent_domain.replace('appspot.com', 'appspotmail.com')
     return 'Do Not Reply <do-not-reply@%s>' % domain
 
-def send_notifications(person, note, handler):
+def subscribe_to(handler, subdomain, person, email, lang):
+    """Add a subscription on a person for an e-mail address"""
+    existing = model.Subscription.get(subdomain, person.record_id, email)
+    if existing and existing.language == lang:
+        return None
+
+    if existing:
+        subscription = existing
+        subscription.language = lang
+    else:
+        subscription = model.Subscription.create(
+            subdomain, person.record_id, email, lang)
+    db.put(subscription)
+    send_subscription_confirmation(handler, person, email)
+    return subscription
+
+def send_notifications(person, note, handler, linked_person_id=None):
     """Sends status updates about the person"""
     sender = get_sender(handler)
-    #send messages
-    for sub in person.get_subscriptions():
-        if is_email_valid(sub.email):
-            django.utils.translation.activate(sub.language)
-            subject = _('[Person Finder] Status update for %(given_name)s '
-                        '%(family_name)s') % {
+    try:
+        for sub in person.get_subscriptions():
+            if is_email_valid(sub.email):
+                django.utils.translation.activate(sub.language)
+                subject = _('[Person Finder] Status update for %(given_name)s '
+                            '%(family_name)s') % {
                             'given_name': escape(person.first_name),
                             'family_name': escape(person.last_name)}
-            body = handler.render_to_string(
-                'person_status_update_email.txt',
-                first_name=person.first_name,
-                last_name=person.last_name,
-                note=note,
-                note_status_text=get_note_status_text(note),
-                site_url=handler.get_url('/'),
-                view_url=handler.get_url('/view', id=person.record_id),
-                unsubscribe_link=get_unsubscribe_link(handler, person,
-                                                      sub.email))
-            taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
-                          params={'sender': sender,
-                                  'to': sub.email,
-                                  'subject': subject,
-                                  'body': body})
-    django.utils.translation.activate(handler.env.lang)
+                body = handler.render_to_string(
+                    'person_status_update_email.txt',
+                    first_name=person.first_name,
+                    last_name=person.last_name,
+                    note=note,
+                    note_status_text=get_note_status_text(note),
+                    linked_person_url=handler.get_url('/view', id=linked_person_id),
+                    site_url=handler.get_url('/'),
+                    view_url=handler.get_url('/view', id=person.record_id),
+                    unsubscribe_link=get_unsubscribe_link(handler, person,
+                                                          sub.email))
+                taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
+                              params={'sender': sender,
+                                      'to': sub.email,
+                                      'subject': subject,
+                                      'body': body})
+    finally:
+        django.utils.translation.activate(handler.env.lang)
 
 def send_subscription_confirmation(handler, person, email):
     """Sends subscription confirmation when person subscribes to
@@ -140,19 +158,6 @@ class Subscribe(Handler):
                                captcha_html=captcha_html,
                                form_action=form_action)
 
-        existing = model.Subscription.get(self.subdomain, self.params.id,
-                                          self.params.subscribe_email)
-        if existing and existing.language == self.env.lang:
-            # User is already subscribed
-            url = self.get_url('/view', id=self.params.id)
-            link_text = _('Return to the record for %(given_name)s '
-                          '%(family_name)s.') % {
-                              'given_name': escape(person.first_name),
-                              'family_name': escape(person.last_name)}
-            html = '<a href="%s">%s</a>' % (url, link_text)
-            message_html = _('You are already subscribed. ' + html)
-            return self.info(200, message_html=message_html)
-
         # Check the captcha
         captcha_response = self.get_captcha_response()
         if not captcha_response.is_valid and not self.is_test_mode():
@@ -165,23 +170,26 @@ class Subscribe(Handler):
                                captcha_html=captcha_html,
                                form_action=form_action)
 
-        if existing:
-            subscription = existing
-            subscription.language = self.env.lang
-        else:
-            subscription = model.Subscription.create(
-                self.subdomain, self.params.id, self.params.subscribe_email,
-                self.env.lang)
-        db.put(subscription)
-        send_subscription_confirmation(self, person,
-                                       self.params.subscribe_email)
+        subscription = subscribe_to(self, self.subdomain, person,
+                                    self.params.subscribe_email, self.env.lang)
+        if not subscription:
+            # User is already subscribed
+            url = self.get_url('/view', id=self.params.id)
+            link_text = _('Return to the record for %(given_name)s '
+                          '%(family_name)s.') % {
+                              'given_name': escape(person.first_name),
+                              'family_name': escape(person.last_name)}
+            html = '<a href="%s">%s</a>' % (url, link_text)
+            message_html = _('You are already subscribed. ' + html)
+            return self.info(200, message_html=message_html)
+
         url = self.get_url('/view', id=self.params.id)
         link_text = _('Return to the record for %(given_name)s '
                       '%(family_name)s.') % {
                           'given_name': escape(person.first_name),
                           'family_name': escape(person.last_name)}
         html = ' <a href="%s">%s</a>' % (url, link_text)
-        message_html = _('You are successfully subscribed.') + html
+        message_html = _('You have successfully subscribed.') + html
         return self.info(200, message_html=message_html)
 
 if __name__ == '__main__':
