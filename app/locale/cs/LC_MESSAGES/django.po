@@ -337,9 +337,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Momentálně nejste přihlášeni. <a href=\"%(login_url)s\">Přihlásit se</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Aktuální informace o této osobě"
@@ -402,6 +399,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Název ulice"
+
+msgid "Physical characteristics"
+msgstr "Popis osoby"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Popište, jak tuto osobu identifikovat."
+
+msgid "Sex"
+msgstr "Pohlaví"
+
+msgid "Age"
+msgstr "Věk"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Bydliště"
@@ -690,17 +703,8 @@ msgstr "V současné době obsahuje databáze přibližně %(num_people)s zázna
 msgid "Compare these records"
 msgstr "Porovnat tyto záznamy"
 
-msgid "Physical characteristics"
-msgstr "Popis osoby"
-
-msgid "Sex"
-msgstr "Pohlaví"
-
 msgid "Date of birth"
 msgstr "Datum narození"
-
-msgid "Age"
-msgstr "Věk"
 
 msgid "Home address"
 msgstr "Bydliště"
@@ -782,6 +786,10 @@ msgstr ""
 "Uživatel zveřejnil aktualizaci stavu pro osobu %(first_name)s %(last_name)s "
 "na stránkách %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Tento záznam je duplikát záznamu"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Úplný záznam můžete zobrazit na adrese %(view_url)s"
@@ -802,6 +810,20 @@ msgstr "Zadejte jméno a příjmení osoby."
 msgid "Enter the person's name."
 msgstr "Zadejte jméno osoby."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Zadejte jméno nebo části jména osoby."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Zadejte jméno nebo části jména osoby."
 
@@ -812,11 +834,11 @@ msgstr ""
 "Nalezeno přes 100 výsledků, zobrazuje se pouze prvních 100. Zkuste zadat "
 "další části jména."
 
-msgid "Search for this person"
-msgstr "Hledat tuto osobu"
-
 msgid "Provide information about this person"
 msgstr "Poskytnout informace o této osobě"
+
+msgid "Search for this person"
+msgstr "Hledat tuto osobu"
 
 #, python-format
 msgid ""
@@ -877,6 +899,13 @@ msgstr "Přepnout do režimu označování duplikátů"
 msgid "Switch to normal view mode"
 msgstr "Přepnout do režimu normálního zobrazení"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Zveřejnil(a)"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Můžete označit až 3 záznamy jako duplicitní:"
 
@@ -895,6 +924,10 @@ msgstr "Nebyly nalezeny žádné výsledky pro osobu"
 
 msgid "We have nothing matching your search."
 msgstr "Vašemu vyhledávacímu dotazu nic neodpovídá."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Pomocí tohoto odkazu vytvoříte nový záznam"
@@ -950,9 +983,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identifikační údaje"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Domovská země"

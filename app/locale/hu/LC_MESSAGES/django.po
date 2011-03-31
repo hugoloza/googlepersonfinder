@@ -345,9 +345,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Jelenleg nincs bejelentkezve. <a href=\"%(login_url)s\">Bejelentkezés.</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Állapotfrissítések ehhez a személyhez"
@@ -410,6 +407,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Utca neve"
+
+msgid "Physical characteristics"
+msgstr "Fizikai jellemzők"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Írja le, hogyan azonosítható ez a személy"
+
+msgid "Sex"
+msgstr "Nem"
+
+msgid "Age"
+msgstr "Kor"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Otthoni cím"
@@ -700,17 +713,8 @@ msgstr ""
 msgid "Compare these records"
 msgstr "Ezen rekordok összehasonlítása"
 
-msgid "Physical characteristics"
-msgstr "Fizikai jellemzők"
-
-msgid "Sex"
-msgstr "Nem"
-
 msgid "Date of birth"
 msgstr "Születési dátum"
-
-msgid "Age"
-msgstr "Kor"
 
 msgid "Home address"
 msgstr "Otthoni cím"
@@ -791,6 +795,10 @@ msgstr ""
 "Egy felhasználó frissítette \"%(first_name)s %(last_name)s\" státuszát a %"
 "(site_url)s webhelyen:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Ez a rekord a következő duplikátuma:"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "A következő címen nézheti meg a teljes rekordot: %(view_url)s"
@@ -811,6 +819,20 @@ msgstr "Adja meg a személy utó- és vezetéknevét."
 msgid "Enter the person's name."
 msgstr "Adja meg a személy nevét."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Adja meg a személy nevét, vagy nevének részleteit."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Adja meg a személy nevét, vagy nevének részleteit."
 
@@ -821,11 +843,11 @@ msgstr ""
 "Több mint 100 eredmény, az első 100 megjelenítve. Próbáljon többet megadni a "
 "névből."
 
-msgid "Search for this person"
-msgstr "A személy keresése"
-
 msgid "Provide information about this person"
 msgstr "Információ megadása erről a személyről"
+
+msgid "Search for this person"
+msgstr "A személy keresése"
 
 #, python-format
 msgid ""
@@ -890,6 +912,13 @@ msgstr "Ismétlődések megjelölése"
 msgid "Switch to normal view mode"
 msgstr "Váltás normál nézetbe."
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Beküldő:"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr ""
 "Válasszon ki legfeljebb 3 rekordot, melyeket duplikátumként kíván megjelölni:"
@@ -909,6 +938,10 @@ msgstr "Nincs találat a következőre"
 
 msgid "We have nothing matching your search."
 msgstr "Semmi sem egyezik a keresésével."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Kövesse ezt a linket új rekord létrehozásához"
@@ -966,9 +999,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Azonosítási információ"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Ország"

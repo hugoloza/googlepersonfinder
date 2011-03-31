@@ -25,9 +25,6 @@ from google.appengine.ext import db
 import indexing
 import pfif
 import prefix
-import re
-import sys
-import utils
 
 # The domain name of this application.  The application hosts multiple
 # repositories, each at a subdomain of this domain.
@@ -287,6 +284,7 @@ class Person(Base):
     def past_due_records():
         """Returns a query for all Person records with expiry_date in the past,
         regardless of their is_expired flags."""
+        import utils
         return Person.all(filter_expired=False).filter(
             'expiry_date <=', utils.get_utcnow())
 
@@ -325,7 +323,7 @@ class Person(Base):
         """Updates the is_expired flags on this Person and related Notes to
         make them consistent with the expiry_date on this Person, and commits
         these changes to the datastore."""
-
+        import utils
         now = utils.get_utcnow()
         expired = self.expiry_date and now >= self.expiry_date
         if self.is_expired != expired:
@@ -431,6 +429,9 @@ class Note(Base):
     # initially hidden from display upon loading a record page.
     hidden = db.BooleanProperty(default=False)
 
+    # True if the note has been reviewed for spam content at /admin/review.
+    reviewed = db.BooleanProperty(default=False)
+
     def get_note_record_id(self):
         return self.record_id
     note_record_id = property(get_note_record_id)
@@ -462,8 +463,7 @@ class Photo(db.Model):
     bin_data = db.BlobProperty()
     date = db.DateTimeProperty(auto_now_add=True)
 
-    def get_url(self, handler):
-        return handler.get_url('/photo', scheme='https', id=str(self.id()))
+
 
 class Authorization(db.Model):
     """Authorization tokens.  Key name: subdomain + ':' + auth_key."""
@@ -492,6 +492,10 @@ class Authorization(db.Model):
     # If this flag is true, this authorization token allows the client to use
     # the API to subscribe any e-mail address to updates on any person.
     subscribe_permission = db.BooleanProperty()
+
+    # If this flag is true, notes written with this authorization token are
+    # marked as "reviewed" and won't show up in admin's review list.
+    mark_notes_reviewed = db.BooleanProperty()
 
     # Bookkeeping information for humans, not used programmatically.
     contact_name = db.StringProperty()
@@ -530,6 +534,48 @@ def encode_count_name(count_name):
             append('\\u%04x' % ch)
     return ''.join(encoded)
 
+class ApiActionLog(db.Model):
+    """Log of api key usage."""
+    # actions
+    DELETE = 'delete'
+    READ = 'read'
+    SEARCH = 'search'
+    WRITE = 'write'
+    SUBSCRIBE = 'subscribe'    
+    UNSUBSCRIBE = 'unsubscribe'
+    ACTIONS = [DELETE, READ, SEARCH, WRITE, SUBSCRIBE, UNSUBSCRIBE]
+
+    subdomain = db.StringProperty(required=True)
+    api_key = db.StringProperty()
+    action = db.StringProperty(required=True, choices=ACTIONS)
+    person_records = db.IntegerProperty()
+    note_records = db.IntegerProperty()
+    people_skipped = db.IntegerProperty() # write only
+    notes_skipped = db.IntegerProperty() # write only
+    user_agent = db.StringProperty()
+    ip_address = db.StringProperty() # client ip
+    request_url = db.StringProperty()
+    version = db.StringProperty() # pfif version.
+    timestamp = db.DateTimeProperty(auto_now=True)
+
+    @staticmethod
+    def record_action(subdomain, api_key, version, action, person_records,
+                      note_records, people_skipped, notes_skipped, user_agent,
+                      ip_address, request_url,
+                      timestamp=None):
+        import utils
+        ApiActionLog(subdomain=subdomain,
+                  api_key=api_key,
+                  action=action,
+                  person_records=person_records,
+                  note_records=note_records,
+                  people_skipped=people_skipped,
+                  notes_skipped=notes_skipped,
+                  user_agent=user_agent,
+                  ip_address=ip_address,
+                  request_url=request_url,
+                  version=version,
+                  timestamp=timestamp or utils.get_utcnow()).put()
 
 class Counter(db.Expando):
     """Counters hold partial and completed results for ongoing counting tasks.
@@ -563,6 +609,12 @@ class Counter(db.Expando):
         'name' should be in the format scan_name + '.' + count_name."""
         scan_name, count_name = name.split('.')
         count_name = encode_count_name(count_name)
+        return cls.get_all_counts(subdomain, scan_name).get(count_name, 0)
+
+    @classmethod
+    def get_all_counts(cls, subdomain, scan_name):
+        """Gets a dictionary of all the counts for the last completed scan
+        for the given subdomain and scan name."""
         counter_key = subdomain + ':' + scan_name
 
         # Get the counts from memcache, loading from datastore if necessary.
@@ -588,8 +640,8 @@ class Counter(db.Expando):
                                     if name.startswith('count_'))
                 memcache.set(counter_key, counter_dict, 60)
 
-        # Get the count for the given count_name.
-        return counter_dict.get(count_name, 0)
+        # Return the dictionary of counts for this scan.
+        return counter_dict
 
     @classmethod
     def all_finished_counters(cls, subdomain, scan_name):
@@ -608,21 +660,6 @@ class Counter(db.Expando):
         if not counter or not counter.last_key:
             counter = Counter(subdomain=subdomain, scan_name=scan_name)
         return counter
-
-
-class UserActionLog(db.Model):
-    """Logs user actions and their reasons."""
-    time = db.DateTimeProperty(required=True)
-    action = db.StringProperty(
-        required=True, choices=['delete', 'restore', 'hide', 'unhide'])
-    entity_kind = db.StringProperty(required=True)
-    entity_key_name = db.StringProperty(required=True)
-    reason = db.StringProperty()  # should be present when action is 'delete'
-
-    @classmethod
-    def put_new(cls, action, entity, reason=''):
-        cls(time=utils.get_utcnow(), action=action, entity_kind=entity.kind(),
-            entity_key_name=entity.key().name(), reason=reason).put()
 
 
 class Subscription(db.Model):
@@ -653,6 +690,46 @@ class Subscription(db.Model):
         query = Subscription.all().filter('subdomain =', subdomain)
         query = query.filter('person_record_id =', person_record_id)
         return query.fetch(limit)
+
+
+class UserActionLog(db.Expando):
+    """Logs user actions."""
+    time = db.DateTimeProperty(required=True)
+    action = db.StringProperty(required=True, choices=[
+        'delete', 'restore', 'hide', 'unhide', 'mark_dead', 'mark_alive'])
+    entity_kind = db.StringProperty(required=True)
+    entity_key_name = db.StringProperty(required=True)
+    detail = db.TextProperty()
+    ip_address = db.StringProperty()
+
+    @classmethod
+    def put_new(cls, action, entity, detail='', ip_address=''):
+        """Adds an entry to the UserActionLog.  'action' is the action that
+        the user performed, 'entity' is the entity that was operated on, and
+        'detail' is a string containing any other details."""
+        import utils
+        kind = entity.kind()
+        entry = cls(
+            time=utils.get_utcnow(), action=action, entity_kind=kind,
+            entity_key_name=entity.key().name(), detail=detail,
+            ip_address=ip_address)
+        for name in entity.properties():  # copy the properties of the entity
+            value = getattr(entity, name)
+            if isinstance(value, db.Model):
+                value = value.key()
+            setattr(entry, kind + '_' + name, value)
+        entry.put()
+
+
+class UserAgentLog(db.Model):
+    """Logs information about the user agent."""
+    timestamp = db.DateTimeProperty(auto_now=True)
+    subdomain = db.StringProperty()
+    user_agent = db.StringProperty()
+    lang = db.StringProperty()
+    accept_charset = db.StringProperty()
+    ip_address = db.StringProperty()
+    sample_rate = db.FloatProperty()
 
 
 class StaticSiteMapInfo(db.Model):

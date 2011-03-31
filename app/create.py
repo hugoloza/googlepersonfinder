@@ -15,6 +15,7 @@
 
 from datetime import datetime
 from model import *
+from photo import get_photo_url
 from utils import *
 from google.appengine.api import images
 from google.appengine.runtime.apiproxy_errors import RequestTooLargeError
@@ -115,7 +116,7 @@ class Create(Handler):
 
             photo = Photo(bin_data=sanitized_photo)
             photo.put()
-            photo_url = photo.get_url(self)
+            photo_url = get_photo_url(photo)
 
         other = ''
         if self.params.description:
@@ -179,6 +180,12 @@ class Create(Handler):
                 phone_of_found_person=self.params.phone_of_found_person)
             person.update_from_note(note)
             entities_to_put.append(note)
+
+            # Specially log 'believed_dead'.
+            if note.status == 'believed_dead':
+                detail = person.first_name + ' ' + person.last_name
+                UserActionLog.put_new(
+                    'mark_dead', note, detail, self.request.remote_addr)
 
         # Write one or both entities to the store.
         db.put(entities_to_put)

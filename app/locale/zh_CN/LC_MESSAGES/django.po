@@ -305,9 +305,6 @@ msgstr "<a href=\"%(logout_url)s\">退出</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "您目前还没有登录。请<a href=\"%(login_url)s\">登录</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "此人的状况更新"
@@ -367,6 +364,22 @@ msgstr "名字拼音"
 
 msgid "Alternate names"
 msgstr "姓名拼音"
+
+msgid "Physical characteristics"
+msgstr "身体特征"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "请描述这个人的一些基本特征。"
+
+msgid "Sex"
+msgstr "性别"
+
+msgid "Age"
+msgstr "年龄"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "家庭住址"
@@ -648,17 +661,8 @@ msgstr "当前正在跟踪大约 %(num_people)s 条记录。"
 msgid "Compare these records"
 msgstr "比较这些记录"
 
-msgid "Physical characteristics"
-msgstr "身体特征"
-
-msgid "Sex"
-msgstr "性别"
-
 msgid "Date of birth"
 msgstr "出生日期"
-
-msgid "Age"
-msgstr "年龄"
 
 msgid "Home address"
 msgstr "家庭住址"
@@ -738,6 +742,10 @@ msgstr ""
 "\n"
 "某用户已在 %(site_url)s 上发布关于“%(first_name)s %(last_name)s”的最新动态："
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "此记录与以下记录重复"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "您可以在 %(view_url)s 上查看完整的记录"
@@ -757,6 +765,20 @@ msgstr "输入此人的名字和姓氏。"
 msgid "Enter the person's name."
 msgstr "输入此人的姓名。"
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "输入此人的姓名（全部或部分）。"
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "输入此人的姓名（全部或部分）。"
 
@@ -765,11 +787,11 @@ msgid ""
 "name"
 msgstr "有 100 个以上的结果，目前只显示前 100 个。请输入尽可能完整的姓名"
 
-msgid "Search for this person"
-msgstr "搜索此人"
-
 msgid "Provide information about this person"
 msgstr "提供关于此人的信息"
+
+msgid "Search for this person"
+msgstr "搜索此人"
 
 #, python-format
 msgid ""
@@ -830,6 +852,13 @@ msgstr "切换至重复标记模式"
 msgid "Switch to normal view mode"
 msgstr "切换至普通视图模式"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "发布者："
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "最多选择 3 条记录，将其标记为重复："
 
@@ -847,6 +876,10 @@ msgstr "未找到有关此姓名的任何结果："
 
 msgid "We have nothing matching your search."
 msgstr "没有任何记录与您的搜索条件相符。"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "按照此链接中的说明创建一条新记录"
@@ -901,9 +934,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "身份识别信息"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "国籍"

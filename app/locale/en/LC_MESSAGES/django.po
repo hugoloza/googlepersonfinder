@@ -312,9 +312,6 @@ msgstr ""
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Atom feed of updates about this person"
 msgstr ""
 
@@ -375,6 +372,21 @@ msgid "Alternate given names"
 msgstr ""
 
 msgid "Alternate names"
+msgstr ""
+
+msgid "Physical characteristics"
+msgstr ""
+
+msgid "Describe the physical characteristics of this person."
+msgstr ""
+
+msgid "Sex"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "Number or range (e.g. 20-30)"
 msgstr ""
 
 msgid "Home Address"
@@ -613,16 +625,7 @@ msgstr ""
 msgid "Compare these records"
 msgstr ""
 
-msgid "Physical characteristics"
-msgstr ""
-
-msgid "Sex"
-msgstr ""
-
 msgid "Date of birth"
-msgstr ""
-
-msgid "Age"
 msgstr ""
 
 msgid "Home address"
@@ -701,6 +704,9 @@ msgid ""
 "(site_url)s:"
 msgstr ""
 
+msgid "This record is a duplicate of another record:"
+msgstr ""
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr ""
@@ -718,6 +724,19 @@ msgstr ""
 msgid "Enter the person's name."
 msgstr ""
 
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr ""
 
@@ -726,10 +745,10 @@ msgid ""
 "name"
 msgstr ""
 
-msgid "Search for this person"
+msgid "Provide information about this person"
 msgstr ""
 
-msgid "Provide information about this person"
+msgid "Search for this person"
 msgstr ""
 
 #, python-format
@@ -782,6 +801,12 @@ msgstr ""
 msgid "Switch to normal view mode"
 msgstr ""
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+msgid "Provided by:"
+msgstr ""
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr ""
 
@@ -797,6 +822,10 @@ msgid "No results found for"
 msgstr ""
 
 msgid "We have nothing matching your search."
+msgstr ""
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
 msgstr ""
 
 msgid "Follow this link to create a new record"
@@ -845,9 +874,6 @@ msgid ""
 msgstr ""
 
 msgid "Identifying information"
-msgstr ""
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
 msgid "Home country"

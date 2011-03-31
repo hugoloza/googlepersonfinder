@@ -310,9 +310,6 @@ msgstr "<a href=\"%(logout_url)s\">ออกจากระบบ</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "คุณยังไม่ได้ลงชื่อเช้าใช้ <a href=\"%(login_url)s\">ลงชื่อเข้าใช้</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "การอัปเดตสถานะของบุคคลนี้"
@@ -374,6 +371,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "ชื่อถนน"
+
+msgid "Physical characteristics"
+msgstr "ลักษณะภายนอก"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "อธิบายลักษณะที่บ่งบอกถึงบุคคลนี้"
+
+msgid "Sex"
+msgstr "เพศ"
+
+msgid "Age"
+msgstr "อายุ"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "ที่อยู่บ้าน"
@@ -655,17 +668,8 @@ msgstr "กำลังติดตามข้อมูลประมาณ %(
 msgid "Compare these records"
 msgstr "เปรียบเทียบรายการเหล่านี้"
 
-msgid "Physical characteristics"
-msgstr "ลักษณะภายนอก"
-
-msgid "Sex"
-msgstr "เพศ"
-
 msgid "Date of birth"
 msgstr "วันเกิด"
-
-msgid "Age"
-msgstr "อายุ"
 
 msgid "Home address"
 msgstr "ที่อยู่บ้าน"
@@ -745,6 +749,10 @@ msgstr ""
 "\n"
 "ผู้ใช้ได้โพสต์อัปเดตสถานะสำหรับ \"%(first_name)s %(last_name)s\" ที่ %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "รายการนี้ซ้ำกับ"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "คุณสามารถดูบันทึกแบบเต็มได้ที่ %(view_url)s"
@@ -764,6 +772,20 @@ msgstr "ป้อนชื่อและนามสกุลของบุค
 msgid "Enter the person's name."
 msgstr "ป้อนชื่อบุคคลดังกล่าว"
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "ป้อนชื่อหรือบางส่วนของชื่อของบุคคลดังกล่าว"
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "ป้อนชื่อหรือบางส่วนของชื่อของบุคคลดังกล่าว"
 
@@ -772,11 +794,11 @@ msgid ""
 "name"
 msgstr "พบผลลัพธ์มากกว่า 100 รายการ กำลังแสดงเฉพาะ 100 รายการแรก ลองป้อนชื่อเพิ่มเติมดู"
 
-msgid "Search for this person"
-msgstr "ค้นหาบุคคลนี้"
-
 msgid "Provide information about this person"
 msgstr "ให้ข้อมูลเกี่ยวกับบุคคลนี้"
+
+msgid "Search for this person"
+msgstr "ค้นหาบุคคลนี้"
 
 #, python-format
 msgid ""
@@ -837,6 +859,13 @@ msgstr "เปลี่ยนไปที่โหมดทำเครื่อ
 msgid "Switch to normal view mode"
 msgstr "เปลี่ยนไปที่โหมดมุมมองปกติ"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "โพสต์โดย"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "เลือกรายการที่จะทำเครื่องหมายว่าซ้ำไม่เกิน 3 รายการ:"
 
@@ -854,6 +883,10 @@ msgstr "ไม่มีผลลัพธ์สำหรับ"
 
 msgid "We have nothing matching your search."
 msgstr "ไม่พบผลลัพธ์ที่ตรงกับการค้นหาของคุณ"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "สร้างรายการใหม่ได้ที่ลิงก์นี้"
@@ -909,9 +942,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "ข้อมูลระบุตัวตน"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "ประเทศบ้านเกิด"

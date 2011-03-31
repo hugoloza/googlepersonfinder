@@ -337,9 +337,6 @@ msgstr "<a href=\"%(logout_url)s\">Keluar</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "Saat ini Anda belum masuk. <a href=\"%(login_url)s\">Masuk</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Status pemutakhiran untuk orang ini"
@@ -402,6 +399,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Nama jalan"
+
+msgid "Physical characteristics"
+msgstr "Ciri-ciri fisik"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Uraikan cara mengidentifikasi orang ini."
+
+msgid "Sex"
+msgstr "Jenis kelamin"
+
+msgid "Age"
+msgstr "Usia"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Alamat rumah"
@@ -691,17 +704,8 @@ msgstr "Saat ini melacak sekitar %(num_people)s data."
 msgid "Compare these records"
 msgstr "Bandingkan data ini"
 
-msgid "Physical characteristics"
-msgstr "Ciri-ciri fisik"
-
-msgid "Sex"
-msgstr "Jenis kelamin"
-
 msgid "Date of birth"
 msgstr "Tanggal lahir"
-
-msgid "Age"
-msgstr "Usia"
 
 msgid "Home address"
 msgstr "Alamat rumah"
@@ -782,6 +786,10 @@ msgstr ""
 "Seorang pengguna telah mengeposkan pembaruan status untuk\"%(first_name)s %"
 "(last_name)s\" di %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Data ini duplikat dari"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Anda dapat melihat rekaman lengkap di %(view_url)s"
@@ -802,6 +810,20 @@ msgstr "Ketikkan nama depan dan nama keluarga orang itu."
 msgid "Enter the person's name."
 msgstr "Ketikkan nama orang itu."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Ketikkan nama atau sebagian nama orang itu."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Ketikkan nama atau sebagian nama orang itu."
 
@@ -812,11 +834,11 @@ msgstr ""
 "Lebih dari 100 hasil, hanya menampilkan 100 hasil pertama. Cobalah lengkapi "
 "nama."
 
-msgid "Search for this person"
-msgstr "Penelusuran untuk orang ini"
-
 msgid "Provide information about this person"
 msgstr "Berikan informasi tentang orang ini"
+
+msgid "Search for this person"
+msgstr "Penelusuran untuk orang ini"
 
 #, python-format
 msgid ""
@@ -877,6 +899,13 @@ msgstr "Ubah ke mode penandaan duplikat"
 msgid "Switch to normal view mode"
 msgstr "Ubah ke mode tampilan normal"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Diposkan oleh"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Pilih hingga 3 data untuk ditandai sebagai duplikat:"
 
@@ -895,6 +924,10 @@ msgstr "Tidak ada hasil yang ditemukan untuk"
 
 msgid "We have nothing matching your search."
 msgstr "Kami tidak menemukan kecocokan untuk penelusuran Anda."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Ikuti tautan ini untuk membuat data baru"
@@ -950,9 +983,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Informasi pengidentifikasi"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Negara asal"

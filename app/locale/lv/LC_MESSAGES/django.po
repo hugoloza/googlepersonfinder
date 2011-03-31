@@ -344,9 +344,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Jūs pašreiz neesat pierakstījies. <a href=\"%(login_url)s\">Pierakstīties</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Statusa atjauninājumi par šo personu"
@@ -409,6 +406,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Iela"
+
+msgid "Physical characteristics"
+msgstr "Fiziskās īpašības"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Aprakstiet, kā šo personu var atpazīt."
+
+msgid "Sex"
+msgstr "Dzimums"
+
+msgid "Age"
+msgstr "Vecums"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Mājas adrese"
@@ -696,17 +709,8 @@ msgstr "Šobrīd ir fiksēti apmēram %(num_people)s ieraksti."
 msgid "Compare these records"
 msgstr "Salīdziniet šos ierakstus"
 
-msgid "Physical characteristics"
-msgstr "Fiziskās īpašības"
-
-msgid "Sex"
-msgstr "Dzimums"
-
 msgid "Date of birth"
 msgstr "Dzimšanas datums"
-
-msgid "Age"
-msgstr "Vecums"
 
 msgid "Home address"
 msgstr "Mājas adrese"
@@ -787,6 +791,10 @@ msgstr ""
 "Lietotājs publicēja statusa atjauninājumu par personu %(first_name)s %"
 "(last_name)s vietnē %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Šis ir dublikāts ierakstam"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Jūs varat skatīt pilnu ierakstu vietnē %(view_url)s"
@@ -806,6 +814,20 @@ msgstr "Ievadiet personas vārdu un uzvārdu."
 msgid "Enter the person's name."
 msgstr "Ievadiet personas vārdu."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Ievadiet personas vārdu vai vārda daļas."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Ievadiet personas vārdu vai vārda daļas."
 
@@ -816,11 +838,11 @@ msgstr ""
 "Vairāk nekā 100 rezultātu, parādīti tikai pirmie 100. Ierakstiet garāku "
 "vārdu."
 
-msgid "Search for this person"
-msgstr "Meklēt šo personu"
-
 msgid "Provide information about this person"
 msgstr "Sniegt informāciju par šo personu"
+
+msgid "Search for this person"
+msgstr "Meklēt šo personu"
 
 #, python-format
 msgid ""
@@ -882,6 +904,13 @@ msgstr "Pārslēgt dublikātu atzīmēšanas režīmu"
 msgid "Switch to normal view mode"
 msgstr "Pārslēgt normāla skatījuma režīmu"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Pievienoja"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Atlasiet ne vairāk kā 3 ierakstus, lai atzīmētu kā dublikātus:"
 
@@ -900,6 +929,10 @@ msgstr "Nav atrasti rezultāti, kas atbilstu"
 
 msgid "We have nothing matching your search."
 msgstr "Jūsu meklējumam nav atbilstošu rezultātu."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Noklikšķiniet uz šīs saites, lai izveidotu jaunu ierakstu"
@@ -955,9 +988,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identifikācijas informācija"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Izcelsmes valsts"

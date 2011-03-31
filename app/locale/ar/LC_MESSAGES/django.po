@@ -310,9 +310,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "لم تسجل دخولك في الوقت الحالي.  <a href=\"%(login_url)s\">تسجيل الدخول</a>"
 
-msgid "Dashboard"
-msgstr "لوحة البيانات"
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "تحديثات الحالة لهذا الشخص"
@@ -375,6 +372,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "اسم الشارع"
+
+msgid "Physical characteristics"
+msgstr "المواصفات البدنية"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "صف كيفية تحديد هوية هذا الشخص."
+
+msgid "Sex"
+msgstr "الجنس"
+
+msgid "Age"
+msgstr "العمر"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "عنوان المنزل"
@@ -655,17 +668,8 @@ msgstr "جارٍ حاليًا تتبع حوالي %(num_people)s من السجل
 msgid "Compare these records"
 msgstr "مقارنة هذه السجلات"
 
-msgid "Physical characteristics"
-msgstr "المواصفات البدنية"
-
-msgid "Sex"
-msgstr "الجنس"
-
 msgid "Date of birth"
 msgstr "تاريخ الميلاد"
-
-msgid "Age"
-msgstr "العمر"
 
 msgid "Home address"
 msgstr "عنوان المنزل"
@@ -746,6 +750,10 @@ msgstr ""
 "A لقد نشر مستخدم تحديث حالة \"%(first_name)s %(last_name)s\" على %(site_url)"
 "s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "هذا السجل نسخة مكررة من"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "يمكنك عرض السجل بالكامل على %(view_url)s"
@@ -765,6 +773,20 @@ msgstr "أدخل الاسم الأول للشخص واسم عائلته."
 msgid "Enter the person's name."
 msgstr "أدخل اسم الشخص."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "أدخل اسم الشخص أو أجزاء منه."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "أدخل اسم الشخص أو أجزاء منه."
 
@@ -773,11 +795,11 @@ msgid ""
 "name"
 msgstr "أكثر من 100 نتيجة، عرض أول 100 نتيجة فقط.  جرّب إدخال جزء أكبر من الاسم"
 
-msgid "Search for this person"
-msgstr "البحث عن هذا الشخص"
-
 msgid "Provide information about this person"
 msgstr "تقديم معلومات عن هذا الشخص"
+
+msgid "Search for this person"
+msgstr "البحث عن هذا الشخص"
 
 #, python-format
 msgid ""
@@ -839,6 +861,13 @@ msgstr "التبديل إلى وضع تمييز السجلات المكررة"
 msgid "Switch to normal view mode"
 msgstr "التبديل إلى وضع العرض العادي"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "تم النشر بواسطة"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "حدد 3 سجلات كحد أقصى لوضع علامة عليها كمكررة:"
 
@@ -857,6 +886,10 @@ msgstr "لم يتم العثور على أية نتائج لـ"
 
 msgid "We have nothing matching your search."
 msgstr "ليس لدينا أي شيء يتطابق مع بحثك."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "اتبع هذا الرابط لإنشاء سجل جديد"
@@ -912,9 +945,6 @@ msgstr ""
 msgid "Identifying information"
 msgstr "معلومات تحديد الهوية"
 
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
-
 msgid "Home country"
 msgstr "مسقط الرأس"
 
@@ -940,3 +970,6 @@ msgstr "لم يتم نشر أي تحديثات للحالة"
 
 msgid "Delete this record"
 msgstr "حذف هذا السجل"
+
+#~ msgid "Dashboard"
+#~ msgstr "لوحة البيانات"

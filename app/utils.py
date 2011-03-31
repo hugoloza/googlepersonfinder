@@ -22,9 +22,11 @@ import logging
 import model
 import os
 import pfif
+import random
 import re
 import time
 import traceback
+import unicodedata
 import urllib
 import urlparse
 
@@ -343,11 +345,17 @@ def validate_approximate_date(string):
     return ''
 
 AGE_RE = re.compile(r'^\d+(-\d+)?$')
+# Hyphen with possibly surrounding whitespaces.
+HYPHEN_RE = re.compile(
+    ur'\s*[-\u2010-\u2015\u2212\u301c\u30fc\ufe58\ufe63\uff0d]\s*',
+    re.UNICODE)
 
 def validate_age(string):
     """Validates the 'age' parameter, returning a canonical value or ''."""
     if string:
         string = strip(string)
+        string = unicodedata.normalize('NFKC', unicode(string))
+        string = HYPHEN_RE.sub('-', string)
         if AGE_RE.match(string):
             return string
     return ''
@@ -390,7 +398,7 @@ def validate_version(string):
     """Version, if present, should be in pfif versions."""
     if string and strip(string) not in pfif.PFIF_VERSIONS:
         raise ValueError('Bad pfif version: %s' % string)
-    return string
+    return pfif.PFIF_VERSIONS[strip(string) or pfif.PFIF_DEFAULT_VERSION]
 
 
 # ==== Other utilities =========================================================
@@ -441,6 +449,19 @@ def get_local_message(local_messages, lang, default_message):
     if not isinstance(local_messages, dict):
         return default_message
     return local_messages.get(lang, local_messages.get('en', default_message))
+
+def log_api_action(handler, action, num_person_records=0, num_note_records=0,
+                   people_skipped=0, notes_skipped=0):
+    """Log an api action."""
+    log = handler.config and handler.config.api_action_logging
+    if log:
+        model.ApiActionLog.record_action(
+            handler.subdomain, handler.params.key,
+            handler.params.version.version, action,
+            num_person_records, num_note_records,
+            people_skipped, notes_skipped,
+            handler.request.headers.get('User-Agent'),
+            handler.request.remote_addr, handler.request.url)
 
 # ==== Base Handler ============================================================
 
@@ -587,6 +608,7 @@ class Handler(webapp.RequestHandler):
             return
         values['env'] = self.env  # pass along application-wide context
         values['params'] = self.params  # pass along the query parameters
+        values['config'] = self.config  # pass along the configuration
         # TODO(kpy): Remove "templates/" from all template names in calls
         # to this method, and have this method call render_to_string instead.
         response = webapp.template.render(os.path.join(ROOT, name), values)
@@ -775,6 +797,16 @@ class Handler(webapp.RequestHandler):
         self.response.headers['Content-Type'] = \
             '%s; charset=%s' % (type, self.charset)
 
+    def to_local_time(self, date):
+        """Converts a datetime object to the local time configured for the
+        current subdomain.  For convenience, returns None if date is None."""
+        # TODO(kpy): This only works for subdomains that have a single fixed
+        # time zone offset and never use Daylight Saving Time.
+        if date:
+            if self.config.time_zone_offset:
+                return date + timedelta(0, 3600*self.config.time_zone_offset)
+            return date
+
     def initialize(self, *args):
         webapp.RequestHandler.initialize(self, *args)
         self.params = Struct()
@@ -784,6 +816,12 @@ class Handler(webapp.RequestHandler):
         for name in self.request.headers.keys():
             if name.lower().startswith('x-appengine'):
                 logging.debug('%s: %s' % (name, self.request.headers[name]))
+
+        # Determine the subdomain.
+        self.subdomain = self.get_subdomain()
+
+        # Get the subdomain-specific configuration.
+        self.config = self.subdomain and config.Configuration(self.subdomain)
 
         # Choose a charset for encoding the response.
         # We assume that any client that doesn't support UTF-8 will specify a
@@ -811,17 +849,22 @@ class Handler(webapp.RequestHandler):
             global_cache.clear()
             global_cache_insert_time.clear()
 
-        # Determine the subdomain.
-        self.subdomain = self.get_subdomain()
-
-        # Get the subdomain-specific configuration.
-        self.config = self.subdomain and config.Configuration(self.subdomain)
-
         # Activate localization.
         lang, rtl = self.select_locale()
 
+        # Log the User-Agent header.
+        sample_rate = float(
+            self.config and self.config.user_agent_sample_rate or 0)
+        if random.random() < sample_rate:
+            model.UserAgentLog(
+                subdomain=self.subdomain, sample_rate=sample_rate,
+                user_agent=self.request.headers.get('User-Agent'), lang=lang,
+                accept_charset=self.request.headers.get('Accept-Charset', ''),
+                ip_address=self.request.remote_addr).put()
+
         # Put common non-subdomain-specific template variables in self.env.
         self.env.charset = self.charset
+        self.env.url = set_url_param(self.request.url, 'lang', lang)
         self.env.netloc = urlparse.urlparse(self.request.url)[1]
         self.env.domain = self.env.netloc.split(':')[0]
         self.env.parent_domain = self.get_parent_domain()

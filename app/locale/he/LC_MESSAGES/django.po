@@ -307,9 +307,6 @@ msgstr "<a href=\"%(logout_url)s\">יציאה</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "אינך מחובר כרגע. <a href=\"%(login_url)s\">היכנס</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "עדכונים לגבי מצבו של אדם זה"
@@ -371,6 +368,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "שם רחוב"
+
+msgid "Physical characteristics"
+msgstr "תכונות פיזיות"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "תאר כיצד ניתן לזהות אדם זה."
+
+msgid "Sex"
+msgstr "מין"
+
+msgid "Age"
+msgstr "גיל"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "כתובת בבית"
@@ -656,17 +669,8 @@ msgstr "מבצע כעת מעקב אחר כ-%(num_people)s רשומות."
 msgid "Compare these records"
 msgstr "השווה רשומות אלה"
 
-msgid "Physical characteristics"
-msgstr "תכונות פיזיות"
-
-msgid "Sex"
-msgstr "מין"
-
 msgid "Date of birth"
 msgstr "תאריך לידה"
-
-msgid "Age"
-msgstr "גיל"
 
 msgid "Home address"
 msgstr "כתובת בבית"
@@ -747,6 +751,10 @@ msgstr ""
 "משתמש פרסם עדכון סטטוס עבור \"%(first_name)s %(last_name)s\" בכתובת %"
 "(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "רשומה זו היא כפולה של"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "תוכל להציג את הרשומה המלאה בכתובת %(view_url)s"
@@ -766,6 +774,20 @@ msgstr "הזן את השם הפרטי ושם המשפחה של האדם."
 msgid "Enter the person's name."
 msgstr "הזן את השם של האדם."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "הזן את שם האדם או חלקים משמו."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "הזן את שם האדם או חלקים משמו."
 
@@ -775,11 +797,11 @@ msgid ""
 msgstr ""
 "מעל 100 תוצאות; מציג רק את ה-100 הראשונות.  נסה להזין חלק גדול יותר מהשם"
 
-msgid "Search for this person"
-msgstr "חפש אדם זה"
-
 msgid "Provide information about this person"
 msgstr "ספק מידע על אדם זה"
+
+msgid "Search for this person"
+msgstr "חפש אדם זה"
 
 #, python-format
 msgid ""
@@ -840,6 +862,13 @@ msgstr "עבור למצב סימון כפול"
 msgid "Switch to normal view mode"
 msgstr "עבור למצב תצוגה רגילה"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "פורסם על ידי"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "בחר עד 3 רשומות לסימון ככפולות:"
 
@@ -858,6 +887,10 @@ msgstr "לא נמצאו תוצאות עבור"
 
 msgid "We have nothing matching your search."
 msgstr "לא נמצאו רשומות התואמות לפרטי החיפוש שלך."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "הפעל קישור זה כדי ליצור רשומה חדשה"
@@ -913,9 +946,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "מידע מזהה"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "ארץ מוצא"

@@ -54,7 +54,12 @@ function hide_unhide_note_contents(note_contents_id) {
         <table class="person column" cellpadding="0" cellspacing="0">
           <tr>
             <td>
-              <h2>{% trans "Identifying information" %}</h2>
+              <h2>
+                {% trans "Identifying information" %}
+                {% if person.provider_name %}<br />
+                ({% trans "Provided by:" %} {{person.provider_name}})
+                {% endif %}
+             </h2>
               <table class="person display" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="name section">
@@ -245,12 +250,22 @@ function hide_unhide_note_contents(note_contents_id) {
                       </tr>
                       <tr>
                         <td class="label">{% trans "Original posting date" %}:</td>
-                        <td class="field">{{person.source_date|date:"Y-m-d H:i \U\T\C"}}</td>
+                        <td class="field">
+                          {% if person.source_date %}
+                            {{person.source_date_local|date:"Y-m-d H:i"}}
+                            {{config.time_zone_abbreviation|default:"UTC"}}
+                          {% endif %}
+                        </td>
                       </tr>
 <!-- Expiry is not fully implemented yet; hide it from the UI for now. -->
                       <tr style="display: none">
                         <td class="label">{% trans "Expiry date of this record" %}:</td>
-                        <td class="field">{{person.expiry_date|date:"Y-m-d H:i \U\T\C"}}</td>
+                        <td class="field">
+                          {% if person.expiry_date %}
+                            {{person.expiry_date_local|date:"Y-m-d H:i"}}
+                            {{config.time_zone_abbreviation|default:"UTC"}}
+                          {% endif %}
+                        </td>
                       </tr>
                       <tr>
                         <td class="label">{% trans "Original site name" %}:</td>

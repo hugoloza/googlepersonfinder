@@ -17,6 +17,7 @@ from model import *
 from utils import *
 from text_query import TextQuery
 import indexing
+import jp_mobile_carriers
 import logging
 import prefix
 
@@ -35,6 +36,8 @@ class Results(Handler):
                                            first_name=self.params.first_name,
                                            last_name=self.params.last_name)
             result.latest_note_status = get_person_status_text(result)
+            if result.is_clone():
+                result.provider_name = result.get_original_domain()
         return results
 
     def reject_query(self, query):
@@ -42,12 +45,14 @@ class Results(Handler):
             '/query', role=self.params.role, small=self.params.small,
             style=self.params.style, error='error', query=query.query)
 
+    def get_results_url(self, query):
+        return self.get_url('/results',
+                            small='no',
+                            query=query,
+                            first_name=self.params.first_name,
+                            last_name=self.params.last_name)
+
     def get(self):
-        results_url = self.get_url('/results',
-                                   small='no',
-                                   query=self.params.query,
-                                   first_name=self.params.first_name,
-                                   last_name=self.params.last_name)
         create_url = self.get_url('/create',
                                   small='no',
                                   role=self.params.role,
@@ -56,9 +61,9 @@ class Results(Handler):
         min_query_word_length = self.config.min_query_word_length
 
         if self.params.role == 'provide':
-            query = TextQuery(
-                self.params.first_name + ' ' + self.params.last_name)
-
+            query_txt = self.params.first_name + ' ' + self.params.last_name
+            query = TextQuery(query_txt)
+            results_url = self.get_results_url(query_txt)
             # Ensure that required parameters are present.
             if not self.params.first_name:
                 return self.reject_query(query)
@@ -71,7 +76,8 @@ class Results(Handler):
             # Look for *similar* names, not prefix matches.
             # Eyalf: we need to full query string
             # for key in criteria:
-            #     criteria[key] = criteria[key][:3]  # "similar" = same first 3 letters
+            #     criteria[key] = criteria[key][:3]  
+            # "similar" = same first 3 letters
             results = self.search(query)
 
             if results:
@@ -84,8 +90,6 @@ class Results(Handler):
             else:
                 if self.params.small:
                     # show a link to a create page.
-                    create_url = self.get_url(
-                        '/create', query=self.params.query)
                     return self.render('templates/small-create.html',
                                        create_url=create_url)
                 else:
@@ -95,6 +99,12 @@ class Results(Handler):
 
         if self.params.role == 'seek':
             query = TextQuery(self.params.query) 
+            # If a query looks like a phone number, show the user a result
+            # of looking up the number in the carriers-provided BBS system.
+            if self.config.jp_mobile_carrier_redirect:
+                if jp_mobile_carriers.handle_phone_number(self, query.query):
+                    return 
+
             # Ensure that required parameters are present.
             if (len(query.query_words) == 0 or
                 max(map(len, query.query_words)) < min_query_word_length):
@@ -103,6 +113,7 @@ class Results(Handler):
 
             # Look for prefix matches.
             results = self.search(query)
+            results_url = self.get_results_url(self.params.query)
 
             # Show the (possibly empty) matches.
             return self.render('templates/results.html',

@@ -49,6 +49,10 @@ class View(Handler):
         reveal_url = reveal.make_reveal_url(self, content_id)
         show_private_info = reveal.verify(content_id, self.params.signature)
 
+        # Compute the local times for the date fields on the person.
+        person.source_date_local = self.to_local_time(person.source_date)
+        person.expiry_date_local = self.to_local_time(person.expiry_date)
+
         # Get the notes and duplicate links.
         try:
             notes = person.get_notes()
@@ -63,6 +67,7 @@ class View(Handler):
                 self.get_url('/flag_note', id=note.note_record_id,
                              hide=(not note.hidden) and 'yes' or 'no',
                              signature=self.params.signature)
+            note.source_date_local = self.to_local_time(note.source_date)
         try:
             linked_persons = person.get_linked_persons()
         except datastore_errors.NeedIndexError:
@@ -87,6 +92,10 @@ class View(Handler):
             person_record_id=self.params.id,
             subdomain=self.subdomain)
         subscribe_url = self.get_url('/subscribe', id=self.params.id)
+
+        if person.is_clone():
+            person.provider_name = person.get_original_domain()
+
         self.render('templates/view.html',
                     person=person,
                     notes=notes,
@@ -133,8 +142,21 @@ class View(Handler):
             text=self.params.text)
         entities_to_put = [note]
 
-        # Update the Person based on the Note.
         person = Person.get(self.subdomain, self.params.id)
+
+        # Specially log 'believed_dead'.
+        if note.status == 'believed_dead':
+            detail = person.first_name + ' ' + person.last_name
+            UserActionLog.put_new(
+                'mark_dead', note, detail, self.request.remote_addr)
+
+        # Specially log a switch to an alive status.
+        if (note.status in ['believed_alive', 'is_note_author'] and
+            person.latest_status not in ['believed_alive', 'is_note_author']):
+            detail = person.first_name + ' ' + person.last_name
+            UserActionLog.put_new('mark_alive', note, detail)
+
+        # Update the Person based on the Note.
         if person:
             person.update_from_note(note)
             # Send notification to all people

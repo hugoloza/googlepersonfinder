@@ -335,9 +335,6 @@ msgstr ""
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "Ou pa konekte aktyèlman.  <a href=\"%(login_url)s\">Sign in</a>."
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Ki dènye nouvèl sou moun sa"
@@ -399,6 +396,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Non lari a"
+
+msgid "Physical characteristics"
+msgstr "Karaktè fizik"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Dekri kouman ou ta idantifye moun sa a."
+
+msgid "Sex"
+msgstr "Fi oswa Gason"
+
+msgid "Age"
+msgstr "Laj"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Adrès lakay li"
@@ -643,17 +656,8 @@ msgstr "Alèkile, n'ap pouswiv anviwon %(num_people)s dosye."
 msgid "Compare these records"
 msgstr "Kompare dosye sa yo"
 
-msgid "Physical characteristics"
-msgstr "Karaktè fizik"
-
-msgid "Sex"
-msgstr "Fi oswa Gason"
-
 msgid "Date of birth"
 msgstr "Dat nesans"
-
-msgid "Age"
-msgstr "Laj"
 
 msgid "Home address"
 msgstr "Adrès lakay"
@@ -732,6 +736,10 @@ msgid ""
 "(site_url)s:"
 msgstr ""
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Dosye sa se doub de"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr ""
@@ -750,6 +758,20 @@ msgstr "Antre non moun nan ak tout non fanmi li"
 msgid "Enter the person's name."
 msgstr "Antre non moun nan ak tout non fanmi li"
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Antre non moun nan oswa yo pati nan non li."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Antre non moun nan oswa yo pati nan non li."
 
@@ -760,11 +782,11 @@ msgstr ""
 "Plis ke 100 rezilta; selman montre premye 100 rezilta yo. Eseye antre plis "
 "sou non an"
 
-msgid "Search for this person"
-msgstr "Chèche moun sa"
-
 msgid "Provide information about this person"
 msgstr "Bay enfomasyon moun sa"
+
+msgid "Search for this person"
+msgstr "Chèche moun sa"
 
 #, python-format
 msgid ""
@@ -817,6 +839,13 @@ msgstr "Chanje pou mòd make doub"
 msgid "Switch to normal view mode"
 msgstr "Chanje pou mòd we nòmal"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Moun ki afiche li a"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Seleksyone jiska 3 dosye pou make kòm doub:"
 
@@ -835,6 +864,10 @@ msgstr "Pa gen okenn rezilta pou"
 
 msgid "We have nothing matching your search."
 msgstr "Nou pa jwen anyen ki match rechèch ou a."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Suiv lyen sa pou kreye yon nouvo dosye"
@@ -885,9 +918,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Enfomasyon pou idantifikasyon"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Peyi kote ou moun"

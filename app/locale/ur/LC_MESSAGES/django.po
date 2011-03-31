@@ -332,9 +332,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "آپ فی الحال سائن ان نہیں ہیں۔  <a href=\"%(login_url)s\">سائن ان کریں</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "اس فرد کے لئے صورتحال کی تازہ کاریاں"
@@ -399,6 +396,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "گلی کا نام یا نمبر"
+
+msgid "Physical characteristics"
+msgstr "طبعی خصوصیات"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "اس فرد کی نشاندہی کا طریقہ بتائیں۔"
+
+msgid "Sex"
+msgstr "جنس"
+
+msgid "Age"
+msgstr "عمر"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "گھر کا پتہ"
@@ -644,17 +657,8 @@ msgstr "اس وقت ھمارےپاس %(num_people)s لوگوں کے بارے م�
 msgid "Compare these records"
 msgstr "ان ریکارڈوں کا موازنہ کریں"
 
-msgid "Physical characteristics"
-msgstr "طبعی خصوصیات"
-
-msgid "Sex"
-msgstr "جنس"
-
 msgid "Date of birth"
 msgstr "تاریخ پیدائش"
-
-msgid "Age"
-msgstr "عمر"
 
 msgid "Home address"
 msgstr "گھر کا پتہ"
@@ -733,6 +737,10 @@ msgid ""
 "(site_url)s:"
 msgstr ""
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "یہ ریکارڈ ایک ڈپلیکٹ ہے از"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr ""
@@ -751,6 +759,20 @@ msgstr "فرد کے عرفی نام اور خاندانی نام درج کریں
 msgid "Enter the person's name."
 msgstr "اس شخص کا نام درج کریں"
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "فرد کا نام یا نام کے اجزاء درج کریں۔"
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "فرد کا نام یا نام کے اجزاء درج کریں۔"
 
@@ -761,11 +783,11 @@ msgstr ""
 "100 سے زیادہ نتائج: صرف پہلے 100 دکھا رہا ہے۔ نام کے مزید حروف درج کرکے "
 "آزمائیں"
 
-msgid "Search for this person"
-msgstr "اس فرد کی تلاش کریں"
-
 msgid "Provide information about this person"
 msgstr "اس فرد کے بارے میں معلومات فراہم کریں"
+
+msgid "Search for this person"
+msgstr "اس فرد کی تلاش کریں"
 
 #, python-format
 msgid ""
@@ -820,6 +842,13 @@ msgstr "ڈپلیکیٹ کا نشان ڈالنے کے انداز پر سوئچ ک
 msgid "Switch to normal view mode"
 msgstr "عام منظر کے انداز پر سوئچ کریں"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "شائع کردہ بذریعہ"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "ڈپلیکیٹ کے بطور نشان ڈالنے کے لئے 3 تک ریکارڈ منتخب کریں:"
 
@@ -838,6 +867,10 @@ msgstr "کوئی نتائج نہیں ملے برائے"
 
 msgid "We have nothing matching your search."
 msgstr "ہمارے پاس آپ کی تلاش سے مماثل کچھ نہیں ہے۔"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "نیا ریکارڈ بنانے کے لئے اس لنک کی پیروی کریں"
@@ -888,9 +921,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "معلومات کی نشاندہی ہو رہی ہے"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "آبائی ملک"

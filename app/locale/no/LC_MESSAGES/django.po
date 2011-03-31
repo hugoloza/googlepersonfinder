@@ -322,9 +322,6 @@ msgstr "<a href=\"%(logout_url)s\">Logg av</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "Du er ikke pålogget. <a href=\"%(login_url)s\">Logg deg på</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Statusoppdateringer for denne personen"
@@ -386,6 +383,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Gatenavn"
+
+msgid "Physical characteristics"
+msgstr "Fysiske kjennetegn"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Gi en beskrivelse av hvordan personen kan identifiseres"
+
+msgid "Sex"
+msgstr "Kjønn"
+
+msgid "Age"
+msgstr "Alder"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Privatadresse"
@@ -676,17 +689,8 @@ msgstr "Sporer for øyeblikket cirka %(num_people)s oppføringer."
 msgid "Compare these records"
 msgstr "Sammenlign disse oppføringene"
 
-msgid "Physical characteristics"
-msgstr "Fysiske kjennetegn"
-
-msgid "Sex"
-msgstr "Kjønn"
-
 msgid "Date of birth"
 msgstr "Fødselsdato"
-
-msgid "Age"
-msgstr "Alder"
 
 msgid "Home address"
 msgstr "Privatadresse"
@@ -767,6 +771,10 @@ msgstr ""
 "En bruker har lagt ut en statusoppdatering for «%(first_name)s %(last_name)s» "
 "på %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Denne oppføringen er et duplikat av"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Du kan vise hele oppføringen på %(view_url)s"
@@ -786,6 +794,20 @@ msgstr "Skriv inn personens for- og etternavn."
 msgid "Enter the person's name."
 msgstr "Skriv inn personens navn."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Angi personens navn eller deler av navnet."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Angi personens navn eller deler av navnet."
 
@@ -796,11 +818,11 @@ msgstr ""
 "Fant mer enn 100 resultater, viser de første 100. Prøv å skriv inn en større "
 "del av navnet"
 
-msgid "Search for this person"
-msgstr "Søk etter denne personen"
-
 msgid "Provide information about this person"
 msgstr "Oppgi informasjon om denne personen"
+
+msgid "Search for this person"
+msgstr "Søk etter denne personen"
 
 #, python-format
 msgid ""
@@ -863,6 +885,13 @@ msgstr "Bytt til duplikatmarkeringsmodus"
 msgid "Switch to normal view mode"
 msgstr "Bytt til normalvisningsmodus"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Lagt inn av"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Velg opptil tre oppføringer for markering som duplikater:"
 
@@ -881,6 +910,10 @@ msgstr "Finner ingen resultater for"
 
 msgid "We have nothing matching your search."
 msgstr "Finner ingen samsvar med søkeordet."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Følg denne koblingen for å opprette en ny oppføring"
@@ -937,9 +970,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identifiserer informasjon"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Hjemland"

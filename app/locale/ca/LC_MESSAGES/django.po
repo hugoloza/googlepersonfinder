@@ -333,9 +333,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "No teniu la sessió iniciada. <a href=\"%(login_url)s\">Inicia la sessió</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Actualitzacions d'estat d'aquesta persona"
@@ -398,6 +395,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Carrer"
+
+msgid "Physical characteristics"
+msgstr "Característiques físiques"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Descriviu com es pot identificar aquesta persona."
+
+msgid "Sex"
+msgstr "Sexe"
+
+msgid "Age"
+msgstr "Edat"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Adreça particular"
@@ -686,17 +699,8 @@ msgstr "Aproximadament %(num_people)s persones registrades."
 msgid "Compare these records"
 msgstr "Compara aquests registres"
 
-msgid "Physical characteristics"
-msgstr "Característiques físiques"
-
-msgid "Sex"
-msgstr "Sexe"
-
 msgid "Date of birth"
 msgstr "Data de naixement"
-
-msgid "Age"
-msgstr "Edat"
 
 msgid "Home address"
 msgstr "Adreça particular"
@@ -777,6 +781,10 @@ msgstr ""
 "Un usuari ha publicat una actualització d'estat de \"%(first_name)s %"
 "(last_name)s\" a %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Aquest registre és un duplicat de"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Podeu visualitzar el registre complet a %(view_url)s"
@@ -797,6 +805,20 @@ msgstr "Introduïu el nom i els cognoms de la persona."
 msgid "Enter the person's name."
 msgstr "Introduïu el nom de la persona."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Introduïu el nom o part del nom de la persona."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Introduïu el nom o part del nom de la persona."
 
@@ -807,11 +829,11 @@ msgstr ""
 "Hi ha més de 100 resultats i només se'n mostren els 100 primers. Proveu "
 "d'introduir-ne més amb el nom"
 
-msgid "Search for this person"
-msgstr "Cerca aquesta persona"
-
 msgid "Provide information about this person"
 msgstr "Proporcioneu informació sobre aquesta persona"
+
+msgid "Search for this person"
+msgstr "Cerca aquesta persona"
 
 #, python-format
 msgid ""
@@ -875,6 +897,13 @@ msgstr "Canvia al mode de marcatge de duplicats"
 msgid "Switch to normal view mode"
 msgstr "Canvia al mode de visualització normal"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Publicat per"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Seleccioneu un màxim de 3 registres per marcar-los com a duplicats:"
 
@@ -893,6 +922,10 @@ msgstr "No s'ha trobat cap resultat per a"
 
 msgid "We have nothing matching your search."
 msgstr "La vostra cerca no correspon amb cap registre."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Seguiu aquest enllaç per crear un registre nou"
@@ -953,9 +986,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Informació d'identificació personal"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "País d'origen"

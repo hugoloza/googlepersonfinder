@@ -335,9 +335,6 @@ msgstr "<a href=\"%(logout_url)s\">サインアウト</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "現在ログインしていません。  <a href=\"%(login_url)s\">ログイン</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "この人の状況"
@@ -399,6 +396,22 @@ msgstr "名（よみがな）"
 
 msgid "Alternate names"
 msgstr "名前（よみがな）"
+
+msgid "Physical characteristics"
+msgstr "身体の特徴"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "この人の特徴を入力してください。"
+
+msgid "Sex"
+msgstr "性別"
+
+msgid "Age"
+msgstr "年齢"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "自宅住所"
@@ -679,17 +692,8 @@ msgstr "現在、およそ %(num_people)s 件の記録が登録されていま�
 msgid "Compare these records"
 msgstr "記録の比較"
 
-msgid "Physical characteristics"
-msgstr "身体の特徴"
-
-msgid "Sex"
-msgstr "性別"
-
 msgid "Date of birth"
 msgstr "誕生日"
-
-msgid "Age"
-msgstr "年齢"
 
 msgid "Home address"
 msgstr "自宅住所"
@@ -770,6 +774,10 @@ msgstr ""
 "「%(first_name)s %(last_name)s」さんの状況に関する情報が投稿されました（%"
 "(site_url)s）:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "この記録は次の記録と重複しています:"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "すべての記録は %(view_url)s で見ることができます。"
@@ -789,6 +797,22 @@ msgstr "その人の姓名を入力してください。"
 msgid "Enter the person's name."
 msgstr "その人の名前を入力してください。"
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr ""
+"その人の名前、または名前の一部を入力してください。（ひらがなやローマ字でも"
+"可）"
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr ""
 "その人の名前、または名前の一部を入力してください。（ひらがなやローマ字でも"
@@ -801,11 +825,11 @@ msgstr ""
 "100 件以上見つかりました。最初の 100 件のみが表示されています。名前の残りの部"
 "分を入力してください"
 
-msgid "Search for this person"
-msgstr "この人を探す"
-
 msgid "Provide information about this person"
 msgstr "この人に関する情報を提供する"
+
+msgid "Search for this person"
+msgstr "この人を探す"
 
 #, python-format
 msgid ""
@@ -867,6 +891,13 @@ msgstr "重複マーク モードに切り替える"
 msgid "Switch to normal view mode"
 msgstr "通常の表示モードに切り替える"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+"(注) 一部のよみがなは自動生成されているため、間違っている可能性があります。"
+
+msgid "Provided by:"
+msgstr "提供元:"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "重複している記録を 3 つまで選択できます:"
 
@@ -885,6 +916,10 @@ msgstr "次の人に一致する結果が見つかりませんでした"
 
 msgid "We have nothing matching your search."
 msgstr "一致する記録が見つかりませんでした。"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "このリンクを使用して新しい記録を作成できます"
@@ -941,10 +976,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "識別情報"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
-"(注) 一部のよみがなは自動生成されているため、間違っている可能性があります。"
 
 msgid "Home country"
 msgstr "出身国"
