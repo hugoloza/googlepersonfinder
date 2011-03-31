@@ -326,9 +326,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Du er i øjeblikket ikke logget ind. <a href=\"%(login_url)s\">Log ind</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Statusopdateringer for denne person"
@@ -390,6 +387,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Vejnavn"
+
+msgid "Physical characteristics"
+msgstr "Fysiske karakteristika"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Beskriv, hvordan man kan identificere denne person."
+
+msgid "Sex"
+msgstr "Køn"
+
+msgid "Age"
+msgstr "Alder"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Hjemmeadresse"
@@ -680,17 +693,8 @@ msgstr "Der spores ca. %(num_people)s journaler i øjeblikket."
 msgid "Compare these records"
 msgstr "Sammenlign disse journaler"
 
-msgid "Physical characteristics"
-msgstr "Fysiske karakteristika"
-
-msgid "Sex"
-msgstr "Køn"
-
 msgid "Date of birth"
 msgstr "Fødselsdato"
-
-msgid "Age"
-msgstr "Alder"
 
 msgid "Home address"
 msgstr "Hjemmeadresse"
@@ -771,6 +775,10 @@ msgstr ""
 "En bruger har indsendt en statusopdatering for \"%(first_name)s %(last_name)s"
 "\" på %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Denne journal er en kopi af"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Du kan få vist hele journalen på %(view_url)s"
@@ -791,6 +799,20 @@ msgstr "Indtast personens for- og efternavn"
 msgid "Enter the person's name."
 msgstr "Indtast personens navn."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Indtast personens navn eller dele af navnet."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Indtast personens navn eller dele af navnet."
 
@@ -801,11 +823,11 @@ msgstr ""
 "Der var flere end 100 resultater. Kun de første 100 vises. Indtast mere af "
 "navnet."
 
-msgid "Search for this person"
-msgstr "Søg efter denne person"
-
 msgid "Provide information about this person"
 msgstr "Angiv oplysninger om denne person"
+
+msgid "Search for this person"
+msgstr "Søg efter denne person"
 
 #, python-format
 msgid ""
@@ -866,6 +888,13 @@ msgstr "Skift til tilstanden kopimarkering"
 msgid "Switch to normal view mode"
 msgstr "Skift til tilstanden normal visning"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Oprettet af"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Vælg 3 journaler, der skal markeres som kopier:"
 
@@ -884,6 +913,10 @@ msgstr "Der blev ikke fundet nogen resultater for"
 
 msgid "We have nothing matching your search."
 msgstr "Vi har ikke noget, der matcher din søgning."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Følg dette link for at oprette en ny journal"
@@ -939,9 +972,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identificering af oplysninger"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Hjemland"

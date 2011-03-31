@@ -322,9 +322,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Trenutačno niste prijavljeni. <a href=\"%(login_url)s\">Prijavite se</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Ažuriranja statusa za tu osobu"
@@ -387,6 +384,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Ulica"
+
+msgid "Physical characteristics"
+msgstr "Fizičke karakteristike"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Opišite na koji se način ta osoba može identificirati."
+
+msgid "Sex"
+msgstr "Spol"
+
+msgid "Age"
+msgstr "Dob"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Adresa stanovanja"
@@ -675,17 +688,8 @@ msgstr "Trenutačno pratim približno ovoliko zapisa: %(num_people)s."
 msgid "Compare these records"
 msgstr "Usporedite te zapise"
 
-msgid "Physical characteristics"
-msgstr "Fizičke karakteristike"
-
-msgid "Sex"
-msgstr "Spol"
-
 msgid "Date of birth"
 msgstr "Datum rođenja"
-
-msgid "Age"
-msgstr "Dob"
 
 msgid "Home address"
 msgstr "Adresa stanovanja"
@@ -766,6 +770,10 @@ msgstr ""
 "Korisnik je objavio ažuriranje statusa za osobu \"%(first_name)s %(last_name)"
 "s\" na %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Taj je zapis je dvostruk unos"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Potpuni zapis možete pogledati na %(view_url)s"
@@ -786,6 +794,20 @@ msgstr "Unesite ime i prezime osobe."
 msgid "Enter the person's name."
 msgstr "Unesite ime osobe."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Unesite ime osobe ili dio imena."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Unesite ime osobe ili dio imena."
 
@@ -796,11 +818,11 @@ msgstr ""
 "Više od 100 rezultata; prikazuje se samo prvih 100. Pokušajte unijeti veći "
 "dio imena"
 
-msgid "Search for this person"
-msgstr "Pretraživanje osobe"
-
 msgid "Provide information about this person"
 msgstr "Unesite informacije o toj osobi"
+
+msgid "Search for this person"
+msgstr "Pretraživanje osobe"
 
 #, python-format
 msgid ""
@@ -861,6 +883,13 @@ msgstr "Prebacite da biste udvostručili način označavanja"
 msgid "Switch to normal view mode"
 msgstr "Prebacite u način uobičajenog pregleda"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Poslao korisnik"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Odaberite 3 zapisa da biste ih označili kao dvostruke:"
 
@@ -879,6 +908,10 @@ msgstr "Nisu nađeni rezultati za"
 
 msgid "We have nothing matching your search."
 msgstr "Ništa ne odgovara vašem pretraživanju."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Slijedite vezu da biste stvorili novi zapis"
@@ -934,9 +967,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Informacije za identifikaciju"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Zemlja porijekla"

@@ -325,9 +325,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Status updates for this person"
@@ -390,6 +387,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Street name"
+
+msgid "Physical characteristics"
+msgstr "Physical characteristics"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Describe how to identify this person."
+
+msgid "Sex"
+msgstr "Sex"
+
+msgid "Age"
+msgstr "Age"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Home Address"
@@ -675,17 +688,8 @@ msgstr "Currently tracking about %(num_people)s records."
 msgid "Compare these records"
 msgstr "Compare these records"
 
-msgid "Physical characteristics"
-msgstr "Physical characteristics"
-
-msgid "Sex"
-msgstr "Sex"
-
 msgid "Date of birth"
 msgstr "Date of birth"
-
-msgid "Age"
-msgstr "Age"
 
 msgid "Home address"
 msgstr "Home address"
@@ -766,6 +770,10 @@ msgstr ""
 "A user has posted a status update for \"%(first_name)s %(last_name)s\" at %"
 "(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "This record is a duplicate of"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "You can view the full record at %(view_url)s"
@@ -786,6 +794,20 @@ msgstr "Enter the person's first and last names."
 msgid "Enter the person's name."
 msgstr "Enter the person's name."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Enter the person's name or parts of the name."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Enter the person's name or parts of the name."
 
@@ -796,11 +818,11 @@ msgstr ""
 "More than 100 results; only showing the first 100.  Try entering more of the "
 "name"
 
-msgid "Search for this person"
-msgstr "Search for this person"
-
 msgid "Provide information about this person"
 msgstr "Provide information about this person"
+
+msgid "Search for this person"
+msgstr "Search for this person"
 
 #, python-format
 msgid ""
@@ -862,6 +884,13 @@ msgstr "Switch to duplicate marking mode"
 msgid "Switch to normal view mode"
 msgstr "Switch to normal viewing mode"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Posted by"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Select up to 3 records to mark as duplicate:"
 
@@ -880,6 +909,10 @@ msgstr "No results found for"
 
 msgid "We have nothing matching your search."
 msgstr "We have nothing matching your search."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Follow this link to create a new record"
@@ -935,9 +968,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identifying information"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Home country"

@@ -323,9 +323,6 @@ msgstr "<a href=\"%(logout_url)s\">Одјави ме</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "Тренутно нисте пријављени. <a href=\"%(login_url)s\">Пријави ме</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Ажурирања статуса за ову особу"
@@ -388,6 +385,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Улица"
+
+msgid "Physical characteristics"
+msgstr "Физичке особине"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Опишите како се ова особа може идентификовати."
+
+msgid "Sex"
+msgstr "Пол"
+
+msgid "Age"
+msgstr "Старост"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Адреса"
@@ -677,17 +690,8 @@ msgstr "Тренутно се прати око %(num_people)s уноса."
 msgid "Compare these records"
 msgstr "Упореди ове уносе"
 
-msgid "Physical characteristics"
-msgstr "Физичке особине"
-
-msgid "Sex"
-msgstr "Пол"
-
 msgid "Date of birth"
 msgstr "Датум рођења"
-
-msgid "Age"
-msgstr "Старост"
 
 msgid "Home address"
 msgstr "Адреса"
@@ -768,6 +772,10 @@ msgstr ""
 "Корисник је поставио ажурирање статуса особе „%(first_name)s %(last_name)s“ "
 "на адреси %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Овај унос је дупликат уноса"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Целокупни запис можете да прегледате на адреси %(view_url)s"
@@ -787,6 +795,20 @@ msgstr "Унесите име и презиме особе."
 msgid "Enter the person's name."
 msgstr "Унесите име особе."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Унесите име или делове имена особе."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Унесите име или делове имена особе."
 
@@ -797,11 +819,11 @@ msgstr ""
 "Постоји више од 100 резултата; приказано је само првих 100. Покушајте да "
 "унесете још неки део имена"
 
-msgid "Search for this person"
-msgstr "Тражи ову особу"
-
 msgid "Provide information about this person"
 msgstr "Наведите информације о овој особи "
+
+msgid "Search for this person"
+msgstr "Тражи ову особу"
 
 #, python-format
 msgid ""
@@ -864,6 +886,13 @@ msgstr "Пребаци на режим за обележавање дуплик�
 msgid "Switch to normal view mode"
 msgstr "Пребаци на режим уобичајеног приказа"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Поставио/ла"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Изаберите највише 3 резултата које ћете означити као дупликате:"
 
@@ -882,6 +911,10 @@ msgstr "Нема пронађених резултата за"
 
 msgid "We have nothing matching your search."
 msgstr "Нема података који се подударају са вашом претрагом."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Кликните на ову везу да бисте направили нови унос"
@@ -937,9 +970,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Информације за идентификацију"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Земља порекла"

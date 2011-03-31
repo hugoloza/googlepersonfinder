@@ -342,9 +342,6 @@ msgstr ""
 "De momento, não tem sessão iniciada.  <a href=\"%(login_url)s\">Iniciar "
 "sessão</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Actualizações de estado para esta pessoa"
@@ -407,6 +404,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Nome da rua"
+
+msgid "Physical characteristics"
+msgstr "Características físicas"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Descreva como identificaria esta pessoa."
+
+msgid "Sex"
+msgstr "Sexo"
+
+msgid "Age"
+msgstr "Idade"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Endereço de casa"
@@ -694,17 +707,8 @@ msgstr "A monitorizar actualmente cerca de %(num_people)s registos."
 msgid "Compare these records"
 msgstr "Comparar estes registos"
 
-msgid "Physical characteristics"
-msgstr "Características físicas"
-
-msgid "Sex"
-msgstr "Sexo"
-
 msgid "Date of birth"
 msgstr "Data de nascimento"
-
-msgid "Age"
-msgstr "Idade"
 
 msgid "Home address"
 msgstr "Endereço de casa"
@@ -785,6 +789,10 @@ msgstr ""
 "Um utilizador publicou uma atualização de estado de \"%(first_name)s %"
 "(last_name)s\" em %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Este registo é um duplicado de"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Pode ver o registo completo em %(view_url)s"
@@ -804,6 +812,20 @@ msgstr "Introduza o nome próprio e o apelido da pessoa."
 msgid "Enter the person's name."
 msgstr "Introduza o nome da pessoa."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Introduza o nome da pessoa ou parte dele."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Introduza o nome da pessoa ou parte dele."
 
@@ -814,11 +836,11 @@ msgstr ""
 "Mais de 100  resultados; só são mostrados os 100 primeiros. Tente introduzir "
 "mais do nome"
 
-msgid "Search for this person"
-msgstr "Pesquisar esta pessoa"
-
 msgid "Provide information about this person"
 msgstr "Fornecer informações acerca desta pessoa"
+
+msgid "Search for this person"
+msgstr "Pesquisar esta pessoa"
 
 #, python-format
 msgid ""
@@ -880,6 +902,13 @@ msgstr "Mudar para o modo de marcação de duplicados"
 msgid "Switch to normal view mode"
 msgstr "Mudar para o modo de visualização normal"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Publicado por"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Seleccionar até 3 registos para marcar como duplicados:"
 
@@ -898,6 +927,10 @@ msgstr "Não foram encontrados resultados para"
 
 msgid "We have nothing matching your search."
 msgstr "Não temos nada que corresponda à sua pesquisa."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Siga este link para criar um registo novo"
@@ -953,9 +986,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Informações de identificação"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "País de origem"

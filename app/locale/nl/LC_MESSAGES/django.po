@@ -332,9 +332,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "U bent momenteel niet aangemeld. <a href=\"%(login_url)s\">Aanmelden</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Status-updates voor deze persoon"
@@ -397,6 +394,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Straatnaam"
+
+msgid "Physical characteristics"
+msgstr "Fysieke kenmerken"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Beschrijf hoe deze persoon kan worden geïdentificeerd."
+
+msgid "Sex"
+msgstr "Geslacht"
+
+msgid "Age"
+msgstr "Leeftijd"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Thuisadres"
@@ -688,17 +701,8 @@ msgstr "Er worden momenteel ongeveer %(num_people)s meldingen bijgehouden."
 msgid "Compare these records"
 msgstr "Deze meldingen vergelijken"
 
-msgid "Physical characteristics"
-msgstr "Fysieke kenmerken"
-
-msgid "Sex"
-msgstr "Geslacht"
-
 msgid "Date of birth"
 msgstr "Geboortedatum"
-
-msgid "Age"
-msgstr "Leeftijd"
 
 msgid "Home address"
 msgstr "Thuisadres"
@@ -779,6 +783,10 @@ msgstr ""
 "Een gebruiker heeft een statusupdate geplaatst op %(site_url)s voor '%"
 "(first_name)s %(last_name)s':"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Deze melding is een duplicaat van"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "U kunt de volledige melding bekijken op %(view_url)s"
@@ -799,6 +807,20 @@ msgstr "Voer de voor- en achternaam van de persoon in."
 msgid "Enter the person's name."
 msgstr "Voer de naam van de persoon in."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Voer de naam of delen van de naam van de persoon in."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Voer de naam of delen van de naam van de persoon in."
 
@@ -809,11 +831,11 @@ msgstr ""
 "Meer dan 100 resultaten. De eerste 100 resultaten worden weergegeven. Voer "
 "meer delen van de naam in"
 
-msgid "Search for this person"
-msgstr "Zoeken naar deze persoon"
-
 msgid "Provide information about this person"
 msgstr "Informatie geven over deze persoon"
+
+msgid "Search for this person"
+msgstr "Zoeken naar deze persoon"
 
 #, python-format
 msgid ""
@@ -878,6 +900,13 @@ msgstr "Overschakelen naar modus voor het markeren van duplicaten"
 msgid "Switch to normal view mode"
 msgstr "Overschakelen naar modus voor normale weergave"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Geplaatst door"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Selecteer maximaal drie meldingen om als duplicaat te markeren:"
 
@@ -896,6 +925,10 @@ msgstr "Geen resultaten gevonden voor"
 
 msgid "We have nothing matching your search."
 msgstr "Er zijn geen gegevens die overeenkomen met uw zoekopdracht."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Volg deze link om een nieuwe melding te maken"
@@ -951,9 +984,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Identificatiegegevens"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Land van herkomst"

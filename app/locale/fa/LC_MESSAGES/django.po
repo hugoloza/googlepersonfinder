@@ -316,9 +316,6 @@ msgstr "<a href=\"%(logout_url)s\">خروج از سیستم</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "هنوز وارد سیستم نشده اید. <a href=\"%(login_url)s\">ورود به سیستم</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "به روز رسانی های وضعیت برای این شخص"
@@ -381,6 +378,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "نام خیابان"
+
+msgid "Physical characteristics"
+msgstr "مشخصات فیزیکی"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "نحوه پیداکردن این شخص را توضیح دهید."
+
+msgid "Sex"
+msgstr "جنسیت"
+
+msgid "Age"
+msgstr "سن"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "نشانی منزل"
@@ -670,17 +683,8 @@ msgstr "درحال حاضر %(num_people)s مدراک ردیابی شده است
 msgid "Compare these records"
 msgstr "مقایسه این سوابق"
 
-msgid "Physical characteristics"
-msgstr "مشخصات فیزیکی"
-
-msgid "Sex"
-msgstr "جنسیت"
-
 msgid "Date of birth"
 msgstr "تاریخ تولد"
-
-msgid "Age"
-msgstr "سن"
 
 msgid "Home address"
 msgstr "نشانی منزل"
@@ -761,6 +765,10 @@ msgstr ""
 "کاربری یک به روز رسانی وضعیت برای \"%(first_name)s %(last_name)s\" در %"
 "(site_url)s پست کرده است:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "این سابقه تکرار این مورد است"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "می توانید سابقه را به صورت کامل در %(view_url)s مشاهده کنید"
@@ -781,6 +789,20 @@ msgstr "نام و نام خانوادگی شخص را وارد کنید."
 msgid "Enter the person's name."
 msgstr "نام شخص را وارد کنید."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "نام یا قسمتی از نام شخص را وارد کنید."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "نام یا قسمتی از نام شخص را وارد کنید."
 
@@ -791,11 +813,11 @@ msgstr ""
 "بیش از 100 نتیجه؛ فقط 100 مورد اول نشان داده می شود. سعی کنید نام را بصورت "
 "کاملتر وارد کنید"
 
-msgid "Search for this person"
-msgstr "جستجوی این شخص"
-
 msgid "Provide information about this person"
 msgstr "ارائه اطلاعاتی درباره این شخص"
+
+msgid "Search for this person"
+msgstr "جستجوی این شخص"
 
 #, python-format
 msgid ""
@@ -858,6 +880,13 @@ msgstr "تغییر وضعیت به حالت علامتگذاری تکراری"
 msgid "Switch to normal view mode"
 msgstr "تغییر وضعیت به حالت مشاهده عادی"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "پست شده توسط"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "حداکثر 3 سابقه را انتخاب کنید تا بعنوان تکراری علامتگذاری شود:"
 
@@ -876,6 +905,10 @@ msgstr "نتیجه ای یافت نشد برای"
 
 msgid "We have nothing matching your search."
 msgstr "هیچ موردی مطابق با جستجوی شما یافت نشد."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "این پیوند را دنبال کنید تا سابقه جدیدی ایجاد کنید"
@@ -931,9 +964,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "شناسایی اطلاعات"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "کشور زادگاه"

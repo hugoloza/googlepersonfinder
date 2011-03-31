@@ -2,6 +2,7 @@ syntax: glob
 *.pyc
 .*.sw?
 *~
+*\#
 *.timestamp
 *.hg
 *.project

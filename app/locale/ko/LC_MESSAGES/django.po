@@ -319,9 +319,6 @@ msgstr "<a href=\"%(logout_url)s\">로그아웃</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "현재 로그인되어 있지 않습니다. <a href=\"%(login_url)s\">로그인</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "이 사람의 상태 업데이트"
@@ -381,6 +378,22 @@ msgstr "이름 (한글 또는 가나)"
 
 msgid "Alternate names"
 msgstr "이름 (한자)"
+
+msgid "Physical characteristics"
+msgstr "신체적 특징"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "이 사람의 신원을 확인할 수 있는 방법을 설명하세요."
+
+msgid "Sex"
+msgstr "성별"
+
+msgid "Age"
+msgstr "나이"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "집 주소"
@@ -669,17 +682,8 @@ msgstr "현재 약 %(num_people)s개의 레코드를 추적 중입니다."
 msgid "Compare these records"
 msgstr "레코드 비교"
 
-msgid "Physical characteristics"
-msgstr "신체적 특징"
-
-msgid "Sex"
-msgstr "성별"
-
 msgid "Date of birth"
 msgstr "생일"
-
-msgid "Age"
-msgstr "나이"
 
 msgid "Home address"
 msgstr "집 주소"
@@ -760,6 +764,10 @@ msgstr ""
 "사용자가 %(site_url)s에 \"%(first_name)s %(last_name)s\"에 대한 상태 업데이트"
 "를 올렸습니다."
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "다음의 중복 레코드입니다."
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "%(view_url)s에서 전체 레코드를 확인할 수 있습니다."
@@ -779,6 +787,20 @@ msgstr "해당하는 사람의 이름과 성을 입력하세요."
 msgid "Enter the person's name."
 msgstr "해당하는 사람의 이름을 입력하세요."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "해당하는 사람의 이름 또는 이름의 일부를 입력하세요."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "해당하는 사람의 이름 또는 이름의 일부를 입력하세요."
 
@@ -789,11 +811,11 @@ msgstr ""
 "결과가 100개를 초과하면 처음 100개만 표시됩니다. 이름을 더 자세히 입력해 보세"
 "요."
 
-msgid "Search for this person"
-msgstr "검색"
-
 msgid "Provide information about this person"
 msgstr "정보 입력"
+
+msgid "Search for this person"
+msgstr "검색"
 
 #, python-format
 msgid ""
@@ -856,6 +878,13 @@ msgstr "중복 표시 모드로 전환"
 msgid "Switch to normal view mode"
 msgstr "기본 보기 모드로 전환"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "게시자"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "중복으로 표시할 레코드를 3개까지 선택:"
 
@@ -874,6 +903,10 @@ msgstr "다음 이름에 대한 결과를 찾을 수 없음"
 
 msgid "We have nothing matching your search."
 msgstr "일치하는 검색결과가 없습니다."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "링크로 이동하여 새 레코드 만들기"
@@ -929,9 +962,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "신원 확인 정보"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "출생 국가"

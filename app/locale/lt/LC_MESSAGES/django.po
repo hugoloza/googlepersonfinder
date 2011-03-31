@@ -343,9 +343,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Šiuo metu esate neprisijungę. <a href=\"%(login_url)s\">Prisijungti</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Šio asmens statuso atnaujinimai"
@@ -408,6 +405,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Gatvės pavadinimas"
+
+msgid "Physical characteristics"
+msgstr "Fiziniai bruožai"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Aprašykite, kaip atpažinti šį asmenį."
+
+msgid "Sex"
+msgstr "Lytis"
+
+msgid "Age"
+msgstr "Amžius"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Namų adresas"
@@ -694,17 +707,8 @@ msgstr "Šiuo metu turime apie %(num_people)s įrašų."
 msgid "Compare these records"
 msgstr "Palyginti šiuos įrašus"
 
-msgid "Physical characteristics"
-msgstr "Fiziniai bruožai"
-
-msgid "Sex"
-msgstr "Lytis"
-
 msgid "Date of birth"
 msgstr "Gimimo data"
-
-msgid "Age"
-msgstr "Amžius"
 
 msgid "Home address"
 msgstr "Namų adresas"
@@ -785,6 +789,10 @@ msgstr ""
 "Naudotojas paskelbė „%(first_name)s %(last_name)s“ statuso atnaujinimą "
 "adresu: %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Šis įrašas dubliuojasi su"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Visą įrašą galite peržiūrėti adresu: %(view_url)s"
@@ -805,6 +813,20 @@ msgstr "Įveskite asmens vardą ir pavardę."
 msgid "Enter the person's name."
 msgstr "Įveskite asmens vardą."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Įveskite asmens vardą arba jo dalį."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Įveskite asmens vardą arba jo dalį."
 
@@ -815,11 +837,11 @@ msgstr ""
 "Rasta daugiau nei 100 rezultatų, rodomi tik pirmieji 100. Bandykite įvesti "
 "didesnę vardo dalį"
 
-msgid "Search for this person"
-msgstr "Ieškoti šio asmens"
-
 msgid "Provide information about this person"
 msgstr "Pateikti informaciją apie šį asmenį"
+
+msgid "Search for this person"
+msgstr "Ieškoti šio asmens"
 
 #, python-format
 msgid ""
@@ -883,6 +905,13 @@ msgstr "Įjungti besidubliuojančių įrašų žymėjimo veikseną"
 msgid "Switch to normal view mode"
 msgstr "Įjungti įprastinę peržiūros veikseną"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Paskelbė"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr ""
 "Pasirinkite iki 3 įrašų, kuriuos norite pažymėti kaip besidubliuojančius:"
@@ -902,6 +931,10 @@ msgstr "Nerasta jokių rezultatų, ieškant"
 
 msgid "We have nothing matching your search."
 msgstr "Nėra jokių įrašų, atitinkančių jūsų paiešką."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Atverkite šią nuorodą, jei norite sukurti naują įrašą"
@@ -961,9 +994,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Tapatumo nustatymo informacija"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Gimtoji šalis"

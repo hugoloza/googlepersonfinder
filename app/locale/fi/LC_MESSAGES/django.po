@@ -337,9 +337,6 @@ msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr ""
 "Et ole kirjautunut sisään. <a href=\"%(login_url)s\">Kirjaudu sisään</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Tämän henkilön tilapäivitykset"
@@ -401,6 +398,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Kadun nimi"
+
+msgid "Physical characteristics"
+msgstr "Fyysiset ominaisuudet"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Kuvaile, miten tämä henkilö voidaan tunnistaa."
+
+msgid "Sex"
+msgstr "Sukupuoli"
+
+msgid "Age"
+msgstr "Ikä"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Kotiosoite"
@@ -692,17 +705,8 @@ msgstr "Seurataan tällä hetkellä noin %(num_people)s tallennetta."
 msgid "Compare these records"
 msgstr "Vertaa näitä tallenteita"
 
-msgid "Physical characteristics"
-msgstr "Fyysiset ominaisuudet"
-
-msgid "Sex"
-msgstr "Sukupuoli"
-
 msgid "Date of birth"
 msgstr "Syntymäpäivä"
-
-msgid "Age"
-msgstr "Ikä"
 
 msgid "Home address"
 msgstr "Kotiosoite"
@@ -783,6 +787,10 @@ msgstr ""
 "Käyttäjä lisäsi tilapäivityksen henkilölle %(first_name)s %(last_name)s "
 "sivustoon %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Tämä tallenne on seuraavan tallenteen kopio:"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Täydet tiedot näkyvät osoitteessa %(view_url)s"
@@ -803,6 +811,20 @@ msgstr "Anna henkilön etu- ja sukunimi."
 msgid "Enter the person's name."
 msgstr "Anna henkilön nimi."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Anna henkilön nimi tai osia nimestä."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Anna henkilön nimi tai osia nimestä."
 
@@ -813,11 +835,11 @@ msgstr ""
 "Löytyi yli 100 tulosta, näytetään vain ensimmäiset 100. Kirjoita nimeä "
 "enemmän."
 
-msgid "Search for this person"
-msgstr "Hae tätä henkilöä"
-
 msgid "Provide information about this person"
 msgstr "Anna tietoja tästä henkilöstä"
+
+msgid "Search for this person"
+msgstr "Hae tätä henkilöä"
 
 #, python-format
 msgid ""
@@ -884,6 +906,13 @@ msgstr "Vaihda kopioiden merkintätilaan"
 msgid "Switch to normal view mode"
 msgstr "Vaihda normaaliin näyttötilaan"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Lisäsi"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Valitse korkeintaan kolme tallennetta, jotka merkitään kopioiksi:"
 
@@ -902,6 +931,10 @@ msgstr "Ei tuloksia haulla"
 
 msgid "We have nothing matching your search."
 msgstr "Haullasi ei löytynyt yhtään tuloksia."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Luo uusi tallenne napsauttamalla tätä linkkiä."
@@ -958,9 +991,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Tunnistustiedot"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Kotimaa"

@@ -332,9 +332,6 @@ msgstr "<a href=\"%(logout_url)s\">Вийти</a>"
 msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
 msgstr "Ви не ввійшли в систему. <a href=\"%(login_url)s\">Увійти</a>"
 
-msgid "Dashboard"
-msgstr ""
-
 #, fuzzy
 msgid "Atom feed of updates about this person"
 msgstr "Оновлення статусу для цієї особи"
@@ -397,6 +394,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Назва вулиці"
+
+msgid "Physical characteristics"
+msgstr "Фізичні характеристики"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Опишіть, як ідентифікувати цю особу."
+
+msgid "Sex"
+msgstr "Стать"
+
+msgid "Age"
+msgstr "Вік"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Домашня адреса"
@@ -687,17 +700,8 @@ msgstr "Записи, які відстежуються на цей момент
 msgid "Compare these records"
 msgstr "Порівняти ці записи"
 
-msgid "Physical characteristics"
-msgstr "Фізичні характеристики"
-
-msgid "Sex"
-msgstr "Стать"
-
 msgid "Date of birth"
 msgstr "Дата народження"
-
-msgid "Age"
-msgstr "Вік"
 
 msgid "Home address"
 msgstr "Домашня адреса"
@@ -778,6 +782,10 @@ msgstr ""
 "Користувач опублікував оновлення статусу про особу \"%(first_name)s %"
 "(last_name)s\" за адресою %(site_url)s:"
 
+#, fuzzy
+msgid "This record is a duplicate of another record:"
+msgstr "Цей запис є дублікатом до"
+
 #, python-format
 msgid "You can view the full record at %(view_url)s"
 msgstr "Повний запис можна переглянути за адресою %(view_url)s"
@@ -797,6 +805,20 @@ msgstr "Введіть ім’я та прізвище особи."
 msgid "Enter the person's name."
 msgstr "Введіть ім’я особи."
 
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Введіть ім'я та прізвище особи або їх частину."
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Введіть ім'я та прізвище особи або їх частину."
 
@@ -807,11 +829,11 @@ msgstr ""
 "Знайдено більше 100 результатів; відображено лише перших 100 результатів. "
 "Спробуйте ввести повніший варіант імені та прізвища"
 
-msgid "Search for this person"
-msgstr "Шукати цю особу"
-
 msgid "Provide information about this person"
 msgstr "Надати інформацію про цю особу"
+
+msgid "Search for this person"
+msgstr "Шукати цю особу"
 
 #, python-format
 msgid ""
@@ -877,6 +899,13 @@ msgstr "Переключитися в режим позначення дублі
 msgid "Switch to normal view mode"
 msgstr "Переключитися в режим звичайного перегляду"
 
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Автор публікації"
+
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Виберіть до 3 записів, щоб позначити їх як дублікати:"
 
@@ -896,6 +925,10 @@ msgstr "Не знайдено жодного результату для зап�
 msgid "We have nothing matching your search."
 msgstr ""
 "Не знайдено жодного результату, який відповідає вашому пошуковому запиту."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Натисніть на це посилання, щоб створити новий запис"
@@ -951,9 +984,6 @@ msgstr ""
 
 msgid "Identifying information"
 msgstr "Особиста інформація"
-
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
 
 msgid "Home country"
 msgstr "Країна проживання"
