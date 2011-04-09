@@ -853,13 +853,20 @@ class PersonNoteTests(TestsBase):
         # Explicitly fire the send-mail task if necessary
         doc = self.go_as_admin('/_ah/admin/tasks?queue=send-mail')
         try:
-            button = doc.firsttag('button', class_='ae-taskqueues-run-now')
-            doc = self.s.submit(d.first('form', name='queue_run_now'),
-                                run_now=button.id)
+            for button in doc.alltags('button', class_='ae-taskqueues-run-now'):
+                doc = self.s.submit(d.first('form', name='queue_run_now'),
+                                    run_now=button.id)
         except scrape.ScrapeError, e:
             # button not found, assume task completed
             pass
-
+        # taskqueue takes a second to actually queue up multiple requests,
+        # so we pause here to allow that to happen.
+        count = 0
+        while len(MailThread.messages) != message_count:
+            count += 1
+            time.sleep(.1)
+            if count > 10:
+                break
         assert len(MailThread.messages) == message_count, \
             'expected %s messages, instead was %s' % (message_count, 
                                                       len(MailThread.messages))
@@ -3424,7 +3431,7 @@ class PersonNoteTests(TestsBase):
             data='subdomain=haiti&' +
                  'id=haiti.person-finder.appspot.com/person.123&' +
                  'reason_for_deletion=spam_received&test_mode=yes')
-        assert len(MailThread.messages) == 2
+        self.verify_email_sent(2)
         messages = sorted(MailThread.messages, key=lambda m: m['to'][0])
 
         # After sorting by recipient, the second message should be to the
@@ -4906,8 +4913,10 @@ def main():
 
         reset_data()  # Reset the datastore for the first test.
         unittest.main()  # You can select tests using command-line arguments.
+
     except Exception, e:
         # Something went wrong during testing.
+        print >>sys.stderr, 'caught exception : %s' % e
         for thread in threads:
             if hasattr(thread, 'flush_output'):
                 thread.flush_output()
