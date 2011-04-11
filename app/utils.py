@@ -39,6 +39,7 @@ import django.utils.html
 from google.appengine.api import images
 from google.appengine.api import mail
 from google.appengine.api import memcache
+from google.appengine.api import taskqueue
 from google.appengine.api import users
 from google.appengine.ext import webapp
 import google.appengine.ext.webapp.template
@@ -54,7 +55,6 @@ if os.environ.get('SERVER_SOFTWARE', '').startswith('Development'):
     urllib.getproxies_macosx_sysconf = lambda: {}
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
-
 
 # ==== Localization setup ======================================================
 
@@ -401,6 +401,20 @@ def validate_version(string):
         raise ValueError('Bad pfif version: %s' % string)
     return pfif.PFIF_VERSIONS[strip(string) or pfif.PFIF_DEFAULT_VERSION]
 
+def queue_mail(sender, to, subject, body):
+    """Queue an email for sending, with proper throttling."""
+    taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
+                  params={'sender': sender,
+                          'to': to,
+                          'subject': subject,
+                          'body': body})
+
+def build_email_sender(domain, address_name='Do Not Reply', address=None):
+    """Construct a valid email address for the 'from' line."""
+    domain = domain.replace('appspot.com', 'appspotmail.com')
+    if not address:
+        address = address_name.replace(' ', '-').lower()
+    return '%s <%s@%s>' % (address_name, address, domain)
 
 # ==== Other utilities =========================================================
 
@@ -765,14 +779,16 @@ class Handler(webapp.RequestHandler):
             return 'http://' + '.'.join([subdomain] + levels[-3:])
         return self.get_url('/', subdomain=subdomain)
 
-    def send_mail(self, **params):
+    def get_email_sender(self, address_name='Do Not Reply', address=None):
+        """Return the default sender of app emails."""
+        # Sender address for the server must be of the following form to get
+        # permission to send emails: foo@app-id.appspotmail.com
+        # Here, the domain is automatically retrieved and altered as appropriate.
+        return build_email_sender(self.env.parent_domain, address_name, address)
+
+    def send_mail(self, to, subject, body):
         """Sends e-mail using a sender address that's allowed for this app."""
-        # TODO(kpy): When the outgoing mail queue is added, use it instead
-        # of sending mail immediately.
-        app_id = os.environ['APPLICATION_ID']
-        mail.send_mail(
-            sender='Do not reply <do-not-reply@%s.appspotmail.com>' % app_id,
-            **params)
+        queue_mail(self.get_email_sender(), to, subject, body)
 
     def get_captcha_html(self, error_code=None, use_ssl=False):
         """Generates the necessary HTML to display a CAPTCHA validation box."""
