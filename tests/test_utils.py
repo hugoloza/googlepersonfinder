@@ -1,3 +1,5 @@
+#!/usr/bin/python2.5
+# encoding: utf-8
 # Copyright 2010 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +21,13 @@ import os
 import tempfile
 import unittest
 
+import django.utils.translation
+from google.appengine.ext import db
 from google.appengine.ext import webapp
 from nose.tools import assert_raises
 
 import config
+import pfif
 import model
 import utils
 
@@ -104,7 +109,32 @@ class UtilsTests(unittest.TestCase):
         assert utils.validate_role('provider') == 'seek'
         assert_raises(Exception, utils.validate_role, None)
 
-      # TODO: test_validate_image
+    def test_validate_expiry(self):
+        assert utils.validate_expiry(100) == 100
+        assert utils.validate_expiry('abc') == None
+        assert utils.validate_expiry(-100) == None
+        
+    def test_validate_version(self):
+        for version in pfif.PFIF_VERSIONS: 
+            assert utils.validate_version(version) == pfif.PFIF_VERSIONS[
+                version]
+        assert utils.validate_version('') == pfif.PFIF_VERSIONS[
+            pfif.PFIF_DEFAULT_VERSION]
+        assert_raises(Exception, utils.validate_version, '1.0')
+
+    def test_validate_age(self):
+        assert utils.validate_age('20') == '20'
+        assert utils.validate_age(' 20 ') == '20'
+        assert utils.validate_age(u'２０') == '20'
+        assert utils.validate_age('20-30') == '20-30'
+        assert utils.validate_age('20 - 30') == '20-30'
+        assert utils.validate_age(u'２０〜３０') == '20-30'
+        assert utils.validate_age(u'２０　ー　３０') == '20-30'
+        assert utils.validate_age('20 !') == ''
+        assert utils.validate_age('2 0') == ''
+
+    # TODO: test_validate_image
+
     def test_set_utcnow_for_test(self):
         max_delta = datetime.timedelta(0,0,100)
         utcnow = datetime.datetime.utcnow()
@@ -142,6 +172,9 @@ class HandlerTests(unittest.TestCase):
             language_menu_options=['en', 'ht', 'fr', 'es'])
 
     def tearDown(self):
+        # Wipe the configuration settings
+        db.delete(config.ConfigEntry.all())
+
         # Cleanup the template file
         os.unlink(self._template_path)
 
@@ -233,6 +266,29 @@ class HandlerTests(unittest.TestCase):
         assert handler.params.first_name == u'\u4F50\u85E4'
         assert request.charset == 'shift_jis'
         assert handler.charset == 'shift_jis'
+
+    def test_default_language(self):
+        """Verify that language_menu_options[0] is used as the default."""
+        _, response, handler = self.handler_for_url('/main?subdomain=haiti')
+        assert handler.env.lang == 'en'  # first language in the options list
+        assert django.utils.translation.get_language() == 'en'
+
+        config.set_for_subdomain(
+            'haiti',
+            subdomain_titles={'en': 'English title', 'fr': 'French title'},
+            language_menu_options=['fr', 'ht', 'fr', 'es'])
+
+        _, response, handler = self.handler_for_url('/main?subdomain=haiti')
+        assert handler.env.lang == 'fr'  # first language in the options list
+        assert django.utils.translation.get_language() == 'fr'
+
+    def test_lang_vulnerability(self):
+        """Regression test for bad characters in the lang parameter."""
+        _, response, handler = self.handler_for_url(
+            '/main?subdomain=haiti&lang=abc%0adef:ghi')
+        assert '\n' not in response.headers['Set-Cookie']
+        assert ':' not in response.headers['Set-Cookie']
+
 
 if __name__ == '__main__':
     unittest.main()

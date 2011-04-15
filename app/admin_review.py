@@ -16,6 +16,7 @@
 import logging
 
 from google.appengine.ext import db
+from google.appengine.api import users
 
 import model
 import utils
@@ -34,9 +35,11 @@ STATUS_CODES = {
 
 class Review(utils.Handler):
     def get(self):
-        status = self.request.get('status') or 'all'
+        if not self.is_current_user_authorized():
+            return self.redirect(users.create_login_url('/admin/review'))
 
         # Make the navigation links.
+        status = self.request.get('status') or 'all'
         nav_html = ''
         for option in [
             'all', 'unspecified', 'information_sought', 'is_note_author',
@@ -76,6 +79,7 @@ class Review(utils.Handler):
                 note.person_status_codes = status_codes
 
         if len(notes) > NOTES_PER_PAGE:
+            notes = notes[:NOTES_PER_PAGE]
             next_skip = skip + NOTES_PER_PAGE
             next_url = self.get_url(
                 '/admin/review', skip=str(next_skip), status=status)
@@ -88,6 +92,9 @@ class Review(utils.Handler):
             first=skip + 1, last=skip + len(notes[:NOTES_PER_PAGE]))
 
     def post(self):
+        if not self.is_current_user_authorized():
+            return self.redirect(users.create_login_url('/admin/review'))
+
         notes = []
         for name, value in self.request.params.items():
             if name.startswith('note.'):
@@ -100,7 +107,14 @@ class Review(utils.Handler):
                     notes.append(note)
         db.put(notes)
         self.redirect('/admin/review', status=self.params.status)
-        
+
+    def is_current_user_authorized(self):
+        if users.is_current_user_admin():  # admins can always review
+            return True
+        domain = self.config.authorized_reviewer_domain
+        if domain:  # also allow any user from the configured domain
+            user = users.get_current_user()
+            return user and user.email().endswith('@' + domain)
 
 
 if __name__ == '__main__':

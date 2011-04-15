@@ -29,6 +29,10 @@ limitations under the License.
   {% if noindex %}
     <meta name="robots" content="noindex">
   {% endif %}
+  {% if feed_url %}
+    <link rel="alternate" type="application/atom+xml"
+      title="{% trans 'Atom feed of updates about this person' %}" href="{{feed_url}}" />
+  {% endif %}
   <link rel="alternate" media="handheld" href="{{env.url}}">
   <title>
     {% block title-extra %}{% endblock %}
@@ -101,6 +105,7 @@ limitations under the License.
           {% trans "Person Finder" %}: {{env.subdomain_title}}
         </a>
       </h1>
+      <div class="clear"></div>
     {% endif %}
   {% endblock %}
 

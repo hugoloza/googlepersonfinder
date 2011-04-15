@@ -32,7 +32,10 @@ limitations under the License.
 
 <p>
 <h2>Data Sources</h2>
-<div id="original_domains">
+<h3>Persons</h3>
+<div id="person_original_domains"></div>
+<h3>Notes</h3>
+<div id="note_original_domains"></div>
 
 <script>
 google.load('visualization', '1', {'packages': ['annotatedtimeline']});
@@ -75,9 +78,12 @@ function show_counts(element) {
     '<td>believed_dead</td>',
     '<td>information_sought</td>',
     '<td>unspecified</td>',
+    '<td>with 0 linked persons</td>',
+    '<td>with 1 linked person</td>',
+    '<td>with 2 linked persons</td>',
     '<th>Notes</th>',
     '<td>with location</td>',
-    '<td>without location</td>'
+    '<td>with linked person</td>'
   ];
   for (var i = 0; i < subdomains.length; i++) {
     var counts = DATA.counts[subdomains[i]];
@@ -89,9 +95,12 @@ function show_counts(element) {
     rows[5] += '<td>' + counts['person.status=believed_dead'] + '</td>';
     rows[6] += '<td>' + counts['person.status=information_sought'] + '</td>';
     rows[7] += '<td>' + counts['person.status='] + '</td>';
-    rows[8] += '<td>' + counts['note.all'] + '</td>';
-    rows[9] += '<td>' + counts['note.location=present'] + '</td>';
-    rows[10] += '<td>' + counts['note.location='] + '</td>';
+    rows[8] += '<td>' + counts['person.linked_persons=0'] + '</td>';
+    rows[9] += '<td>' + counts['person.linked_persons=1'] + '</td>';
+    rows[10] += '<td>' + counts['person.linked_persons=2'] + '</td>';
+    rows[11] += '<td>' + counts['note.all'] + '</td>';
+    rows[12] += '<td>' + counts['note.last_known_location'] + '</td>';
+    rows[13] += '<td>' + counts['note.linked_person'] + '</td>';
   }
   var html = '<table class="counts">';
   for (var r = 0; r < rows.length; r++) {
@@ -101,11 +110,11 @@ function show_counts(element) {
   element.innerHTML = html;
 }
 
-function show_original_domains(element) {
+function show_original_domains(element, original_domains) {
   var subdomains = {{subdomains_js|safe}};
   var html = '<table class="counts">';
   for (var i = 0; i < subdomains.length; i++) {
-    var counts = DATA.original_domains[subdomains[i]];
+    var counts = original_domains[subdomains[i]];
     var total = 0;
     for (var j = 0; j < counts.length; j++) {
       total += counts[j][1];
@@ -126,7 +135,10 @@ function show_original_domains(element) {
 }
 
 show_counts(document.getElementById('counts'));
-show_original_domains(document.getElementById('original_domains'));
+show_original_domains(document.getElementById('person_original_domains'),
+                      DATA.person_original_domains);
+show_original_domains(document.getElementById('note_original_domains'),
+                      DATA.note_original_domains);
 </script>
 
 {% endblock %}
