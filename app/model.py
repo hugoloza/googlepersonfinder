@@ -238,9 +238,14 @@ class Person(Base):
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
 
-    # source_date is the original creation time; it should not change.
-    source_name = db.StringProperty(default='')
+    # the original date we saw this record; it should not change.
+    original_creation_date = db.DateTimeProperty(auto_now_add=True)
+
+    # source_date is the date that the original repository last changed
+    # any of the fields in the pfif record.
     source_date = db.DateTimeProperty()
+
+    source_name = db.StringProperty(default='')
     source_url = db.StringProperty(default='')
 
     full_name = db.StringProperty()
@@ -293,12 +298,13 @@ class Person(Base):
     _fields_to_index_by_prefix_properties = ['first_name', 'last_name']
 
     @staticmethod
-    def past_due_records():
+    def past_due_records(subdomain):
         """Returns a query for all Person records with expiry_date in the past,
         regardless of their is_expired flags."""
         import utils
         return Person.all(filter_expired=False).filter(
-            'expiry_date <=', utils.get_utcnow())
+            'expiry_date <=', utils.get_utcnow()).filter(
+            'subdomain =', subdomain)
 
     def get_person_record_id(self):
         return self.record_id
@@ -361,10 +367,15 @@ class Person(Base):
         these changes to the datastore."""
         import utils
         now = utils.get_utcnow()
-        expired = self.expiry_date and now >= self.expiry_date
+        expired = bool(self.expiry_date and now >= self.expiry_date)
         if self.is_expired != expired:
             # NOTE: This should be the ONLY code that modifies is_expired.
             self.is_expired = expired
+
+            # if we neglected to capture the original_creation_date,
+            # make a best effort to grab it now, for posterity.
+            if not self.original_creation_date:
+                self.original_creation_date = self.source_date
 
             # If the record is expiring (being replaced with a placeholder,
             # see http://zesty.ca/pfif/1.3/#data-expiry) or un-expiring (being 
@@ -451,7 +462,11 @@ class Note(Base):
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
 
-    # source_date is the original creation time; it should not change.
+    # the original date we saw this record; it should not change.
+    original_creation_date = db.DateTimeProperty(auto_now_add=True)
+
+    # source_date is the date that the original repository last changed
+    # any of the fields in the pfif record.
     source_date = db.DateTimeProperty()
 
     status = db.StringProperty(default='', choices=pfif.NOTE_STATUS_VALUES)

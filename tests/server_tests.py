@@ -226,7 +226,11 @@ class MailThread(threading.Thread):
                 MailThread.messages.append(
                     {'from': mailfrom, 'to': rcpttos, 'data': data})
 
-        server = MailServer(('localhost', self.port), None)
+        try:
+            server = MailServer(('localhost', self.port), None)
+        except Exception, e:
+            print >>sys.stderr, 'SMTP server failed: %s' % e
+            sys.exit(-1)
         print >>sys.stderr, 'SMTP server started.'
         while not self.stop_requested:
             smtpd.asyncore.loop(timeout=0.5, count=1)
@@ -853,12 +857,20 @@ class PersonNoteTests(TestsBase):
         # Explicitly fire the send-mail task if necessary
         doc = self.go_as_admin('/_ah/admin/tasks?queue=send-mail')
         try:
-            button = doc.firsttag('button', class_='ae-taskqueues-run-now')
-            doc = self.s.submit(d.first('form', name='queue_run_now'),
-                                run_now=button.id)
+            for button in doc.alltags('button', class_='ae-taskqueues-run-now'):
+                doc = self.s.submit(d.first('form', name='queue_run_now'),
+                                    run_now=button.id)
         except scrape.ScrapeError, e:
             # button not found, assume task completed
             pass
+        # taskqueue takes a second to actually queue up multiple requests,
+        # so we pause here to allow that to happen.
+        count = 0
+        while len(MailThread.messages) != message_count and count < 10:
+            count += 1
+            time.sleep(.1)
+        if count > 1:
+            self.debug_print('verify_email_sent: %s' % count)
 
         assert len(MailThread.messages) == message_count, \
             'expected %s messages, instead was %s' % (message_count, 
@@ -1100,6 +1112,9 @@ class PersonNoteTests(TestsBase):
             status=['Someone has received information that this person is dead']
         )
 
+        # test for default_expiry_days config:
+        config.set_for_subdomain('haiti', default_expiry_days=10)
+
         # Submit the create form with complete information
         self.s.submit(create_form,
                       author_name='_test_author_name',
@@ -1123,7 +1138,7 @@ class PersonNoteTests(TestsBase):
                       home_postal_code='_test_home_postal_code',
                       home_country='_test_home_country',
                       photo_url='_test_photo_url',
-                      expiry_option='10',
+                      expiry_option='foo',
                       description='_test_description')
 
         self.verify_details_page(0, details={
@@ -2286,10 +2301,10 @@ class PersonNoteTests(TestsBase):
         assert expected_content == doc.content, \
             text_diff(expected_content, doc.content)
 
-        # Verify that PFIF 1.2 is the default version.
+        # Verify that PFIF 1.2 is not the default version.
         default_doc = self.go(
             '/api/read?subdomain=haiti&id=test.google.com/person.123')
-        assert default_doc.content == doc.content
+        assert default_doc.content != doc.content
 
 
         # Fetch a PFIF 1.3 document.
@@ -2337,6 +2352,15 @@ class PersonNoteTests(TestsBase):
 '''
         assert expected_content == doc.content, \
             text_diff(expected_content, doc.content)
+
+        # Fetch a PFIF  document.
+        # verify that 1.3 is the default version
+        doc = self.go('/api/read?subdomain=haiti' +
+                      '&id=test.google.com/person.123')
+
+        assert expected_content == doc.content, \
+            text_diff(expected_content, doc.content)
+
 
         # Fetch a PFIF 1.2 document, with full read authorization.
         doc = self.go('/api/read?subdomain=haiti&key=full_read_key' +
@@ -2542,10 +2566,10 @@ class PersonNoteTests(TestsBase):
         # verify the log got written.
         verify_api_log(ApiActionLog.READ, api_key='')
 
-        # Verify that PFIF 1.2 is the default version.
+        # Verify that PFIF 1.2 is not the default version.
         default_doc = self.go(
             '/api/read?subdomain=haiti&id=test.google.com/person.123')
-        assert default_doc.content == doc.content, \
+        assert default_doc.content != doc.content, \
             text_diff(default_doc.content, doc.content)
 
         # Fetch a PFIF 1.3 document.
@@ -2569,10 +2593,10 @@ class PersonNoteTests(TestsBase):
         assert expected_content == doc.content, \
             text_diff(expected_content, doc.content)
 
-        # Verify that PFIF 1.3 is not the default version.
+        # Verify that PFIF 1.3 is the default version.
         default_doc = self.go(
             '/api/read?subdomain=haiti&id=test.google.com/person.123')
-        assert default_doc.content != doc.content
+        assert default_doc.content == doc.content
 
 
     def test_search_api(self):
@@ -2648,10 +2672,11 @@ class PersonNoteTests(TestsBase):
                           '&q=_wrong_last_name')
             assert self.s.status not in [403,404]
             empty_pfif = '''<?xml version="1.0" encoding="UTF-8"?>
-<pfif:pfif xmlns:pfif="http://zesty.ca/pfif/1.2">
+<pfif:pfif xmlns:pfif="http://zesty.ca/pfif/1.3">
 </pfif:pfif>
 '''
-            assert (empty_pfif == doc.content)
+            assert (empty_pfif == doc.content), \
+                text_diff(empty_pfif, doc.content)                
 
             # Check that we can get results without a key if no key is required.
             config.set_for_subdomain('haiti', search_auth_key_required=False)
@@ -2739,7 +2764,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti</id>
   <title>%s</title>
   <updated>2010-01-02T03:04:05Z</updated>
@@ -2752,6 +2777,7 @@ class PersonNoteTests(TestsBase):
       <pfif:source_name>_feed_source_name</pfif:source_name>
       <pfif:source_date>2001-02-03T04:05:06Z</pfif:source_date>
       <pfif:source_url>_feed_source_url</pfif:source_url>
+      <pfif:full_name></pfif:full_name>
       <pfif:first_name>_feed_first_name</pfif:first_name>
       <pfif:last_name>_feed_last_name</pfif:last_name>
       <pfif:sex>male</pfif:sex>
@@ -2800,7 +2826,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti&omit_notes=yes')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti&amp;omit_notes=yes</id>
   <title>%s</title>
   <updated>2010-01-02T03:04:05Z</updated>
@@ -2813,6 +2839,7 @@ class PersonNoteTests(TestsBase):
       <pfif:source_name>_feed_source_name</pfif:source_name>
       <pfif:source_date>2001-02-03T04:05:06Z</pfif:source_date>
       <pfif:source_url>_feed_source_url</pfif:source_url>
+      <pfif:full_name></pfif:full_name>
       <pfif:first_name>_feed_first_name</pfif:first_name>
       <pfif:last_name>_feed_last_name</pfif:last_name>
       <pfif:sex>male</pfif:sex>
@@ -2846,7 +2873,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti&key=full_read_key')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti&amp;key=full_read_key</id>
   <title>%s</title>
   <updated>2010-01-02T03:04:05Z</updated>
@@ -2861,6 +2888,7 @@ class PersonNoteTests(TestsBase):
       <pfif:source_name>_feed_source_name</pfif:source_name>
       <pfif:source_date>2001-02-03T04:05:06Z</pfif:source_date>
       <pfif:source_url>_feed_source_url</pfif:source_url>
+      <pfif:full_name></pfif:full_name>
       <pfif:first_name>_feed_first_name</pfif:first_name>
       <pfif:last_name>_feed_last_name</pfif:last_name>
       <pfif:sex>male</pfif:sex>
@@ -2941,7 +2969,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/note?subdomain=haiti')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/note?subdomain=haiti</id>
   <title>%s</title>
   <updated>2006-06-06T06:06:06Z</updated>
@@ -2992,7 +3020,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti</id>
   <title>%s</title>
   <updated>2010-01-02T03:04:05Z</updated>
@@ -3003,6 +3031,7 @@ class PersonNoteTests(TestsBase):
       <pfif:entry_date>2010-01-02T03:04:05Z</pfif:entry_date>
       <pfif:author_name>illegal character ()</pfif:author_name>
       <pfif:source_date>2001-02-03T04:05:06Z</pfif:source_date>
+      <pfif:full_name></pfif:full_name>
       <pfif:first_name>illegal character ()</pfif:first_name>
       <pfif:last_name>illegal character ()</pfif:last_name>
     </pfif:person>
@@ -3043,7 +3072,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti')
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti</id>
   <title>%s</title>
   <updated>2010-01-02T03:04:05Z</updated>
@@ -3056,6 +3085,7 @@ class PersonNoteTests(TestsBase):
       <pfif:source_name>c with cedilla = \xc3\xa7</pfif:source_name>
       <pfif:source_date>2001-02-03T04:05:06Z</pfif:source_date>
       <pfif:source_url>e with acute = \xc3\xa9</pfif:source_url>
+      <pfif:full_name></pfif:full_name>
       <pfif:first_name>greek alpha = \xce\xb1</pfif:first_name>
       <pfif:last_name>hebrew alef = \xd7\x90</pfif:last_name>
     </pfif:person>
@@ -3424,7 +3454,7 @@ class PersonNoteTests(TestsBase):
             data='subdomain=haiti&' +
                  'id=haiti.person-finder.appspot.com/person.123&' +
                  'reason_for_deletion=spam_received&test_mode=yes')
-        assert len(MailThread.messages) == 2
+        self.verify_email_sent(2)
         messages = sorted(MailThread.messages, key=lambda m: m['to'][0])
 
         # After sorting by recipient, the second message should be to the
@@ -3523,7 +3553,7 @@ class PersonNoteTests(TestsBase):
         doc = self.go('/feeds/person?subdomain=haiti')  # PFIF 1.2
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
-      xmlns:pfif="http://zesty.ca/pfif/1.2">
+      xmlns:pfif="http://zesty.ca/pfif/1.3">
   <id>http://%s/feeds/person?subdomain=haiti</id>
   <title>%s</title>
   <updated>2010-01-02T00:00:00Z</updated>
@@ -3532,9 +3562,9 @@ class PersonNoteTests(TestsBase):
     <pfif:person>
       <pfif:person_record_id>haiti.person-finder.appspot.com/person.123</pfif:person_record_id>
       <pfif:entry_date>2010-01-02T00:00:00Z</pfif:entry_date>
+      <pfif:expiry_date>2010-01-02T00:00:00Z</pfif:expiry_date>
       <pfif:source_date>2010-01-02T00:00:00Z</pfif:source_date>
-      <pfif:first_name></pfif:first_name>
-      <pfif:last_name></pfif:last_name>
+      <pfif:full_name></pfif:full_name>
     </pfif:person>
     <id>pfif:haiti.person-finder.appspot.com/person.123</id>
     <author>
@@ -3711,7 +3741,7 @@ class PersonNoteTests(TestsBase):
                              'reason_for_deletion=spam_received&test_mode=yes')
 
         # Run the DeleteExpired task.
-        doc = self.s.go('/tasks/delete_expired')
+        doc = self.s.go('/tasks/delete_expired?subdomain=haiti')
 
         # The Person and Note records should be marked expired but retain data.
         person = db.get(person.key())
@@ -3752,18 +3782,24 @@ class PersonNoteTests(TestsBase):
         assert expected_content == doc.content, \
             text_diff(expected_content, doc.content)
 
+        self.verify_email_sent(2) # notification for delete.
+        MailThread.messages = []
+
         # Advance time past the end of the expiration grace period.
         now = datetime.datetime(2010, 1, 6, 0, 0, 0)
         self.set_utcnow_for_test(now)
 
         # Run the DeleteExpired task.
-        doc = self.s.go('/tasks/delete_expired')
+        doc = self.s.go('/tasks/delete_expired?subdomain=haiti')
 
         # The Person record should still exist but now be empty.
         # The timestamps should be unchanged.
+
+        self.verify_email_sent(0) # no notification for wipe.
         person = db.get(person.key())
         assert person.is_expired
-        assert person.first_name == None
+        assert person.first_name == None, \
+            'found first_name: %s' % person.first_name
         assert person.source_date == datetime.datetime(2010, 1, 2, 0, 0, 0)
         assert person.entry_date == datetime.datetime(2010, 1, 2, 0, 0, 0)
         assert person.expiry_date == datetime.datetime(2010, 1, 2, 0, 0, 0)
@@ -3817,7 +3853,7 @@ class PersonNoteTests(TestsBase):
         self.set_utcnow_for_test(now)
 
         # Run the DeleteExpired task.
-        self.s.go('/tasks/delete_expired').content
+        self.s.go('/tasks/delete_expired?subdomain=haiti').content
 
         # The Person record should be hidden but not yet gone.
         # The timestamps should reflect the time that the record was hidden.
@@ -3854,7 +3890,7 @@ class PersonNoteTests(TestsBase):
         self.set_utcnow_for_test(now)
 
         # Run the DeleteExpired task.
-        self.s.go('/tasks/delete_expired').content
+        self.s.go('/tasks/delete_expired?subdomain=haiti').content
 
         # The Person record should still exist but now be empty.
         # The timestamps should be unchanged.
@@ -4906,8 +4942,10 @@ def main():
 
         reset_data()  # Reset the datastore for the first test.
         unittest.main()  # You can select tests using command-line arguments.
+
     except Exception, e:
         # Something went wrong during testing.
+        print >>sys.stderr, 'caught exception : %s' % e
         for thread in threads:
             if hasattr(thread, 'flush_output'):
                 thread.flush_output()
