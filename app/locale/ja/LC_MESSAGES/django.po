@@ -69,30 +69,6 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>\n"
 "    "
 
-msgid ""
-"\n"
-"<table style=\"margin:1em 0;\">\n"
-"<tr><td colspan=\"3\"><strong>Query Samples</strong></td></tr>\n"
-"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
-"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
-"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana "
-"reading</td></tr>\n"
-"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by "
-"romaji</td></tr>\n"
-"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone "
-"number</td></tr>\n"
-"</table>\n"
-msgstr ""
-"\n"
-"<table style=\"margin:1em 0;\">\n"
-"<tr><td colspan=\"3\"><strong>（検索の例）</strong></td></tr>\n"
-"<tr><td>日本太郎</td><td>...</td><td>フルネームで検索</td></tr>\n"
-"<tr><td>日本太郎 仙台市</td><td>...</td><td>住所で絞り込み</td></tr>\n"
-"<tr><td>にっぽんたろう</td><td>...</td><td>読み仮名（ひらがな）で検索</td></tr>\n"
-"<tr><td>Nippon Taro</td><td>...</td><td>ローマ字で検索</td></tr>\n"
-"<tr><td>090-1234-xxxx</td><td>...</td><td>携帯電話番号で検索</td></tr>\n"
-"</table>\n"
-
 #, python-format
 msgid ""
 "\n"
@@ -145,10 +121,8 @@ msgstr ""
 msgid ""
 "\n"
 "A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
+" %(site_url)s.\n"
 msgstr ""
-"\n"
-"「%(first_name)s %(last_name)s」さんの状況に関する情報が投稿されました（%(site_url)s）:"
 
 #, python-format
 msgid ""
@@ -356,14 +330,6 @@ msgid "Follow this link to create a new record"
 msgstr "このリンクを使用して新しい記録を作成できます"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database.<br>For a mobile phone number, redirects you to messages "
-"registered to the mobile carrier."
-msgstr ""
-"名前を入れるとパーソンファインダーの消息情報が表示され、<br>"
-"携帯電話番号を入力すると、各携帯電話会社の災害伝言板の登録情報が表示されます。"
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -529,6 +495,9 @@ msgstr "状況は投稿されていません"
 
 msgid "Not spam"
 msgstr "スパムではありません"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr "(注) 一部のよみがなは自動生成されているため、間違っている可能性があります。"
@@ -819,10 +788,6 @@ msgstr "この記録が目的を果たしたから"
 msgid "This record is a duplicate of"
 msgstr "この記録は次の記録と重複しています:"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "この記録は次の記録と重複しています:"
-
 msgid "This record is copied from another source."
 msgstr "この記録は別の情報源からコピーしたものです。"
 
@@ -831,6 +796,9 @@ msgstr "この記録が不適切な情報だから"
 
 msgid "This record is spam."
 msgstr "この記録がスパム情報だから"
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "情報を表示または追加するには、下に表示されている名前を選択してください。"
@@ -916,19 +884,15 @@ msgid "You can view the full record at %(view_url)s"
 msgstr "すべての記録は %(view_url)s で見ることができます。"
 
 msgid "You have successfully subscribed."
-msgstr "アップデートの受け取りが正しく設定されました。"
+msgstr "アップデートを受け取るように設定されました。"
 
 msgid "You have successfully unsubscribed."
-msgstr "アップデートを受け取るように、すでに設定されています。"
+msgstr "アップデートの受け取りが停止されました。"
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"この人の新着情報を受け取るための登録が完了しました。\n"
-"登録を解除する場合は、次のリンクから手続きしてください: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "あなたのメール アドレス"

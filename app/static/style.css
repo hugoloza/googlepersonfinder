@@ -150,6 +150,15 @@ td.submit {
   font-weight: bold;
 }
 
+.custom-message {
+  width: 500px;
+  margin: 1em 0;
+}
+
+.clear {
+  clear: both;
+}
+
 /* Footer */
 
 .disclaimer {

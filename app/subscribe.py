@@ -47,15 +47,6 @@ def get_unsubscribe_link(handler, person, email, ttl=7*24*3600):
     return handler.get_url('/unsubscribe', token=token, email=email,
                            id=person.record_id)
 
-def get_sender(handler):
-    """Return the default sender of subscribe emails."""
-    # Sender address for the server must be of the following form to get
-    # permission to send emails: foo@app-id.appspotmail.com
-    # Here, the domain is automatically retrieved and altered as appropriate.
-    # TODO(kpy) Factor this out of subscribe
-    domain = handler.env.parent_domain.replace('appspot.com', 'appspotmail.com')
-    return 'Do Not Reply <do-not-reply@%s>' % domain
-
 def subscribe_to(handler, subdomain, person, email, lang):
     """Add a subscription on a person for an e-mail address"""
     existing = model.Subscription.get(subdomain, person.record_id, email)
@@ -72,33 +63,55 @@ def subscribe_to(handler, subdomain, person, email, lang):
     send_subscription_confirmation(handler, person, email)
     return subscription
 
-def send_notifications(person, note, handler, linked_person_id=None):
-    """Sends status updates about the person"""
-    sender = get_sender(handler)
+def send_notifications(handler, updated_person, notes, follow_links=True):
+    """Sends status updates about the person
+
+    Subscribers to the updated_person and to all person records marked as its
+    duplicate will be notified. Each element of notes should belong to the
+    updated_person. If follow_links=False, only notify subscribers to the
+    updated_person, ignoring linked Person records.
+    """
+    linked_persons = []
+    if follow_links:
+        linked_persons = updated_person.get_all_linked_persons()
+    # Dictionary of
+    # (subscriber_email, [person_subscribed_to, subscriber_language]) pairs
+    subscribers = {}
+    # Subscribers to duplicates of updated_person
+    for p in linked_persons:
+        for sub in p.get_subscriptions():
+            subscribers[sub.email] = [p, sub.language]
+    # Subscribers to updated_person
+    for sub in updated_person.get_subscriptions():
+        subscribers[sub.email] = [updated_person, sub.language]
     try:
-        for sub in person.get_subscriptions():
-            if is_email_valid(sub.email):
-                django.utils.translation.activate(sub.language)
-                subject = _('[Person Finder] Status update for %(given_name)s '
-                            '%(family_name)s') % {
-                            'given_name': escape(person.first_name),
-                            'family_name': escape(person.last_name)}
-                body = handler.render_to_string(
-                    'person_status_update_email.txt',
-                    first_name=person.first_name,
-                    last_name=person.last_name,
-                    note=note,
-                    note_status_text=get_note_status_text(note),
-                    linked_person_url=handler.get_url('/view', id=linked_person_id),
-                    site_url=handler.get_url('/'),
-                    view_url=handler.get_url('/view', id=person.record_id),
-                    unsubscribe_link=get_unsubscribe_link(handler, person,
-                                                          sub.email))
-                taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
-                              params={'sender': sender,
-                                      'to': sub.email,
-                                      'subject': subject,
-                                      'body': body})
+        for note in notes:
+            if note.person_record_id != updated_person.record_id:
+                continue
+            for email, (subscribed_person, language) in subscribers.items():
+                subscribed_person_url = \
+                    handler.get_url('/view', id=subscribed_person.record_id)
+                if is_email_valid(email):
+                    django.utils.translation.activate(language)
+                    subject = \
+                        _('[Person Finder] Status update for %(given_name)s '
+                          '%(family_name)s') % {
+                            'given_name': escape(updated_person.first_name),
+                            'family_name': escape(updated_person.last_name)}
+                    body = handler.render_to_string(
+                        'person_status_update_email.txt',
+                        first_name=updated_person.first_name,
+                        last_name=updated_person.last_name,
+                        note=note,
+                        note_status_text=get_note_status_text(note),
+                        subscribed_person_url=subscribed_person_url,
+                        site_url=handler.get_url('/'),
+                        view_url=handler.get_url('/view',
+                                                 id=updated_person.record_id),
+                        unsubscribe_link=get_unsubscribe_link(handler,
+                                                              subscribed_person,
+                                                              email))
+                    handler.send_mail(email, subject, body)
     finally:
         django.utils.translation.activate(handler.env.lang)
 
@@ -116,11 +129,7 @@ def send_subscription_confirmation(handler, person, email):
         site_url=handler.get_url('/'),
         view_url=handler.get_url('/view', id=person.record_id),
         unsubscribe_link=get_unsubscribe_link(handler, person, email))
-    taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
-                  params={'sender': get_sender(handler),
-                          'to': email,
-                          'subject': subject,
-                          'body': body})
+    handler.send_mail(email, subject, body)
 
 class Subscribe(Handler):
     """Handles requests to subscribe to notifications on Person and
