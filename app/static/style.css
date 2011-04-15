@@ -150,6 +150,15 @@ td.submit {
   font-weight: bold;
 }
 
+.custom-message {
+  width: 500px;
+  margin: 1em 0;
+}
+
+.clear {
+  clear: both;
+}
+
 /* Footer */
 
 .disclaimer {
@@ -365,10 +374,15 @@ label.option {
 
 div.languages {
   float: right;
+  width: 350px;
 }
 
 div.languages .selected {
   font-weight: bold;
+}
+
+div.languages a {
+  white-space: nowrap;
 }
 
 /* results page */
@@ -504,26 +518,6 @@ form.admin .option label {
   width: 20em;
 }
 
-/* dashboard page */
-
-table.counts {
-  border-collapse: collapse;
-}
-
-table.counts th, table.counts td {
-  padding: 4px 8px;
-  border: 1px solid #aaa;
-}
-
-table.counts th {
-  text-align: left;
-  font-weight: bold;
-}
-
-table.counts td {
-  text-align: right;
-}
-
 .subscribe_email_error {
   color: #f00;
 }
@@ -591,4 +585,24 @@ table.review .no-email {
 
 table.review .entry-date {
   color: #aaa;
+}
+
+/* dashboard page */
+
+table.counts {
+  border-collapse: collapse;
+}
+
+table.counts th, table.counts td {
+  padding: 4px 8px;
+  border: 1px solid #aaa;
+}
+
+table.counts th {
+  text-align: left;
+  font-weight: bold;
+}
+
+table.counts td {
+  text-align: right;
 }

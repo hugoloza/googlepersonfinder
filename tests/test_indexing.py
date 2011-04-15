@@ -1,4 +1,5 @@
 #!/usr/bin/python2.5
+# encoding=utf-8
 #
 # Copyright 2010 Google Inc. All Rights Reserved.
 
@@ -24,6 +25,9 @@ def create_person(first_name, last_name):
 
 class IndexingTests(unittest.TestCase):
     def setUp(self):
+        db.delete(model.Person.all())
+
+    def tearDown(self):
         db.delete(model.Person.all())
 
     def add_persons(self, *persons):
@@ -130,6 +134,20 @@ class IndexingTests(unittest.TestCase):
             (WEN, ZHU + DI),  # then: match query characters out of order
         ]
 
+    def test_sort_query_words(self):
+        # Sorted lexicographically.
+        assert indexing.sort_query_words(
+            ['CC', 'BB', 'AA']) == ['AA', 'BB', 'CC']
+        # Sorted by lengths.
+        assert indexing.sort_query_words(
+            ['A', 'AA', 'AAA']) == ['AAA', 'AA', 'A']
+        # Sorted by popularity.
+        assert indexing.sort_query_words(
+            [u'川', u'口', u'良']) == [u'口', u'良', u'川']
+        # Test sort key precedence.
+        assert indexing.sort_query_words(
+            ['CCC', 'BB', 'AA', 'A']) == ['CCC', 'AA', 'BB', 'A']
+
     def test_search(self):
         persons = [create_person(first_name='Bryan', last_name='abc'),
                    create_person(first_name='Bryan', last_name='abcef'),
@@ -169,7 +187,6 @@ class IndexingTests(unittest.TestCase):
         assert self.get_matches(u'\u4f59\u5609\u5e73') == \
             [(u'\u4f59\u5609\u5e73', 'foo')]
 
-
     def test_cjk_last_only(self):
         self.add_persons(
             create_person(first_name='foo', last_name=u'\u4f59\u5609\u5e73'),
@@ -194,7 +211,6 @@ class IndexingTests(unittest.TestCase):
         assert self.get_matches(u'\u4f59\u5609\u5e73') == \
             [('foo', u'\u4f59\u5609\u5e73')]
 
-
     def test_cjk_first_last(self):
         self.add_persons(
             create_person(first_name=u'\u5609\u5e73', last_name=u'\u4f59'),
@@ -218,6 +234,10 @@ class IndexingTests(unittest.TestCase):
             [(u'\u5609\u5e73', u'\u4f59')]
         assert self.get_matches(u'\u4f59\u5609\u5e73') == \
             [(u'\u5609\u5e73', u'\u4f59')]
+
+    def test_no_query_terms(self):
+        # Regression test (this used to throw an exception).
+        assert indexing.search('test', TextQuery(''), 100) == []
 
 
 if __name__ == '__main__':

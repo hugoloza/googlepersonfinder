@@ -77,22 +77,24 @@ class Dashboard(Handler):
         counter_names = ['person.all', 'note.all']
         counter_names += ['person.status=' + status
                           for status in [''] + pfif.NOTE_STATUS_VALUES]
+        counter_names += ['person.linked_persons=%d' % n for n in range(10)]
+        counter_names += ['note.last_known_location', 'note.linked_person']
         counter_names += ['note.status=' + status
                           for status in [''] + pfif.NOTE_STATUS_VALUES]
-        counter_names += ['note.location=', 'note.location=present']
         for subdomain in subdomains:
             data['counts'][subdomain] = dict(
                 (name, Counter.get_count(subdomain, name))
                 for name in counter_names)
 
-        data['original_domains'] = {}
-        for subdomain in subdomains:
-            counts = Counter.get_all_counts(subdomain, 'person')
-            domain_count_pairs = [
-                (name.split('=', 1)[1], counts[name])
-                for name in counts if name.startswith('original_domain=')]
-            data['original_domains'][subdomain] = sorted(
-                domain_count_pairs, key=lambda pair: -pair[1])
+        for kind in ['person', 'note']:
+            data[kind + '_original_domains'] = {}
+            for subdomain in subdomains:
+                counts = Counter.get_all_counts(subdomain, kind)
+                domain_count_pairs = [
+                    (name.split('=', 1)[1], counts[name])
+                    for name in counts if name.startswith('original_domain=')]
+                data[kind + '_original_domains'][subdomain] = sorted(
+                    domain_count_pairs, key=lambda pair: -pair[1])
 
         # Encode the data as JSON.
         json = simplejson.dumps(data, default=encode_date)
