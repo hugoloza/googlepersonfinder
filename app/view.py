@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
 from google.appengine.api import datastore_errors
 
 from model import *
@@ -27,15 +25,21 @@ from django.utils.translation import ugettext as _
 
 class View(Handler):
     def get(self):
+        redirect_url = self.maybe_redirect_jp_tier2_mobile()
+        if redirect_url:
+            return self.redirect(redirect_url)
+
         # Check the request parameters.
         if not self.params.id:
             return self.error(404, 'No person id was specified.')
         try:
             person = Person.get(self.subdomain, self.params.id)
         except ValueError:
-            return self.error(404, 'There is no record for the specified id.')
+            return self.error(404,
+                _("This person's entry does not exist or has been deleted."))
         if not person:
-            return self.error(404, 'There is no record for the specified id.')
+            return self.error(404,
+                _("This person's entry does not exist or has been deleted."))
         standalone = self.request.get('standalone')
 
         # Check if private info should be revealed.
@@ -43,14 +47,9 @@ class View(Handler):
         reveal_url = reveal.make_reveal_url(self, content_id)
         show_private_info = reveal.verify(content_id, self.params.signature)
 
-        # Select the time zone for display. (JAPAN ONLY)
-        time_zone, time_zone_offset = 'UTC', timedelta(0)
-        if self.subdomain == 'japan':
-            time_zone, time_zone_offset = 'JST', timedelta(0, 3600*9)  # UTC+9
-
-        # Compute the local time for the person.
-        person.source_date_local = person.source_date and (
-            person.source_date + time_zone_offset)
+        # Compute the local times for the date fields on the person.
+        person.source_date_local = self.to_local_time(person.source_date)
+        person.expiry_date_local = self.to_local_time(person.expiry_date)
 
         # Get the notes and duplicate links.
         try:
@@ -66,10 +65,9 @@ class View(Handler):
                 self.get_url('/flag_note', id=note.note_record_id,
                              hide=(not note.hidden) and 'yes' or 'no',
                              signature=self.params.signature)
-            note.source_date_local = note.source_date and (
-                note.source_date + time_zone_offset)
+            note.source_date_local = self.to_local_time(note.source_date)
         try:
-            linked_persons = person.get_linked_persons(note_limit=200)
+            linked_persons = person.get_all_linked_persons()
         except datastore_errors.NeedIndexError:
             linked_persons = []
         linked_person_info = [
@@ -87,10 +85,15 @@ class View(Handler):
             query=self.params.query,
             first_name=self.params.first_name,
             last_name=self.params.last_name)
+        feed_url = self.get_url(
+            '/feeds/note',
+            person_record_id=self.params.id,
+            subdomain=self.subdomain)
         subscribe_url = self.get_url('/subscribe', id=self.params.id)
 
         if person.is_clone():
             person.provider_name = person.get_original_domain()
+        person.full_name = get_person_full_name(person, self.config)
 
         self.render('templates/view.html',
                     person=person,
@@ -103,8 +106,8 @@ class View(Handler):
                     dupe_notes_url=dupe_notes_url,
                     results_url=results_url,
                     reveal_url=reveal_url,
-                    time_zone=time_zone,
-                    subscribe_url=subscribe_url)
+                    feed_url=feed_url,
+	            subscribe_url=subscribe_url)
 
     def post(self):
         if not self.params.text:
@@ -121,8 +124,10 @@ class View(Handler):
                 200, _('Please check that you have been in contact with '
                        'the person after the earthquake, or change the '
                        '"Status of this person" field.'))
+
         note = Note.create_original(
             self.subdomain,
+            entry_date=get_utcnow(),
             person_record_id=self.params.id,
             author_name=self.params.author_name,
             author_email=self.params.author_email,
@@ -155,8 +160,7 @@ class View(Handler):
             person.update_from_note(note)
             # Send notification to all people
             # who subscribed to updates on this person
-            subscribe.send_notifications(person, note, self)
-
+            subscribe.send_notifications(self, person, [note])
             entities_to_put.append(person)
 
         # Write one or both entities to the store.
