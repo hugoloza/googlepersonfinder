@@ -15,6 +15,7 @@
 
 __author__ = 'kpy@google.com (Ka-Ping Yee) and many other Googlers'
 
+import calendar
 import cgi
 from datetime import datetime, timedelta
 import httplib
@@ -26,6 +27,7 @@ import random
 import re
 import time
 import traceback
+import unicodedata
 import urllib
 import urlparse
 
@@ -324,11 +326,17 @@ def validate_approximate_date(string):
     return ''
 
 AGE_RE = re.compile(r'^\d+(-\d+)?$')
+# Hyphen with possibly surrounding whitespaces.
+HYPHEN_RE = re.compile(
+    ur'\s*[-\u2010-\u2015\u2212\u301c\u30fc\ufe58\ufe63\uff0d]\s*',
+    re.UNICODE)
 
 def validate_age(string):
     """Validates the 'age' parameter, returning a canonical value or ''."""
     if string:
         string = strip(string)
+        string = unicodedata.normalize('NFKC', unicode(string))
+        string = HYPHEN_RE.sub('-', string)
         if AGE_RE.match(string):
             return string
     return ''
@@ -371,7 +379,8 @@ def validate_version(string):
     """Version, if present, should be in pfif versions."""
     if string and strip(string) not in pfif.PFIF_VERSIONS:
         raise ValueError('Bad pfif version: %s' % string)
-    return string
+    # TODO(lschumacher) use default version when merging to 'default'.
+    return string or '1.2'
 
 
 # ==== Other utilities =========================================================
@@ -415,6 +424,11 @@ def get_utcnow():
     global _utcnow_for_test
     return _utcnow_for_test or datetime.utcnow()
 
+def get_utcnow_seconds():
+    """Return current time in seconds in utc, or debug value if set."""
+    now = get_utcnow()
+    return calendar.timegm(now.utctimetuple()) + now.microsecond * 1e-6
+
 def get_local_message(local_messages, lang, default_message):
     """Return a localized message for lang where local_messages is a dictionary
     mapping language codes and localized messages, or return default_message if
@@ -422,6 +436,37 @@ def get_local_message(local_messages, lang, default_message):
     if not isinstance(local_messages, dict):
         return default_message
     return local_messages.get(lang, local_messages.get('en', default_message))
+
+def log_api_action(handler, action, num_person_records=0, num_note_records=0,
+               people_skipped=0, notes_skipped=0):
+    """Log an api action."""
+    log = handler.config and handler.config.api_action_logging
+    if log:
+        model.ApiActionLog.record_action(
+            handler.subdomain, handler.params.key,
+            handler.params.version, action,
+            num_person_records, num_note_records,
+            people_skipped, notes_skipped,
+            handler.request.headers.get('User-Agent'),
+            handler.request.remote_addr, handler.request.url)
+
+def get_full_name(first_name, last_name, config):
+    """Return full name string obtained by concatenating first_name and
+    last_name in the order specified by config.family_name_first, or just
+    first_name if config.use_family_name is False."""
+    if config.use_family_name:
+        separator = (first_name and last_name) and u' ' or u''
+        if config.family_name_first:
+            return separator.join([last_name, first_name])
+        else:
+            return separator.join([first_name, last_name])
+    else:
+        return first_name
+
+def get_person_full_name(person, config):
+    """Return person's full name.  "person" can be any object with "first_name"
+    and "last_name" attributes."""
+    return get_full_name(person.first_name, person.last_name, config)
 
 # ==== Base Handler ============================================================
 
@@ -899,6 +944,10 @@ class Handler(webapp.RequestHandler):
                     self.config.results_page_custom_htmls, lang, '')
         self.env.jp_mobile_carrier_redirect = \
             self.config.jp_mobile_carrier_redirect
+
+        # Pre-format full name using self.params.{first_name,last_name}.
+        self.env.params_full_name = get_person_full_name(
+            self.params, self.config)
 
         # Provide the contents of the language menu.
         self.env.language_menu = [

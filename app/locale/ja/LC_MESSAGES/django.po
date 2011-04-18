@@ -21,6 +21,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 # Copyright 2010 Google Inc.
 msgid ""
@@ -211,6 +212,9 @@ msgstr ""
 "ん。管理者が原因を調査しますが、念のためリクエストの形式が正しいかどうかをご"
 "確認ください。"
 
+msgid "This person's entry does not exist or has been deleted."
+msgstr "この方の情報は削除されたか、存在しません。"
+
 msgid "Tell us the status of this person"
 msgstr "この人の状況について教えてください"
 
@@ -376,6 +380,21 @@ msgstr "名（よみがな）"
 msgid "Alternate names"
 msgstr "名前（よみがな）"
 
+msgid "Physical characteristics"
+msgstr "身体の特徴"
+
+msgid "Describe the physical characteristics of this person."
+msgstr "この人の身体的特徴を入力してください。"
+
+msgid "Sex"
+msgstr "性別"
+
+msgid "Age"
+msgstr "年齢"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr "半角数字。ハイフンで<br>範囲指定も可（例. 20-30）"
+
 msgid "Home Address"
 msgstr "自宅住所"
 
@@ -404,7 +423,7 @@ msgid "Description"
 msgstr "説明"
 
 msgid "Describe how to identify this person."
-msgstr "この人の特徴を入力してください。"
+msgstr "この人のその他の特徴を入力してください。"
 
 msgid "Photo"
 msgstr "写真"
@@ -649,17 +668,8 @@ msgstr "現在、およそ %(num_people)s 件の記録が登録されていま�
 msgid "Compare these records"
 msgstr "記録の比較"
 
-msgid "Physical characteristics"
-msgstr "身体の特徴"
-
-msgid "Sex"
-msgstr "性別"
-
 msgid "Date of birth"
 msgstr "誕生日"
-
-msgid "Age"
-msgstr "年齢"
 
 msgid "Home address"
 msgstr "自宅住所"
@@ -764,10 +774,48 @@ msgid "Enter the person's name."
 msgstr "その人の名前を入力してください。"
 
 msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "その人の名前、名前の一部、または携帯電話番号を入力してください。"
+
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
 msgstr ""
-"その人の名前、名前の一部、または携帯電話番号（半角数字）を入力してください。"
-"（ひらがなやローマ字でも可）<br>（携帯電話番号を入力すると、各携帯電話会社の"
-"災害伝言板に移動します。）"
+"\n"
+"<strong>（検索の例）</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>フルネームで検索</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>住所で絞り込み</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>読み仮名（ひらがな）で検索</td></"
+"tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>ローマ字で検索</td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>携帯電話番号で検索</td></tr>\n"
+"</table>\n"
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+"名前を入れるとパーソンファインダーの消息情報が表示され、携帯電話番号を入力す"
+"ると、各携帯電話会社の災害伝言板の登録情報が表示されます。"
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+"<b>携帯電話以外の電話番号の場合はNTTの緊急用ダイヤル、または<a href="
+"\"https://www.web171.jp/\">災害用ブロードバンド伝言板</a>をご利用ください。</"
+"b><br><b>緊急用ダイヤルで伝言を残す</b>&nbsp;&nbsp;&nbsp;171+1+電話番号"
+"<br><b>緊急用ダイヤルで伝言を再生</b>&nbsp;&nbsp;&nbsp;171+2+電話番号"
 
 msgid "Enter the person's name or parts of the name."
 msgstr ""
@@ -851,6 +899,10 @@ msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 "(注) 一部のよみがなは自動生成されているため、間違っている可能性があります。"
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr "名前及び住所が \"%(query)s\" に一致した検索結果"
+
 msgid "Provided by:"
 msgstr "提供元:"
 
@@ -872,6 +924,12 @@ msgstr "次の人に一致する結果が見つかりませんでした"
 
 msgid "We have nothing matching your search."
 msgstr "一致する記録が見つかりませんでした。"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
+"この携帯電話番号での各社災害用伝言板へのメッセージ登録は見つかりませんでし"
+"た。"
 
 msgid "Follow this link to create a new record"
 msgstr "このリンクを使用して新しい記録を作成できます"
@@ -946,6 +1004,3 @@ msgstr "状況は投稿されていません"
 
 msgid "Delete this record"
 msgstr "このレコードを削除します"
-
-#~ msgid "You are successfully subscribed."
-#~ msgstr "アップデートの受け取りが正しく設定されました。"

@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -207,6 +208,10 @@ msgstr ""
 "besvär. Våra administratörer kommer att undersöka källan till problemet, men "
 "kontrollera gärna att begärans format är korrekt."
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Posten har tagits bort."
+
 msgid "Tell us the status of this person"
 msgstr "Berätta för oss vilken status personen har"
 
@@ -373,6 +378,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Gatunamn"
+
+msgid "Physical characteristics"
+msgstr "Fysiska kännetecken"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Beskriv hur personen kan identifieras."
+
+msgid "Sex"
+msgstr "Kön"
+
+msgid "Age"
+msgstr "Ålder"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Hemadress"
@@ -656,17 +677,8 @@ msgstr "Spårar för närvarande ungefär %(num_people)s poster."
 msgid "Compare these records"
 msgstr "Jämför dessa poster"
 
-msgid "Physical characteristics"
-msgstr "Fysiska kännetecken"
-
-msgid "Sex"
-msgstr "Kön"
-
 msgid "Date of birth"
 msgstr "Födelsedatum"
-
-msgid "Age"
-msgstr "Ålder"
 
 msgid "Home address"
 msgstr "Hemadress"
@@ -776,6 +788,31 @@ msgstr "Ange personens namn."
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "Ange personens namn eller delar av namnet."
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Ange personens namn eller delar av namnet."
 
@@ -854,6 +891,10 @@ msgstr "Byt till normalt visningsläge"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 #, fuzzy
 msgid "Provided by:"
 msgstr "Upplagt av"
@@ -876,6 +917,10 @@ msgstr "Det finns inga resultat för"
 
 msgid "We have nothing matching your search."
 msgstr "Vi har ingenting som matchar din sökning."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Följ den här länken om du vill skapa en ny post"

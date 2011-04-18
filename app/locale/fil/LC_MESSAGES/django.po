@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -221,6 +222,10 @@ msgstr ""
 "Sisiyasatin ng aming mga administrator ang pinagmulan ng problema, ngunit "
 "mangyaring suriin na tama ang format ng iyong hiling."
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Tinanggal na ang talaan."
+
 msgid "Tell us the status of this person"
 msgstr "Sabihin sa amin ang katayuan ng taong ito"
 
@@ -392,6 +397,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Pangalan ng kalye"
+
+msgid "Physical characteristics"
+msgstr "Mga pisikal na katangian"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Ilarawan kung paano kikilalanin ang taong ito."
+
+msgid "Sex"
+msgstr "Kasarian"
+
+msgid "Age"
+msgstr "Edad"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Address ng Tahanan"
@@ -678,17 +699,8 @@ msgstr "Kasalukuyang sinusubaybayan ang tungkol sa %(num_people)s (na) rekord."
 msgid "Compare these records"
 msgstr "Ihambing ang mga rekord na ito"
 
-msgid "Physical characteristics"
-msgstr "Mga pisikal na katangian"
-
-msgid "Sex"
-msgstr "Kasarian"
-
 msgid "Date of birth"
 msgstr "Petsa ng kapanganakan"
-
-msgid "Age"
-msgstr "Edad"
 
 msgid "Home address"
 msgstr "Address ng tahanan"
@@ -797,6 +809,31 @@ msgstr "Ilagay ang pangalan ng tao."
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "Ipasok ang pangalan o mga bahagi ng pangalan ng tao."
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Ipasok ang pangalan o mga bahagi ng pangalan ng tao."
 
@@ -877,6 +914,10 @@ msgstr "Lumipat sa mode na normal na pagtingin"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 #, fuzzy
 msgid "Provided by:"
 msgstr "Na-post ni"
@@ -899,6 +940,10 @@ msgstr "Walang resultang natagpuan para sa"
 
 msgid "We have nothing matching your search."
 msgstr "Walang tumutugma sa iyong hinahanap."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Sundan ang link na ito upang lumikha ng bagong rekord"

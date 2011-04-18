@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -197,6 +198,10 @@ msgstr ""
 "אירעה שגיאה בעיבוד הבקשה שלך.  מצטערים על אי הנוחות.  מנהלי המערכת שלנו "
 "יבדקו מה מקור הבעיה, אך עליך לוודא שהזנת את הבקשה בפורמט הנכון."
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "הרשומה נמחקה."
+
 msgid "Tell us the status of this person"
 msgstr "ספר לנו על מצבו של אדם זה"
 
@@ -358,6 +363,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "שם רחוב"
+
+msgid "Physical characteristics"
+msgstr "תכונות פיזיות"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "תאר כיצד ניתן לזהות אדם זה."
+
+msgid "Sex"
+msgstr "מין"
+
+msgid "Age"
+msgstr "גיל"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "כתובת בבית"
@@ -637,17 +658,8 @@ msgstr "מבצע כעת מעקב אחר כ-%(num_people)s רשומות."
 msgid "Compare these records"
 msgstr "השווה רשומות אלה"
 
-msgid "Physical characteristics"
-msgstr "תכונות פיזיות"
-
-msgid "Sex"
-msgstr "מין"
-
 msgid "Date of birth"
 msgstr "תאריך לידה"
-
-msgid "Age"
-msgstr "גיל"
 
 msgid "Home address"
 msgstr "כתובת בבית"
@@ -755,6 +767,31 @@ msgstr "הזן את השם של האדם."
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "הזן את שם האדם או חלקים משמו."
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "הזן את שם האדם או חלקים משמו."
 
@@ -832,6 +869,10 @@ msgstr "עבור למצב תצוגה רגילה"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 #, fuzzy
 msgid "Provided by:"
 msgstr "פורסם על ידי"
@@ -854,6 +895,10 @@ msgstr "לא נמצאו תוצאות עבור"
 
 msgid "We have nothing matching your search."
 msgstr "לא נמצאו רשומות התואמות לפרטי החיפוש שלך."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "הפעל קישור זה כדי ליצור רשומה חדשה"
