@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -212,6 +213,10 @@ msgstr ""
 "Yöneticilerimiz sorunun kaynağını araştıracaktır, lütfen siz de isteğinizin "
 "biçiminin doğru olup olmadığını kontrol edin."
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Kayıt silindi."
+
 msgid "Tell us the status of this person"
 msgstr "Bu kişinin durumu hakkında bilgi verin"
 
@@ -380,6 +385,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Sokak adı"
+
+msgid "Physical characteristics"
+msgstr "Fiziksel özellikler"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Bu kişiyi tarif edin."
+
+msgid "Sex"
+msgstr "Cinsiyet"
+
+msgid "Age"
+msgstr "Yaş"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Ev Adresi"
@@ -660,17 +681,8 @@ msgstr "Şu anda yaklaşık %(num_people)s kayıt takip ediliyor."
 msgid "Compare these records"
 msgstr "Bu kayıtları karşılaştırın"
 
-msgid "Physical characteristics"
-msgstr "Fiziksel özellikler"
-
-msgid "Sex"
-msgstr "Cinsiyet"
-
 msgid "Date of birth"
 msgstr "Doğum tarihi"
-
-msgid "Age"
-msgstr "Yaş"
 
 msgid "Home address"
 msgstr "Ev adresi"
@@ -778,6 +790,31 @@ msgstr "Kişinin adını girin."
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "Kişinin adını veya adının bir kısmını girin."
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Kişinin adını veya adının bir kısmını girin."
 
@@ -859,6 +896,10 @@ msgstr "Normal görünüm moduna geç"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 #, fuzzy
 msgid "Provided by:"
 msgstr "Yayınlayan"
@@ -881,6 +922,10 @@ msgstr "Şu arama için sonuç bulunamadı"
 
 msgid "We have nothing matching your search."
 msgstr "Hiçbir kaydımız aramanızla eşleşmiyor."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Yeni bir kayıt oluşturmak için bu bağlantıyı izleyin"

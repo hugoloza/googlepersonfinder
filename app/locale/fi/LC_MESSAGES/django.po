@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -209,6 +210,10 @@ msgstr ""
 "tutkivat ongelmaa, mutta tarkista kuitenkin, että pyyntösi on oikeassa "
 "muodossa."
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Tiedot poistettu."
+
 msgid "Tell us the status of this person"
 msgstr "Ilmoita tämän henkilön tila"
 
@@ -376,6 +381,22 @@ msgstr ""
 #, fuzzy
 msgid "Alternate names"
 msgstr "Kadun nimi"
+
+msgid "Physical characteristics"
+msgstr "Fyysiset ominaisuudet"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Kuvaile, miten tämä henkilö voidaan tunnistaa."
+
+msgid "Sex"
+msgstr "Sukupuoli"
+
+msgid "Age"
+msgstr "Ikä"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "Kotiosoite"
@@ -661,17 +682,8 @@ msgstr "Seurataan tällä hetkellä noin %(num_people)s tallennetta."
 msgid "Compare these records"
 msgstr "Vertaa näitä tallenteita"
 
-msgid "Physical characteristics"
-msgstr "Fyysiset ominaisuudet"
-
-msgid "Sex"
-msgstr "Sukupuoli"
-
 msgid "Date of birth"
 msgstr "Syntymäpäivä"
-
-msgid "Age"
-msgstr "Ikä"
 
 msgid "Home address"
 msgstr "Kotiosoite"
@@ -780,6 +792,31 @@ msgstr "Anna henkilön nimi."
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "Anna henkilön nimi tai osia nimestä."
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "Anna henkilön nimi tai osia nimestä."
 
@@ -864,6 +901,10 @@ msgstr "Vaihda normaaliin näyttötilaan"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 #, fuzzy
 msgid "Provided by:"
 msgstr "Lisäsi"
@@ -886,6 +927,10 @@ msgstr "Ei tuloksia haulla"
 
 msgid "We have nothing matching your search."
 msgstr "Haullasi ei löytynyt yhtään tuloksia."
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "Luo uusi tallenne napsauttamalla tätä linkkiä."

@@ -22,6 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid ""
 "The Given name and Family name are both required.  Please go back and try "
@@ -195,6 +196,10 @@ msgstr ""
 "系统在处理您的请求时出错。对此带来的不便，我们深表歉意。我们的管理员将会调查"
 "问题的原因，不过，也请您核实一下自己的请求格式是否正确。"
 
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "此记录已删除。"
+
 msgid "Tell us the status of this person"
 msgstr "请告诉我们这个人的状况"
 
@@ -354,6 +359,22 @@ msgstr "名字拼音"
 
 msgid "Alternate names"
 msgstr "姓名拼音"
+
+msgid "Physical characteristics"
+msgstr "身体特征"
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "请描述这个人的一些基本特征。"
+
+msgid "Sex"
+msgstr "性别"
+
+msgid "Age"
+msgstr "年龄"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
 
 msgid "Home Address"
 msgstr "家庭住址"
@@ -629,17 +650,8 @@ msgstr "当前正在跟踪大约 %(num_people)s 条记录。"
 msgid "Compare these records"
 msgstr "比较这些记录"
 
-msgid "Physical characteristics"
-msgstr "身体特征"
-
-msgid "Sex"
-msgstr "性别"
-
 msgid "Date of birth"
 msgstr "出生日期"
-
-msgid "Age"
-msgstr "年龄"
 
 msgid "Home address"
 msgstr "家庭住址"
@@ -746,6 +758,31 @@ msgstr "输入此人的姓名。"
 msgid "Enter the person's name, parts of the name, or mobile phone number."
 msgstr "输入此人的姓名（全部或部分）。"
 
+msgid ""
+"\n"
+"<strong>(Query Samples)</strong><br>\n"
+"<table>\n"
+"<tr><td>日本太郎</td><td>...</td><td>Search with the full name</td></tr>\n"
+"<tr><td>日本太郎 仙台市</td><td>...</td><td>Filter by the address</td></tr>\n"
+"<tr><td>にっぽんたろう</td><td>...</td><td>Search by the hiragana reading</"
+"td></tr>\n"
+"<tr><td>Nippon Taro</td><td>...</td><td>Search Japanese names by romaji</"
+"td></tr>\n"
+"<tr><td>090-1234-xxxx</td><td>...</td><td>Search by the mobile phone number</"
+"td></tr>\n"
+"</table>\n"
+msgstr ""
+
+msgid ""
+"For a person name, Person Finder returns matching records in the database. "
+"For a mobile phone number, redirects you to messages registered to the "
+"mobile carrier."
+msgstr ""
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by NTT."
+msgstr ""
+
 msgid "Enter the person's name or parts of the name."
 msgstr "输入此人的姓名（全部或部分）。"
 
@@ -822,6 +859,10 @@ msgstr "切换至普通视图模式"
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
 msgid "Provided by:"
 msgstr "发布者："
 
@@ -842,6 +883,10 @@ msgstr "未找到有关此姓名的任何结果："
 
 msgid "We have nothing matching your search."
 msgstr "没有任何记录与您的搜索条件相符。"
+
+msgid ""
+"No messages are found registered to the carrier's message board service."
+msgstr ""
 
 msgid "Follow this link to create a new record"
 msgstr "按照此链接中的说明创建一条新记录"

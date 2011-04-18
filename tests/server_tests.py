@@ -66,6 +66,27 @@ def timed(function):
             print '%s: %.1f s' % (function.__name__, time.time() - start)
     return timed_function
 
+def configure_api_logging(subdomain='haiti', enable=True):
+    db.delete(ApiActionLog.all())
+    config.set_for_subdomain(subdomain, api_action_logging=enable)        
+
+def verify_api_log(action, api_key='test_key', person_records=None,
+                   people_skipped=None, note_records=None, notes_skipped=None):
+    action_logs = ApiActionLog.all().fetch(1)
+    assert action_logs
+    entry = action_logs[0]    
+    assert entry.action == action \
+        and entry.api_key == api_key, \
+        'api_key=%s, action=%s' % (entry.api_key, entry.action)
+    if person_records:
+        assert person_records == entry.person_records
+    if people_skipped:
+        assert people_skipped == entry.people_skipped
+    if note_records:
+        assert note_records == entry.note_records
+    if notes_skipped:
+        assert notes_skipped == entry.notes_skipped
+
 
 class ProcessRunner(threading.Thread):
     """A thread that starts a subprocess, collects its output, and stops it."""
@@ -208,6 +229,10 @@ def reset_data():
     setup.reset_datastore()
     Authorization.create(
         'haiti', 'test_key', domain_write_permission='test.google.com').put()
+    Authorization.create(
+        'haiti', 'reviewed_test_key',
+        domain_write_permission='test.google.com',
+        mark_notes_reviewed=True).put()
     Authorization.create(
         'haiti', 'domain_test_key', domain_write_permission='mytestdomain.com').put()
     Authorization.create(
@@ -771,7 +796,9 @@ class PersonNoteTests(TestsBase):
             # button not found, assume task completed
             pass
 
-        assert len(MailThread.messages) == message_count
+        assert len(MailThread.messages) == message_count, \
+            'expected %s messages, instead was %s' % (MailThread.messages,
+                                                      message_count)
 
     def test_have_information_small(self):
         """Follow the I have information flow on the small-sized embed."""
@@ -1696,6 +1723,7 @@ class PersonNoteTests(TestsBase):
         assert note.found == False
         assert note.status == u'believed_missing'
         assert note.linked_person_record_id == u'test.google.com/person.999'
+        assert note.reviewed == False
 
         note = notes[1]
         assert note.author_name == u'inna-testing'
@@ -1713,20 +1741,24 @@ class PersonNoteTests(TestsBase):
         assert note.found == True
         assert note.status == ''
         assert not note.linked_person_record_id
+        assert note.reviewed == False
 
         # Just confirm that a missing <found> tag is parsed as None.
         # We already checked all the other fields above.
         note = notes[2]
         assert note.found == None
         assert note.status == u'is_note_author'
+        assert note.reviewed == False
 
         note = notes[3]
         assert note.found == False
         assert note.status == u'believed_missing'
+        assert note.reviewed == False
 
     def test_api_write_pfif_1_2_note(self):
         """Post a single note-only entry as PFIF 1.2 using the upload API."""
         # Create person records that the notes will attach to.
+        configure_api_logging()
         Person(key_name='haiti:test.google.com/person.21009',
                subdomain='haiti',
                first_name='_test_first_name_1',
@@ -1741,6 +1773,8 @@ class PersonNoteTests(TestsBase):
         data = get_test_data('test.pfif-1.2-note.xml')
         self.go('/api/write?subdomain=haiti&key=test_key',
                 data=data, type='application/xml')
+
+        verify_api_log(ApiActionLog.WRITE)
 
         person = Person.get('haiti', 'test.google.com/person.21009')
         assert person
@@ -1762,6 +1796,7 @@ class PersonNoteTests(TestsBase):
         assert note.found == False
         assert note.status == u'believed_missing'
         assert note.linked_person_record_id == u'test.google.com/person.999'
+        assert note.reviewed == False
 
         # Found flag and status should have propagated to the Person.
         assert person.latest_found == False
@@ -1789,6 +1824,7 @@ class PersonNoteTests(TestsBase):
         assert note.found is None
         assert note.status == u'is_note_author'
         assert not note.linked_person_record_id
+        assert note.reviewed == False
 
         # Status should have propagated to the Person, but not found.
         assert person.latest_found is None
@@ -1846,6 +1882,7 @@ class PersonNoteTests(TestsBase):
         # Current date should replace the provided entry_date.
         assert note.entry_date.year == utils.get_utcnow().year
         assert note.found == True
+        assert note.reviewed == False
 
         note = notes[1]
         assert note.author_name == u'inna-testing'
@@ -1860,6 +1897,7 @@ class PersonNoteTests(TestsBase):
         # Current date should replace the provided entry_date.
         assert note.entry_date.year == utils.get_utcnow().year
         assert note.found is None
+        assert note.reviewed == False
 
     def test_api_write_bad_key(self):
         """Attempt to post an entry with an invalid API key."""
@@ -1904,6 +1942,30 @@ class PersonNoteTests(TestsBase):
         second_error = first_error.next('status:error')
         assert 'Not in authorized domain' in first_error.text
         assert 'Not in authorized domain' in second_error.text
+
+    def test_api_write_reviewed_note(self):
+        """Post reviewed note entries."""
+        data = get_test_data('test.pfif-1.2.xml')
+        self.go('/api/write?subdomain=haiti&key=reviewed_test_key',
+                data=data, type='application/xml')
+        person = Person.get('haiti', 'test.google.com/person.21009')
+        notes = person.get_notes()
+        assert len(notes) == 4
+
+        # Confirm all notes are marked reviewed.
+        for note in notes:
+            assert note.reviewed == True
+
+    def test_api_write_log_skipping(self):
+        """Test skipping bad note entries."""
+        configure_api_logging()
+        data = get_test_data('test.pfif-1.2-badrecord.xml')
+        self.go('/api/write?subdomain=haiti&key=reviewed_test_key',
+                data=data, type='application/xml')
+        # verify we logged the write.
+        verify_api_log(ApiActionLog.WRITE, api_key='reviewed_test_key', 
+                       person_records=1, people_skipped=1)
+
 
     def test_api_subscribe_unsubscribe(self):
         """Subscribe and unsubscribe to e-mail updates for a person via API"""
@@ -1963,7 +2025,11 @@ class PersonNoteTests(TestsBase):
             'lang': 'en',
             'subscribe_email': SUBSCRIBE_EMAIL
         }
+        configure_api_logging()
         self.go('/api/subscribe?subdomain=haiti&key=subscribe_key', data=data)
+        # verify we logged the subscribe.
+        verify_api_log(ApiActionLog.SUBSCRIBE, api_key='subscribe_key')
+
         subscriptions = person.get_subscriptions()
         assert 'Success' in self.s.content
         assert len(subscriptions) == 1
@@ -1995,9 +2061,13 @@ class PersonNoteTests(TestsBase):
 
         # Unsubscribe
         del data['lang']
+        configure_api_logging()
         self.go('/api/unsubscribe?subdomain=haiti&key=subscribe_key', data=data)
         assert 'Success' in self.s.content
         assert len(person.get_subscriptions()) == 0
+
+        # verify we logged the unsub.
+        verify_api_log(ApiActionLog.UNSUBSCRIBE, api_key='subscribe_key')
 
         # Unsubscribe non-existent subscription
         self.go('/api/unsubscribe?subdomain=haiti&key=subscribe_key', data=data)
@@ -2049,7 +2119,9 @@ class PersonNoteTests(TestsBase):
             found=True,
             status='believed_missing'
         ))
-
+        # check for logging as well
+        configure_api_logging()
+        
         # Fetch a PFIF 1.1 document.
         # Note that author_email, author_phone, email_of_found_person, and
         # phone_of_found_person are omitted intentionally (see
@@ -2086,6 +2158,8 @@ class PersonNoteTests(TestsBase):
   </pfif:person>
 </pfif:pfif>
 ''', doc.content)
+        # verify the log got written.
+        verify_api_log(ApiActionLog.READ, api_key='')
 
         # Fetch a PFIF 1.2 document.
         # Note that date_of_birth, author_email, author_phone,
@@ -2378,9 +2452,13 @@ class PersonNoteTests(TestsBase):
             assert 'Missing or invalid authorization key' in doc.content
 
             # With a valid search authorization key, the request should succeed.
+            configure_api_logging()
             doc = self.go('/api/search?subdomain=haiti&key=search_key' +
                           '&q=_search_lastname')
             assert self.s.status not in [403,404]
+            # verify we logged the search.
+            verify_api_log(ApiActionLog.SEARCH, api_key='search_key')
+
             # Make sure we return the first record and not the 2nd one.
             assert '_search_first_name' in doc.content
             assert '_search_2ndlastname' not in doc.content
@@ -2440,6 +2518,7 @@ class PersonNoteTests(TestsBase):
 
     def test_person_feed(self):
         """Fetch a single person using the PFIF Atom feed."""
+        configure_api_logging()
         db.put(Person(
             key_name='haiti:test.google.com/person.123',
             subdomain='haiti',
@@ -2543,6 +2622,9 @@ class PersonNoteTests(TestsBase):
 </feed>
 ''' % (self.hostport, self.hostport, self.hostport, self.hostport), doc.content)
 
+        # verify we logged the search.
+        verify_api_log(ApiActionLog.READ, api_key='')
+        
         # Test the omit_notes parameter.
         doc = self.go('/feeds/person?subdomain=haiti&omit_notes=yes')
         assert re.match(r'''<\?xml version="1.0" encoding="UTF-8"\?>
@@ -3648,6 +3730,11 @@ class PersonNoteTests(TestsBase):
             'Alternate family names:'
         assert f[3].first('td', class_='field').text.strip() == \
             '_test_alternate_last'
+
+        self.go('/results?subdomain=haiti&query=_test_first+_test_last')
+        self.verify_results_page(1, all_have=([
+            '_test_first _test_last',
+            '(_test_alternate_first _test_alternate_last)']))
         person.delete()
 
         # use_family_name=False
@@ -3672,6 +3759,12 @@ class PersonNoteTests(TestsBase):
         assert 'Given name' not in d.text
         assert 'Family name' not in d.text
         assert '_test_last' not in d.first('body').text
+
+        self.go('/results?subdomain=pakistan&query=_test_first+_test_last')
+        self.verify_results_page(1)
+        first_title = self.s.doc.first(class_='resultDataTitle').content
+        assert '_test_first' in first_title
+        assert '_test_last' not in first_title
         person.delete()
 
     def test_config_family_name_first(self):
@@ -3720,6 +3813,11 @@ class PersonNoteTests(TestsBase):
             'Alternate given names:'
         assert f[3].first('td', class_='field').text.strip() == \
             '_test_alternate_first'
+
+        self.go('/results?subdomain=china&query=_test_first+_test_last')
+        self.verify_results_page(1, all_have=([
+            '_test_last _test_first',
+            '(_test_alternate_last _test_alternate_first)']))
         person.delete()
 
         # family_name_first=False
@@ -3767,6 +3865,11 @@ class PersonNoteTests(TestsBase):
             'Alternate family names:'
         assert f[3].first('td', class_='field').text.strip() == \
             '_test_alternate_last'
+
+        self.go('/results?subdomain=haiti&query=_test_first+_test_last')
+        self.verify_results_page(1, all_have=([
+            '_test_first _test_last',
+            '(_test_alternate_first _test_alternate_last)']))
         person.delete()
 
     def test_config_use_alternate_names(self):
@@ -3797,6 +3900,11 @@ class PersonNoteTests(TestsBase):
             'Alternate family names:'
         assert f[3].first('td', class_='field').text.strip() == \
             '_test_alternate_last'
+
+        self.go('/results?subdomain=haiti&query=_test_first+_test_last')
+        self.verify_results_page(1, all_have=([
+            '_test_first _test_last',
+            '(_test_alternate_first _test_alternate_last)']))
         person.delete()
 
         # use_alternate_names=False
@@ -3822,6 +3930,13 @@ class PersonNoteTests(TestsBase):
         assert 'Alternate family names' not in d.text
         assert '_test_alternate_first' not in d.text
         assert '_test_alternate_last' not in d.text
+
+        self.go('/results?subdomain=pakistan&query=_test_first+_test_last')
+        self.verify_results_page(1)
+        first_title = self.s.doc.first(class_='resultDataTitle').content
+        assert '_test_first' in first_title
+        assert '_test_alternate_first' not in first_title
+        assert '_test_alternate_last' not in first_title
         person.delete()
 
     def test_config_use_postal_code(self):
