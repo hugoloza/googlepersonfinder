@@ -749,9 +749,11 @@ class Handler(webapp.RequestHandler):
             return strip(self.request.get('subdomain'))
 
         levels = self.request.headers.get('Host', '').split('.')
-        if levels[-2:] == ['appspot', 'com'] and len(levels) >= 4:
+        if (levels[-2:] == ['appspot', 'com'] and len(levels) >= 4 and 
+            not levels[0].startswith('release')):
             # foo.person-finder.appspot.com -> subdomain 'foo'
             # bar.kpy.latest.person-finder.appspot.com -> subdomain 'bar'
+            # release-foo.person-finder.appspot.com -> no subdomain.
             return levels[0]
 
         # Use the 'default_subdomain' setting, if present.
