@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      Наистина ли искате да изтриете записа за „%(first_name)s "
 "%(last_name)s“?\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -98,40 +130,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"Потребител изтри записа за %(first_name)s %(last_name)s\n"
-"на адрес %(site_url)s.\n"
-"\n"
-"Уведомяваме Ви за изтриването, защото Вашият имейл адрес е\n"
-"отбелязан като автора на този запис.\n"
-"\n"
-"ЗАБЕЛЕЖКА: Ако смятате, че записът е изтрит по погрешка, можете да го\n"
-"възстановите, като отворите тази връзка в следващите "
-"%(days_until_deletion)s дни:\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"След %(days_until_deletion)s дни той ще бъде изтрит завинаги.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"Потребител публикува актуализация за състоянието на %(first_name)s "
-"%(last_name)s на адрес %(site_url)s:"
 
 #, python-format
 msgid ""
@@ -347,12 +370,6 @@ msgid "Follow this link to create a new record"
 msgstr "Отворете тази връзка, за да създадете нов запис"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -522,6 +539,9 @@ msgstr "Не са публикувани актуализации за съст�
 
 msgid "Not spam"
 msgstr "Не е спам"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -756,8 +776,15 @@ msgstr "Предоставеното изображение е твърде го
 msgid "The reason this note is being marked as spam:"
 msgstr "Причина за означаване на тази бележка като спам:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "Записът е изтрит."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -831,10 +858,6 @@ msgstr "Този запис изпълни предназначението си
 msgid "This record is a duplicate of"
 msgstr "Този запис се дублира с/ъс"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "Този запис се дублира с/ъс"
-
 msgid "This record is copied from another source."
 msgstr "Този запис е копиран от друг източник."
 
@@ -843,6 +866,9 @@ msgstr "Този запис е неподходящ."
 
 msgid "This record is spam."
 msgstr "Този запис е спам."
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "За да прегледате или добавите информация, изберете име по-долу."
@@ -872,6 +898,9 @@ msgstr "Не е посочено"
 msgid "Upload"
 msgstr "Качване"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "Нямаме нищо, което да съответства на търсенето ви."
 
@@ -895,6 +924,9 @@ msgstr "Да"
 
 msgid "Yes, delete the record"
 msgstr "Да, записът да се изтрие"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "Да, записът да се възстанови"
@@ -939,15 +971,10 @@ msgstr "Абонирахте се успешно."
 msgid "You have successfully unsubscribed."
 msgstr "Отписахте се успешно."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"Получавате това известие, защото сте абонирани за актуализации за този "
-"човек.\n"
-"За да се отпишете, отворете следната връзка: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "Вашият имейл адрес"

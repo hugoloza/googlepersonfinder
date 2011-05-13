@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      Are you sure that you want to delete the record for "
 "\"%(first_name)s %(last_name)s\"?\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -98,41 +130,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
-"at %(site_url)s.\n"
-"\n"
-"We are notifying you of the deletion because your email address is\n"
-"recorded as the author of this record.\n"
-"\n"
-"NOTE: If you believe that this record was deleted in error, you can\n"
-"restore it by following this link within the next %(days_until_deletion)s"
-" days:\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be deleted "
-"permanently.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
 
 #, python-format
 msgid ""
@@ -346,12 +368,6 @@ msgid "Follow this link to create a new record"
 msgstr "Follow this link to create a new record"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -521,6 +537,9 @@ msgstr "No status updates have been posted"
 
 msgid "Not spam"
 msgstr "Not spam"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -760,8 +779,15 @@ msgstr "The image provided is too large.  Please upload a smaller one."
 msgid "The reason this note is being marked as spam:"
 msgstr "The reason that this note is being marked as spam:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "The record has been deleted."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -838,10 +864,6 @@ msgstr "This record has served its purpose."
 msgid "This record is a duplicate of"
 msgstr "This record is a duplicate of"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "This record is a duplicate of"
-
 msgid "This record is copied from another source."
 msgstr "This record is copied from another source."
 
@@ -850,6 +872,9 @@ msgstr "This record is inappropriate."
 
 msgid "This record is spam."
 msgstr "This record is spam."
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "To view or add information, select a name below."
@@ -879,6 +904,9 @@ msgstr "Unspecified"
 msgid "Upload"
 msgstr "Upload"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "We have nothing matching your search."
 
@@ -902,6 +930,9 @@ msgstr "Yes"
 
 msgid "Yes, delete the record"
 msgstr "Yes, delete the record"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "Yes, restore this record"
@@ -944,15 +975,10 @@ msgstr "You have subscribed successfully."
 msgid "You have successfully unsubscribed."
 msgstr "You have unsubscribed successfully."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"You've received this notification because you have subscribed to updates "
-"on this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "Your email address"

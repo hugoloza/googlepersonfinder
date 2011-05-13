@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      \"%(first_name)s %(last_name)s\" ile ilgili kaydı silmek "
 "istediğinizden emin misiniz?\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -98,40 +130,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"Bir kullanıcı \"%(first_name)s %(last_name)s\"\n"
-"kaydını %(site_url)s konumundan silmiş.\n"
-"\n"
-"Bu kaydın yazarı olarak sizin e-posta adresiniz kayıtlı\n"
-"olduğundan silme işlemi ile ilgili bu bildirimi size gönderiyoruz.\n"
-"\n"
-"NOT: Bu kaydın yanlışlıkla silindiğini düşünüyorsanız,\n"
-"önümüzdeki %(days_until_deletion)s gün içinde şu bağlantıyı izleyerek "
-"geri yükleyebilirsiniz:\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"%(days_until_deletion)s gün sonra kayıt kalıcı olarak silinecektir.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"Bir kullanıcı %(site_url)s konumunda \"%(first_name)s %(last_name)s\" "
-"için durum güncellemesi yayınlamış:"
 
 #, python-format
 msgid ""
@@ -347,12 +370,6 @@ msgid "Follow this link to create a new record"
 msgstr "Yeni bir kayıt oluşturmak için bu bağlantıyı izleyin"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -522,6 +539,9 @@ msgstr "Herhangi bir durum güncellemesi yayınlanmadı"
 
 msgid "Not spam"
 msgstr "Spam değil"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -765,8 +785,15 @@ msgstr "Sağlanan resim çok büyük. Lütfen daha küçük bir resim yükleyin.
 msgid "The reason this note is being marked as spam:"
 msgstr "Bu notun spam olarak işaretlenme nedeni:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "Kayıt silindi."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -840,10 +867,6 @@ msgstr "Bu kayıt amacına uygun şekilde hizmet etti."
 msgid "This record is a duplicate of"
 msgstr "Bu kayıt şu kaydın bir tekrarıdır:"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "Bu kayıt şu kaydın bir tekrarıdır:"
-
 msgid "This record is copied from another source."
 msgstr "Bu kayıt, başka bir kaynaktan kopyalandı."
 
@@ -852,6 +875,9 @@ msgstr "Bu kayıt uygunsuz."
 
 msgid "This record is spam."
 msgstr "Bu kayıt spam."
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "Bilgi görüntülemek veya eklemek için aşağıdan bir ad seçin."
@@ -881,6 +907,9 @@ msgstr "Belirtilmemiş"
 msgid "Upload"
 msgstr "Yükle"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "Hiçbir kaydımız aramanızla eşleşmiyor."
 
@@ -904,6 +933,9 @@ msgstr "Evet"
 
 msgid "Yes, delete the record"
 msgstr "Evet, kaydı sil"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "Evet, bu kaydı geri yükle"
@@ -950,15 +982,10 @@ msgstr "Başarıyla abone oldunuz."
 msgid "You have successfully unsubscribed."
 msgstr "Abonelikten başarıyla çıktınız."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"Bu kişiyle ilgili güncellemelere abone olduğunuz için bu bildirimi "
-"aldınız.\n"
-"Abonelikten çıkmak için şu bağlantıyı izleyin: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "E-posta adresiniz"

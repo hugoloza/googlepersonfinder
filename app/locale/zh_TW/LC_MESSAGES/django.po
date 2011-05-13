@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -31,6 +55,14 @@ msgstr ""
 "\n"
 "      您確定要刪除「%(last_name)s%(first_name)s」的記錄嗎？\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -96,36 +128,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"有人已將「%(last_name)s%(first_name)s」的記錄從 %(site_url)s 中刪除。\n"
-"\n"
-"由於系統根據您的郵件地址判定您為這筆記錄的登錄者，\n"
-"因此特地發送這則刪除通知給您。\n"
-"\n"
-"注意：如果您確信這筆記錄不應遭到刪除，請在 %(days_until_deletion)s 天內前往以下連結還原記錄：\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"系統將在 %(days_until_deletion)s 天後永久刪除這筆記錄。\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"有人在 %(site_url)s 發佈了「%(last_name)s%(first_name)s」的狀態更新："
 
 #, python-format
 msgid ""
@@ -336,12 +363,6 @@ msgid "Follow this link to create a new record"
 msgstr "請前往此連結來建立新記錄"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -505,6 +526,9 @@ msgstr "尚未張貼任何狀態更新"
 
 msgid "Not spam"
 msgstr "非垃圾資訊"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -733,8 +757,15 @@ msgstr "提供的圖片檔案大小太大，請上傳檔案較小的圖片。"
 msgid "The reason this note is being marked as spam:"
 msgstr "這則附註被標示為垃圾資訊的原因："
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "記錄已經刪除。"
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -801,10 +832,6 @@ msgstr "這筆記錄已達到其目的。"
 msgid "This record is a duplicate of"
 msgstr "此記錄與下列項目重複："
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "此記錄與下列項目重複："
-
 msgid "This record is copied from another source."
 msgstr "此記錄是從另一個地方複製過來的。"
 
@@ -813,6 +840,9 @@ msgstr "這筆記錄內容不當。"
 
 msgid "This record is spam."
 msgstr "這筆記錄是垃圾資訊。"
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "若要查看或新增資訊，請從下方選擇姓名。"
@@ -840,6 +870,9 @@ msgstr "未指定"
 msgid "Upload"
 msgstr "上傳"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "系統找不到相符的搜尋結果。"
 
@@ -863,6 +896,9 @@ msgstr "是"
 
 msgid "Yes, delete the record"
 msgstr "是，刪除這筆記錄"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "是，還原這筆記錄"
@@ -903,14 +939,10 @@ msgstr "訂閱成功。"
 msgid "You have successfully unsubscribed."
 msgstr "取消訂閱成功。"
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"由於您訂閱了這個人的最新消息，因此我們特地發送這則通知給您。\n"
-"如要取消訂閱，請前往以下連結：%(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "您的電子郵件位址"

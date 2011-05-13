@@ -39,6 +39,7 @@ import django.utils.html
 from google.appengine.api import images
 from google.appengine.api import mail
 from google.appengine.api import memcache
+from google.appengine.api import taskqueue
 from google.appengine.api import users
 from google.appengine.ext import webapp
 import google.appengine.ext.webapp.template
@@ -54,6 +55,9 @@ if os.environ.get('SERVER_SOFTWARE', '').startswith('Development'):
     urllib.getproxies_macosx_sysconf = lambda: {}
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
+
+# The domain name from which to send e-mail.
+EMAIL_DOMAIN = 'appspotmail.com'  # All apps on appspot.com use this for mail.
 
 
 # ==== Localization setup ======================================================
@@ -200,7 +204,6 @@ def get_person_sex_text(person):
 
 # UI text for the expiry field when displayinga person.
 PERSON_EXPIRY_TEXT = {
-    '-1': _('Unspecified'),
     '30': _('About 1 month (30 days) from now'),
     '60': _('About 2 months (60 days) from now'),
     '90': _('About 3 months (90 days) from now'),
@@ -328,13 +331,19 @@ def validate_sex(string):
     return string in pfif.PERSON_SEX_VALUES and string or ''
 
 def validate_expiry(value):
-    """Validates that the 'expiry_option' parameter is a positive integer;
-    otherwise returns -1 which represents the 'unspecified' status."""
+    """Validates that the 'expiry_option' parameter is a positive integer.
+    
+    Returns:
+      the int() value if it's present and parses, or the default_expiry_days 
+      for the subdomain, if it's set, otherwise -1 which represents the
+      'unspecified' status.
+    """
     try:
         value = int(value)
-    except:
-        return -1
-    return value > 0 and value or -1
+    except Exception, e:
+        logging.debug('validate_expiry exception: %s', e)
+        return None
+    return value > 0 and value or None
 
 APPROXIMATE_DATE_RE = re.compile(r'^\d{4}(-\d\d)?(-\d\d)?$')
 
@@ -400,7 +409,6 @@ def validate_version(string):
     if string and strip(string) not in pfif.PFIF_VERSIONS:
         raise ValueError('Bad pfif version: %s' % string)
     return pfif.PFIF_VERSIONS[strip(string) or pfif.PFIF_DEFAULT_VERSION]
-
 
 # ==== Other utilities =========================================================
 
@@ -568,6 +576,7 @@ class Handler(webapp.RequestHandler):
         'subscribe_email': strip,
         'subscribe': validate_checkbox,
         'suppress_redirect': validate_yes,
+        'cursor': strip
     }
 
     def maybe_redirect_jp_tier2_mobile(self):
@@ -765,14 +774,15 @@ class Handler(webapp.RequestHandler):
             return 'http://' + '.'.join([subdomain] + levels[-3:])
         return self.get_url('/', subdomain=subdomain)
 
-    def send_mail(self, **params):
+    def send_mail(self, to, subject, body):
         """Sends e-mail using a sender address that's allowed for this app."""
-        # TODO(kpy): When the outgoing mail queue is added, use it instead
-        # of sending mail immediately.
         app_id = os.environ['APPLICATION_ID']
-        mail.send_mail(
-            sender='Do not reply <do-not-reply@%s.appspotmail.com>' % app_id,
-            **params)
+        sender = 'Do not reply <do-not-reply@%s.%s>' % (app_id, EMAIL_DOMAIN)
+        taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
+                      params={'sender': sender,
+                              'to': to,
+                              'subject': subject,
+                              'body': body})
 
     def get_captcha_html(self, error_code=None, use_ssl=False):
         """Generates the necessary HTML to display a CAPTCHA validation box."""
@@ -957,27 +967,14 @@ class Handler(webapp.RequestHandler):
         self.env.main_url = self.get_url('/')
         self.env.embed_url = self.get_url('/embed')
 
-        # TODO(ryok): The following if statements are necessary only during the
-        # transition of {main|results}_page_custom_html(s) options from the old
-        # plain text format to the new i18n'ed dictionary format.  Remove these
-        # once the transition is complete.
-        if self.config.main_page_custom_html:
-            self.env.main_page_custom_html = self.config.main_page_custom_html
-        else:
-            self.env.main_page_custom_html = get_local_message(
-                self.config.main_page_custom_htmls, lang, '')
-        if self.config.results_page_custom_html:
-            self.env.results_page_custom_html = \
-                self.config.results_page_custom_html
-        else:
-            self.env.results_page_custom_html = get_local_message(
-                self.config.results_page_custom_htmls, lang, '')
-        if self.config.view_page_custom_html:
-            self.env.view_page_custom_html = \
-                self.config.view_page_custom_html
-        else:
-            self.env.view_page_custom_html = get_local_message(
-                self.config.view_page_custom_htmls, lang, '')
+        self.env.main_page_custom_html = get_local_message(
+            self.config.main_page_custom_htmls, lang, '')
+        self.env.results_page_custom_html = get_local_message(
+            self.config.results_page_custom_htmls, lang, '')
+        self.env.view_page_custom_html = get_local_message(
+            self.config.view_page_custom_htmls, lang, '')
+        self.env.seek_query_form_custom_html = get_local_message(
+            self.config.seek_query_form_custom_htmls, lang, '')
 
         # Pre-format full name using self.params.{first_name,last_name}.
         self.env.params_full_name = get_person_full_name(

@@ -11,9 +11,10 @@ cron:
 - description: sitemap ping
   url: /sitemap/ping?search_engine=google
   schedule: every 15 minutes
-- description: clear out tombstones
-  url: /tasks/clear_tombstones
-  schedule: every 60 minutes
 - description: delete expired
   url: /tasks/delete_expired
   schedule: every 60 minutes
+- description: delete old
+  url: /tasks/delete_old
+  schedule: every 60 minutes
+

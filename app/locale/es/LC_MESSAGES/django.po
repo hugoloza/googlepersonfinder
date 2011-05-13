@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      ¿Seguro que quieres eliminar el registro de \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -100,42 +132,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"Un usuario ha eliminado el registro de \"%(first_name)s %(last_name)s\"\n"
-"en la página %(site_url)s.\n"
-"\n"
-"Te hemos enviado esta notificación porque tu dirección de correo "
-"electrónico\n"
-"aparece registrada como la dirección del autor de este registro.\n"
-"\n"
-"NOTA: Si consideras que este registro se ha eliminado por error, puedes\n"
-"restaurarlo haciendo clic en el siguiente enlace en los próximos "
-"%(days_until_deletion)s días:\n"
-"\n"
-"    %(restore_url)s.\n"
-"\n"
-"Una vez que haya transcurrido el plazo de %(days_until_deletion)s días, "
-"el registro se eliminará de forma permanente.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"Un usuario ha publicado una actualización del estado de \"%(first_name)s "
-"%(last_name)s\" en la página %(site_url)s:"
 
 #, python-format
 msgid ""
@@ -355,12 +376,6 @@ msgid "Follow this link to create a new record"
 msgstr "Accede a este enlace para crear un registro nuevo."
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -540,6 +555,9 @@ msgstr "No se han publicado actualizaciones de estado."
 
 msgid "Not spam"
 msgstr "No es spam"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -781,8 +799,15 @@ msgstr "La imagen que has subido es demasiado grande. Sube una imagen más peque
 msgid "The reason this note is being marked as spam:"
 msgstr "Motivo por el que esta nota se ha marcado como spam:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "Se ha eliminado el registro"
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -860,10 +885,6 @@ msgstr "Este registro ha cumplido su objetivo"
 msgid "This record is a duplicate of"
 msgstr "Este registro es un duplicado de"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "Este registro es un duplicado de"
-
 msgid "This record is copied from another source."
 msgstr "Este registro se ha copiado de otra fuente."
 
@@ -872,6 +893,9 @@ msgstr "Este registro es inadecuado"
 
 msgid "This record is spam."
 msgstr "Este registro contiene spam"
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr ""
@@ -903,6 +927,9 @@ msgstr "No especificado"
 msgid "Upload"
 msgstr "Subir"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "No hay resultados que coincidan con la búsqueda."
 
@@ -926,6 +953,9 @@ msgstr "Sí"
 
 msgid "Yes, delete the record"
 msgstr "Sí, eliminar el registro"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "Sí, restaurar este registro"
@@ -968,16 +998,10 @@ msgstr "Te has suscrito correctamente."
 msgid "You have successfully unsubscribed."
 msgstr "Has anulado tu suscripción."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"Has recibido esta notificación porque te has suscrito para recibir "
-"actualizaciones sobre esta persona.\n"
-"Para anular la suscripción, haz clic en el siguiente enlace: "
-"%(unsubscribe_link)s."
 
 msgid "Your e-mail address"
 msgstr "Tu dirección de correo electrónico"

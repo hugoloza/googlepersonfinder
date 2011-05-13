@@ -24,12 +24,58 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+"\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"保存期間を %(extension_days)s 日間延長する\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+"\n"
+"                注意：この記録は 1 日以内に保存期間が終了します\n"
+"\t\t"
+msgstr[1] ""
+"\n"
+"                注意 : この記録は%(days)s 以内に保存期間が終了します                "
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
 "本当に%(last_name)s%(first_name)sのレコードを削除してもよろしいですか？"
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"\"%(last_name)s %(first_name)s\"さんに関する記録の保存期間を延長します。よろしいですか？    "
 
 msgid ""
 "\n"
@@ -93,38 +139,44 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+"\n"
+"\"%(last_name)s %(first_name)s \"さんに関する情報が %(site_url)s で削除されました。\n"
+"この記録の作成者の電子メールアドレスにお知らせをしています。\n"
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+"\n"
+"\"%(last_name)s %(first_name)s \"さんに関する情報が %(site_url)s で更新されました。\n"
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+"\n"
+"%(days_until_deletion)s日後にこの記録は永久に消去されます。\n"
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
 "\n"
-"他のユーザが、%(site_url)s において、\"%(last_name)s　%(first_name)s\"\n"
-"さんの記録を消去しました.\n"
-"\n"
-"あなたがこの記録の作成者と記録されていましたので\n"
-"お知らせいたします。\n"
-"\n"
-"注意: もしこの削除が間違いである場合には\n"
-"%(days_until_deletion)s 日以内なら以下のリンクで復元できます:\n"
+"もしこの記録が間違って消された場合、\n"
+"次の%(days_until_deletion)s日以内に\n"
+"このリンクから復元できます。\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"%(days_until_deletion)s 日で記録は完全に消去されます。\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"「%(first_name)s %(last_name)s」さんの状況に関する情報が投稿されました（%(site_url)s）:"
 
 #, python-format
 msgid ""
@@ -308,16 +360,16 @@ msgid "Enter the person's given and family names."
 msgstr "その人の姓名を入力してください。"
 
 msgid "Enter the person's name or parts of the name."
-msgstr "その人の名前、または名前の一部を入力してください。（ひらがなやローマ字でも可）"
+msgstr "その人の名前、または名前の一部を入力してください。"
 
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "その人の名前、名前の一部（ひらがなやローマ字でも可）、または携帯電話番号（半角数字）を入力してください。"
+msgstr "その人の名前、名前の一部、または携帯電話番号を入力してください。"
 
 msgid "Enter the person's name."
 msgstr "その人の名前を入力してください。"
 
 msgid "Expiry"
-msgstr "期限"
+msgstr "記録の期限"
 
 msgid "Expiry date of this record"
 msgstr "この記録の有効期限"
@@ -330,12 +382,6 @@ msgstr "この人に関する最新情報のフィード"
 
 msgid "Follow this link to create a new record"
 msgstr "このリンクを使用して新しい記録を作成できます"
-
-msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr "名前を入れるとパーソンファインダーの消息情報が表示され、携帯電話番号を入力すると、各携帯電話会社の災害伝言板の登録情報が表示されます。"
 
 msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
@@ -503,6 +549,9 @@ msgstr "状況は投稿されていません"
 
 msgid "Not spam"
 msgstr "スパムではありません"
+
+msgid "Note text"
+msgstr "メモ"
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr "(注) 一部のよみがなは自動生成されているため、間違っている可能性があります。"
@@ -724,8 +773,15 @@ msgstr "画像が大きすぎます。もっと小さい画像をアップロー
 msgid "The reason this note is being marked as spam:"
 msgstr "スパムとして報告した理由："
 
+msgid "The record cannot be extended."
+msgstr "この記録は保存期間を延長できません。"
+
 msgid "The record has been deleted."
 msgstr "レコードが削除されました。"
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "保存期間が%(expiry_date)sまで延長されました。"
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -793,10 +849,6 @@ msgstr "この記録が目的を果たしたから"
 msgid "This record is a duplicate of"
 msgstr "この記録は次の記録と重複しています:"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "この記録は次の記録と重複しています:"
-
 msgid "This record is copied from another source."
 msgstr "この記録は別の情報源からコピーしたものです。"
 
@@ -805,6 +857,9 @@ msgstr "この記録が不適切な情報だから"
 
 msgid "This record is spam."
 msgstr "この記録がスパム情報だから"
+
+msgid "To unsubscribe, follow this link"
+msgstr "アップデートの受け取りを停止するには、以下のリンクをたどってください"
 
 msgid "To view or add information, select a name below."
 msgstr "情報を表示または追加するには、下に表示されている名前を選択してください。"
@@ -832,6 +887,9 @@ msgstr "指定なし"
 msgid "Upload"
 msgstr "アップロード"
 
+msgid "View the record"
+msgstr "記録を見る"
+
 msgid "We have nothing matching your search."
 msgstr "一致する記録が見つかりませんでした。"
 
@@ -842,7 +900,7 @@ msgid "What is your situation?"
 msgstr "どちらかを選択してください。"
 
 msgid "When should this record disappear?"
-msgstr "この記録はいつ削除しますか？"
+msgstr "この記録を自動的に削除するよう設定できます。いつに指定しますか？"
 
 msgid "Where did this information come from?"
 msgstr "この記録の情報源を指定してください。"
@@ -855,6 +913,9 @@ msgstr "はい"
 
 msgid "Yes, delete the record"
 msgstr "はい、削除する"
+
+msgid "Yes, extend the record"
+msgstr "はい、延長します"
 
 msgid "Yes, restore this record"
 msgstr "はい、この記録を復元します。"
@@ -890,19 +951,15 @@ msgid "You can view the full record at %(view_url)s"
 msgstr "すべての記録は %(view_url)s で見ることができます。"
 
 msgid "You have successfully subscribed."
-msgstr "アップデートの受け取りが正しく設定されました。"
+msgstr "アップデートを受け取るように設定されました。"
 
 msgid "You have successfully unsubscribed."
-msgstr "アップデートを受け取るように、すでに設定されています。"
+msgstr "アップデートの受け取りが停止されました。"
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
-msgstr ""
-"この人の新着情報を受け取るための登録が完了しました。\n"
-"登録を解除する場合は、次のリンクから手続きしてください: %(unsubscribe_link)s"
+"the following person:\n"
+msgstr "このお知らせをお送りしているのは、以前次の方の情報を受け取るよう登録されたためです :\n"
 
 msgid "Your e-mail address"
 msgstr "あなたのメール アドレス"

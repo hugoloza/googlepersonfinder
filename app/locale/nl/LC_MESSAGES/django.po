@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      Weet u zeker dat u de melding voor '%(first_name)s %(last_name)s' "
 "wilt verwijderen?\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -99,40 +131,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"Een gebruiker heeft de melding voor '%(first_name)s %(last_name)s'\n"
-"op %(site_url)s verwijderd.\n"
-"\n"
-"We stellen u op de hoogte van deze verwijdering omdat \n"
-"uw e-mailadres als auteur van deze vermelding is geregistreerd.\n"
-"\n"
-"OPMERKING: als u denkt dat deze melding ten onrechte \n"
-"is verwijderd, kunt u deze herstellen door deze link te volgen binnen de "
-"komende %(days_until_deletion)s dagen:\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"Na %(days_until_deletion)s dagen wordt de melding permanent verwijderd.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"Een gebruiker heeft een statusupdate geplaatst op %(site_url)s voor "
-"'%(first_name)s %(last_name)s':"
 
 #, python-format
 msgid ""
@@ -350,12 +373,6 @@ msgid "Follow this link to create a new record"
 msgstr "Volg deze link om een nieuwe melding te maken"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -529,6 +546,9 @@ msgstr "Er zijn geen status-updates geplaatst"
 
 msgid "Not spam"
 msgstr "Geen spam"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -770,8 +790,15 @@ msgstr "De geleverde afbeelding is te groot. Upload een kleinere afbeelding."
 msgid "The reason this note is being marked as spam:"
 msgstr "De reden dat deze opmerking als spam wordt gemarkeerd:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "De melding is verwijderd."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -848,10 +875,6 @@ msgstr "Deze melding heeft resultaat gehad."
 msgid "This record is a duplicate of"
 msgstr "Deze melding is een duplicaat van"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "Deze melding is een duplicaat van"
-
 msgid "This record is copied from another source."
 msgstr "Deze melding is gekopieerd van een andere bron."
 
@@ -860,6 +883,9 @@ msgstr "Deze melding is ongepast."
 
 msgid "This record is spam."
 msgstr "Deze melding is spam."
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr ""
@@ -891,6 +917,9 @@ msgstr "Niet opgegeven"
 msgid "Upload"
 msgstr "Uploaden"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "Er zijn geen gegevens die overeenkomen met uw zoekopdracht."
 
@@ -914,6 +943,9 @@ msgstr "Ja"
 
 msgid "Yes, delete the record"
 msgstr "Ja, de melding verwijderen"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "Ja, deze melding herstellen"
@@ -956,15 +988,10 @@ msgstr "U bent geabonneerd."
 msgid "You have successfully unsubscribed."
 msgstr "U bent afgemeld."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"U heeft deze melding ontvangen omdat u bent geabonneerd op updates over "
-"deze persoon.\n"
-"Als u zich wilt afmelden, volgt u deze link: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "Uw e-mailadres"

@@ -24,6 +24,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"\t\t<a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
+"\t\t\t id=\"extend_btn\">\n"
+"\t\t</a>\n"
+"\t\t"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"\t\t"
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
 "      Are you sure you want to delete the record for \"%(first_name)s "
 "%(last_name)s\"?\n"
 "    "
@@ -32,6 +56,14 @@ msgstr ""
 "      آیا مطمئن هستید می خواهید سابقه \"%(first_name)s %(last_name)s\" را"
 " حذف کنید؟\n"
 "    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(first_name)s %(last_name)s\"?\n"
+"    "
+msgstr ""
 
 msgid ""
 "\n"
@@ -99,40 +131,31 @@ msgid ""
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
+" %(site_url)s.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
-"\n"
-"کاربری سابقه \"%(first_name)s %(last_name)s\"\n"
-" را در %(site_url)s حذف کرده است.\n"
-"\n"
-"چون آدرس ایمیل شما به عنوان نویسنده اصلی یادداشت این سابقه ثبت شده است،\n"
-"ما این حذف را به شما اطلاع می دهیم.\n"
-"\n"
-"نکته: اگر معتقدید این سابقه به اشتباه حذف شده است، می توانید\n"
-"با دنبال کردن پیوند زیر ظرف%(days_until_deletion)s روز آینده آن را "
-"بازیابی کنید:\n"
-"\n"
-"   %(restore_url)s\n"
-"\n"
-"بعد از %(days_until_deletion)s روز، سابقه برای همیشه حذف خواهد شد.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
-msgstr ""
-"\n"
-"کاربری یک به روز رسانی وضعیت برای \"%(first_name)s %(last_name)s\" در "
-"%(site_url)s پست کرده است:"
 
 #, python-format
 msgid ""
@@ -348,12 +371,6 @@ msgid "Follow this link to create a new record"
 msgstr "این پیوند را دنبال کنید تا سابقه جدیدی ایجاد کنید"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
@@ -523,6 +540,9 @@ msgstr "هیچ به روز رسانی وضعیت پست نشده است"
 
 msgid "Not spam"
 msgstr "هرزنامه نیست"
+
+msgid "Note text"
+msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
@@ -764,8 +784,15 @@ msgstr "تصویر ارائه شده خیلی بزرگ است. لطفاً عکس
 msgid "The reason this note is being marked as spam:"
 msgstr "دلیل اینکه چرا این یادداشت به عنوان هرزنامه علامتگذاری شده است:"
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
 msgstr "سابقه حذف شده است."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -840,10 +867,6 @@ msgstr "این سابقه شرایط لازم را دارد."
 msgid "This record is a duplicate of"
 msgstr "این سابقه تکرار این مورد است"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "این سابقه تکرار این مورد است"
-
 msgid "This record is copied from another source."
 msgstr "این سابقه از منبع دیگری کپی شده است."
 
@@ -852,6 +875,9 @@ msgstr "این سابقه نامناسب است."
 
 msgid "This record is spam."
 msgstr "این سابقه هرزنامه است."
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "برای مشاهده یا افزودن اطلاعات، نامی را در زیر انتخاب کنید."
@@ -881,6 +907,9 @@ msgstr "مشخص نشده"
 msgid "Upload"
 msgstr "آپلود"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "هیچ موردی مطابق با جستجوی شما یافت نشد."
 
@@ -904,6 +933,9 @@ msgstr "بله"
 
 msgid "Yes, delete the record"
 msgstr "بله، این سابقه حذف شود"
+
+msgid "Yes, extend the record"
+msgstr ""
 
 msgid "Yes, restore this record"
 msgstr "بله، این سابقه بازیابی شود"
@@ -946,15 +978,10 @@ msgstr "با موفقیت مشترک شدید."
 msgid "You have successfully unsubscribed."
 msgstr "اشتراک شما با موفقیت لغو شد."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"این اعلان به این دلیل برای شما ارسال شده است که مشترک شده اید تا به روز "
-"رسانی های مربوط به این فرد را دریافت کنید.\n"
-"برای لغو اشتراک، روی این پیوند کلیک کنید: %(unsubscribe_link)s"
 
 msgid "Your e-mail address"
 msgstr "نشانی ایمیل شما"

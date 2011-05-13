@@ -17,11 +17,12 @@
 
 __author__ = 'kpy@google.com (Ka-Ping Yee) and many other Googlers'
 
-import datetime
+from datetime import timedelta
 
 from google.appengine.api import datastore_errors
 from google.appengine.api import memcache
 from google.appengine.ext import db
+import config
 import indexing
 import pfif
 import prefix
@@ -30,6 +31,8 @@ import prefix
 # repositories, each at a subdomain of this domain.
 HOME_DOMAIN = 'person-finder.appspot.com'
 
+# default # of days for a record to expire.
+DEFAULT_EXPIRATION_DAYS = 40
 
 # ==== PFIF record IDs =====================================================
 
@@ -108,10 +111,12 @@ class Subdomain(db.Model):
     def list(cls):
         return [subdomain.key().name() for subdomain in cls.all()]
 
-
 class Base(db.Model):
     """Base class providing methods common to both Person and Note entities,
     whose key names are partitioned using the subdomain as a prefix."""
+
+    # max records to fetch in one go.
+    FETCH_LIMIT = 200
 
     # Even though the subdomain is part of the key_name, it is also stored
     # redundantly as a separate property so it can be indexed and queried upon.
@@ -173,6 +178,17 @@ class Base(db.Model):
         return not self.is_original()
 
     @classmethod
+    def get_key(cls, subdomain, record_id):
+        """Get entity key from its record id"""
+        return db.Key.from_path(cls.kind(), subdomain + ':' + record_id)
+
+    @classmethod
+    def get_all(cls, subdomain, record_ids, limit=200):
+        """Gets the entities with the given record_ids in a given repository."""
+        keys = [cls.get_key(subdomain, id) for id in record_ids]
+        return [record for record in db.get(keys) if record is not None]
+
+    @classmethod
     def get(cls, subdomain, record_id, filter_expired=True):
         """Gets the entity with the given record_id in a given repository."""
         record = cls.get_by_key_name(subdomain + ':' + record_id)
@@ -227,9 +243,14 @@ class Person(Base):
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
 
-    # source_date is the original creation time; it should not change.
-    source_name = db.StringProperty(default='')
+    # the original date we saw this record; it should not change.
+    original_creation_date = db.DateTimeProperty(auto_now_add=True)
+
+    # source_date is the date that the original repository last changed
+    # any of the fields in the pfif record.
     source_date = db.DateTimeProperty()
+
+    source_name = db.StringProperty(default='')
     source_url = db.StringProperty(default='')
 
     full_name = db.StringProperty()
@@ -282,12 +303,26 @@ class Person(Base):
     _fields_to_index_by_prefix_properties = ['first_name', 'last_name']
 
     @staticmethod
-    def past_due_records():
+    def past_due_records(subdomain):
         """Returns a query for all Person records with expiry_date in the past,
-        regardless of their is_expired flags."""
+        or None, regardless of their is_expired flags."""
         import utils
         return Person.all(filter_expired=False).filter(
-            'expiry_date <=', utils.get_utcnow())
+            'expiry_date <=', utils.get_utcnow()).filter(
+            'subdomain =', subdomain)
+
+    @staticmethod
+    def potentially_expired_records(subdomain,
+                                    days_to_expire=DEFAULT_EXPIRATION_DAYS):
+        """Returns a query for all Person records with source date 
+        older than days_to_expire (or empty source_date), regardless of 
+        is_expired flags value."""
+        import utils
+        cutoff_date = utils.get_utcnow() - timedelta(days_to_expire)
+        return Person.all(filter_expired=False).filter(
+            'source_date <=',cutoff_date).filter(
+            'subdomain =', subdomain)
+
 
     def get_person_record_id(self):
         return self.record_id
@@ -304,13 +339,35 @@ class Person(Base):
         return Subscription.get_by_person_record_id(
             self.subdomain, self.record_id, limit=subscription_limit)
 
-    def get_linked_persons(self):
-        """Retrieves the Persons linked (as duplicates) to this Person."""
+    def get_linked_person_ids(self, note_limit=200):
+        """Retrieves IDs of Persons marked as duplicates of this Person."""
+        return [note.linked_person_record_id
+                for note in self.get_notes(note_limit)
+                if note.linked_person_record_id]
+
+    def get_linked_persons(self, note_limit=200):
+        """Retrieves Persons marked as duplicates of this Person."""
+        return Person.get_all(self.subdomain,
+                              self.get_linked_person_ids(note_limit))
+
+    def get_all_linked_persons(self):
+        """Retrieves all Persons transitively linked to this Person."""
+        linked_person_ids = set([self.record_id])
         linked_persons = []
-        for note in self.get_notes():
-            person = Person.get(self.subdomain, note.linked_person_record_id)
-            if person:
-                linked_persons.append(person)
+        # Maintain a list of ids of duplicate persons that have not
+        # yet been processed.
+        new_person_ids = set(self.get_linked_person_ids())
+        # Iteratively process all new_person_ids by retrieving linked
+        # duplicates and storing those not yet processed.
+        # Processed ids are stored in the linked_person_ids set, and
+        # their corresponding records are in the linked_persons list.
+        while new_person_ids:
+            linked_person_ids.update(new_person_ids)
+            new_persons = Person.get_all(self.subdomain, list(new_person_ids))
+            for person in new_persons:
+                new_person_ids.update(person.get_linked_person_ids())
+            linked_persons += new_persons
+            new_person_ids -= linked_person_ids
         return linked_persons
 
     def get_associated_emails(self):
@@ -322,16 +379,43 @@ class Person(Base):
             email_addresses.add(self.author_email)
         return email_addresses
 
+    def get_effective_expiry_date(self):
+        """The expiry_date or source date plus some default interval,
+        configurable with default_expiration_days.
+        
+        If there's no source_date, we use original_creation_date.
+        Returns:
+          A datetime date (not None).
+        """
+        if self.expiry_date:
+            return self.expiry_date
+        else:
+            expiration_days = config.get_for_subdomain(
+                self.subdomain, 'default_expiration_days') or (
+                DEFAULT_EXPIRATION_DAYS)
+            # in theory, we should always have original_creation_date, but since
+            # it was only added recently, we might have legacy 
+            # records without it.
+            start_date = (self.source_date or self.original_creation_date or 
+                          utils.get_utcnow())
+            return start_date + timedelta(expiration_days)
+    
     def put_expiry_flags(self):
         """Updates the is_expired flags on this Person and related Notes to
-        make them consistent with the expiry_date on this Person, and commits
-        these changes to the datastore."""
+        make them consistent with the effective_expiry_date() on this Person, 
+        and commits the changes to the datastore."""
         import utils
         now = utils.get_utcnow()
-        expired = self.expiry_date and now >= self.expiry_date
+        expired = self.get_effective_expiry_date() <= now
+
         if self.is_expired != expired:
             # NOTE: This should be the ONLY code that modifies is_expired.
             self.is_expired = expired
+
+            # if we neglected to capture the original_creation_date,
+            # make a best effort to grab it now, for posterity.
+            if not self.original_creation_date:
+                self.original_creation_date = self.source_date
 
             # If the record is expiring (being replaced with a placeholder,
             # see http://zesty.ca/pfif/1.3/#data-expiry) or un-expiring (being 
@@ -404,8 +488,6 @@ class Note(Base):
     """The datastore entity kind for storing a PFIF note record.  Never call
     Note() directly; use Note.create_clone() or Note.create_original()."""
 
-    FETCH_LIMIT = 200
-
     # The entry_date should update every time a record is re-imported.
     entry_date = db.DateTimeProperty(required=True)
 
@@ -418,7 +500,11 @@ class Note(Base):
     author_email = db.StringProperty(default='')
     author_phone = db.StringProperty(default='')
 
-    # source_date is the original creation time; it should not change.
+    # the original date we saw this record; it should not change.
+    original_creation_date = db.DateTimeProperty(auto_now_add=True)
+
+    # source_date is the date that the original repository last changed
+    # any of the fields in the pfif record.
     source_date = db.DateTimeProperty()
 
     status = db.StringProperty(default='', choices=pfif.NOTE_STATUS_VALUES)
@@ -453,12 +539,12 @@ class Note(Base):
         query = Note.all_in_subdomain(subdomain, filter_expired=filter_expired
             ).filter('person_record_id =', person_record_id
             ).order('source_date')
-        notes = query.fetch(Note.FETCH_LIMIT)
+        notes = query.fetch(Note.FETCH_LIMIT) 
         while notes:
             for note in notes:
                 yield note
             query.with_cursor(query.cursor())  # Continue where fetch left off.
-            notes = query.fetch(Note.FETCH_LIMIT)
+            notes = query.fetch(Note.FETCH_LIMIT)       
 
 
 class Photo(db.Model):
@@ -522,7 +608,6 @@ class Secret(db.Model):
     """A place to store application-level secrets in the database."""
     secret = db.BlobProperty()
 
-
 def encode_count_name(count_name):
     """Encode a name to printable ASCII characters so it can be safely
     used as an attribute name for the datastore."""
@@ -567,18 +652,22 @@ class ApiActionLog(db.Model):
                       ip_address, request_url,
                       timestamp=None):
         import utils
-        ApiActionLog(subdomain=subdomain,
-                  api_key=api_key,
-                  action=action,
-                  person_records=person_records,
-                  note_records=note_records,
-                  people_skipped=people_skipped,
-                  notes_skipped=notes_skipped,
-                  user_agent=user_agent,
-                  ip_address=ip_address,
-                  request_url=request_url,
-                  version=version,
-                  timestamp=timestamp or utils.get_utcnow()).put()
+        try:
+            ApiActionLog(subdomain=subdomain,
+                         api_key=api_key,
+                         action=action,
+                         person_records=person_records,
+                         note_records=note_records,
+                         people_skipped=people_skipped,
+                         notes_skipped=notes_skipped,
+                         user_agent=user_agent,
+                         ip_address=ip_address,
+                         request_url=request_url,
+                         version=version,
+                         timestamp=timestamp or utils.get_utcnow()).put()
+        except Exception:
+            # swallow anything to prevent the main action from failing.
+            pass
 
 class Counter(db.Expando):
     """Counters hold partial and completed results for ongoing counting tasks.
@@ -699,7 +788,8 @@ class UserActionLog(db.Expando):
     """Logs user actions."""
     time = db.DateTimeProperty(required=True)
     action = db.StringProperty(required=True, choices=[
-        'delete', 'restore', 'hide', 'unhide', 'mark_dead', 'mark_alive'])
+        'delete', 'extend', 'hide', 'mark_dead', 'mark_alive',
+        'restore', 'unhide'])
     entity_kind = db.StringProperty(required=True)
     entity_key_name = db.StringProperty(required=True)
     detail = db.TextProperty()
