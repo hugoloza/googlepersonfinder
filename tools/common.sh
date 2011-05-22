@@ -40,20 +40,13 @@ done
 
 if [ -z "$PYTHON" ]; then
     DEFAULT_PYTHON="$(which python)"
-    if [[ "$($DEFAULT_PYTHON -V 2>&1)" =~ "Python 2.5" ]]; then
+    if [[ "$($DEFAULT_PYTHON -V 2>&1 | awk '$0 ~ /Python 2.5/')" != "" ]]; then
         export PYTHON="$DEFAULT_PYTHON"
     fi
 fi
 
 if [ -z "$PYTHON" ]; then
     echo "Could not find python2.5 executable.  Please set PYTHON."
-    exit 1
-fi
-
-django_version=$(${PYTHON} -c 'import django; print django.get_version()')
-
-if [ "$django_version" '<' '1.1' ]; then
-    echo "Could not find Django 1.1.  Please install Django 1.1 for $PYTHON."
     exit 1
 fi
 

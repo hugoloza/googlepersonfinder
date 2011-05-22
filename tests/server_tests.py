@@ -43,10 +43,10 @@ import unittest
 import calendar
 import config
 from model import *
+import pf_setup as setup
 import remote_api
 import reveal
 import scrape
-import setup
 from test_pfif import text_diff
 from text_query import TextQuery
 import utils
