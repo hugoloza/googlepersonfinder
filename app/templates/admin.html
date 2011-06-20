@@ -38,6 +38,9 @@ limitations under the License.
 <h2>Configure subdomains</h2>
 
 <script>
+  String.prototype.trim = function() {
+    return this.replace(/^\s+|\s?$/g, "");
+  }
   function $(id) {
     return document.getElementById(id);
   }
@@ -47,6 +50,43 @@ limitations under the License.
     } else {
       $('subdomain_select').form.submit();
     }
+  }
+  function validate_subdomain() {
+    LANGUAGE_CODES = [
+                       {% for language_code in language_endonyms %}
+                         "{{language_code}}",
+                       {% endfor %}
+                     ]
+    //find all languages that the user specified with "Use?" checkboxes and
+    //their associated titles.  Only allows titles from used languages.
+    var used_languages = [];
+    var languages_to_titles = {}
+    for (var language_index in LANGUAGE_CODES) {
+      var language_code = LANGUAGE_CODES[language_index];
+      var lang_title = $('title_' + language_code).value;
+      if ($('use_' + language_code).checked) {
+        used_languages.push(language_code);
+        languages_to_titles[language_code] = lang_title;
+      } else {
+        if (lang_title.trim().length != 0) {
+          var ignore = confirm("You entered a title for the language " +
+                               language_code + " but you didn't use it.  \n" +
+                               "Press 'OK,' and we'll submit anyways, " +
+                               "ignoring the title.  \n" +
+                               "Otherwise, press 'Cancel'");
+          if (!ignore) {
+            return false;
+          }
+        }
+      }
+    }
+
+    //copy the "Use?" checkboxes and the titles into the text boxes that will
+    //actually be POSTed (language_menu_options and subdomain_titles).
+    $('language_menu_options').value = JSON.stringify(used_languages);
+    $('subdomain_titles').value = JSON.stringify(languages_to_titles);
+
+    return true;
   }
 </script>
 
@@ -78,42 +118,82 @@ limitations under the License.
 <a href="{{start_url}}">
 {{env.subdomain}}.{{env.parent_domain}}</a></h2>
 
-<form id="subdomain_save" method="post" class="admin">
+<form id="subdomain_save" method="post" class="admin"
+      onSubmit="return validate_subdomain()">
   <fieldset>
     <legend>General</legend>
     <div class="config">
-      <label for="language_menu_options">
-        Languages in the language menu (JSON list):
+      <!--TODO(samking): More compact design.  Maybe a dropdown box where you
+          can select a language and a "+" button so that you can add as many
+          dropdowns as you need.  -->
+      <label for="available_languages">
+        Available Languages:
       </label>
-      <div class="response">
-        <input name="language_menu_options" size=60 id="language_menu_options"
-            value="{{config_json.language_menu_options}}">
+      <div class="language_table">
+        <table>
+          <tr>
+            <th>Language</th>
+            <th>Code</th>
+            <th>Use?</th>
+            <th>Title</th>
+          </tr>
+          {% for language_code, language in language_endonyms.items %}
+            <tr>
+              <td>{{language}}</td>
+              <td>{{language_code}}</td>
+              <td><input type="checkbox" id="use_{{language_code}}"
+                {% comment %}
+                  For loop is a workaround since Django 1.1 doesn't support
+                  if elem in collection
+                {% endcomment %}
+                {% for search_code in config.language_menu_options %}
+                  {% ifequal language_code search_code %}
+                    checked="yes"
+                  {% endifequal %}
+                {% endfor %}
+                />
+              </td>
+              <td>
+                <input type="text" id="title_{{language_code}}"
+                  {% comment %}
+                    TODO(samking): When I try to split the >80 character line
+                    into two lines, Django fails.  How do I split django
+                    filters over multiple lines?
+                  {% endcomment %}
+                  {% for search_code, subdomain_title in config.subdomain_titles.items %}
+                    {% ifequal language_code search_code %}
+                      value="{{subdomain_title}}"
+                    {% endifequal %}
+                  {% endfor %}
+                  >
+                </input>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="config">
-      <label for="subdomain_titles">
-        Title in each language (JSON dictionary):
-      </label>
-      <div class="response">
-        <textarea name="subdomain_titles" rows=4 cols=80
->{{config_json.subdomain_titles}}</textarea>
+      <!-- Aggregates the above forms into one form for ease of parsing -->
+      <input name="language_menu_options" id="language_menu_options"
+             value="{{config_json.language_menu_options}}"
+             type="hidden" />
+      <input name="subdomain_titles" id="subdomain_titles"
+             value= {{config_json.subdomain_titles}} type="hidden" />
+      <div class="config">
+        <label for="keywords">
+          Keywords in all languages (keywords separated by commas):
+        </label>
+        <div class="response">
+          <textarea name="keywords" rows=4 cols=80
+            >{{config.keywords|default:""}}</textarea>
+        </div>
       </div>
-    </div>
-    <div class="config">
-      <label for="keywords">
-        Keywords in all languages (keywords separated by commas):
-      </label>
-      <div class="response">
-        <textarea name="keywords" rows=4 cols=80
->{{config.keywords|default:""}}</textarea>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Forms</legend>
-    <div class="config">
-      <div class="option">
-        <input type="radio" name="use_family_name" value="true"
+    </fieldset>
+    <fieldset>
+      <legend>Forms</legend>
+      <div class="config">
+        <div class="option">
+          <input type="radio" name="use_family_name" value="true"
             id="use_family_name_true"
             {{config.use_family_name|yesno:"checked,"}}>
         <label for="use_family_name_true">
