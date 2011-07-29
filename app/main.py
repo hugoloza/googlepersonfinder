@@ -29,7 +29,7 @@ class Main(Handler):
             self.write('THIS IS SO MUCH FUN!')
             return
 
-        if self.render_from_cache(cache_time=6):
+        if self.render_from_cache(cache_time=600):
             return
 
         # Round off the count so people don't expect it to change every time
@@ -41,7 +41,7 @@ class Main(Handler):
             # 100, 200, 300, etc.
             num_people = int(round(person_count, -2))
 
-        self.render('templates/main.html', cache_time=6,
+        self.render('templates/main.html', cache_time=600,
                     num_people=num_people,
                     seek_url=self.get_url('/query', role='seek'),
                     provide_url=self.get_url('/query', role='provide'))
