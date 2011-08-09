@@ -36,7 +36,7 @@ APP_DIR = os.environ['APP_DIR']
 APPENGINE_DIR = os.environ['APPENGINE_DIR']
 PROJECT_DIR = os.environ['PROJECT_DIR']
 TOOLS_DIR = os.environ['TOOLS_DIR']
-
+TESTS_DIR = os.environ['TESTS_DIR']
 # Set up more useful representations, handy for interactive data manipulation
 # and debugging.  Unfortunately, the App Engine runtime relies on the specific
 # output of repr(), so this isn't safe in production, only debugging.
@@ -55,9 +55,15 @@ def model_repr(model):
     else:
         return '<%s: unsaved>' % model.kind()
 
+def get_application_id():
+    return yaml.safe_load(open(APP_DIR + '/app.yaml'))['application']
+
 def get_app_id():
     """Gets the app_id from the app.yaml configuration file."""
-    return yaml.safe_load(open(APP_DIR + '/app.yaml'))['application']
+    # note that as of Version 1.5.2 - July 21, 2011, the 'preferred way'
+    # to get the app_id is 'app_identity.get_application_id()', which relies
+    # on the presence of APPLICATION_ID env variable, which we don't have
+    return 'dev~%s' % get_application_id()
 
 def connect(server, app_id=None, username=None, password=None, secure=True):
     """Sets up a connection to an app that has the remote_api handler."""
