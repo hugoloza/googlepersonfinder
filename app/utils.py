@@ -443,7 +443,7 @@ def sanitize_urls(person):
             person.source_url = None
 
 def get_host():
-    """Return the host name, without subdomain or version specific details."""
+    """Return the host name, without version specific details."""
     host = os.environ['HTTP_HOST']
     parts = host.split('.')
     if len(parts) > 3:
@@ -630,20 +630,25 @@ class Handler(webapp.RequestHandler):
             not self.params.suppress_redirect and
             not self.params.small and
             user_agents.is_jp_tier2_mobile_phone(self.request)):
+            # split off the path from the subdomain
+            path = '/%s' % '/'.join(self.request.path.split('/')[2:]) 
             # Except for top page, we propagate path and query params.
-            redirect_url = (self.config.jp_tier2_mobile_redirect_url +
-                            self.request.path)
-            if self.request.path != '/' and self.request.query_string:
+            redirect_url = (self.config.jp_tier2_mobile_redirect_url + path)
+            if path != '/' and self.request.query_string:
                 redirect_url += '?' + self.request.query_string
             return redirect_url
         return ''
 
-    def redirect(self, url, **params):
+    def redirect(self, url, new_subdomain=None, **params):
+        # this will prepend the subdomain to the path to create a working url
+        # if its not there already.  having new_subdomain or self.subdomain 
+        # set and prepending a different subdomain to the url won't work.
         if re.match('^[a-z]+:', url):
             if params:
                 url += '?' + urlencode(params, self.charset)
         else:
-            url = self.get_url(url, **params)
+            subdomain = new_subdomain or self.subdomain
+            url = self.get_url(url, subdomain=subdomain, **params)
         return webapp.RequestHandler.redirect(self, url)
 
     def cache_key_for_request(self):
@@ -770,39 +775,47 @@ class Handler(webapp.RequestHandler):
         self.response.headers.add_header('Content-Language', lang)
         return lang, rtl
 
-    def get_url(self, path, scheme=None, **params):
+    def get_absolute_path(self, path, subdomain=None):
+        """Make sure the path has a proper subdomain prefixed."""
+        current_instance = subdomain or self.subdomain
+        if path.startswith(current_instance):
+            return path
+        else: 
+            return '/%s%s' % (current_instance, path)
+        
+    def get_url(self, path, subdomain=None, scheme=None, **params):
         """Constructs the absolute URL for a given path and query parameters,
         preserving the current 'subdomain', 'small', and 'style' parameters.
         Parameters are encoded using the same character encoding (i.e.
         self.charset) used to deliver the document."""
-        for name in ['subdomain', 'small', 'style']:
+        for name in ['small', 'style']:
             if self.request.get(name) and name not in params:
                 params[name] = self.request.get(name)
         if params:
             separator = ('?' in path) and '&' or '?'
             path += separator + urlencode(params, self.charset)
         current_scheme, netloc, _, _, _ = urlparse.urlsplit(self.request.url)
+        path = self.get_absolute_path(path, subdomain=subdomain)
         if netloc.split(':')[0] == 'localhost':
             scheme = 'http'  # HTTPS is not available during testing
+        
         return (scheme or current_scheme) + '://' + netloc + path
 
     def get_subdomain(self):
         """Determines the subdomain of the request."""
-        if self.ignore_subdomain:
-            return None
+        scheme, netloc, path, _, _ = urlparse.urlsplit(self.request.url)
+        return path.split('/')[1]
 
-        # The 'subdomain' query parameter always overrides the hostname
-        if strip(self.request.get('subdomain', '')):
-            return strip(self.request.get('subdomain'))
+    def is_subdomain(self):
+        """Determines if we're in a local or global context."""
+        return self.subdomain != 'global'
 
-        levels = self.request.headers.get('Host', '').split('.')
-        if levels[-2:] == ['appspot', 'com'] and len(levels) >= 4:
-            # foo.person-finder.appspot.com -> subdomain 'foo'
-            # bar.kpy.latest.person-finder.appspot.com -> subdomain 'bar'
-            return levels[0]
-
-        # Use the 'default_subdomain' setting, if present.
-        return config.get('default_subdomain')
+    def add_task_for_subdomain(self, subdomain, name, url, **kwargs):
+        """Queues up a task for an individual subdomain."""  
+        task_name = '%s-%s-%s' % (
+            subdomain, name, int(time.time()*1000))
+        path = self.get_absolute_path(url)
+        taskqueue.add(name=task_name, method='GET', url=path, params=kwargs)
 
     def get_parent_domain(self):
         """Determines the app's domain, not including the subdomain."""
@@ -816,14 +829,14 @@ class Handler(webapp.RequestHandler):
         subdomain = subdomain or self.subdomain
         levels = self.request.headers.get('Host', '').split('.')
         if levels[-2:] == ['appspot', 'com']:
-            return 'http://' + '.'.join([subdomain] + levels[-3:])
+            return 'http://' + '.'.join(levels[-3:])
         return self.get_url('/', subdomain=subdomain)
 
     def send_mail(self, to, subject, body):
         """Sends e-mail using a sender address that's allowed for this app."""
         app_id = get_app_name()
         sender = 'Do not reply <do-not-reply@%s.%s>' % (app_id, EMAIL_DOMAIN)
-        taskqueue.add(queue_name='send-mail', url='/admin/send_mail',
+        taskqueue.add(queue_name='send-mail', url='/global/admin/send_mail',
                       params={'sender': sender,
                               'to': to,
                               'subject': subject,
@@ -1006,7 +1019,7 @@ class Handler(webapp.RequestHandler):
               self.auth = model.Authorization.get('*', self.params.key)
 
         # Handlers that don't need a subdomain configuration can skip it.
-        if not self.subdomain:
+        if not self.subdomain or self.subdomain == 'global':
             if self.subdomain_required:
                 return self.error(400, 'No subdomain specified.')
             return
@@ -1085,4 +1098,6 @@ class Handler(webapp.RequestHandler):
 
 
 def run(*mappings, **kwargs):
-    webapp.util.run_wsgi_app(webapp.WSGIApplication(list(mappings), **kwargs))
+    regex_map = [(r'/.*%s' % m[0], m[1]) for m in mappings]
+    webapp.util.run_wsgi_app(webapp.WSGIApplication(regex_map, **kwargs))
+
