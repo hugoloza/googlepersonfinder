@@ -37,7 +37,7 @@ def add_task_for_subdomain(subdomain, name, url, **kwargs):
     taskqueue.add(name=task_name, method='GET', url=url, params=kwargs)
 
 
-class ScanForExpired(utils.Handler):
+class ScanForExpired(utils.BaseHandler):
     """Common logic for scanning the Person table looking for things to delete.
 
     The common logic handles iterating through the query, updating the expiry
@@ -132,7 +132,7 @@ def run_count(make_query, update_counter, counter):
         counter.last_key = str(entities[-1].key())
 
 
-class CountBase(utils.Handler):
+class CountBase(utils.BaseHandler):
     """A base handler for counting tasks.  Making a request to this handler
     without a subdomain will start tasks for all subdomains in parallel.
     Each subclass of this class handles one scan through the datastore."""
@@ -263,13 +263,3 @@ class Reindex(CountBase):
     def update_counter(self, counter, person):
         person.update_index(['old', 'new'])
         person.put()
-
-
-if __name__ == '__main__':
-    utils.run((CountPerson.URL, CountPerson),
-              (CountNote.URL, CountNote),
-              (DeleteExpired.URL, DeleteExpired),
-              (DeleteOld.URL, DeleteOld),
-              (UpdateStatus.URL, UpdateStatus),
-              (Reindex.URL, Reindex))
-
