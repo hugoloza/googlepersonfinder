@@ -5432,11 +5432,14 @@ def main():
     parser.add_option('-m', '--mail_port', type='int', default=8025,
                       help='SMTP server port number (default: 8025)')
     parser.add_option('-v', '--verbose', action='store_true')
+    parser.add_option('-w', '--wait',
+                      help='Leave app running until input received',
+                      action='store_true')
     options, args = parser.parse_args()
-
+    wait = options.wait
     try:
         threads = []
-        if options.address == 'localhost':
+        if options.address == 'localhost' and options.port == 8081:
             # We need to start up a clean new appserver for testing.
             threads.append(AppServerRunner(options.port, options.mail_port))
         threads.append(MailThread(options.mail_port))
@@ -5453,8 +5456,12 @@ def main():
         TestsBase.verbose = options.verbose
 
         reset_data()  # Reset the datastore for the first test.
-        unittest.main()
-
+        suite = unittest.TestSuite()
+        for test in TestsBase.__subclasses__():
+            suite.addTest(unittest.TestLoader().loadTestsFromTestCase(test))
+            
+        unittest.TextTestRunner(verbosity=2).run(suite)
+#        unittest.main()  # You can select tests using command-line arguments.
     except Exception, e:
         # Something went wrong during testing.
         print >>sys.stderr, 'caught exception : %s' % e
@@ -5462,8 +5469,12 @@ def main():
             if hasattr(thread, 'flush_output'):
                 thread.flush_output()
         traceback.print_exc()
-        raise SystemExit
+        raise SystemExit(-1)
     finally:
+        if wait:
+            # leave the servers around until prompted
+            print >>sys.stderr, 'appserver on %s, Hit return to finish: ' % hostport
+            sys.stdin.readline()
         for thread in threads:
             thread.stop()
             thread.join()
