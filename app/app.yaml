@@ -106,3 +106,7 @@ handlers:
   static_dir: static
 - url: /personfinder.*
   script: googleorg.py
+
+# find appstats on http://host:port/_ah/stats/
+builtins:
+- appstats: on
