@@ -34,22 +34,27 @@ class ConfigurationCache:
     This cache uses subdomain name as the key and stores all configs for a
     subdomain in one cache element. The global configs have a subdomain '*'. """
     storage = {}
-    expiry_time=600
-    miss_count=0
-    hit_count=0
-    evict_count=0
-    items_count=0
-    max_items=0
+    expiry_time = 600
+    miss_count = 0
+    hit_count = 0
+    evict_count = 0
+    items_count = 0
+    added_items = 0
+    delete_count = 0
+    flush_count  =  0
 
     def flush(self):
+        self.delete_count += len(self.storage)
         self.storage.clear()
-        self.items_count=0
+        self.items_count = 0
+        self.flush_count += 1
         
     def delete(self,key):
         """Deletes the entry with given key from config_cache."""
         if key in self.storage:
             self.storage.pop(key)
-            self.items_count -= 1 
+            self.items_count -= 1
+            self.delete_count += 1
 
     def add(self, key, value, time_to_live_in_seconds):
         """Adds the key/value pair to cache and updates the expiry time.
@@ -57,7 +62,7 @@ class ConfigurationCache:
         expiry = utils.get_utcnow() + timedelta(seconds=time_to_live_in_seconds)
         self.storage[key] = (value, expiry)
         self.items_count += 1
-        self.max_items += 1
+        self.added_items += 1
 
     def read(self, key, default=None):
         """Gets the value corresponding to the key from cache. If cache entry
@@ -78,13 +83,22 @@ class ConfigurationCache:
             self.miss_count += 1
             return default
 
+    def get_stats(self):
+        """Return a dictionary with all the stats."""
+        return {
+            'Hit Count' : self.hit_count,
+            'Miss Count': self.miss_count,
+            'Items Count': self.items_count,
+            'Eviction Count': self.evict_count,
+            'Inserted Items': self.added_items,
+            'Deleted Items': self.delete_count,
+            'Cache Flushes': self.flush_count
+            }
 
     def stats(self):
-        logging.info("Hit Count - %r" % self.hit_count)
-        logging.info("Miss Count - %r" % self.miss_count)
-        logging.info("Items Count - %r" % self.items_count)
-        logging.info("Eviction Count - %r" % self.evict_count)
-        logging.info("Max Items - %r" % self.max_items)
+        """Log the stats."""
+        for k, v in self.get_stats().iteritems:
+            logging.info('%s - %r' % (k, v))
     
     def get_config(self, subdomain, name, default=None):
         """Looks for data in cache. If not present, retrieves from

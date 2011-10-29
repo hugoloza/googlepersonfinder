@@ -22,7 +22,6 @@ from datetime import timedelta
 from google.appengine.api import datastore_errors
 from google.appengine.api import memcache
 from google.appengine.ext import db
-import config
 import indexing
 import pfif
 import prefix
@@ -394,6 +393,7 @@ class Person(Base):
         if self.expiry_date:
             return self.expiry_date
         else:
+            import config
             expiration_days = config.get_for_subdomain(
                 self.subdomain, 'default_expiration_days') or (
                 DEFAULT_EXPIRATION_DAYS)

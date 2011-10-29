@@ -32,6 +32,7 @@ import optparse
 import os
 import re
 import signal
+import simplejson
 import smtpd
 import subprocess
 import sys
@@ -113,7 +114,7 @@ class ProcessRunner(threading.Thread):
     """A thread that starts a subprocess, collects its output, and stops it."""
 
     READY_RE = re.compile('')  # this output means the process is ready
-    OMIT_RE = re.compile('INFO ')  # omit these lines from the displayed output
+    OMIT_RE = re.compile('INFO |WARNING ')  # omit these lines from the displayed output
     ERROR_RE = re.compile('ERROR|CRITICAL')  # this output indicates failure
 
     def __init__(self, name, args):
@@ -5245,7 +5246,8 @@ class ConfigTests(TestsBase):
         )
 
         cfg = config.Configuration('xyz')
-        assert cfg.language_menu_options == ['nl']
+        assert cfg.language_menu_options == ['nl'], \
+            'language_menu_options: ' + ','.join(cfg.language_menu_options)
         assert cfg.subdomain_titles == {'nl': 'Aardbeving'}
         assert cfg.keywords == 'spam, ham'
         assert cfg.use_family_name
@@ -5423,6 +5425,30 @@ class SecretTests(TestsBase):
         assert 'id="map_' in doc.content
 
 
+def print_cache_stats(stream):
+    """Printout cache stats from the appserver."""
+    s = scrape.Session()
+
+    # we duplicate some stuff from TestsBase here, because
+    # its a pain to factor it out.
+    def path_to_url(path):
+        return 'http://%s%s' % (TestsBase.hostport, path)
+
+    def go(path, **kwargs):
+        """Navigates the scrape Session to the given path on the test server."""
+        return s.go(path_to_url(path), **kwargs)
+
+    # login as admin
+    doc = go('/_ah/login')
+    s.submit(doc.first('form'), admin='True', action='Login')
+    assert s.status == 200
+    # get the stats as json
+    doc = go('/admin/cachestats?operation=json')
+    stats = simplejson.loads(doc.content)
+    print >>stream, 'Cache stats:'
+    for k,v in stats.iteritems():
+        print >>stream, '%s : %s' % (k, v)
+
 def main():
     parser = optparse.OptionParser()
     parser.add_option('-a', '--address', default='localhost',
@@ -5457,11 +5483,14 @@ def main():
 
         reset_data()  # Reset the datastore for the first test.
         suite = unittest.TestSuite()
-        for test in TestsBase.__subclasses__():
-            suite.addTest(unittest.TestLoader().loadTestsFromTestCase(test))
+        if args:
+            suite.addTest(unittest.TestLoader().loadTestsFromNames(
+                    args, sys.modules[__name__]))
+        else:
+            for test in TestsBase.__subclasses__():
+                suite.addTest(unittest.TestLoader().loadTestsFromTestCase(test))
             
         unittest.TextTestRunner(verbosity=2).run(suite)
-#        unittest.main()  # You can select tests using command-line arguments.
     except Exception, e:
         # Something went wrong during testing.
         print >>sys.stderr, 'caught exception : %s' % e
@@ -5471,7 +5500,15 @@ def main():
         traceback.print_exc()
         raise SystemExit(-1)
     finally:
+        print_cache_stats(sys.stderr)
         if wait:
+            print >>sys.stderr, 'will pause following appserver output\n' \
+                'appserver on %s, Hit return to finish: ' % hostport
+
+            for thread in threads:
+                if hasattr(thread, 'flush_output'):
+                    thread.flush_output()
+
             # leave the servers around until prompted
             print >>sys.stderr, 'appserver on %s, Hit return to finish: ' % hostport
             sys.stdin.readline()

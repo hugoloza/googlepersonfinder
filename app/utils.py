@@ -652,7 +652,7 @@ class Handler(webapp.RequestHandler):
         'subscribe': validate_checkbox,
         'suppress_redirect': validate_yes,
         'cursor': strip,
-        'flush_config_cache': strip
+        'flush_config_cache': strip,
     }
 
     def maybe_redirect_jp_tier2_mobile(self):
