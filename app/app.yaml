@@ -98,6 +98,9 @@ handlers:
 - url: /admin/set_utcnow_for_test
   script: set_utcnow.py
   login: admin
+- url: /admin/cachestats
+  script: cache_stats.py
+  login: admin
 
 # Temporary handlers for the google.org National Preparedness Month launch.
 # Renders /personfinder/about, /personfinder/responders, and handles redirects
