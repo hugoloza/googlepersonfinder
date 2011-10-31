@@ -101,6 +101,9 @@ handlers:
 - url: /admin/cachestats
   script: cache_stats.py
   login: admin
+- url: /admin/appstats
+  script: app_stats.py
+  login: admin
 
 # Temporary handlers for the google.org National Preparedness Month launch.
 # Renders /personfinder/about, /personfinder/responders, and handles redirects
