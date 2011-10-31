@@ -19,10 +19,11 @@ creates dependency loops with utils."""
 import random, simplejson
 import utils
 import config
-from google.appengine.ext.appstats import ui as appstats
+import stats_ui as appstats
 
 class AppStats(utils.Handler):
-    """Handler for viewing appstats."""
+    """Handler for viewing appstats.  Currently doesn't work because
+    simplejson can't handle protobuf format."""
     # cache is global
     subdomain_required = False
     

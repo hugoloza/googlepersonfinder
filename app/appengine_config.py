@@ -16,7 +16,7 @@
 __author__ = 'lschumacher@google.com (Lee Schumacher) and no other Googlers'
 
 # Uncomment this to enable collection of appstats.
-# def webapp_add_wsgi_middleware(app):
-#     from google.appengine.ext.appstats import recording
-#     app = recording.appstats_wsgi_middleware(app)
-#     return app
+def webapp_add_wsgi_middleware(app):
+    from google.appengine.ext.appstats import recording
+    app = recording.appstats_wsgi_middleware(app)
+    return app
