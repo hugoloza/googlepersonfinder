@@ -5425,7 +5425,7 @@ class SecretTests(TestsBase):
         assert 'id="map_' in doc.content
 
 
-def print_cache_stats(stream):
+def print_stats(stream):
     """Printout cache stats from the appserver."""
     s = scrape.Session()
 
@@ -5448,6 +5448,12 @@ def print_cache_stats(stream):
     print >>stream, 'Cache stats:'
     for k,v in stats.iteritems():
         print >>stream, '%s : %s' % (k, v)
+
+    print >>stream, 'App stats:'
+    doc = go('/admin/appstats?operation=json')
+    stats = simplejson.loads(doc.content)
+    for stat in stats:
+        print >>stream, '%s : %s' % (stat, stats[stat])
 
 def main():
     parser = optparse.OptionParser()
@@ -5491,6 +5497,7 @@ def main():
                 suite.addTest(unittest.TestLoader().loadTestsFromTestCase(test))
             
         unittest.TextTestRunner(verbosity=2).run(suite)
+        print_stats(sys.stderr)
     except Exception, e:
         # Something went wrong during testing.
         print >>sys.stderr, 'caught exception : %s' % e
@@ -5500,7 +5507,6 @@ def main():
         traceback.print_exc()
         raise SystemExit(-1)
     finally:
-        print_cache_stats(sys.stderr)
         if wait:
             print >>sys.stderr, 'will pause following appserver output\n' \
                 'appserver on %s, Hit return to finish: ' % hostport
