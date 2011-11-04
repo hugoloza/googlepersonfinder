@@ -419,7 +419,7 @@ def validate_subdomain(string):
     except:
         raise ValueError('Subdomain cannot contain special characters other '
             'than underscore and hyphen')
-        
+
 # ==== Other utilities =========================================================
 
 def url_is_safe(url):
@@ -536,7 +536,7 @@ def get_person_full_name(person, config):
 
 def send_confirmation_email_to_record_author(handler, person,
                                              action, embed_url, record_id):
-    """Send the author an email to confirm enabling/disabling notes 
+    """Send the author an email to confirm enabling/disabling notes
     of a record."""
     if not person.author_email:
         return handler.error(
@@ -929,7 +929,7 @@ class Handler(webapp.RequestHandler):
         return options
 
     def get_subdomains_as_html(self):
-        
+
         result = '''
 <style>body { font-family: arial; font-size: 13px; }</style>
 <p>Select a Person Finder site:<ul>
@@ -939,8 +939,8 @@ class Handler(webapp.RequestHandler):
             result += '<li><a href="%s">%s</a>' % (url, instance.subdomain)
         result += '</ul>'
         return result
-        
-        
+
+
     def initialize(self, *args):
         webapp.RequestHandler.initialize(self, *args)
         self.params = Struct()
@@ -1044,7 +1044,7 @@ class Handler(webapp.RequestHandler):
         # Check for an authorization key.
         self.auth = None
         if self.params.key:
-            if self.subdomain: 
+            if self.subdomain:
                 # check for domain specific one.
                 self.auth = model.Authorization.get(self.subdomain, self.params.key)
             if not self.auth:
