@@ -208,13 +208,13 @@ class DetailsHandler(webapp.RequestHandler):
         timestamp = int(time_key) * 0.001
       except Exception:
         pass
-      
+
     data = details(timestamp)
     if data is None:
       self.response.set_status(404)
 
       self.response.out.write(render('details.html', {}))
-    else: 
+    else:
       self.response.out.write(render('details.html', data))
 
 

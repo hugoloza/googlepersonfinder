@@ -26,7 +26,7 @@ class AppStats(utils.Handler):
     simplejson can't handle protobuf format."""
     # cache is global
     subdomain_required = False
-    
+
     def get(self):
         """Handler that renders the cache stats or optionally spits out json."""
         stats = appstats.summarize_stats()

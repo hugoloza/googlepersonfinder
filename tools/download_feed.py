@@ -114,7 +114,7 @@ def download_batch(url, auth_key, min_entry_date, skip, parser):
     if auth_key != '':
         query_params['key'] =  auth_key
 
-    query = urllib.urlencode(query_params)        
+    query = urllib.urlencode(query_params)
     if '?' in url:
         url += '&' + query
     else:
@@ -155,7 +155,8 @@ Usage: %s <type> <feed_url> <min_entry_date> <format> <filename> [auth_key]
     feed_url: URL of the Person Finder Atom feed (as a shorthand, you can
         give just the domain name and the rest of the URL will be assumed)
     min_entry_date: retrieve only entries with entry_date >= this timestamp
-        (specify the timestamp in RFC 3339 format)
+        (specify the timestamp in RFC 3339 format, with no .SS at the end, and
+         must be Zulu.)
     format: 'xml' or 'csv'
     filename: filename of the file to write
     auth_key (optional): authorization key if data is protected with a read key
@@ -167,7 +168,7 @@ Usage: %s <type> <feed_url> <min_entry_date> <format> <filename> [auth_key]
     auth_key = ''
     if len(sys.argv) == 7:
         auth_key = sys.argv[6]
-    
+
     # If given a plain domain name, assume the usual feed path.
     if '/' not in feed_url:
         feed_url = 'https://' + feed_url + '/feeds/' + type
