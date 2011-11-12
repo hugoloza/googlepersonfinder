@@ -330,13 +330,12 @@ class ModelTests(unittest.TestCase):
     def test_extend_expiry_date(self):
         """Make sure that the expiry date gets updated with the given increment,
         and that entry_date and source_date are set to now."""
+        expected_expiry_date = self.p1.expiry_date + timedelta(60)
 
         set_utcnow_for_test(datetime(2011, 11, 12))
         self.p1.extend_expiry_date(timedelta(60))
 
         # Both entities should have the new source, entry and expiry dates.
-        expected_expiry_date = self.p1.expiry_date + timedelta(60)
-
         assert self.p1.source_date == datetime(2011, 11, 12)
         assert self.p1.entry_date == datetime(2011, 11, 12)
         assert self.p1.expiry_date == expected_expiry_date
