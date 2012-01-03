@@ -113,7 +113,7 @@ from google.appengine.ext import webapp
 
 def delta_to_seconds(td):
     """Converts a timedelta to a number of seconds."""
-    return td.days*24*2600 + td.seconds + td.microseconds/1e6
+    return td.days*24*3600 + td.seconds + td.microseconds/1e6
 
 
 class RamCache:
@@ -133,7 +133,7 @@ class RamCache:
         remaining cache lifetime in seconds; otherwise returns (None, 0)."""
         if key in self.cache:
             value, expiry = self.cache[key]
-            ttl_seconds = delta_to_seconds(utils.get_utcnow() - expiry)
+            ttl_seconds = delta_to_seconds(expiry - utils.get_utcnow())
             if ttl_seconds > 0:
                 return value, ttl_seconds
         return None, 0
@@ -161,7 +161,7 @@ class Resource(db.Model):
         try:
             file = open(Resource.RESOURCE_DIR + '/' + name)
             return Resource(key_name=name, content=file.read(),
-                            cache_seconds=Resource.FILE_CACHE_SECONDS)
+                            cache_seconds=float(Resource.FILE_CACHE_SECONDS))
         except IOError:
             return None
 
@@ -198,21 +198,20 @@ def get_localized(resource_name, lang):
         if not resource:
             resource = Resource.get(resource_name)
         if resource:
-            LOCALIZED_CACHE.put(cache_key, resource, resource.cache_seconds)
             ttl_seconds = resource.cache_seconds
+            LOCALIZED_CACHE.put(cache_key, resource, ttl_seconds)
     return resource, ttl_seconds
 
 def get_rendered(resource_name, lang, extra_key=None,
-                 get_vars=lambda: {}, render_output_cache_seconds=0):
+                 get_vars=lambda: {}, cache_seconds_override=None):
     """Gets rendered or static content from the cache or datastore and returns
     (content, ttl_seconds), where ttl_seconds is the remaining cache lifetime,
     or (None, 0) if nothing suitable is found.  If resource_name is 'foo.html',
-    this looks for a Resource named 'foo.html' to serve directly (in which case
-    the Resource's cache_seconds property sets the cache lifetime), then a
-    Resource named 'foo.html.template' to render as a template (in which case
-    the rendered result is cached for 'render_output_cache_seconds' seconds).
-    When rendering a template, this calls get_vars() to obtain a dictionary of
-    template variables.  The cache is keyed on resource_name, lang, and
+    we look for a Resource named 'foo.html' to serve directly, then a Resource
+    named 'foo.html.template' to render as a template.  In the latter case, we
+    call get_vars() to get a dictionary of template variables.  The cache
+    lifetime comes from cache_seconds_override (if given) or the Resource's
+    cache_seconds property.  The cache is keyed on resource_name, lang, and
     extra_key; use extra_key to capture dependencies on template variables."""
     cache_key = (resource_name, lang, extra_key)
     content, ttl_seconds = RENDERED_CACHE.get(cache_key)
@@ -223,8 +222,9 @@ def get_rendered(resource_name, lang, extra_key=None,
         resource, ttl_seconds = get_localized(resource_name + '.template', lang)
         if resource:  # a template is available
             content = render_in_lang(resource.get_template(), lang, get_vars())
-            RENDERED_CACHE.put(cache_key, content, render_output_cache_seconds)
-            ttl_seconds = render_output_cache_seconds
+            if cache_seconds_override is not None:
+                ttl_seconds = cache_seconds_override
+            RENDERED_CACHE.put(cache_key, content, ttl_seconds)
     return content, ttl_seconds
 
 def render_in_lang(template, lang, vars):
