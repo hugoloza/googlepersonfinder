@@ -555,16 +555,16 @@ class BaseHandler(webapp.RequestHandler):
         The rendered result will be cached only if cache_seconds is specified;
         when a cached result is available for the same template, language,
         repo, charset, and query string, vars and get_vars will be ignored."""
-        lang = language_override or self.env.lang
-        extra_key = (self.env.repo, self.env.charset, self.request.query_string)
+        env = self.env
+        lang = language_override or env.lang
         def get_all_vars():
-            vars['env'] = self.env  # pass along application-wide context
+            vars['env'] = env  # pass along application-wide context
             vars['config'] = self.config  # pass along the configuration
             vars['params'] = self.params  # pass along the query parameters
             vars.update(get_vars())
             return vars
         content, ttl_seconds = resources.get_rendered(
-            name, lang, extra_key, get_all_vars, cache_seconds)
+            name, lang, (env.url, env.charset), get_all_vars, cache_seconds)
         return content
 
     def error(self, code, message='', message_html=''):
