@@ -538,23 +538,25 @@ class BaseHandler(webapp.RequestHandler):
             path = self.get_url(path, repo, **params)
         return webapp.RequestHandler.redirect(self, path, permanent=permanent)
 
-    def render(self, name, language_override=None, cache_seconds=0,
-               get_vars=lambda: {}, **vars):
+    def render(self, name, language_override=None,
+               get_vars=lambda: {}, cache_seconds=0, **vars):
         """Renders a template to the output stream, passing in the variables
         specified in **vars as well as any additional variables returned by
-        get_vars().  Since this is intended for use by a dynamic page handler,
-        caching is off by default; if cache_seconds is positive, then
-        get_vars() will be called only when cached content is unavailable."""
+        get_vars().  If cache_seconds is specified, the rendered result will be
+        cached; future calls to render() for the same template, language, repo,
+        charset, and query string will use the cached result, instead of
+        calling get_vars() and rendering the template."""
         self.write(self.render_to_string(
-            name, language_override, cache_seconds, get_vars, **vars))
+            name, language_override, get_vars, cache_seconds, **vars))
 
-    def render_to_string(self, name, language_override=None, cache_seconds=0,
-                         get_vars=lambda: {}, **vars):
+    def render_to_string(self, name, language_override=None,
+                         get_vars=lambda: {}, cache_seconds=0, **vars):
         """Renders a template to a string, passing in the variables specified
         in **vars as well as any additional variables returned by get_vars().
-        Since this is intended for use by a dynamic page handler, caching is
-        off by default; if cache_seconds is positive, then get_vars() will be
-        called only when cached content is unavailable."""
+        If cache_seconds is specified, the rendered result will be cached;
+        future calls to render() for the same template, language, repo,
+        charset, and query string will use the cached result, instead of
+        calling get_vars() and rendering the template."""
         # TODO(kpy): Make the contents of extra_key overridable by callers?
         lang = language_override or self.env.lang
         extra_key = (self.env.repo, self.env.charset, self.request.query_string)

@@ -284,15 +284,18 @@ class Main(webapp.RequestHandler):
             handler.initialize(self.request, self.response, self.env)
             getattr(handler, self.request.method.lower())()  # get() or post()
         elif not action.endswith('.template'):  # don't serve template code
-            # Serve a static page or file.
+            # Serve a static file or a page rendered purely from a template.
             self.env.robots_ok = True
             extra_key = (self.env.repo, self.env.charset)
             get_vars = lambda: {'env': self.env, 'config': self.env.config}
-            content = resources.get_rendered(action, lang, extra_key, get_vars)
+            content, ttl_seconds = resources.get_rendered(
+                action, lang, extra_key, get_vars, 1)
             if content is None:
                 return self.error(404)
             content_type, content_encoding = mimetypes.guess_type(action)
             self.response.headers['Content-Type'] = content_type
+            self.response.headers['Cache-Control'] = \
+                'public; max-age=%d' % ttl_seconds
             self.response.out.write(content)
 
     def get(self):
