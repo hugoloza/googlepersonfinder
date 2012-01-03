@@ -276,29 +276,28 @@ class Main(webapp.RequestHandler):
         django_setup.activate(self.env.lang)
 
     def serve(self):
-        action, lang = self.env.action, self.env.lang
-        if action in HANDLER_CLASSES:
+        request, response, env = self.request, self.response, self.env
+        if env.action in HANDLER_CLASSES:
             # Dispatch to the handler for the specified action.
-            module_name, class_name = HANDLER_CLASSES[action].split('.')
+            module_name, class_name = HANDLER_CLASSES[env.action].split('.')
             handler = getattr(__import__(module_name), class_name)()
-            handler.initialize(self.request, self.response, self.env)
-            getattr(handler, self.request.method.lower())()  # get() or post()
-        elif not action.endswith('.template'):  # don't serve template code
+            handler.initialize(request, response, env)
+            getattr(handler, request.method.lower())()  # get() or post()
+        elif not env.action.endswith('.template'):  # don't serve template code
             # Serve a static file or a page rendered purely from a template.
-            self.env.robots_ok = True
-            extra_key = (self.env.repo, self.env.charset)
-            get_vars = lambda: {'env': self.env, 'config': self.env.config}
+            env.robots_ok = True
+            get_vars = lambda: {'env': env, 'config': env.config}
             # As we don't specify cache_seconds_override, the resulting content
             # will be cached based on the Resource's cache_seconds property.
             content, ttl_seconds = resources.get_rendered(
-                action, lang, extra_key, get_vars)
+                env.action, env.lang, (env.url, env.charset), get_vars)
             if content is None:
                 return self.error(404)
-            content_type, content_encoding = mimetypes.guess_type(action)
-            self.response.headers['Content-Type'] = content_type
-            self.response.headers['Cache-Control'] = \
+            content_type, content_encoding = mimetypes.guess_type(env.action)
+            response.headers['Content-Type'] = content_type
+            response.headers['Cache-Control'] = \
                 'public, max-age=%d' % ttl_seconds
-            self.response.out.write(content)
+            response.out.write(content)
 
     def get(self):
         self.serve()
