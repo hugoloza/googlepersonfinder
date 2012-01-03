@@ -541,23 +541,20 @@ class BaseHandler(webapp.RequestHandler):
     def render(self, name, language_override=None,
                get_vars=lambda: {}, cache_seconds=0, **vars):
         """Renders a template to the output stream, passing in the variables
-        specified in **vars as well as any additional variables returned by
-        get_vars().  If cache_seconds is specified, the rendered result will be
-        cached; future calls to render() for the same template, language, repo,
-        charset, and query string will use the cached result, instead of
-        calling get_vars() and rendering the template."""
+        given in **vars as well as any other variables returned by get_vars().
+        The rendered result will be cached only if cache_seconds is specified;
+        when a cached result is available for the same template, language,
+        repo, charset, and query string, vars and get_vars will be ignored."""
         self.write(self.render_to_string(
             name, language_override, get_vars, cache_seconds, **vars))
 
     def render_to_string(self, name, language_override=None,
                          get_vars=lambda: {}, cache_seconds=0, **vars):
-        """Renders a template to a string, passing in the variables specified
-        in **vars as well as any additional variables returned by get_vars().
-        If cache_seconds is specified, the rendered result will be cached;
-        future calls to render() for the same template, language, repo,
-        charset, and query string will use the cached result, instead of
-        calling get_vars() and rendering the template."""
-        # TODO(kpy): Make the contents of extra_key overridable by callers?
+        """Renders a template to a string, passing in the variables given in
+        **vars as well as any other variables returned by get_vars().
+        The rendered result will be cached only if cache_seconds is specified;
+        when a cached result is available for the same template, language,
+        repo, charset, and query string, vars and get_vars will be ignored."""
         lang = language_override or self.env.lang
         extra_key = (self.env.repo, self.env.charset, self.request.query_string)
         def get_all_vars():
@@ -566,8 +563,9 @@ class BaseHandler(webapp.RequestHandler):
             vars['params'] = self.params  # pass along the query parameters
             vars.update(get_vars())
             return vars
-        return resources.get_rendered(
+        content, ttl_seconds = resources.get_rendered(
             name, lang, extra_key, get_all_vars, cache_seconds)
+        return content
 
     def error(self, code, message='', message_html=''):
         self.info(code, message, message_html, style='error')

@@ -288,14 +288,16 @@ class Main(webapp.RequestHandler):
             self.env.robots_ok = True
             extra_key = (self.env.repo, self.env.charset)
             get_vars = lambda: {'env': self.env, 'config': self.env.config}
+            # As we don't specify cache_seconds_override, the resulting content
+            # will be cached based on the Resource's cache_seconds property.
             content, ttl_seconds = resources.get_rendered(
-                action, lang, extra_key, get_vars, 1)
+                action, lang, extra_key, get_vars)
             if content is None:
                 return self.error(404)
             content_type, content_encoding = mimetypes.guess_type(action)
             self.response.headers['Content-Type'] = content_type
             self.response.headers['Cache-Control'] = \
-                'public; max-age=%d' % ttl_seconds
+                'public, max-age=%d' % ttl_seconds
             self.response.out.write(content)
 
     def get(self):
