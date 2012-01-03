@@ -61,7 +61,7 @@ class TemplateLoader(django.template.loader.BaseLoader):
     def load_template(self, name, dirs):
         import resources
         lang = django.utils.translation.get_language()  # currently active lang
-        resource = resources.get_localized(name, lang)
+        resource, ttl_seconds = resources.get_localized(name, lang)
         template = resource and resource.get_template()
         if template:
             return template, name + ':' + lang

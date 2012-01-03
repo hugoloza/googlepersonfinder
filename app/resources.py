@@ -111,6 +111,11 @@ from google.appengine.ext import webapp
 #     > self.response.out.write(rendered_string)
 
 
+def delta_to_seconds(td):
+    """Converts a timedelta to a number of seconds."""
+    return td.days*24*2600 + td.seconds + td.microseconds/1e6
+
+
 class RamCache:
     def __init__(self):
         self.cache = {}
@@ -118,16 +123,20 @@ class RamCache:
     def clear(self):
         self.cache.clear()
 
-    def put(self, key, value, ttl_seconds):
-        if ttl_seconds > 0:
-            expiry = utils.get_utcnow() + datetime.timedelta(0, ttl_seconds)
+    def put(self, key, value, cache_seconds):
+        if cache_seconds > 0:
+            expiry = utils.get_utcnow() + datetime.timedelta(0, cache_seconds)
             self.cache[key] = (value, expiry)
 
     def get(self, key):
+        """Gets an item if it's fresh and returns the item together with its
+        remaining cache lifetime in seconds; otherwise returns (None, 0)."""
         if key in self.cache:
             value, expiry = self.cache[key]
-            if utils.get_utcnow() < expiry:
-                return value
+            ttl_seconds = delta_to_seconds(utils.get_utcnow() - expiry)
+            if ttl_seconds > 0:
+                return value, ttl_seconds
+        return None, 0
 
 
 class Resource(db.Model):
@@ -144,13 +153,15 @@ class Resource(db.Model):
     last_modified = db.DateTimeProperty(auto_now=True)  # for bookkeeping
 
     RESOURCE_DIR = 'resources'  # directory containing resource files
+    FILE_CACHE_SECONDS = 10  # length of time to cache files loaded from disk
 
     @staticmethod
     def load_from_file(name):
         """Creates a Resource from a file, or returns None if no such file."""
         try:
             file = open(Resource.RESOURCE_DIR + '/' + name)
-            return Resource(key_name=name, content=file.read())
+            return Resource(key_name=name, content=file.read(),
+                            cache_seconds=Resource.FILE_CACHE_SECONDS)
         except IOError:
             return None
 
@@ -176,10 +187,11 @@ def clear_caches():
     RENDERED_CACHE.clear()
 
 def get_localized(resource_name, lang):
-    """Gets the localized (or if none, generic) version of a Resource from the
-    cache, the datastore, or a file.  Returns None if no match is found."""
+    """Gets the localized or generic version of a Resource from the cache, the
+    datastore, or a file, and returns (resource, ttl_seconds) where ttl_seconds
+    is its remaining cache lifetime, or (None, 0) if no match is found."""
     cache_key = (resource_name, lang)
-    resource = LOCALIZED_CACHE.get(cache_key)
+    resource, ttl_seconds = LOCALIZED_CACHE.get(cache_key)
     if not resource:
         if lang:
             resource = Resource.get(resource_name + ':' + lang)
@@ -187,28 +199,33 @@ def get_localized(resource_name, lang):
             resource = Resource.get(resource_name)
         if resource:
             LOCALIZED_CACHE.put(cache_key, resource, resource.cache_seconds)
-    return resource
+            ttl_seconds = resource.cache_seconds
+    return resource, ttl_seconds
 
 def get_rendered(resource_name, lang, extra_key=None,
-                 get_vars=lambda: {}, cache_seconds=1):
-    """Gets the rendered content of a Resource from the cache or the datastore.
-    If resource_name is 'foo.html', this looks for a Resource named 'foo.html'
-    to serve as a plain file, then a Resource named 'foo.html.template' to
-    render as a template.  Returns None if nothing suitable is found.  When
-    rendering a template, this calls get_vars() to obtain a dictionary of
+                 get_vars=lambda: {}, render_output_cache_seconds=0):
+    """Gets rendered or static content from the cache or datastore and returns
+    (content, ttl_seconds), where ttl_seconds is the remaining cache lifetime,
+    or (None, 0) if nothing suitable is found.  If resource_name is 'foo.html',
+    this looks for a Resource named 'foo.html' to serve directly (in which case
+    the Resource's cache_seconds property sets the cache lifetime), then a
+    Resource named 'foo.html.template' to render as a template (in which case
+    the rendered result is cached for 'render_output_cache_seconds' seconds).
+    When rendering a template, this calls get_vars() to obtain a dictionary of
     template variables.  The cache is keyed on resource_name, lang, and
-    extra_key; use extra_key to capture dependencies on template variables)."""
+    extra_key; use extra_key to capture dependencies on template variables."""
     cache_key = (resource_name, lang, extra_key)
-    content = RENDERED_CACHE.get(cache_key)
+    content, ttl_seconds = RENDERED_CACHE.get(cache_key)
     if content is None:
-        resource = get_localized(resource_name, lang)
+        resource, ttl_seconds = get_localized(resource_name, lang)
         if resource:  # a plain file is available
-            return resource.content  # already cached, no need to cache again
-        resource = get_localized(resource_name + '.template', lang)
+            return resource.content, ttl_seconds
+        resource, ttl_seconds = get_localized(resource_name + '.template', lang)
         if resource:  # a template is available
             content = render_in_lang(resource.get_template(), lang, get_vars())
-            RENDERED_CACHE.put(cache_key, content, cache_seconds)
-    return content
+            RENDERED_CACHE.put(cache_key, content, render_output_cache_seconds)
+            ttl_seconds = render_output_cache_seconds
+    return content, ttl_seconds
 
 def render_in_lang(template, lang, vars):
     """Renders a template in a given language.  We use this to ensure that
