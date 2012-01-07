@@ -203,22 +203,16 @@ class AppServerRunner(ProcessRunner):
         'INFO |WARNING |DeprecationWarning: get_request_cpu_usage')
 
     def __init__(self, port, smtp_port):
-        self.datastore_path = '/tmp/dev_appserver.datastore.%d' % os.getpid()
         ProcessRunner.__init__(self, 'appserver', [
             os.environ['PYTHON'],
             os.path.join(os.environ['APPENGINE_DIR'], 'dev_appserver.py'),
             os.environ['APP_DIR'],
             '--port=%s' % port,
-            '--clear_datastore',
-            '--datastore_path=%s' % self.datastore_path,
+            '--datastore_path=/dev/null',
             '--require_indexes',
             '--smtp_host=localhost',
             '--smtp_port=%d' % smtp_port # '-d'
         ])
-
-    def clean_up(self):
-        if os.path.exists(self.datastore_path):
-            os.unlink(self.datastore_path)
 
 
 class MailThread(threading.Thread):
@@ -423,6 +417,15 @@ class TestsBase(unittest.TestCase):
 
 class ReadOnlyTests(TestsBase):
     """Tests that don't modify data go here."""
+
+    def setUp(self):
+        """Sets up a scrape Session for each test."""
+        self.s = scrape.Session(verbose=self.verbose)
+        # These tests don't rely on utcnow, so don't bother to set it.
+
+    def tearDown(self):
+        # These tests don't write anything, so no need to reset the datastore.
+        pass
 
     def test_noconfig(self):
         """Check the main page with no config (now points to /personfinder/)."""
