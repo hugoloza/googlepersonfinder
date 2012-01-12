@@ -256,6 +256,10 @@ def setup_env(request):
         last = request.get('last_name', '').strip()
         env.params_full_name = utils.get_full_name(first, last, env.config)
 
+        # URLs that are used in the base template.
+        env.start_url = utils.get_url(request, env.repo, '/')
+        env.embed_url = utils.get_url(request, env.repo, '/embed')
+
     return env
 
 def flush_caches(*keywords):
