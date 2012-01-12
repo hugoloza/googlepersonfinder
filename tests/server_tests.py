@@ -36,6 +36,7 @@ import optparse
 import os
 import re
 import signal
+import simplejson
 import smtpd
 import subprocess
 import sys
@@ -5654,6 +5655,38 @@ class GoogleorgTests(TestsBase):
         assert self.s.status == 200
         assert 'Information for responders' in doc.content
 
+def print_stats(stream):
+    """Printout cache stats from the appserver."""
+    s = scrape.Session()
+
+    # we duplicate some stuff from TestsBase here, because
+    # its a pain to factor it out.
+    def path_to_url(path):
+        return 'http://%s%s' % (TestsBase.hostport, path)
+
+    def go(path, **kwargs):
+        """Navigates the scrape Session to the given path on the test server."""
+        return s.go(path_to_url(path), **kwargs)
+
+    # login as admin
+    try:
+        doc = go('/_ah/login')
+        s.submit(doc.first('form'), admin='True', action='Login')
+        assert s.status == 200
+        # get the stats as json
+        doc = go('/global/admin/cachestats?operation=json')
+        stats = simplejson.loads(doc.content)
+        print >>stream, 'Cache stats:'
+        for k,v in stats.iteritems():
+            print >>stream, '%s : %s' % (k, v)
+
+        print >>stream, 'App stats:'
+        doc = go('/admin/appstats?operation=json')
+        stats = simplejson.loads(doc.content)
+        for stat in stats:
+            print >>stream, '%s : %s' % (stat, stats[stat])
+    except Exception, e:
+        print >>sys.stderr, 'Exception during print_stats: %s' % e
 
 class DownloadFeedTests(TestsBase):
     """Tests for the tools/download_feed.py script."""
@@ -5695,6 +5728,8 @@ class DownloadFeedTests(TestsBase):
 
 def main():
     parser = optparse.OptionParser()
+    parser.add_option('-a', '--address', default='localhost',
+                      help='appserver hostname (default: localhost)')
     parser.add_option('-d', '--debug', action='store_true',
                       help='emit copious debugging messages')
     parser.add_option('-m', '--mail_port', type='int', default=8025,
@@ -5705,8 +5740,11 @@ def main():
                       help='appserver URL (default: localhost:8081)')
     parser.add_option('-v', '--verbose', action='store_true',
                       help='list test names as they are being executed')
+    parser.add_option('-w', '--wait',
+                      help='Leave app running until input received',
+                      action='store_true')
     options, args = parser.parse_args()
-
+    wait = options.wait
     try:
         threads = []
         options.server = options.server or 'localhost:%d' % options.port
@@ -5741,7 +5779,17 @@ def main():
         # unittest.main looks at sys.argv for options and test names.
         sys.argv[1:] = (options.verbose and ['-v'] or []) + args
         sys.stderr.write('[test] ')
-        unittest.main()
+
+        suite = unittest.TestSuite()
+        if args:
+            suite.addTest(unittest.TestLoader().loadTestsFromNames(
+                args, sys.modules[__name__]))
+        else:
+            for test in TestsBase.__subclasses__():
+                suite.addTest(unittest.TestLoader().loadTestsFromTestCase(test))
+
+        unittest.TextTestRunner(verbosity=2).run(suite)
+        print_stats(sys.stderr)
 
     except Exception, e:
         # Something went wrong during testing.
@@ -5749,6 +5797,19 @@ def main():
         traceback.print_exc()
         raise SystemExit(-1)  # Signal failure to the continuous build.
     finally:
+        if wait:
+            print >>sys.stderr, 'will pause following appserver output\n' \
+                'appserver on %s, Hit return to finish: ' % options.server
+
+            for thread in threads:
+                if hasattr(thread, 'flush_output'):
+                    thread.flush_output()
+
+            # leave the servers around until prompted
+            print >>sys.stderr, \
+                'waiting for appserver on %s, Hit return to finish: ' \
+                % options.server
+            sys.stdin.readline()
         for thread in threads:
             if hasattr(thread, 'flush_output'):
                 thread.flush_output()

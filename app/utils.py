@@ -484,6 +484,7 @@ class BaseHandler(webapp.RequestHandler):
         'cursor': strip,
         'date_of_birth': validate_approximate_date,
         'description': strip,
+        'expiry_option': validate_expiry,
         'dupe_notes': validate_yes,
         'email_of_found_person': strip,
         'error': strip,
