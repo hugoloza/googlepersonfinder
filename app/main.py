@@ -152,8 +152,9 @@ def select_lang(request, config=None):
             request.cookies.get('django_language', None) or
             default_lang or
             django_setup.LANGUAGE_CODE)
-    lang = re.sub('[^A-Za-z0-9-]', '', lang)
+    lang = re.sub('[^A-Za-z-]', '', lang)
     return const.LANGUAGE_SYNONYMS.get(lang, lang)
+
 
 def get_repo_options(request, lang):
     """Returns a list of the names and titles of the active repositories."""
@@ -313,9 +314,6 @@ class Main(webapp.RequestHandler):
             'django_language=%s; path=/' % self.env.lang
         django_setup.activate(self.env.lang)
 
-        # Activate the appropriate resource bundle.
-        resources.set_active_bundle_name(self.env.resource_bundle)
-
     def serve(self):
         request, response, env = self.request, self.response, self.env
         if not env.action and not env.repo:
@@ -332,17 +330,21 @@ class Main(webapp.RequestHandler):
             response.set_status(404)
             response.out.write('Not found')
         else:
-            # Serve a static page or file.
+            # Serve a static file or a page rendered purely from a template.
             env.robots_ok = True
             get_vars = lambda: {'env': env, 'config': env.config}
-            content = resources.get_rendered(
-                env.action, env.lang, (env.repo, env.charset), get_vars)
+            # As we don't specify cache_seconds_override, the resulting content
+            # will be cached based on the Resource's cache_seconds property.
+            content, ttl_seconds = resources.get_rendered(
+                env.action, env.lang, None, (env.url, env.charset), get_vars)
             if content is None:
                 response.set_status(404)
                 response.out.write('Not found')
             else:
                 content_type, encoding = mimetypes.guess_type(env.action)
                 response.headers['Content-Type'] = content_type or 'text/plain'
+                response.headers['Cache-Control'] = \
+                    'public, max-age=%d' % ttl_seconds
                 response.out.write(content)
 
     def get(self):
