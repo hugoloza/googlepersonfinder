@@ -26,7 +26,7 @@ class Handler(BaseHandler):
             return self.redirect(redirect_url)
 
         self.env.robots_ok = True
-        self.render('start.html', cache_seconds=0, get_vars=self.get_vars)
+        self.render('start.html', get_vars=self.get_vars, cache_seconds=10)
 
     def get_vars(self):
         # Round off the count so people don't expect it to change every time

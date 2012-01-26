@@ -118,6 +118,11 @@ from google.appengine.ext import webapp
 #     > self.response.out.write(rendered_string)
 
 
+def delta_to_seconds(td):
+    """Converts a timedelta to a number of seconds."""
+    return td.days*24*3600 + td.seconds + td.microseconds/1e6
+
+
 class RamCache:
     def __init__(self):
         self.cache = {}
@@ -125,16 +130,20 @@ class RamCache:
     def clear(self):
         self.cache.clear()
 
-    def put(self, key, value, ttl_seconds):
-        if ttl_seconds > 0:
-            expiry = utils.get_utcnow() + datetime.timedelta(0, ttl_seconds)
+    def put(self, key, value, cache_seconds):
+        if cache_seconds > 0:
+            expiry = utils.get_utcnow() + datetime.timedelta(0, cache_seconds)
             self.cache[key] = (value, expiry)
 
     def get(self, key):
+        """Gets an item if it's still fresh and returns the item together with
+        its remaining cache lifetime in seconds; otherwise returns (None, 0)."""
         if key in self.cache:
             value, expiry = self.cache[key]
-            if utils.get_utcnow() < expiry:
-                return value
+            ttl_seconds = delta_to_seconds(expiry - utils.get_utcnow())
+            if ttl_seconds > 0:
+                return value, ttl_seconds
+        return None, 0
 
 
 class ResourceBundle(db.Model):
@@ -158,24 +167,21 @@ class Resource(db.Model):
         4. We support compiling and rendering a resource as a Django template.
         5. We cache the fetched, compiled, or rendered result in RAM.
     The key_name is a resource_name or resource_name + ':' + language_code.
-    All Resource entities should be children of a ResourceBundle."""
+    Every Resource entity should be a child of a ResourceBundle."""
     cache_seconds = db.FloatProperty(default=1.0)  # cache TTL of resource
     content = db.BlobProperty()  # binary data or UTF8-encoded template text
     last_modified = db.DateTimeProperty(auto_now=True)  # for bookkeeping
 
     RESOURCE_DIR = 'resources'  # directory containing resource files
-
-    @staticmethod
-    def list_files():
-        """Returns a list of the files in the resource directory."""
-        return os.listdir(Resource.RESOURCE_DIR)
+    FILE_CACHE_SECONDS = 30  # length of time to cache files loaded from disk
 
     @staticmethod
     def load_from_file(name):
         """Creates a Resource from a file, or returns None if no such file."""
         try:
             file = open(Resource.RESOURCE_DIR + '/' + name)
-            return Resource(key_name=name, content=file.read())
+            return Resource(key_name=name, content=file.read(),
+                            cache_seconds=float(Resource.FILE_CACHE_SECONDS))
         except IOError:
             return None
 
@@ -213,41 +219,48 @@ def set_active_bundle_name(name):
     active_bundle_name = name
 
 def get_localized(name, lang, bundle_name=None):
-    """Gets the localized (or if none, generic) variant of a Resource from the
-    cache, the datastore, or a file.  Returns None if no match is found."""
+    """Gets the localized or generic version of a Resource from the cache, the
+    datastore, or a file; returns (resource, ttl_seconds) where ttl_seconds is
+    its remaining cache lifetime, or (None, 0) if no match is found."""
     bundle_name = bundle_name or active_bundle_name
     cache_key = (bundle_name, name, lang)
-    resource = LOCALIZED_CACHE.get(cache_key)
+    resource, ttl_seconds = LOCALIZED_CACHE.get(cache_key)
     if not resource:
         if lang:
             resource = Resource.get(name + ':' + lang, bundle_name)
         if not resource:
             resource = Resource.get(name, bundle_name)
         if resource:
-            LOCALIZED_CACHE.put(cache_key, resource, resource.cache_seconds)
-    return resource
+            ttl_seconds = resource.cache_seconds
+            LOCALIZED_CACHE.put(cache_key, resource, ttl_seconds)
+    return resource, ttl_seconds
 
-def get_rendered(name, lang, extra_key=None,
-                 get_vars=lambda: {}, cache_seconds=1, bundle_name=None):
-    """Gets the rendered content of a Resource from the cache or the datastore.
-    If name is 'foo.html', this looks for a Resource named 'foo.html' to serve
-    as a plain file, then a Resource named 'foo.html.template' to render as a
-    template.  Returns None if nothing suitable is found.  When rendering a
-    template, this calls get_vars() to obtain a dictionary of template
-    variables.  The cache is keyed on bundle_name, name, lang, and extra_key;
-    use extra_key to capture dependencies on template variables)."""
+def get_rendered(name, lang, bundle_name=None, extra_key=None,
+                 get_vars=lambda: {}, cache_seconds_override=None):
+    """Gets rendered or static content from the cache or datastore and returns
+    (content, ttl_seconds), where ttl_seconds is the remaining cache lifetime,
+    or (None, 0) if nothing suitable is found.  If resource_name is 'foo.html',
+    we look for a Resource named 'foo.html' to serve directly, then a Resource
+    named 'foo.html.template' to render as a template.  When we need to render
+    a template, we call get_vars() to get a dictionary of template variables
+    and cache the rendered result with a lifetime set by cache_seconds_override
+    (if given) or the Resource's cache_seconds property.  The cache of rendered
+    results is keyed on resource_name, lang, and extra_key; use extra_key to
+    capture dependencies on template variables."""
     bundle_name = bundle_name or active_bundle_name
     cache_key = (bundle_name, name, lang, extra_key)
-    content = RENDERED_CACHE.get(cache_key)
+    content, ttl_seconds = RENDERED_CACHE.get(cache_key)
     if content is None:
-        resource = get_localized(name, lang, bundle_name)
+        resource, ttl_seconds = get_localized(name, lang, bundle_name)
         if resource:  # a plain file is available
-            return resource.content  # already cached, no need to cache again
-        resource = get_localized(name + '.template', lang, bundle_name)
+            return resource.content, ttl_seconds
+        resource, ttl_seconds = get_localized(name + '.template', lang, bundle_name)
         if resource:  # a template is available
             content = render_in_lang(resource.get_template(), lang, get_vars())
-            RENDERED_CACHE.put(cache_key, content, cache_seconds)
-    return content
+            if cache_seconds_override is not None:
+                ttl_seconds = cache_seconds_override
+            RENDERED_CACHE.put(cache_key, content, ttl_seconds)
+    return content, ttl_seconds
 
 def render_in_lang(template, lang, vars):
     """Renders a template in a given language.  We use this to ensure that
