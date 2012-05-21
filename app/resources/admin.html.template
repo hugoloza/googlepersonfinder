@@ -197,6 +197,37 @@
   <fieldset>
     <legend>General</legend>
     <div class="config">
+      <div class="option">
+        <input type="radio" name="test_mode" value="true"
+          id="test_mode_true"
+          {{config.test_mode|yesno:"checked,"}}>
+        <label for="test_mode_true">
+          Test mode
+        </label>
+	<div class="note">
+	  Use this mode when real crisis is NOT happening e.g. in drill.
+	  In this mode, all entries are deleted in about
+	  {{test_mode_min_age_hours}} hours after they are created, regardless
+	  of their expiration specification. This minimizes affect of spams.
+	</div>
+      </div>
+      <div class="option">
+        <input type="radio" name="test_mode" value="false"
+            id="test_mode_false"
+            {{config.test_mode|yesno:",checked"}}>
+        <label for="test_mode_false">
+          Real mode
+        </label>
+	<div class="note">
+	  Use this mode on real crisis.
+	  In this mode, entries are deleted on the date specified for each
+	  entry. When you switch from test mode to real mode, the remaining
+	  entries created in test mode are kept undeleted, and handled as a part
+	  of real mode data.
+	</div>
+      </div>
+    </div>
+    <div class="config">
       <label for="available_languages">
         Available Languages (they will appear in the order shown here; the first
         one will be default):
