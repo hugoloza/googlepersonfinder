@@ -764,9 +764,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "نام سایت اصلی"
 
-msgid "Other information"
-msgstr "اطلاعات دیگر"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

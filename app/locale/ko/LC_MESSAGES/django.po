@@ -762,9 +762,6 @@ msgstr "원래 게시 날짜가 YYYY-MM-DD 형식이 아니거나 존재하지 �
 msgid "Original site name"
 msgstr "처음 사이트 이름"
 
-msgid "Other information"
-msgstr "기타 정보"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

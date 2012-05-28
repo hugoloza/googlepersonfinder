@@ -733,9 +733,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "Non orijinal sit la"
 
-msgid "Other information"
-msgstr "Lòt enfomasyon"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

@@ -791,9 +791,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "Navnet på det oprindelige websted"
 
-msgid "Other information"
-msgstr "Andre oplysninger"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

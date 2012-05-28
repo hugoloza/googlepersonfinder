@@ -787,9 +787,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "Nazwa witryny zawierającej oryginał"
 
-msgid "Other information"
-msgstr "Inne informacje"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

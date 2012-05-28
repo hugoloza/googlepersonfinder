@@ -761,9 +761,6 @@ msgstr "原始的張貼日期格式不是 YYYY-MM-DD (年年年年-月月-日日
 msgid "Original site name"
 msgstr "原始網站名稱"
 
-msgid "Other information"
-msgstr "其他資訊"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

@@ -804,9 +804,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "Nombre de la página web original"
 
-msgid "Other information"
-msgstr "Información adicional"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

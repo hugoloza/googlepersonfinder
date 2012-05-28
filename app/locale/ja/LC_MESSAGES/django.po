@@ -761,9 +761,6 @@ msgstr "[元の投稿日] が YYYY-MM-DD 形式になっていないか、実在
 msgid "Original site name"
 msgstr "情報元のサイト名"
 
-msgid "Other information"
-msgstr "その他の情報"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "

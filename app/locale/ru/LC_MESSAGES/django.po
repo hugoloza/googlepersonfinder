@@ -785,9 +785,6 @@ msgstr ""
 msgid "Original site name"
 msgstr "Исходный веб-сайт"
 
-msgid "Other information"
-msgstr "Другая информация"
-
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
 "viewable and usable by anyone.  Google does not review or verify the "
