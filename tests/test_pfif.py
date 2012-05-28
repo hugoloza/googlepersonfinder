@@ -103,9 +103,9 @@ PERSON_RECORD_1_4 = {
     u'source_name': u'_test_source_name',
     u'source_date': u'2000-01-01T00:00:00Z',
     u'source_url': u'_test_source_url',
-    u'first_name': u'_test_first_name',
-    u'last_name': u'_test_last_name',
-    u'full_name': u'_test_first_name_dot_last_name',
+    u'given_name': u'_test_given_name',
+    u'family_name': u'_test_family_name',
+    u'full_name': u'_test_given_name_dot_family_name',
     u'alternate_names': u'_test_alternate_name1\n_test_alternate_name2',
     u'description': u'_test_description & < > "\n',
     u'sex': u'female',
@@ -161,9 +161,9 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:full_name>_test_first_name_dot_last_name</pfif:full_name>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:full_name>_test_given_name_dot_family_name</pfif:full_name>
+    <pfif:given_name>_test_given_name</pfif:given_name>
+    <pfif:family_name>_test_family_name</pfif:family_name>
     <pfif:alternate_names>_test_alternate_name1
 _test_alternate_name2</pfif:alternate_names>
     <pfif:description>_test_description &amp; &lt; &gt; "
@@ -217,9 +217,9 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:full_name>_test_first_name_dot_last_name</pfif:full_name>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:full_name>_test_given_name_dot_family_name</pfif:full_name>
+    <pfif:given_name>_test_given_name</pfif:given_name>
+    <pfif:family_name>_test_family_name</pfif:family_name>
     <pfif:alternate_names>_test_alternate_name1
 _test_alternate_name2</pfif:alternate_names>
     <pfif:description>_test_description &amp; &lt; &gt; "
@@ -329,9 +329,9 @@ PERSON_RECORD_1_3 = {
     u'source_name': u'_test_source_name',
     u'source_date': u'2000-01-01T00:00:00Z',
     u'source_url': u'_test_source_url',
-    u'first_name': u'_test_first_name',
-    u'last_name': u'_test_last_name',
-    u'full_name': u'_test_first_name_dot_last_name',
+    u'given_name': u'_test_given_name',
+    u'family_name': u'_test_family_name',
+    u'full_name': u'_test_given_name_dot_family_name',
     u'description': u'_test_description & < > "\n',
     u'sex': u'female',
     u'date_of_birth': u'1970-01-01',
@@ -384,9 +384,9 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:full_name>_test_first_name_dot_last_name</pfif:full_name>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:full_name>_test_given_name_dot_family_name</pfif:full_name>
+    <pfif:first_name>_test_given_name</pfif:first_name>
+    <pfif:last_name>_test_family_name</pfif:last_name>
     <pfif:sex>female</pfif:sex>
     <pfif:date_of_birth>1970-01-01</pfif:date_of_birth>
     <pfif:age>35-45</pfif:age>
@@ -436,9 +436,9 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:full_name>_test_first_name_dot_last_name</pfif:full_name>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:full_name>_test_given_name_dot_family_name</pfif:full_name>
+    <pfif:first_name>_test_given_name</pfif:first_name>
+    <pfif:last_name>_test_family_name</pfif:last_name>
     <pfif:sex>female</pfif:sex>
     <pfif:date_of_birth>1970-01-01</pfif:date_of_birth>
     <pfif:age>35-45</pfif:age>
@@ -543,8 +543,8 @@ PERSON_RECORD_1_2 = {
     u'source_name': u'_test_source_name',
     u'source_date': u'2000-01-01T00:00:00Z',
     u'source_url': u'_test_source_url',
-    u'first_name': u'_test_first_name',
-    u'last_name': u'_test_last_name',
+    u'given_name': u'_test_given_name',
+    u'family_name': u'_test_family_name',
     u'description': u'_test_description & < > "\n',
     u'sex': u'female',
     u'date_of_birth': u'1970-01-01',
@@ -589,8 +589,8 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:first_name>_test_given_name</pfif:first_name>
+    <pfif:last_name>_test_family_name</pfif:last_name>
     <pfif:sex>female</pfif:sex>
     <pfif:date_of_birth>1970-01-01</pfif:date_of_birth>
     <pfif:age>35-45</pfif:age>
@@ -640,8 +640,8 @@ TEST_CASES.append((
     <source_name>_test_source_name</source_name>
     <source_date>2000-01-01T00:00:00Z</source_date>
     <source_url>_test_source_url</source_url>
-    <first_name>_test_first_name</first_name>
-    <last_name>_test_last_name</last_name>
+    <first_name>_test_given_name</first_name>
+    <last_name>_test_family_name</last_name>
     <sex>female</sex>
     <date_of_birth>1970-01-01</date_of_birth>
     <age>35-45</age>
@@ -690,8 +690,8 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:first_name>_test_given_name</pfif:first_name>
+    <pfif:last_name>_test_family_name</pfif:last_name>
     <pfif:sex>female</pfif:sex>
     <pfif:date_of_birth>1970-01-01</pfif:date_of_birth>
     <pfif:age>35-45</pfif:age>
@@ -765,8 +765,8 @@ PERSON_RECORD_1_1 = {
     u'source_name': u'_test_source_name',
     u'source_date': u'2000-01-01T00:00:00Z',
     u'source_url': u'_test_source_url',
-    u'first_name': u'_test_first_name',
-    u'last_name': u'_test_last_name',
+    u'given_name': u'_test_given_name',
+    u'family_name': u'_test_family_name',
     u'description': u'_test_description & < > "\n',
     u'home_street': u'_test_home_street',
     u'home_neighborhood': u'_test_home_neighborhood',
@@ -805,8 +805,8 @@ TEST_CASES.append((
     <pfif:source_name>_test_source_name</pfif:source_name>
     <pfif:source_date>2000-01-01T00:00:00Z</pfif:source_date>
     <pfif:source_url>_test_source_url</pfif:source_url>
-    <pfif:first_name>_test_first_name</pfif:first_name>
-    <pfif:last_name>_test_last_name</pfif:last_name>
+    <pfif:first_name>_test_given_name</pfif:first_name>
+    <pfif:last_name>_test_family_name</pfif:last_name>
     <pfif:home_city>_test_home_city</pfif:home_city>
     <pfif:home_state>_test_home_state</pfif:home_state>
     <pfif:home_neighborhood>_test_home_neighborhood</pfif:home_neighborhood>
@@ -841,8 +841,8 @@ PERSON_RECORD_WITH_NON_ASCII = {
     'author_name': u'a with acute = \u00e1',
     'author_email': u'c with cedilla = \u00e7',
     'author_phone': u'e with acute = \u00e9',
-    'first_name': u'greek alpha = \u03b1',
-    'last_name': u'hebrew alef = \u05d0'
+    'given_name': u'greek alpha = \u03b1',
+    'family_name': u'hebrew alef = \u05d0'
 }
 
 # A PFIF document containing some non-ASCII characters in UTF-8 encoding.
