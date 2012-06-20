@@ -61,6 +61,8 @@ PLACEHOLDER_FIELDS = [
 # for backward compatibility with older PFIF versions.
 RENAMED_FIELDS = {
     'home_zip': 'home_postal_code',  # Renamed in PFIF 1.2
+    'first_name': 'given_name',      # Renamed in PFIF 1.4
+    'last_name': 'family_name',      # Renamed in PFIF 1.4
     'found': 'author_made_contact',  # Renamed in PFIF 1.4
     'other': 'description',          # Renamed in PFIF 1.4
 }
@@ -363,9 +365,8 @@ PFIF_1_4 = PfifVersion(
             'source_date',
             'source_url',
             'full_name',
-            # TODO(ryok): rename to given_name & family_name
-            'first_name',
-            'last_name',
+            'given_name',
+            'family_name',
             'alternate_names',
             'description',
             'sex',
@@ -425,7 +426,9 @@ def check_pfif_tag(name, parent=None):
 
 class Handler(xml.sax.handler.ContentHandler):
     """SAX event handler for parsing PFIF documents."""
-    def __init__(self):
+    def __init__(self, rename_fields=True):
+        # Wether to attempt to rename fields based on RENAMED_FIELDS.
+        self.rename_fields = rename_fields
         self.tags = []
         self.person = {}
         self.note = {}
@@ -481,24 +484,27 @@ def rename_fields(record):
                 record[new] = maybe_convert_other_to_description(record[old])
             del record[old]
 
-def parse_file(pfif_utf8_file):
+def parse_file(pfif_utf8_file, rename_fields=True):
     """Reads a UTF-8-encoded PFIF file to give a list of person records and a
     list of note records.  Each record is a plain dictionary of strings,
-    with PFIF 1.4 field names as keys."""
-    handler = Handler()
+    with PFIF 1.4 field names as keys if rename_fields is True; otherwise,
+    the field names are kept as is in the input XML file."""
+    handler = Handler(rename_fields)
     parser = xml.sax.make_parser()
     parser.setFeature(xml.sax.handler.feature_namespaces, True)
     parser.setContentHandler(handler)
     parser.parse(pfif_utf8_file)
-    for record in handler.person_records + handler.note_records:
-        rename_fields(record)
+    if rename_fields:
+        for record in handler.person_records + handler.note_records:
+            rename_fields(record)
     return handler.person_records, handler.note_records
 
-def parse(pfif_text):
+def parse(pfif_text, rename_fields=True):
     """Takes the text of a PFIF document, as a Unicode string or UTF-8 string,
     and returns a list of person records and a list of note records.  Each
-    record is a plain dictionary of strings, with PFIF 1.4 field names as keys.
-    """
+    record is a plain dictionary of strings, with PFIF 1.4 field names as keys
+    if rename_fields is True; otherwise, the field names are kept as is in the
+    input XML file."""
     if isinstance(pfif_text, unicode):
         pfif_text = pfif_text.decode('utf-8')
-    return parse_file(StringIO.StringIO(pfif_text))
+    return parse_file(StringIO.StringIO(pfif_text), rename_fields)
