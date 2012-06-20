@@ -1004,6 +1004,11 @@ msgstr ""
 msgid "This record is spam."
 msgstr ""
 
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
 msgid "To unsubscribe, follow this link"
 msgstr ""
 
@@ -1052,6 +1057,11 @@ msgid "Where did this information come from?"
 msgstr ""
 
 msgid "Where is this person from?"
+msgstr ""
+
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
 msgstr ""
 
 msgid "Yes"
