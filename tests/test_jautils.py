@@ -35,6 +35,7 @@ class JaUtilsTests(unittest.TestCase):
         assert jautils.normalize(u'ａｂｃ') == u'ABC'
         assert jautils.normalize(u'　ＡＢＣ　') == u'ABC'
         assert jautils.normalize(u'ひらがな カタカナ') == u'ひらがな かたかな'
+        assert jautils.normalize(u'キミヱ') == u'きみえ'
         assert jautils.normalize(u"(abc) O'Hearn") == u'ABC  OHEARN'
 
     def test_katakana_to_hiragana(self):
@@ -52,6 +53,21 @@ class JaUtilsTests(unittest.TestCase):
             u'エンドウイチオ') == u'えんどういちお'
         assert jautils.katakana_to_hiragana(
             u'ひらがな カタカナ') == u'ひらがな かたかな'
+        assert jautils.katakana_to_hiragana(
+            u'ァィゥェォッャュョヮヶヵ') == \
+            u'ぁぃぅぇぉっゃゅょゎヶヵ'
+        assert jautils.katakana_to_hiragana(
+            u'ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴヰヱ') == \
+            u'がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽゔゐゑ'
+        assert jautils.katakana_to_hiragana(
+            u'アイウエオカキクケコサシスセソタチツテトナニヌネノ') == \
+            u'あいうえおかきくけこさしすせそたちつてとなにぬねの'
+        assert jautils.katakana_to_hiragana(
+            u'ハヒフヘホマミムメモヤユヨラリルレロワヲンー') == \
+            u'はひふへほまみむめもやゆよらりるれろわをんー'
+
+    def test_normalize_hiragana(self):
+        assert jautils.normalize_hiragana(u'ぢづゐゑ') == u'じずいえ'
 
     def test_hiragana_to_romaji(self):
         assert jautils.hiragana_to_romaji(u'abc') == u'abc'
@@ -78,6 +94,17 @@ class JaUtilsTests(unittest.TestCase):
             set([u'YAMADA', u'TARO', u'やまだたろう', u'たろうやまだ'])
         assert jautils.get_additional_tokens([u'はい', u'やまだ', u'たろう']) == \
             set([u'HAI', u'YAMADA', u'TARO'])
+
+    def test_sorted_by_popularity(self):
+        assert jautils.sorted_by_popularity(
+            [u'山', u'田', u'xxx', u'yyy', u'zzz']) == \
+            [u'xxx', u'yyy', u'zzz', u'山', u'田']
+        assert jautils.sorted_by_popularity(
+            [u'山', u'田', u'はなこ']) == \
+            [u'はなこ', u'山', u'田']
+        assert jautils.sorted_by_popularity(
+            [u'山', u'田', u'龍', u'太', u'郎']) == \
+            [u'龍', u'太', u'郎', u'山', u'田']
 
 
 if __name__ == '__main__':
