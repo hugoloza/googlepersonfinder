@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from datetime import datetime
+
+import const
 from model import *
 from utils import *
 
@@ -19,7 +22,7 @@ def setup_datastore():
     """Sets up the subject types and translations in a datastore.  (Existing
     subject types and messages will be updated; existing Subject or Report
     information will not be changed or deleted.)"""
-    setup_subdomains()
+    setup_repos()
     setup_configs()
 
 def wipe_datastore(delete=None, keep=None):
@@ -40,33 +43,29 @@ def reset_datastore():
     wipe_datastore(keep=['Account', 'Secret'])
     setup_datastore()
 
-def setup_subdomains():
-    db.put([Subdomain(key_name='haiti'),
-            Subdomain(key_name='chile'),
-            Subdomain(key_name='china'),
-            Subdomain(key_name='japan'),
-            Subdomain(key_name='pakistan'),
-            Subdomain(key_name='lang-test')])
-    # set some subdomains active so they show on the main page.
-    config.set(active_subdomains=['japan', 'haiti', 'lang-test'])
+def setup_repos():
+    db.put([Repo(key_name='haiti'),
+            Repo(key_name='japan'),
+            Repo(key_name='pakistan')])
+    # Set some repositories active so they show on the main page.
+    config.set(active_repos=['japan', 'haiti'])
 
 def setup_configs():
-    """Installs the configuration settings for Haiti, Chile, China, Pakistan."""
+    """Installs configuration settings used for testing by server_tests."""
     COMMON_KEYWORDS = ['person', 'people', 'finder', 'person finder',
                        'people finder', 'crisis', 'survivor', 'family']
 
-    # NOTE: the following two CAPTCHA keys are dummy keys for testing only. They
-    # should be replaced with secret keys upon launch.
+    # NOTE: the following two CAPTCHA keys are dummy keys for testing only.
+    # They should be replaced with real keys upon launch.
     config.set(captcha_private_key='6LfiOr8SAAAAAFyxGzWkhjo_GRXxYoDEbNkt60F2',
                captcha_public_key='6LfiOr8SAAAAAM3wRtnLdgiVfud8uxCqVVJWCs-z',
-    # Google Language API key registered for person-finder.appspot.com
-               language_api_key='ABQIAAAAkyNXK1D6CLHJNPVQfiU8DhQowImlwyPaNDI' +
-                                'ohCJwgv-5lcExKBTP5o1_bXlgQjGi0stsXRtN-p8fdw')
+    # A Google Translate API key with a very low quota, just for testing.
+               translate_api_key='AIzaSyCXdz9x7LDL3BvieEP8Wcze64CC_iqslSE')
 
-    config.set_for_subdomain(
+    config.set_for_repo(
         'haiti',
         # Appended to "Google Person Finder" in page titles.
-        subdomain_titles={
+        repo_titles={
             'en': 'Haiti Earthquake',
             'fr': u'S\xe9isme en Ha\xefti',
             'ht': u'Tranbleman T\xe8 an Ayiti',
@@ -80,7 +79,7 @@ def setup_configs():
             u'ha\xefti', u's\xe9isme', 'tremblement', 'tremblement de terre',
             'famille', 'recherche de personnes', 'terremoto'
         ] + COMMON_KEYWORDS),
-        # If false, hide the last_name field and use only first_name.
+        # If false, hide the family_name field and use only given_name.
         use_family_name=True,
         # Presentation order for the given name and family name.
         family_name_first=False,
@@ -102,73 +101,18 @@ def setup_configs():
         allow_believed_dead_via_ui=True,
         # Custom html messages to show on main page, results page, view page,
         # and query form, keyed by language codes.
-        main_page_custom_htmls={'en': '', 'fr': ''},
+        start_page_custom_htmls={'en': '', 'fr': ''},
         results_page_custom_htmls={'en': '', 'fr': ''},
         view_page_custom_htmls={'en': '', 'fr': ''},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
+        published_date=get_timestamp(datetime(2010, 1, 12)),
+        updated_date=get_timestamp(datetime(2010, 1, 12)),
     )
 
-    config.set_for_subdomain(
-        'chile',
-        subdomain_titles={
-            'en': 'Chile Earthquake',
-            'es': 'Terremoto en Chile'
-        },
-        language_menu_options=['en', 'es'],
-        keywords=', '.join([
-            'chile', 'earthquake', 'chile earthquake', 'chilean',
-            'terremoto', 'terremoto de chile',
-            'sobreviviente', 'buscador de personas'
-        ] + COMMON_KEYWORDS),
-        use_family_name=True,
-        family_name_first=False,
-        use_alternate_names=True,
-        use_postal_code=True,
-        min_query_word_length=2,
-        map_default_zoom=6,
-        map_default_center=[-35, -72],  # near Curico, Chile
-        map_size_pixels=[400, 500],
-        read_auth_key_required=False,
-        search_auth_key_required=False,
-        allow_believed_dead_via_ui=True,
-        main_page_custom_htmls={'en': '', 'fr': ''},
-        results_page_custom_htmls={'en': '', 'fr': ''},
-        view_page_custom_htmls={'en': '', 'fr': ''},
-        seek_query_form_custom_htmls={'en': '', 'fr': ''},
-    )
-
-    config.set_for_subdomain(
-        'china',
-        subdomain_titles={
-            'en': 'China Earthquake',
-            'zh-TW': u'\u4e2d\u570b\u5730\u9707',
-            'zh-CN': u'\u4e2d\u56fd\u5730\u9707'
-        },
-        language_menu_options=['en', 'zh-TW', 'zh-CN'],
-        keywords=', '.join([
-            'china', 'earthquake', 'china earthquake', 'chinese',
-            'qinghai', 'yushu'] + COMMON_KEYWORDS),
-        use_family_name=True,
-        family_name_first=True,
-        use_alternate_names=True,
-        use_postal_code=True,
-        min_query_word_length=1,
-        map_default_zoom=7,
-        map_default_center=[33.005822, 97.006636],  # near Yushu, China
-        map_size_pixels=[400, 280],
-        read_auth_key_required=False,
-        search_auth_key_required=False,
-        allow_believed_dead_via_ui=True,
-        main_page_custom_htmls={'en': '', 'fr': ''},
-        results_page_custom_htmls={'en': '', 'fr': ''},
-        view_page_custom_htmls={'en': '', 'fr': ''},
-        seek_query_form_custom_htmls={'en': '', 'fr': ''},
-    )
-
-    config.set_for_subdomain(
+    config.set_for_repo(
         'japan',
         language_menu_options=['ja', 'en', 'ko', 'zh-CN', 'zh-TW', 'pt-BR', 'es'],
-        subdomain_titles={
+        repo_titles={
             'en': '2011 Japan Earthquake',
             'zh-TW': u'2011 \u65e5\u672c\u5730\u9707',
             'zh-CN': u'2011 \u65e5\u672c\u5730\u9707',
@@ -188,7 +132,7 @@ def setup_configs():
         search_auth_key_required=True,
         read_auth_key_required=True,
         allow_believed_dead_via_ui=True,
-        main_page_custom_htmls={'en': 'Custom message', 'fr': 'French'},
+        start_page_custom_htmls={'en': 'Custom message', 'fr': 'French'},
         results_page_custom_htmls={'en': 'Custom message', 'fr': 'French'},
         view_page_custom_htmls={'en': 'Custom message', 'fr': 'French'},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
@@ -197,12 +141,14 @@ def setup_configs():
         time_zone_offset=9,  # UTC+9
         time_zone_abbreviation='JST',
         jp_mobile_carrier_redirect=True,
-        jp_tier2_mobile_redirect_url='http://sagasu-m.appspot.com'
+        jp_tier2_mobile_redirect_url='http://sagasu-m.appspot.com',
+        published_date=get_timestamp(datetime(2011, 3, 11)),
+        updated_date=get_timestamp(datetime(2011, 3, 11)),
     )
 
-    config.set_for_subdomain(
+    config.set_for_repo(
         'pakistan',
-        subdomain_titles={
+        repo_titles={
             'en': 'Pakistan Floods',
             'ur': u'\u067e\u0627\u06a9\u0633\u062a\u0627\u0646\u06cc \u0633\u06cc\u0644\u0627\u0628'
         },
@@ -221,19 +167,20 @@ def setup_configs():
         read_auth_key_required=False,
         search_auth_key_required=False,
         allow_believed_dead_via_ui=True,
-        main_page_custom_htmls={'en': '', 'fr': ''},
+        start_page_custom_htmls={'en': '', 'fr': ''},
         results_page_custom_htmls={'en': '', 'fr': ''},
         view_page_custom_htmls={'en': '', 'fr': ''},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
+        published_date=get_timestamp(datetime(2010, 8, 6)),
+        updated_date=get_timestamp(datetime(2010, 8, 6)),
     )
 
-    config.set_for_subdomain(
+def setup_lang_test_config():
+    config.set_for_repo(
         'lang-test',
-        # We set empty titles to avoid going over the 500-char limit
-        # of the field
-        subdomain_titles=dict(zip(LANGUAGE_ENDONYMS.keys(),
-                                  [''] * len(LANGUAGE_ENDONYMS))),
-        language_menu_options=list(LANGUAGE_EXONYMS.keys()),
+        # We set short titles to avoid exceeding the field's 500-char limit.
+        repo_titles=dict((lang, lang) for lang in const.LANGUAGE_ENDONYMS),
+        language_menu_options=list(const.LANGUAGE_ENDONYMS.keys()),
         keywords=', '.join(COMMON_KEYWORDS),
         use_family_name=True,
         family_name_first=True,
@@ -246,7 +193,7 @@ def setup_configs():
         read_auth_key_required=False,
         search_auth_key_required=False,
         allow_believed_dead_via_ui=True,
-        main_page_custom_htmls={'en': '', 'fr': ''},
+        start_page_custom_htmls={'en': '', 'fr': ''},
         results_page_custom_htmls={'en': '', 'fr': ''},
         view_page_custom_htmls={'en': '', 'fr': ''},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
