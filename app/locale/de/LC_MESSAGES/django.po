@@ -21,16 +21,195 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  Damit Notizen nur mit dem Einverständnis des Erstellers aktiviert oder "
+"deaktiviert werden, wird eine Bestätigungsnachricht an den Ersteller des "
+"Datensatzes gesendet. Wenn Sie der Ersteller sind, klicken Sie auf die "
+"Schaltfläche unten und überprüfen Sie anschließend Ihre E-Mails.\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Sehr geehrte(r) %(author_name)s, ein Nutzer möchte Notizen für den "
+"Datensatz von \"%(given_name)s %(family_name)s\" aktivieren. Ihre E-Mail-"
+"Adresse wird als Ersteller für diesen Datensatz angegeben. Wenn Sie "
+"Notizen für diesen Datensatz aktivieren möchten, folgen Sie innerhalb von"
+" drei Tagen diesem Link:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Sehr geehrte(r) %(author_name)s, ein Nutzer bittet um Deaktivierung von "
+"Notizen für den Datensatz für \"%(given_name)s %(family_name)s\". Ihre E"
+"-Mail-Adresse wird als Ersteller für diesen Datensatz angegeben. Wenn Sie"
+" Notizen für diesen Datensatz deaktivieren möchten, folgen Sie innerhalb "
+"von drei Tagen diesem Link:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Sehr geehrte(r) %(author_name)s, Sie haben gerade eine Notiz für den "
+"Datensatz für \"%(given_name)s %(family_name)s\" eingegeben. Wenn Sie die "
+"Notiz veröffentlichen möchten, folgen Sie innerhalb von drei Tagen diesem"
+" Link:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      Möchten Sie den Datensatz für \"%(first_name)s %(last_name)s\" "
+"      Möchten Sie den Datensatz für \"%(given_name)s %(family_name)s\" "
 "wirklich löschen?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Möchten Sie Notizen für \"%(given_name)s %(family_name)s\" wirklich "
+"deaktivieren?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Möchten Sie Notizen für den Datensatz von \"%(given_name)s "
+"%(family_name)s\" wirklich deaktivieren?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Möchten Sie Notizen für \"%(given_name)s %(family_name)s\" wirklich "
+"aktivieren?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Möchten Sie das Ablaufdatum für den Eintrag \"%(given_name)s "
+"%(family_name)s\" wirklich verlängern?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Notiz bestätigen\n"
 "    "
 
 msgid ""
@@ -76,17 +255,59 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a> einsehen.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    Damit Notizen nur mit dem Einverständnis des Erstellers aktiviert "
+"oder deaktiviert werden, wird eine Bestätigungsnachricht an den Ersteller"
+" des Datensatzes gesendet. Wenn Sie der Ersteller sind, klicken Sie auf "
+"die Schaltfläche unten und überprüfen Sie anschließend Ihre E-Mails.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Der Datensatz ist weiterhin auf dieser Website sichtbar, aber es können"
+" keine weiteren Notizen hinzugefügt werden.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Wenn Sie Ihre Notiz veröffentlichen möchten, geben Sie Ihre E-Mail-"
+"Adresse unten ein und folgen Sie dem Bestätigungslink, der Ihnen "
+"zugesendet wird.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"Ein Nutzer hat den Datensatz für \"%(first_name)s %(last_name)s\"\n"
+"Ein Nutzer hat den Datensatz für \"%(given_name)s %(family_name)s\"\n"
 "unter %(site_url)s gelöscht.\n"
 "\n"
 "Wir informieren Sie über diesen Vorgang, da für den Autor einer\n"
@@ -95,53 +316,88 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+"\n"
+"Ein Nutzer hat den Eintrag für \"%(given_name)s %(family_name)s\" unter "
+"%(site_url)s gelöscht. Sie erhalten diese Benachrichtigung, weil Ihre E"
+"-Mail-Adresse als Ersteller des Eintrags gespeichert ist.\n"
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+"\n"
+"Nach %(days_until_deletion)s Tagen wird der Eintrag endgültig gelöscht.\n"
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
 "\n"
-"Ein Nutzer hat den Datensatz für \"%(first_name)s %(last_name)s\"\n"
-"unter %(site_url)s gelöscht.\n"
-"\n"
-"Wir informieren Sie über diesen Vorgang, da für den Autor dieses "
-"Datensatzes\n"
-"Ihre E-Mail-Adresse angegeben ist.\n"
-"\n"
-"Hinweis: Falls Sie der Meinung sind, dass dieser Datensatz "
-"irrtümlicherweise gelöscht wurde, können Sie\n"
-"ihn wiederherstellen, indem Sie innerhalb der nächsten "
-"%(days_until_deletion)s Tage diesen Link aufrufen:\n"
+"Hinweis: Wenn Sie glauben, dass dieser Eintrag irrtümlicherweise gelöscht"
+" wurde, können Sie ihn wiederherstellen, indem Sie innerhalb der nächsten"
+" %(days_until_deletion)s Tage auf folgenden Link klicken:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"Nach %(days_until_deletion)s Tagen wird der Datensatz dauerhaft gelöscht."
-"\n"
 
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Ein Nutzer hat ein Statusupdate für \"%(first_name)s %(last_name)s\" "
-"unter %(site_url)s gepostet:"
+"Notizen sind jetzt für den Datensatz für \"%(given_name)s %(family_name)s\""
+" deaktiviert. Über diesen Link können Sie den Datensatz abrufen:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Wir informieren Sie, weil Ihre E-Mail-Adresse mit diesem "
+"Personendatensatz oder einer Notiz zu diesem Datensatz verknüpft ist.\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Notizen sind jetzt für den Datensatz für \"%(given_name)s "
+"%(family_name)s\" aktiviert. Über diesen Link können Sie den Datensatz abrufen:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Wir informieren Sie, weil Ihre E-Mail-Adresse mit diesem "
+"Personendatensatz oder einer Notiz zu diesem Datensatz verknüpft ist.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -151,7 +407,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Der Autor des Datensatzes für \"%(first_name)s %(last_name)s\"\n"
+"Der Autor des Datensatzes für \"%(given_name)s %(family_name)s\"\n"
 "(der vor Kurzem gelöscht wurde) hat den Datensatz wiederhergestellt. "
 "Folgen Sie zum Anzeigen\n"
 "des Datensatzes diesem Link:\n"
@@ -165,20 +421,32 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"Es ist eine neue Notiz für den Datensatz für \"%(given_name)s %(family_name)s\" vorhanden."
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"Sie haben Statusupdates für \"%(first_name)s %(last_name)s\" unter "
-"%(site_url)s abonniert.\n"
+"Sie haben Notizen zum Datensatz für \"%(given_name)s %(family_name)s\" "
+"abonniert. Sie können den Datensatz hier ansehen:\n"
 "\n"
-"Den vollständigen Datensatz können Sie unter %(view_url)s einsehen.\n"
+"     %(view_url)s\n"
 "\n"
-"Folgen Sie zum Beenden des Abonnements diesem Link: %(unsubscribe_link)s\n"
+"Wenn Sie das Abonnement beenden möchten, klicken Sie auf diesen Link: "
+"%(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(zum Anzeigen klicken)"
@@ -217,16 +485,14 @@ msgstr "Verwaltung"
 msgid "Age"
 msgstr "Alter"
 
-#, fuzzy
 msgid "Alternate family names"
-msgstr "Nachname"
+msgstr "Alternative Nachnamen"
 
 msgid "Alternate given names"
-msgstr ""
+msgstr "Alternative Vornamen"
 
-#, fuzzy
 msgid "Alternate names"
-msgstr "Straßenname"
+msgstr "Alternative Namen"
 
 msgid "Are you sure this note isn't spam?"
 msgstr ""
@@ -257,6 +523,10 @@ msgstr "Zurück zur Ergebnisliste"
 msgid "Back to start"
 msgstr "Zurück zum Start"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Notiz mit dieser ID kann nicht gefunden werden: %(id)s"
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -283,6 +553,9 @@ msgstr "Einen neuen Datensatz erstellen für"
 msgid "Create a new record for a missing person"
 msgstr "Einen neuen Datensatz für eine vermisste Person erstellen"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "Derzeit werden ca.%(num_people)s Datensätze verfolgt."
@@ -301,15 +574,17 @@ msgstr "Diesen Datensatz löschen"
 msgid "Describe how to identify this person."
 msgstr "Beschreiben Sie, wie diese Person identifiziert werden kann."
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "Beschreiben Sie, wie diese Person identifiziert werden kann."
+msgstr "Beschreiben Sie das Aussehen der gesuchten Person."
 
 msgid "Description"
 msgstr "Beschreibung"
 
 msgid "Developers"
 msgstr "Entwickler"
+
+msgid "Disable notes on this record"
+msgstr "Notizen für diesen Datensatz deaktivieren"
 
 msgid "Download the sound as MP3"
 msgstr "Ton als MP3 herunterladen"
@@ -326,6 +601,9 @@ msgstr "Dieses Tool in Ihre Website einbetten"
 msgid "Embedding the Application"
 msgstr "Einbetten der Anwendung"
 
+msgid "Enable notes on this record"
+msgstr "Notizen für diesen Datensatz aktivieren"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "Im Format JJJJ-MM-TT eingeben"
 
@@ -335,9 +613,10 @@ msgstr "Geben Sie den Vor- und Nachnamen der Person ein."
 msgid "Enter the person's name or parts of the name."
 msgstr "Geben Sie den Namen der Person ganz oder teilweise ein."
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "Geben Sie den Namen der Person ganz oder teilweise ein."
+msgstr ""
+"Geben Sie den Namen, einen Namensteil oder die Mobiltelefonnummer der "
+"Person ein."
 
 msgid "Enter the person's name."
 msgstr "Geben Sie den Namen der Person ein."
@@ -358,15 +637,11 @@ msgid "Follow this link to create a new record"
 msgstr "Folgen Sie diesem Link, um einen neuen Datensatz zu erstellen."
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
+"Wenn es sich um kein Mobiltelefon handelt, verwenden Sie bitte den "
+"171-Dienst von NTT."
 
 msgid "Get a new challenge"
 msgstr "Neue Herausforderung erhalten"
@@ -420,6 +695,9 @@ msgstr "Ich suche nach Informationen."
 msgid "I am this person"
 msgstr "Ich bin diese Person."
 
+msgid "I do not want any more updates on this record."
+msgstr "Ich möchte keine weiteren Updates zu diesem Datensatz erhalten."
+
 msgid "I do not want my information online anymore."
 msgstr "Meine Informationen sollen nicht mehr online angezeigt werden."
 
@@ -463,6 +741,26 @@ msgstr ""
 "Wenn keiner der Datensätze zu der Person passt, an die Sie denken, können"
 " Sie unten klicken, um einen neuen Datensatz zu erstellen."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Wenn Sie der Ersteller dieser Notiz sind, suchen Sie bitte in Ihren "
+"E-Mails nach dem Link mit der Bestätigung zur Deaktivierung der Notizen "
+"für diesen Datensatz. Anderenfalls warten Sie bitte, bis der Ersteller "
+"des Datensatzes Ihre Anfrage bestätigt."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Wenn Sie der Ersteller dieser Notiz sind, suchen Sie bitte in Ihren "
+"E-Mails nach dem Link mit der Bestätigung zur Aktivierung der Notizen für"
+" diesen Datensatz. Anderenfalls warten Sie bitte, bis der Ersteller des "
+"Datensatzes Ihre Anfrage bestätigt."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr ""
 "Wenn Sie ein Foto dieser Person haben, laden Sie es hoch oder geben Sie "
@@ -473,6 +771,9 @@ msgstr "Falsch. Versuchen Sie es erneut."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "Ungültige E-Mail-Adresse. Bitte versuchen Sie es erneut."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "Letzter bekannter Aufenthaltsort"
@@ -532,23 +833,51 @@ msgstr "Stadtviertel"
 msgid "No"
 msgstr "Nein"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Keine E-Mail-Adresse für den Ersteller des Datensatzes %(id)s."
+
 msgid "No messages are found registered to the carrier's message board service."
-msgstr ""
+msgstr "Im Diskussionsforum des Anbieters wurden keine Nachrichten registriert."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Keine Notiz mit der ID %(id)s."
+
+msgid "No notes have been posted"
+msgstr "Es wurden keine Notizen veröffentlicht."
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Keine Person mit der ID %(id)s."
 
 msgid "No results found for"
 msgstr "Keine Ergebnisse gefunden für"
 
-msgid "No status updates have been posted"
-msgstr "Es wurden keine Status-Updates gepostet."
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr ""
+"Sie haben keine Berechtigung, Notizen mit dem Status \"believed_dead\" zu"
+" veröffentlichen."
 
 msgid "Not spam"
 msgstr "Kein Spam"
 
+msgid "Note author"
+msgstr "Ersteller der Notiz"
+
+msgid "Note text"
+msgstr "Hinweistext"
+
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
+"Hinweis: Alternativnamen können unter Umständen computergeneriert und "
+"nicht genau sein."
+
+msgid "Notes for this person"
+msgstr "Notizen für diese Person"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "Anzahl oder Bereich (z. B. 20-30)"
 
 #, python-format
 msgid ""
@@ -576,9 +905,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Name der ursprünglichen Website"
-
-msgid "Other information"
-msgstr "Sonstige Informationen"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -640,6 +966,12 @@ msgstr ""
 msgid "Please fill in all the required fields."
 msgstr "Füllen Sie alle erforderlichen Felder aus."
 
+msgid "Please fill in your email address."
+msgstr "Bitte geben Sie Ihre E-Mail-Adresse an."
+
+msgid "Please provide an valid email address."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse an."
+
 msgid "Possible duplicates"
 msgstr "Mögliche doppelte Datensätze"
 
@@ -655,15 +987,17 @@ msgstr "Fortfahren"
 msgid "Provide information about this person"
 msgstr "Informationen zu dieser Person angeben"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "Gepostet von"
+msgstr "Bereitgestellt von:"
 
 msgid "Province or state"
 msgstr "Provinz, Bundesstaat oder Bundesland"
 
 msgid "Reason for deletion:"
 msgstr "Grund für die Löschung:"
+
+msgid "Reason for disabling notes:"
+msgstr "Grund für die Deaktivierung von Notizen:"
 
 msgid "Records Similar to"
 msgstr "Ähnliche Datensätze für"
@@ -673,7 +1007,7 @@ msgstr "Ausgewählte Datensätze"
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "Einträge mit Namen und Adressen, die mit \"%(query)s\" übereinstimmen."
 
 msgid "Report spam"
 msgstr "Spam melden"
@@ -696,6 +1030,9 @@ msgstr "Nach dieser Person suchen"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Bis zu 3 Datensätze auswählen und als doppelte Datensätze kennzeichnen:"
+
+msgid "Send email"
+msgstr "E-Mail senden"
 
 msgid "Sex"
 msgstr "Geschlecht"
@@ -730,9 +1067,6 @@ msgstr "Status"
 msgid "Status of this person"
 msgstr "Status dieser Person"
 
-msgid "Status updates for this person"
-msgstr "Status-Updates für diese Person"
-
 msgid "Street name"
 msgstr "Straßenname"
 
@@ -743,8 +1077,8 @@ msgid "Subscribe"
 msgstr "Abonnieren"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "Updates zu %(first_name)s %(last_name)s abonnieren"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "Updates zu %(given_name)s %(family_name)s abonnieren"
 
 msgid "Subscribe to updates about this person"
 msgstr "Updates zu dieser Person abonnieren"
@@ -774,14 +1108,27 @@ msgstr ""
 "Der Name des ursprünglichen Verfassers ist erforderlich. Gehen Sie zurück"
 " und versuchen Sie es erneut."
 
+msgid "The author has disabled notes on this record."
+msgstr "Der Ersteller hat Notizen für diesen Datensatz deaktiviert."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Der Ersteller hat Statusupdates für diesen Datensatz deaktiviert."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "Das bereitgestellte Bild ist zu groß. Laden Sie ein kleineres Bild hoch."
 
 msgid "The reason this note is being marked as spam:"
 msgstr "Diese Nachricht wird aus folgendem Grund als Spam markiert:"
 
+msgid "The record cannot be extended."
+msgstr "Der Zeitraum des Eintrags kann nicht verlängert werden."
+
 msgid "The record has been deleted."
 msgstr "Der Datensatz wurde gelöscht."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "Der Zeitraum des Eintrags wurde bis %(expiry_date)sverlängert."
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -791,6 +1138,14 @@ msgstr ""
 "Laut dem von Ihnen ausgewählten Status sind Sie diese Person. Falls das "
 "stimmt, wählen Sie außerdem \"Ja\" aus, um anzugeben, dass Sie diese "
 "Person kontaktiert haben."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "Das Token %(token)s war ungültig."
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "Das Token %(token)s war ungültig."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -849,18 +1204,13 @@ msgstr "Diese Person hatte Kontakt mit jemandem."
 msgid "This person has posted a message"
 msgstr "Diese Person hat eine Nachricht gepostet."
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "Der Datensatz wurde gelöscht."
+msgstr "Der Eintrag dieser Person existiert nicht oder wurde gelöscht."
 
 msgid "This record has served its purpose."
 msgstr "Dieser Datensatz hat seinen Zweck erfüllt."
 
 msgid "This record is a duplicate of"
-msgstr "Dieser Datensatz ist identisch mit"
-
-#, fuzzy
-msgid "This record is a duplicate of another record:"
 msgstr "Dieser Datensatz ist identisch mit"
 
 msgid "This record is copied from another source."
@@ -871,6 +1221,17 @@ msgstr "Dieser Datensatz ist unangemessen."
 
 msgid "This record is spam."
 msgstr "Dieser Datensatz ist Spam."
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "Zum Beenden des Abonnements auf diesen Link klicken"
 
 msgid "To view or add information, select a name below."
 msgstr ""
@@ -902,6 +1263,9 @@ msgstr "Nicht angegeben"
 msgid "Upload"
 msgstr "Hochladen"
 
+msgid "View the record"
+msgstr "Eintrag anzeigen"
+
 msgid "We have nothing matching your search."
 msgstr "Es gibt keine passenden Datensätze zu Ihrer Suche."
 
@@ -920,11 +1284,28 @@ msgstr "Woher stammen diese Informationen?"
 msgid "Where is this person from?"
 msgstr "Woher kommt diese Person?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Ja"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "Ja, den Ersteller des Datensatzes bitten, Notizen zu deaktivieren"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Ja, den Ersteller des Datensatzes bitten, Notizen zu aktivieren"
+
 msgid "Yes, delete the record"
 msgstr "Ja, den Datensatz löschen"
+
+msgid "Yes, disable notes on this record."
+msgstr "Ja, Notizen für diesen Datensatz deaktivieren"
+
+msgid "Yes, extend the record"
+msgstr "Ja, Zeitraum des Eintrags verlängern"
 
 msgid "Yes, restore this record"
 msgstr "Ja, diesen Datensatz wiederherstellen"
@@ -969,21 +1350,21 @@ msgstr "Sie haben das Abonnement jetzt abgeschlossen."
 msgid "You have successfully unsubscribed."
 msgstr "Sie haben das Abonnement beendet."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"Sie erhalten diese Benachrichtigung, weil Sie Updates zu dieser Person "
-"abonniert haben.\n"
-"Folgen Sie zum Beenden des Abonnements diesem Link: %(unsubscribe_link)s"
+"Sie erhalten diese Benachrichtigung, weil Sie Updates zu folgender Person"
+" abonniert haben:\n"
 
 msgid "Your e-mail address"
 msgstr "Ihre E-Mail-Adresse"
 
 msgid "Your e-mail address:"
 msgstr "Ihre E-Mail-Adresse:"
+
+msgid "Your email"
+msgstr "Ihre E-Mail-Adresse"
 
 msgid "Your name"
 msgstr "Ihr Name"
@@ -1005,17 +1386,61 @@ msgstr ""
 msgid "Your phone number"
 msgstr "Ihre Telefonnummer"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr "[Personenfinder] Löschhinweis für\"%(first_name)s %(last_name)s\""
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"Ihre Anfrage wurde verarbeitet. Bitte suchen Sie in Ihrem Posteingang "
+"nach der entsprechenden E-Mail und bestätigen Sie über die eingebettete "
+"URL, dass Sie Ihre Notiz veröffentlichen möchten."
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
-"[Personenfinder] Datensatzwiederherstellungshinweis für \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder]  %(action)s für Notizen für \"%(given_name)s "
+"%(family_name)s\" bestätigen"
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr "[Person Finder] Notiz für \"%(given_name)s %(family_name)s\" bestätigen"
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr "[Personenfinder] Löschhinweis für\"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Benachrichtigung über Notiz für \"%(given_name)s "
+"%(family_name)s\" wird bestätigt."
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Notizen für \"%(given_name)s %(family_name)s\" sind jetzt "
+"deaktiviert."
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Notizen für \"%(given_name)s %(family_name)s\" sind jetzt "
+"aktiviert."
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Personenfinder] Datensatzwiederherstellungshinweis für \"%(given_name)s "
+"%(family_name)s\""
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
