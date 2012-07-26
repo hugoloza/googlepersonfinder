@@ -15,16 +15,11 @@
 
 from datetime import datetime
 from model import *
-from photo import get_photo_url
+from photo import create_photo, PhotoError
 from utils import *
-from google.appengine.api import images
-from google.appengine.runtime.apiproxy_errors import RequestTooLargeError
-import indexing
-import prefix
+from detect_spam import SpamDetector
 
 from django.utils.translation import ugettext as _
-
-MAX_IMAGE_DIMENSION = 300
 
 def validate_date(string):
     """Parses a date in YYYY-MM-DD format.    This is a special case for manual
@@ -41,10 +36,10 @@ def days_to_date(days):
     return days and get_utcnow() + timedelta(days=days)
 
 
-class Create(Handler):
+class Handler(BaseHandler):
     def get(self):
         self.params.create_mode = True
-        self.render('templates/create.html',
+        self.render('create.html',
                     onload_function='view_page_loaded()')
 
     def post(self):
@@ -53,10 +48,10 @@ class Create(Handler):
         # Several messages here exceed the 80-column limit because django's
         # makemessages script can't handle messages split across lines. :(
         if self.config.use_family_name:
-            if not (self.params.first_name and self.params.last_name):
+            if not (self.params.given_name and self.params.family_name):
                 return self.error(400, _('The Given name and Family name are both required.  Please go back and try again.'))
         else:
-            if not self.params.first_name:
+            if not self.params.given_name:
                 return self.error(400, _('Name is required.  Please go back and try again.'))
         if not self.params.author_name:
             if self.params.clone:
@@ -67,7 +62,8 @@ class Create(Handler):
         if self.params.add_note:
             if not self.params.text:
                 return self.error(400, _('Message is required. Please go back and try again.'))
-            if self.params.status == 'is_note_author' and not self.params.found:
+            if self.params.status == 'is_note_author' and \
+                not self.params.author_made_contact:
                 return self.error(400, _('Please check that you have been in contact with the person after the earthquake, or change the "Status of this person" field.'))
             if (self.params.status == 'believed_dead' and \
                 not self.config.allow_believed_dead_via_ui):
@@ -82,52 +78,27 @@ class Create(Handler):
             if source_date > now:
                 return self.error(400, _('Date cannot be in the future.  Please go back and try again.'))
 
-        expiry_date = days_to_date(self.params.expiry_option or 
+        expiry_date = days_to_date(self.params.expiry_option or
                                    self.config.default_expiry_days)
 
         # If nothing was uploaded, just use the photo_url that was provided.
-        photo = None
-        photo_url = self.params.photo_url
-
-        # If a picture was uploaded, store it and the URL where we serve it.
-        photo_obj = self.params.photo
-        # if image is False, it means it's not a valid image
-        if photo_obj == False:
-            return self.error(400, _('Photo uploaded is in an unrecognized format.  Please go back and try again.'))
-
-        if photo_obj:
-            if max(photo_obj.width, photo_obj.height) <= MAX_IMAGE_DIMENSION:
-                # No resize needed.  Keep the same size but add a
-                # transformation so we can change the encoding.
-                photo_obj.resize(photo_obj.width, photo_obj.width)
-            elif photo_obj.width > photo_obj.height:
-                photo_obj.resize(
-                    MAX_IMAGE_DIMENSION,
-                    photo_obj.height * (MAX_IMAGE_DIMENSION / photo_obj.width))
-            else:
-                photo_obj.resize(
-                    photo_obj.width * (MAX_IMAGE_DIMENSION / photo_obj.height),
-                    MAX_IMAGE_DIMENSION)
-
-            try:
-                sanitized_photo = \
-                    photo_obj.execute_transforms(output_encoding=images.PNG)
-            except RequestTooLargeError:
-                return self.error(400, _('The provided image is too large.  Please upload a smaller one.'))
-            except Exception:
-                # There are various images.Error exceptions that can be raised,
-                # as well as e.g. IOError if the image is corrupt.
-                return self.error(400, _('There was a problem processing the image.  Please try a different image.'))
-
-            photo = Photo(bin_data=sanitized_photo)
+        photo, photo_url = (None, self.params.photo_url)
+        note_photo, note_photo_url = (None, self.params.note_photo_url)
+        try:
+            # If a photo was uploaded, create a Photo entry and get the URL
+            # where we serve it.
+            if self.params.photo is not None:
+                photo, photo_url = create_photo(self.params.photo, self)
+            if self.params.note_photo is not None:
+                note_photo, note_photo_url = \
+                    create_photo(self.params.note_photo, self)
+        except PhotoError, e:
+            return self.error(400, e.message)
+        # Finally, store the Photo. Past this point, we should NOT self.error.
+        if photo:
             photo.put()
-            photo_url = get_photo_url(photo)
-
-        other = ''
-        if self.params.description:
-            indented = '    ' + self.params.description.replace('\n', '\n    ')
-            indented = indented.rstrip() + '\n'
-            other = 'description:\n' + indented
+        if note_photo:
+            note_photo.put()
 
         # Person records have to have a source_date; if none entered, use now.
         source_date = source_date or now
@@ -139,13 +110,15 @@ class Create(Handler):
             source_name = self.env.netloc  # record originated here
 
         person = Person.create_original(
-            self.subdomain,
+            self.repo,
             entry_date=now,
             expiry_date=expiry_date,
-            first_name=self.params.first_name,
-            last_name=self.params.last_name,
-            alternate_first_names=self.params.alternate_first_names,
-            alternate_last_names=self.params.alternate_last_names,
+            given_name=self.params.given_name,
+            family_name=self.params.family_name,
+            alternate_names=get_full_name(self.params.alternate_given_names,
+                                          self.params.alternate_family_names,
+                                          self.config),
+            description=self.params.description,
             sex=self.params.sex,
             date_of_birth=self.params.date_of_birth,
             age=self.params.age,
@@ -162,47 +135,83 @@ class Create(Handler):
             source_date=source_date,
             source_name=source_name,
             photo=photo,
-            photo_url=photo_url,
-            other=other
+            photo_url=photo_url
         )
         person.update_index(['old', 'new'])
-        entities_to_put = [person]
 
         if self.params.add_note:
-            if person.notes_disabled:
-                return self.error(
-                    403, _('The author has disabled status updates on this record.'))
+            spam_detector = SpamDetector(self.config.bad_words)
+            spam_score = spam_detector.estimate_spam_score(self.params.text)
+            if (spam_score > 0):
+                note = NoteWithBadWords.create_original(
+                    self.repo,
+                    entry_date=get_utcnow(),
+                    person_record_id=person.record_id,
+                    author_name=self.params.author_name,
+                    author_email=self.params.author_email,
+                    author_phone=self.params.author_phone,
+                    source_date=source_date,
+                    author_made_contact=bool(self.params.author_made_contact),
+                    status=self.params.status,
+                    email_of_found_person=self.params.email_of_found_person,
+                    phone_of_found_person=self.params.phone_of_found_person,
+                    last_known_location=self.params.last_known_location,
+                    text=self.params.text,
+                    photo=note_photo,
+                    photo_url=note_photo_url,
+                    spam_score=spam_score,
+                    confirmed=False)
 
-            note = Note.create_original(
-                self.subdomain,
-                entry_date=get_utcnow(),
-                person_record_id=person.record_id,
-                author_name=self.params.author_name,
-                author_phone=self.params.author_phone,
-                author_email=self.params.author_email,
-                source_date=source_date,
-                text=self.params.text,
-                last_known_location=self.params.last_known_location,
-                status=self.params.status,
-                found=bool(self.params.found),
-                email_of_found_person=self.params.email_of_found_person,
-                phone_of_found_person=self.params.phone_of_found_person)
-            person.update_from_note(note)
-            entities_to_put.append(note)
+                # Write the new NoteWithBadWords to the datastore
+                db.put(note)
+                # Write the person record to datastore before redirect
+                db.put(person)
+
+                # When the note is detected as spam, we do not update person
+                # record with this note or log action. We ask the note author
+                # for confirmation first.
+                return self.redirect('/post_flagged_note',
+                                     id=note.get_record_id(),
+                                     author_email=note.author_email,
+                                     repo=self.repo)
+            else:
+                note = Note.create_original(
+                    self.repo,
+                    entry_date=get_utcnow(),
+                    person_record_id=person.record_id,
+                    author_name=self.params.author_name,
+                    author_email=self.params.author_email,
+                    author_phone=self.params.author_phone,
+                    source_date=source_date,
+                    author_made_contact=bool(self.params.author_made_contact),
+                    status=self.params.status,
+                    email_of_found_person=self.params.email_of_found_person,
+                    phone_of_found_person=self.params.phone_of_found_person,
+                    last_known_location=self.params.last_known_location,
+                    text=self.params.text,
+                    photo=note_photo,
+                    photo_url=note_photo_url)
+
+                # Write the new NoteWithBadWords to the datastore
+                db.put(note)
+                person.update_from_note(note)
 
             # Specially log 'believed_dead'.
             if note.status == 'believed_dead':
-                detail = person.first_name + ' ' + person.last_name
+                detail = person.given_name + ' ' + person.family_name
                 UserActionLog.put_new(
                     'mark_dead', note, detail, self.request.remote_addr)
 
-        # Write one or both entities to the store.
-        db.put(entities_to_put)
+        # Write the person record to datastore
+        db.put(person)
 
+        # TODO(ryok): we could do this earlier so we don't neet to db.put twice.
         if not person.source_url and not self.params.clone:
             # Put again with the URL, now that we have a person_record_id.
             person.source_url = self.get_url('/view', id=person.record_id)
             db.put(person)
+
+        # TODO(ryok): batch-put person, note, photo, note_photo here.
 
         # If user wants to subscribe to updates, redirect to the subscribe page
         if self.params.subscribe:
@@ -210,6 +219,3 @@ class Create(Handler):
                                  subscribe_email=self.params.author_email)
 
         self.redirect('/view', id=person.record_id)
-
-if __name__ == '__main__':
-    run(('/create', Create))

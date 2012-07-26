@@ -21,83 +21,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\">\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
 "                  <input type=\"button\"\n"
-"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
-"\t\t\t id=\"extend_btn\">\n"
-"\t\t</a>\n"
-"\t\t"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"\n"
-"Dear %(author_name)s,\n"
-"\n"
-"A user has requested disabling status updates on the record\n"
-"\"%(first_name)s %(last_name)s\".\n"
-"\n"
-"We are notifying you of this request because your e-mail address is\n"
-"recorded as the author of this record. To confirm to disable status "
-"updates on  \n"
-"this record, please follow this link within 3 days:\n"
-"\n"
-"   %(embed_url)s\n"
-"\n"
-"Note: You will receive another email with instructions of how to \n"
-"enable status updates after you confirm disabling status updates with \n"
-"the link above.\n"
-"\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"\n"
-"Dear %(author_name)s,\n"
-"\n"
-"A user has requested enabling status updates on the record of\n"
-"\"%(first_name)s %(last_name)s\".\n"
-"\n"
-"We are notifying you of this request because your e-mail address is\n"
-"recorded as the author of this record. To confirm to enable status "
-"updates\n"
-"on this record, please follow this link within 3 days:\n"
-"\n"
-"   %(embed_url)s\n"
-"\n"
-"\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"\n"
-"Dear %(author_name)s,\n"
-"\n"
-"A user has requested to enable further editing to the record of\n"
-"\"%(first_name)s %(last_name)s\".\n"
-"\n"
-"We are notifying you of this request because your e-mail address is\n"
-"recorded as the author of this record. To confirm to enable status "
-"updates\n"
-"on this record, please follow this link within 3 days:\n"
-"\n"
-"   %(embed_url)s\n"
-"\n"
-"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
 "                Warning: this record will expire in less than a day.\n"
-"\t\t"
+"                "
 msgid_plural ""
 "\n"
 "                Warning: this record will expire in less than %(days)s "
@@ -109,32 +108,32 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to disable notes for the record of "
-"\"%(first_name)s %(last_name)s\"?\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to disable status updates for the record of "
-"\"%(first_name)s %(last_name)s\"?\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
 "    "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to enable status updates for the record of "
-"\"%(first_name)s %(last_name)s\"?\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 
@@ -142,7 +141,13 @@ msgstr ""
 msgid ""
 "\n"
 "      Are you sure you want to extend the expiration for record "
-"\"%(first_name)s %(last_name)s\"?\n"
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+
+msgid ""
+"\n"
+"      Confirm your note\n"
 "    "
 msgstr ""
 
@@ -172,38 +177,35 @@ msgstr ""
 
 msgid ""
 "\n"
-"    If you confirm to disable status updates to this record,\n"
-"    this record will still be viewable on this site,\n"
-"    but others can no longer add new notes to this record.\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
 "  "
 msgstr ""
 
 msgid ""
 "\n"
-"    Only the record author has the permission to disable/enable \n"
-"    status updates for the record. An email will be sent to the record \n"
-"    author with instructions about how to disable status updates for this"
-" record.\n"
-"    To proceed your request, contact record author,\n"
-"    or check your inbox if you are the author.\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
 "  "
 msgstr ""
 
 msgid ""
 "\n"
-"    Only the record author has the permission to disable/enable \n"
-"    status updates for the record. An email will be sent to the record \n"
-"    author with instructions about how to enable status updates for this "
-"record.\n"
-"    To proceed your request, contact the record author,\n"
-"    or check your inbox if you are the author.\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
 "  "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
@@ -213,18 +215,11 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
 msgstr ""
 
 #, python-format
@@ -247,7 +242,33 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -260,40 +281,18 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\" has "
-"disabled \n"
-"status updates to the record. To view the current status of this record,"
-" \n"
-"follow this link:\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"    %(record_url)s\n"
-"\n"
-"We are notifying you because your e-mail address is associated with this\n"
-"person record or a note on the record.\n"
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\" has enabled"
-" \n"
-"status updates to the record. To view the current status of this record,"
-" \n"
-"follow this link:\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
 "\n"
-"    %(record_url)s\n"
+"You can view this record at\n"
 "\n"
-"We are notifying you because your e-mail address is associated with this\n"
-"person record or a note on the record.\n"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
-"\n"
-"You can view the full record at %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
@@ -374,6 +373,10 @@ msgstr "Retounen sou komansman"
 msgid "Back to start"
 msgstr "Retounen sou komansman"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Anile"
 
@@ -399,6 +402,9 @@ msgstr "Kreye yon nouvo dosye pou"
 
 msgid "Create a new record for a missing person"
 msgstr "Kreye yon nouvo dosye pou yon moun ki manke"
+
+msgid "Crisis events"
+msgstr ""
 
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
@@ -427,7 +433,7 @@ msgstr "Deskripsyon"
 msgid "Developers"
 msgstr "Développeurs"
 
-msgid "Disable status updates for this record"
+msgid "Disable notes on this record"
 msgstr ""
 
 #, fuzzy
@@ -446,7 +452,7 @@ msgstr "Afiche zouti sa sou sit ou"
 msgid "Embedding the Application"
 msgstr "Intégration de l'application"
 
-msgid "Enable status updates for this record"
+msgid "Enable notes on this record"
 msgstr ""
 
 msgid "Enter as YYYY-MM-DD"
@@ -585,6 +591,18 @@ msgstr ""
 "Si okenn nan dosye sa yo pa match moun ou an, ou met pezesou bouton anba "
 "la pou ou sa kreye yon nouvo dosye."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr "Si ou genyen foto moun sa ajoute li oswa bay URL la."
 
@@ -592,6 +610,9 @@ msgid "Incorrect.  Try again."
 msgstr ""
 
 msgid "Invalid e-mail address. Please try again."
+msgstr ""
+
+msgid "Language selection"
 msgstr ""
 
 msgid "Last known location"
@@ -655,14 +676,18 @@ msgid "No messages are found registered to the carrier's message board service."
 msgstr ""
 
 #, python-format
+msgid "No note with ID: %(id)s."
+msgstr ""
+
+msgid "No notes have been posted"
+msgstr ""
+
+#, python-format
 msgid "No person with ID: %(id)s."
 msgstr ""
 
 msgid "No results found for"
 msgstr "Pa gen okenn rezilta pou"
-
-msgid "No status updates have been posted"
-msgstr "Pa gen okenn nouvèl ki afiche"
 
 msgid "Not authorized to post notes with the status \"believed_dead\"."
 msgstr ""
@@ -670,10 +695,16 @@ msgstr ""
 msgid "Not spam"
 msgstr ""
 
+msgid "Note author"
+msgstr ""
+
 msgid "Note text"
 msgstr ""
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+msgid "Notes for this person"
 msgstr ""
 
 msgid "Number or range (e.g. 20-30)"
@@ -703,9 +734,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Non orijinal sit la"
-
-msgid "Other information"
-msgstr "Lòt enfomasyon"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -762,6 +790,12 @@ msgstr "Tanpri eksplike poukisa ou panse moun sa yo menm moun"
 msgid "Please fill in all the required fields."
 msgstr ""
 
+msgid "Please fill in your email address."
+msgstr ""
+
+msgid "Please provide an valid email address."
+msgstr ""
+
 msgid "Possible duplicates"
 msgstr "Nou genyen dosye ki matche moun sa, li posib ke se menm moun nan"
 
@@ -787,7 +821,7 @@ msgstr "Pwovens oswa depatman"
 msgid "Reason for deletion:"
 msgstr ""
 
-msgid "Reason for disabling status updates:"
+msgid "Reason for disabling notes:"
 msgstr ""
 
 msgid "Records Similar to"
@@ -821,6 +855,9 @@ msgstr "Chèche moun sa"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Seleksyone jiska 3 dosye pou make kòm doub:"
+
+msgid "Send email"
+msgstr ""
 
 msgid "Sex"
 msgstr "Fi oswa Gason"
@@ -856,9 +893,6 @@ msgstr "Eta"
 msgid "Status of this person"
 msgstr "Ki dènye nouvèl sou moun sa"
 
-msgid "Status updates for this person"
-msgstr "Ki dènye nouvèl sou moun sa"
-
 msgid "Street name"
 msgstr "Non lari a"
 
@@ -869,7 +903,7 @@ msgid "Subscribe"
 msgstr ""
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
 msgstr ""
 
 #, fuzzy
@@ -899,6 +933,9 @@ msgid "The Original author's name is required.  Please go back and try again."
 msgstr ""
 "Non otè orijinal la obligatwa. Tanpri tounen sou paj ou te ye aa epi "
 "eseye ankò."
+
+msgid "The author has disabled notes on this record."
+msgstr ""
 
 msgid "The author has disabled status updates on this record."
 msgstr ""
@@ -1008,6 +1045,14 @@ msgstr "Dosye sa se doub de"
 msgid "This record is spam."
 msgstr "Dosye sa se doub de"
 
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
 msgid "To unsubscribe, follow this link"
 msgstr ""
 
@@ -1060,22 +1105,27 @@ msgstr "Kote enfòmasyon sa a sòti? "
 msgid "Where is this person from?"
 msgstr "Ki kote moun sa a sòti?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Wi"
+
+msgid "Yes, ask the record author to disable notes"
+msgstr ""
+
+msgid "Yes, ask the record author to enable notes"
+msgstr ""
 
 msgid "Yes, delete the record"
 msgstr ""
 
-msgid "Yes, disable status updates for this record."
+msgid "Yes, disable notes on this record."
 msgstr ""
 
 msgid "Yes, extend the record"
-msgstr ""
-
-msgid "Yes, request record author to disable status updates."
-msgstr ""
-
-msgid "Yes, request record author to enable status updates."
 msgstr ""
 
 #, fuzzy
@@ -1130,6 +1180,9 @@ msgstr "Email ou"
 msgid "Your e-mail address:"
 msgstr "Email ou"
 
+msgid "Your email"
+msgstr ""
+
 msgid "Your name"
 msgstr "Non ou"
 
@@ -1151,49 +1204,46 @@ msgid "Your phone number"
 msgstr "Nimewo telefòn ou"
 
 msgid ""
-"Your request is successfully processed. If you are the author of this "
-"record, please check your inbox and confirm that you want to disable "
-"future commenting to this record by following the url embedded in the "
-"email we will shortly send out."
-msgstr ""
-
-msgid ""
-"Your request is successfully processed. If you are the author of this "
-"record, please check your inbox and confirm that you want to enable "
-"future commenting to this record by following the url embedded in the "
-"email we will shortly send out."
-msgstr ""
-
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
 msgstr ""
 
 #, python-format
 msgid ""
-"[Person Finder] Disabling status updates notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 
 #, python-format
-msgid "[Person Finder] Enabling notes notice for \"%(first_name)s %(last_name)s\""
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
 msgstr ""
 
 #, python-format
-msgid ""
-"[Person Finder] Enabling status updates notice for \"%(first_name)s "
-"%(last_name)s\""
-msgstr ""
-
-#, python-format
-msgid ""
-"[Person Finder] Please confirm %(action)s status updates for record "
-"\"%(first_name)s %(last_name)s\""
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
 msgstr ""
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 
 #, python-format

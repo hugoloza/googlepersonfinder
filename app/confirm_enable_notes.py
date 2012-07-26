@@ -23,7 +23,7 @@ from django.utils.translation import ugettext as _
 
 from confirm_disable_notes import DisableAndEnableNotesError
 
-class ConfirmEnableNotes(utils.Handler):
+class Handler(utils.BaseHandler):
     """This handler lets the author confirm to disable future nots 
     to a person record."""
 
@@ -41,15 +41,15 @@ class ConfirmEnableNotes(utils.Handler):
         db.put([person])
 
         record_url = self.get_url(
-            '/view', id=person.record_id, subdomain=person.subdomain)
+            '/view', id=person.record_id, repo=person.repo)
 
         # Send subscribers a notice email.
         subject = _(
-            '[Person Finder] Enabling status updates notice for '
-            '"%(first_name)s %(last_name)s"'
+            '[Person Finder] Notes are now enabled on '
+            '"%(given_name)s %(family_name)s"'
         ) % {
-            'first_name': person.first_name,
-            'last_name': person.last_name
+            'given_name': person.given_name,
+            'family_name': person.family_name
         }
         email_addresses = person.get_associated_emails()
         for address in email_addresses:
@@ -58,14 +58,14 @@ class ConfirmEnableNotes(utils.Handler):
                 to=address,
                 body=self.render_to_string(
                     'enable_notes_notice_email.txt',
-                    first_name=person.first_name,
-                    last_name=person.last_name,
+                    given_name=person.given_name,
+                    family_name=person.family_name,
                     record_url=record_url
                 )
             )
 
         self.redirect(record_url)
- 
+
 
     def post(self):
         try:
@@ -81,15 +81,15 @@ class ConfirmEnableNotes(utils.Handler):
         db.put([person])
 
         record_url = self.get_url(
-            '/view', id=person.record_id, subdomain=person.subdomain)
+            '/view', id=person.record_id, repo=person.repo)
 
         # Send subscribers a notice email.
         subject = _(
             '[Person Finder] Enabling notes notice for '
-            '"%(first_name)s %(last_name)s"'
+            '"%(given_name)s %(family_name)s"'
         ) % {
-            'first_name': person.first_name,
-            'last_name': person.last_name
+            'given_name': person.given_name,
+            'family_name': person.family_name
         }
         email_addresses = person.get_associated_emails()
         for address in email_addresses:
@@ -98,8 +98,8 @@ class ConfirmEnableNotes(utils.Handler):
                 to=address,
                 body=self.render_to_string(
                     'enable_notes_notice_email.txt',
-                    first_name=person.first_name,
-                    last_name=person.last_name,
+                    given_name=person.given_name,
+                    family_name=person.family_name,
                     record_url=record_url
                 )
             )
@@ -125,6 +125,3 @@ class ConfirmEnableNotes(utils.Handler):
                 _('The token %(token)s was invalid') % {'token': token})
 
         return (person, token)
-
-if __name__ == '__main__':
-    utils.run(('/confirm_enable_notes', ConfirmEnableNotes))
