@@ -1,11 +1,8 @@
 # Copyright 2010 Google Inc.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License.  You may obtain
+# a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,605 +12,199 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-17 20:08+0900\n"
-"PO-Revision-Date: 2010-03-24 10:09-0800\n"
-"Last-Translator: weloc <info@welocalize.com>\n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel None\n"
 
-#: create.py:49
 msgid ""
-"The Given name and Family name are both required.  Please go back and try "
-"again."
-msgstr "Izena eta abizena beharrezkoak dira. Joan atzera eta saiatu berriro."
-
-#: create.py:52
-msgid "Name is required.  Please go back and try again."
-msgstr "Izena beharrezkoa da. Joan atzera eta saiatu berriro."
-
-#: create.py:55
-msgid "The Original author's name is required.  Please go back and try again."
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
 msgstr ""
-"Jatorrizko egilearen izena beharrezkoa da. Joan atzera eta saiatu berriro."
+"\n"
+"\n"
+"  Oharrak erregistroaren egilearen baimenarekin gaitzen eta desgaitzen "
+"direla ziurtatzeko, berrespen-mezu bat bidaliko zaio erregistroaren "
+"egileari. Egilea zu bazara, begiratu posta elektronikoa beheko botoian "
+"klik egin ondoren.\n"
+"\n"
+"  "
 
-#: create.py:57
-msgid ""
-"Your name is required in the \"Source\" section.  Please go back and try "
-"again."
-msgstr ""
-"Zure izena beharrezkoa da \"Iturburua\" atalean. Joan atzera eta saiatu "
-"berriro."
-
-#: create.py:61 multiview.py:77 view.py:112
-msgid "Message is required. Please go back and try again."
-msgstr "Mezua beharrezkoa da. Joan atzera eta saiatu berriro."
-
-#: create.py:63 view.py:121
-msgid ""
-"Please check that you have been in contact with the person after the "
-"earthquake, or change the \"Status of this person\" field."
-msgstr ""
-"Egiaztatu pertsonarekin harremanetan egon zarela lurrikararen ondoren, edo "
-"aldatu \"Pertsonaren egoera\" eremua."
-
-#: create.py:70
-msgid ""
-"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
-"date.  Please go back and try again."
-msgstr ""
-"Mezua bidali zeneko jatorrizko data ez dago UUUU-HH-EE formatuan, edo data "
-"okerra da. Joan atzera eta saiatu berriro."
-
-#: create.py:72
-msgid "Date cannot be in the future.  Please go back and try again."
-msgstr "Datak ezin du etorkizunekoa izan. Joan atzera eta saiatu berriro."
-
-#: create.py:78
-msgid ""
-"Photo uploaded is in an unrecognized format.  Please go back and try again."
-msgstr ""
-"Kargatutako argazkiaren formatua ezezaguna da. Joan atzera eta saiatu "
-"berriro."
-
-#: create.py:99
-msgid "The provided image is too large.  Please upload a smaller one."
-msgstr "Kargatutako irudia handiegia da. Kargatu irudi txikiago bat."
-
-#: create.py:103
-msgid ""
-"There was a problem processing the image.  Please try a different image."
-msgstr ""
-"Arazo bat gertatu da irudia prozesatzerakoan. Saiatu beste irudi bat "
-"kargatzen."
-
-#: delete.py:83
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr ""
-"[Person Finder] Honen ezabatze-oharra: \"%(first_name)s %(last_name)s\""
-
-#: delete.py:111
-msgid "The record has been deleted."
-msgstr "Erregistroa ezabatu da."
-
-#: multiview.py:81 view.py:116
-msgid ""
-"Your name is required in the \"About you\" section.  Please go back and try "
-"again."
-msgstr ""
-"Zure izena beharrezkoa da \"Zuri buruz\" atalean. Joan atzera eta saiatu "
-"berriro."
-
-#: restore.py:85
-#, python-format
-msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s %(last_name)s"
-"\""
-msgstr ""
-"[Person Finder] Honen erregistro-leheneratze oharra: \"%(first_name)s %"
-"(last_name)s\""
-
-#: subscribe.py:82
-#, python-format
-msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
-msgstr ""
-"[Person Finder] Honen egoera-eguneratzea: %(given_name)s %(family_name)s"
-
-#: subscribe.py:106
-#, python-format
-msgid ""
-"[Person Finder] You are subscribed to status updates for %(given_name)s %"
-"(family_name)s"
-msgstr ""
-"[Person Finder] Honen egoera-eguneratzeetara harpidetuta zaude: %(given_name)"
-"s %(family_name)s"
-
-#: subscribe.py:155
-msgid "Invalid e-mail address. Please try again."
-msgstr "Helbide elektroniko baliogabea. Saiatu berriro."
-
-#: subscribe.py:176 subscribe.py:185
-#, python-format
-msgid "Return to the record for %(given_name)s %(family_name)s."
-msgstr "Itzuli %(given_name)s %(family_name)s erregistrora."
-
-#: subscribe.py:181
-msgid "You are already subscribed. "
-msgstr "Dagoeneko harpidetuta zaude. "
-
-#: subscribe.py:190
-msgid "You have successfully subscribed."
-msgstr "Behar bezala harpidetu zara."
-
-#: unsubscribe.py:29
-msgid "This link is invalid."
-msgstr "Esteka baliogabea da."
-
-#: unsubscribe.py:34
-msgid "You have successfully unsubscribed."
-msgstr "Harpidetza behar bezala kendu duzu."
-
-#: unsubscribe.py:36
-msgid "You are already unsubscribed."
-msgstr "Dagoeneko kendu duzu harpidetza."
-
-#: utils.py:187
-msgid "female"
-msgstr "emakumea"
-
-#: utils.py:188
-msgid "male"
-msgstr "gizona"
-
-#: utils.py:189
-msgid "other"
-msgstr "beste bat"
-
-#: utils.py:201 utils.py:220
-msgid "Unspecified"
-msgstr "Zehaztu gabe"
-
-#: utils.py:202
-msgid "I am seeking information"
-msgstr "Informazio bila nabil"
-
-#: utils.py:203
-msgid "I am this person"
-msgstr "Pertsona hori naiz"
-
-#: utils.py:205
-msgid "I have received information that this person is alive"
-msgstr "Pertsona hori bizirik dagoenari buruzko informazioa jaso dut"
-
-#: utils.py:206
-msgid "I have reason to think this person is missing"
-msgstr "Pertsona hori desagertuta dagoela pentsatzeko arrazoiak ditut"
-
-#: utils.py:207
-msgid "I have received information that this person is dead"
-msgstr "Pertsona hori hilda dagoenari buruzko informazioa jaso dut"
-
-#: utils.py:221
-msgid "Someone is seeking information about this person"
-msgstr "Norbait pertsona honi buruzko informazioa bilatzen ari da"
-
-#: utils.py:222
-msgid "This person has posted a message"
-msgstr "Pertsona horrek mezu bat idatzi du"
-
-#: utils.py:224
-msgid "Someone has received information that this person is alive"
-msgstr "Pertsona hori bizirik dagoenari buruzko informazioa jaso du norbaitek"
-
-#: utils.py:225
-msgid "Someone has reported that this person is missing"
-msgstr "Pertsona hori desagertuta dagoela jakinarazi du norbaitek"
-
-#: utils.py:227
-msgid "Someone has received information that this person is dead"
-msgstr "Pertsona hori hilda dagoenari buruzko informazioa jaso du norbaitek"
-
-#: utils.py:698
-msgid "Type the two words:"
-msgstr "Idatzi bi hitzak:"
-
-#: utils.py:699
-msgid "Type what you hear:"
-msgstr "Idatzi entzuten duzuna:"
-
-#: utils.py:700
-msgid "Play the sound again"
-msgstr "Erreproduzitu soinua berriro"
-
-#: utils.py:701
-msgid "Download the sound as MP3"
-msgstr "Deskargatu soinua MP3 gisa"
-
-#: utils.py:702
-msgid "Get a visual challenge"
-msgstr "Lortu erronka bisual bat"
-
-#: utils.py:703
-msgid "Get an audio challenge"
-msgstr "Lortu audio-erronka bat"
-
-#: utils.py:704
-msgid "Get a new challenge"
-msgstr "Lortu erronka berri bat"
-
-#: utils.py:705
-msgid "Help"
-msgstr "Laguntza"
-
-#: utils.py:706
-msgid "Incorrect.  Try again."
-msgstr "Oker. Saiatu berriro."
-
-#: utils.py:722
-msgid ""
-"There was an error processing your request.  Sorry for the inconvenience.  "
-"Our administrators will investigate the source of the problem, but please "
-"check that the format of your request is correct."
-msgstr ""
-"Errore bat gertatu da eskaera prozesatzerakoan. Barkatu eragozpenak. Gure "
-"administratzaileek arazoaren jatorria aztertuko dute, baina egiaztatu "
-"eskaeraren formatua zuzena dela."
-
-#: templates/add_note.html:29
-msgid "Tell us the status of this person"
-msgstr "Emaguzu pertsona horren egoeraren berri"
-
-#: templates/add_note.html:31 templates/results.html:144
-msgid "Mark records as duplicate"
-msgstr "Markatu erregistroak bikoiztu gisa"
-
-#: templates/add_note.html:39
-msgid "Status of this person"
-msgstr "Pertsonaren egoera"
-
-#: templates/add_note.html:60
-msgid "Message (required)"
-msgstr "Mezua (beharrezkoa)"
-
-#: templates/add_note.html:64
-msgid "A message for this person or others seeking this person"
-msgstr "Pertsonarentzako edo pertsonaren bila ari direnentzako mezua"
-
-#: templates/add_note.html:66
-msgid "Please explain why you think these are the same person"
-msgstr "Azaldu zergatik uste duzun pertsona bera direla"
-
-#: templates/add_note.html:84 templates/note.html:138
-#: templates/person_status_update_email.txt:13
-msgid "Last known location"
-msgstr "Azken kokapen ezaguna"
-
-#: templates/add_note.html:87
-msgid ""
-"Type an address or open the map below and indicate the location by moving "
-"the pin."
-msgstr ""
-"Idatzi helbidea edo ireki beheko mapa eta zehaztu kokapena markatzailea "
-"mugituta."
-
-#: templates/add_note.html:103 templates/note.html:148
-msgid "Show Map"
-msgstr "Erakutsi mapa"
-
-#: templates/add_note.html:108 templates/note.html:153
-msgid "Hide Map"
-msgstr "Ezkutatu mapa"
-
-#: templates/add_note.html:125
-msgid ""
-"Have you personally talked with this person AFTER the disaster? (required)"
-msgstr ""
-"Hitz egin al duzu pertsonalki pertsona horrekin ezbeharraren ONDOREN? "
-"(beharrezkoa)"
-
-#: templates/add_note.html:135
-msgid "Yes"
-msgstr "Bai"
-
-#: templates/add_note.html:143
-msgid "No"
-msgstr "Ez"
-
-#: templates/add_note.html:154
-msgid "Missing person's current contact information"
-msgstr "Desagertutako pertsonaren uneko harremanetarako informazioa"
-
-#: templates/add_note.html:157
-msgid "How can this person be reached now?"
-msgstr "Nola jar daiteke pertsona honekin harremanetan orain?"
-
-#: templates/add_note.html:163
-msgid "Phone number"
-msgstr "Telefono-zenbakia"
-
-#: templates/add_note.html:174
-msgid "E-mail address"
-msgstr "Helbide elektronikoa"
-
-#: templates/add_note.html:190
-msgid "About you (required)"
-msgstr "Zuri buruz (beharrezkoa)"
-
-#: templates/add_note.html:193
-msgid "How others who are interested in this person can contact you"
-msgstr ""
-"Nola jar daitezke pertsona honetan interesatutako gainerakoak zurekin "
-"harremanetan"
-
-#: templates/add_note.html:200 templates/create.html:303
-msgid "Your name"
-msgstr "Zure izena"
-
-#: templates/add_note.html:210 templates/create.html:317
-msgid "Your phone number"
-msgstr "Zure telefono-zenbakia"
-
-#: templates/add_note.html:220 templates/create.html:331
-msgid "Your e-mail address"
-msgstr "Zure helbide elektronikoa"
-
-#: templates/add_note.html:237
-msgid "Yes, these are the same person"
-msgstr "Bai, pertsona bera dira"
-
-#: templates/add_note.html:239 templates/create.html:381
-msgid "Save this record"
-msgstr "Gorde erregistroa"
-
-#: templates/add_note.html:243 templates/delete.html:70
-#: templates/flag_note.html:62 templates/subscribe_captcha.html:43
-msgid "Cancel"
-msgstr "Utzi"
-
-#: templates/add_note.html:247 templates/create.html:385
-msgid "Please fill in all the required fields."
-msgstr "Bete beharrezko eremu guztiak"
-
-#: templates/add_note.html:251 templates/create.html:389
-msgid ""
-"The status you selected indicates that you are this person.  If this is "
-"true, please also select 'Yes' to indicate that you have contacted this "
-"person."
-msgstr ""
-"Hautatu duzun egoerak pertsona hori zarela adierazten du. Egia bada, hautatu "
-"'Bai' pertsona horrekin harremanetan jarri zarela baieztatzeko."
-
-#: templates/admin.html:20
-msgid "Administration"
-msgstr "Administrazioa"
-
-#: templates/admin.html:23
-#, python-format
-msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
-msgstr "<span class=\"email\">%(email)s</span> helbidearekin hasi duzu saioa."
-
-#: templates/admin.html:24
-#, python-format
-msgid "<a href=\"%(logout_url)s\">Sign out</a>"
-msgstr "<a href=\"%(logout_url)s\">Amaitu saioa</a>"
-
-#: templates/admin.html:26
-#, python-format
-msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
-msgstr "Unean ez duzu saioa hasita. <a href=\"%(login_url)s\">Hasi saioa</a>"
-
-#: templates/base.html:35
-msgid "Google Person Finder"
-msgstr "Google Pertsona-bilagailua"
-
-#: templates/base.html:82 templates/base.html.py:101
-msgid "Person Finder"
-msgstr "Pertsona-bilagailua"
-
-#: templates/base.html:113 templates/embed.html:42 templates/view.html:314
-msgid "Back to start"
-msgstr "Itzuli hasierara"
-
-#: templates/base.html:119
-msgid ""
-"PLEASE NOTE: All data entered will be available to the public and viewable "
-"and usable by anyone.  Google does not review or verify the accuracy of this "
-"data."
-msgstr ""
-"OHARRA: sartutako datu guztiak erabilgarri egongo dira publikoarentzat eta "
-"edonork ikusi eta erabili ahal izango ditu. Google-k ez ditu datuen "
-"egiazkotasuna eta zehaztasuna egiaztatzen."
-
-#: templates/base.html:128
-msgid "Embed this tool on your site"
-msgstr "Kapsulatu tresna hau zure gunean"
-
-#: templates/base.html:133
-msgid "Developers"
-msgstr "Garatzaileak"
-
-#: templates/base.html:136
-msgid "Terms of Service"
-msgstr "Zerbitzu-baldintzak"
-
-#: templates/create.html:32
-msgid "Identify who you have information about"
-msgstr "Zehaztu nori buruzko informazioa duzun"
-
-#: templates/create.html:34
-msgid "Identify who you are looking for"
-msgstr "Zehaztu noren bila ari zaren"
-
-#: templates/create.html:41
-msgid "Name (required)"
-msgstr "Izena (beharrezkoa)"
-
-#: templates/create.html:44
-msgid "What is this person's name?"
-msgstr "Zein da pertsonaren izena?"
-
-#: templates/create.html:51 templates/create.html.py:81
-#: templates/multiview.html:47 templates/multiview.html.py:79
-#: templates/query_form.html:34 templates/query_form.html.py:70
-#: templates/view.html:70 templates/view.html.py:86
-msgid "Family name"
-msgstr "Abizena"
-
-#: templates/create.html:65 templates/multiview.html:64
-#: templates/query_form.html:51 templates/view.html:77
-msgid "Given name"
-msgstr "Izena"
-
-#: templates/create.html:67 templates/multiview.html:42
-#: templates/multiview.html.py:66 templates/query_form.html:53
-#: templates/view.html:66 templates/view.html.py:79
-msgid "Name"
-msgstr "Izena"
-
-#: templates/create.html:96 templates/create.html.py:128
-#: templates/multiview.html:88 templates/multiview.html.py:112
-#: templates/view.html:93 templates/view.html.py:109
-#, fuzzy
-msgid "Alternate family names"
-msgstr "Abizena"
-
-#: templates/create.html:111 templates/multiview.html:101
-#: templates/view.html:100
-msgid "Alternate given names"
-msgstr ""
-
-#: templates/create.html:113 templates/multiview.html:103
-#: templates/view.html:102
-#, fuzzy
-msgid "Alternate names"
-msgstr "Kale-helbidea"
-
-#: templates/create.html:146
-msgid "Home Address"
-msgstr "Etxeko helbidea"
-
-#: templates/create.html:149
-msgid "Where is this person from?"
-msgstr "Nongoa da pertsona?"
-
-#: templates/create.html:155 templates/multiview.html:148
-#: templates/view.html:149
-msgid "Street name"
-msgstr "Kale-helbidea"
-
-#: templates/create.html:157
-msgid "Street name only, no number"
-msgstr "Kalearen izena soilik, zenbakirik gabe"
-
-#: templates/create.html:172 templates/multiview.html:154
-#: templates/view.html:153
-msgid "Neighborhood"
-msgstr "Auzoa"
-
-#: templates/create.html:181 templates/multiview.html:160
-#: templates/view.html:157
-msgid "City"
-msgstr "Hiria"
-
-#: templates/create.html:191 templates/multiview.html:166
-#: templates/view.html:161
-msgid "Province or state"
-msgstr "Probintzia edo estatua"
-
-#: templates/create.html:203 templates/multiview.html:173
-#: templates/view.html:166
-msgid "Postal or zip code"
-msgstr "Posta-kodea edo zip kodea"
-
-#: templates/create.html:218
-msgid "Description"
-msgstr "Azalpena"
-
-#: templates/create.html:221
-msgid "Describe how to identify this person."
-msgstr "Azaldu pertsona nola identifika daitekeen."
-
-#: templates/create.html:236 templates/multiview.html:198
-#: templates/view.html:195
-msgid "Photo"
-msgstr "Argazkia"
-
-#: templates/create.html:239
-msgid "If you have a photo of this person, upload it or enter its URL address."
-msgstr "Pertsonaren argazkirik baduzu, kargatu irudia edo sartu URL helbidea."
-
-#: templates/create.html:247
-msgid "URL"
-msgstr "URL"
-
-#: templates/create.html:259
-msgid "Upload"
-msgstr "Kargatu"
-
-#: templates/create.html:272
-msgid "Source of this record (required)"
-msgstr "Erregistroaren iturburua (beharrezkoa)"
-
-#: templates/create.html:275
-msgid "Where did this information come from?"
-msgstr "Nondik jaso da informazioa?"
-
-#: templates/create.html:286
-msgid "This is a new record."
-msgstr "Erregistro berria da."
-
-#: templates/create.html:294
-msgid "This record is copied from another source."
-msgstr "Erregistroa beste iturburu batetik kopiatu da."
-
-#: templates/create.html:307
-msgid "Original author's name"
-msgstr "Jatorrizko egilearen izena"
-
-#: templates/create.html:321 templates/multiview.html:226
-#: templates/view.html:218
-msgid "Author's phone number"
-msgstr "Egilearen telefono-zenbakia"
-
-#: templates/create.html:335 templates/multiview.html:242
-#: templates/view.html:231
-msgid "Author's e-mail address"
-msgstr "Egilearen helbide elektronikoa"
-
-#: templates/create.html:345
-msgid "URL of original record"
-msgstr "Jatorrizko erregistroaren URLa"
-
-#: templates/create.html:355 templates/multiview.html:268
-#: templates/view.html:252
-msgid "Original posting date"
-msgstr "Jatorrizko bidaltze-data"
-
-#: templates/create.html:357
-msgid "Enter as YYYY-MM-DD"
-msgstr "Sartu UUUU-HH-EE formatuan"
-
-#: templates/create.html:366 templates/multiview.html:274
-#: templates/view.html:256
-msgid "Original site name"
-msgstr "Jatorrizko gunearen izena"
-
-#: templates/delete.html:23
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s %"
-"(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kaixo %(author_name)s: erabiltzaile batek \"%(given_name)s "
+"%(family_name)s\" erregistroan oharrak gaitzeko eskaera egin du. Zure "
+"helbide elektronikoa gordeko da erregistro honen egile gisa. Erregistroan"
+" oharrak gaitzeko, jarraitu esteka honi 3 eguneko epean:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kaixo %(author_name)s: erabiltzaile batek \"%(given_name)s "
+"%(family_name)s\" erregistroan oharrak desgaitzeko eskaera egin du. Zure "
+"helbide elektronikoa gordeko da erregistro honen egile gisa. Erregistroan"
+" oharrak desgaitzeko, jarraitu esteka honi 3 eguneko epean:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kaixo %(author_name)s: ohar bat gehitu duzu \"%(given_name)s "
+"%(family_name)s\" erregistroan. Oharra argitaratzeko, jarraitu esteka honi "
+"3 eguneko epean:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      Ziur \"%(first_name)s %(last_name)s\" pertsonaren erregistroa ezabatu "
-"nahi duzula?\n"
+"      Ziur \"%(given_name)s %(family_name)s\" pertsonaren erregistroa "
+"ezabatu nahi duzula?\n"
 "    "
 
-#: templates/delete.html:30
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ziur oharrak desgaitu nahi dituzula \"%(given_name)s "
+"%(family_name)s\" erregistroan?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ziur oharrak desgaitu nahi dituzula \"%(given_name)s "
+"%(family_name)s\" erregistroan?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ziur oharrak gaitu nahi dituzula \"%(given_name)s %(family_name)s\" "
+"erregistroan?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Berretsi oharra\n"
+"    "
+
 msgid ""
 "\n"
 "      If you proceed with deletion,\n"
@@ -625,14 +216,14 @@ msgstr ""
 "      erregistroa ezingo da bilatu edo ikusi gune honetan.\n"
 "    "
 
-#: templates/delete.html:35
 #, python-format
 msgid ""
 "\n"
 "      This record is a copy of a record from another source.\n"
 "      You can delete the record here,\n"
 "      but please be aware that\n"
-"      we might later receive another copy of it from the original source.\n"
+"      we might later receive another copy of it from the original source."
+"\n"
 "\n"
 "      <p>\n"
 "      If you would like it permanently deleted,\n"
@@ -654,368 +245,139 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
 "    "
 
-#: templates/delete.html:48
-#, python-format
 msgid ""
-"You can <a target=\"_blank\" href=\"%(view_url)s\">view the record</a> "
-"before deleting it."
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
 msgstr ""
-"<a target=\"_blank\" href=\"%(view_url)s\">Erregistroa ikus</a> dezakezu "
-"hura ezabatu aurretik."
+"\n"
+"    Oharrak erregistroaren egilearen baimenarekin gaitzen eta desgaitzen "
+"direla ziurtatzeko, berrespen-mezu bat bidaliko zaio erregistroaren "
+"egileari. Egilea zu bazara, begiratu posta elektronikoa beheko botoian "
+"klik egin ondoren.\n"
+"  "
 
-#: templates/delete.html:51
-msgid "Reason for deletion:"
-msgstr "Ezabatzearen arrazoia:"
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Erregistroak gunean ikusgai egoten jarraituko du, baina inork ezingo "
+"ditu oharrak gehitu bertan.\n"
+"  "
 
-#: templates/delete.html:54
-msgid "I do not want my information online anymore."
-msgstr "Ez dut nire informazioa linean egoterik nahi."
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Oharra argitaratzeko, sartu helbide elektronikoa behean eta jarraitu "
+"jasotzen duzun berrespen-estekari.\n"
+"  "
 
-#: templates/delete.html:56
-msgid "I have received spam."
-msgstr "Spama jaso dut."
-
-#: templates/delete.html:58
-msgid "This record is inappropriate."
-msgstr "Erregistroa desegokia da."
-
-#: templates/delete.html:60
-msgid "This record is spam."
-msgstr "Erregistroa spama da."
-
-#: templates/delete.html:62
-msgid "This record has served its purpose."
-msgstr "Erregistroak bere helburua bete du."
-
-#: templates/delete.html:69
-msgid "Yes, delete the record"
-msgstr "Bai, ezabatu erregistroa"
-
-#: templates/deletion_email_for_note_author.txt:4
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"Erabiltzaile batek \"%(first_name)s %(last_name)s\" pertsonaren erregistro "
-"bat ezabatu du\n"
+"Erabiltzaile batek \"%(given_name)s %(family_name)s\" pertsonaren "
+"erregistro bat ezabatu du\n"
 "%(site_url)s helbidean.\n"
 "\n"
 "Ezabatzearen berri ematen dizugu, zure helbide elektronikoa dagoelako\n"
 "erregistro honi buruzko ohar baten egile gisa erregistratuta.\n"
 
-#: templates/deletion_email_for_person_author.txt:4
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
-"restore it by following this link within the next %(days_until_deletion)s "
-"days:\n"
+"restore it by following this link within the next %(days_until_deletion)s"
+" days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently deleted.\n"
 msgstr ""
-"\n"
-"Erabiltzaile batek \"%(first_name)s %(last_name)s\" pertsonaren erregistro "
-"bat ezabatu du\n"
-"%(site_url)s helbidean.\n"
-"\n"
-"Ezabatzearen berri ematen dizugu, zure helbide elektronikoa dagoelako\n"
-"erregistro honi buruzko ohar baten egile gisa erregistratuta.\n"
-"\n"
-"OHARRA: erregistroa istripuz ezabatu dela iruditzen bazaizu, leheneratu\n"
-"esteka hau jarraituta datozen %(days_until_deletion)s egunetan:\n"
-"\n"
-"    %(restore_url)s\n"
-"\n"
-"%(days_until_deletion)s egun igarotakoan, erregistroa behin betiko ezabatuko "
-"da.\n"
 
-#: templates/embed.html:21
-msgid "Embedding the Application"
-msgstr "Aplikazioa kapsulatu"
-
-#: templates/embed.html:22
-msgid "Copy and paste the following HTML code to put this tool on your site"
-msgstr "Kopiatu eta itsatsi HTML kode hau tresna zure gunean ezartzeko"
-
-#: templates/embed.html:30
-#, python-format
-msgid ""
-"Or add to your site as a %(gadget_link_html)sGoogle Gadget%(link_end_html)s."
-msgstr ""
-"Edo gehitu zure gunean %(gadget_link_html)sGoogle-ren gadget%(link_end_html)"
-"s gisa."
-
-#: templates/embed.html:32
-#, python-format
-msgid ""
-"These gadgets are made available under the %(apache_link_html)sApache 2.0 "
-"license%(link_end_html)s."
-msgstr ""
-"Gadget hauek %(apache_link_html)sApache 2.0 license%(link_end_html)s "
-"lizentzia dute."
-
-#: templates/embed.html:35
-#, python-format
-msgid ""
-"More information for developers can now be found %(developers_link_html)shere"
-"%(link_end_html)s."
-msgstr ""
-"Garatzaileentzako informazio gehiago eskura daiteke %(developers_link_html)"
-"shemen%(link_end_html)s."
-
-#: templates/embed.html:39
-msgid "Close window"
-msgstr "Itxi leihoa"
-
-#: templates/flag_note.html:23
-msgid "Are you sure this note isn't spam?"
-msgstr "Ziur ohar hau spama ez dela?"
-
-#: templates/flag_note.html:25
-msgid "Are you sure you want to mark this note as spam?"
-msgstr "Ziur ohar hau spam gisa markatu nahi duzula?"
-
-#: templates/flag_note.html:41
-msgid "The reason this note is being marked as spam:"
-msgstr "Ohar hau spam gisa markatzearen arrazoia:"
-
-#: templates/flag_note.html:44
-msgid "I prefer not to specify."
-msgstr "Nahiago dut ez zehaztu."
-
-#: templates/flag_note.html:46
-msgid "This note is spam."
-msgstr "Oharra spama da."
-
-#: templates/flag_note.html:48
-msgid "This note is inappropriate."
-msgstr "Oharra desegokia da."
-
-#: templates/flag_note.html:50
-msgid "I have received spam due to this note."
-msgstr "Spama jaso dut ohar hau dela-eta."
-
-#: templates/flag_note.html:52
-msgid "This note is incorrect or untrue."
-msgstr "Oharrak gezurra dio edo oker dago."
-
-#: templates/flag_note.html:61
-msgid "Yes, update the note"
-msgstr "Bai, eguneratu oharra"
-
-#: templates/main.html:22
-msgid "What is your situation?"
-msgstr "Zein da zure egoera?"
-
-#: templates/main.html:28 templates/query_form.html:20
-msgid "I'm looking for someone"
-msgstr "Norbaiten bila nabil"
-
-#: templates/main.html:33 templates/query_form.html:13
-msgid "I have information about someone"
-msgstr "Norbaiti buruzko informazioa dut"
-
-#: templates/main.html:40
-#, python-format
-msgid "Currently tracking about %(num_people)s records."
-msgstr "Unean %(num_people)s erregistro ingururen jarraipena egiten ari da."
-
-#: templates/multiview.html:37
-msgid "Compare these records"
-msgstr "Alderatu erregistro hauek"
-
-#: templates/multiview.html:121 templates/view.html:124
-msgid "Physical characteristics"
-msgstr "Ezaugarri fisikoak"
-
-#: templates/multiview.html:125 templates/view.html:127
-msgid "Sex"
-msgstr "Sexua"
-
-#: templates/multiview.html:131 templates/view.html:133
-msgid "Date of birth"
-msgstr "Jaioteguna"
-
-#: templates/multiview.html:137 templates/view.html:138
-msgid "Age"
-msgstr "Adina"
-
-#: templates/multiview.html:144 templates/results.html:99
-#: templates/view.html:146
-msgid "Home address"
-msgstr "Etxeko helbidea"
-
-#: templates/multiview.html:182 templates/view.html:180
-msgid "Other information"
-msgstr "Informazio gehiago"
-
-#: templates/multiview.html:216 templates/view.html:211
-msgid "Source of this record"
-msgstr "Erregistroaren iturburua"
-
-#: templates/multiview.html:220 templates/view.html:214
-msgid "Author's name"
-msgstr "Egilearen izena"
-
-#: templates/multiview.html:234 templates/multiview.html.py:250
-#: templates/note.html:59 templates/note.html.py:70 templates/note.html:115
-#: templates/note.html.py:130 templates/view.html:225
-#: templates/view.html.py:238
-msgid "(click to reveal)"
-msgstr "(egin klik ikusteko)"
-
-#: templates/multiview.html:259 templates/view.html:245
-msgid "Original URL"
-msgstr "Jatorrizko URLa"
-
-#: templates/multiview.html:263 templates/view.html:248
-msgid "Link"
-msgstr "Esteka"
-
-#: templates/note.html:21
-msgid "Posted by"
-msgstr "Mezuaren egilea:"
-
-#: templates/note.html:25
-msgid "(unknown)"
-msgstr "(ezezaguna)"
-
-#: templates/note.html:27
-msgid "on"
-msgstr "-"
-
-#: templates/note.html:29
-msgid "at"
-msgstr "ordua:"
-
-#: templates/note.html:35
-msgid "This note has been marked as spam."
-msgstr "Oharra spam gisa markatu da."
-
-#: templates/note.html:38
-msgid "Reveal note"
-msgstr "Erakutsi oharra"
-
-#: templates/note.html:41
-msgid "Hide note"
-msgstr "Ezkutatu oharra"
-
-#: templates/note.html:44
-msgid "Not spam"
-msgstr "Ez da spa"
-
-#: templates/note.html:49
-msgid "Report spam"
-msgstr "Eman spamaren berri"
-
-#: templates/note.html:54
-msgid "E-mail"
-msgstr "Helbide elektronikoa"
-
-#: templates/note.html:65
-msgid "Phone"
-msgstr "Telefonoa"
-
-#: templates/note.html:85 templates/person_status_update_email.txt:10
-msgid "This record is a duplicate of"
-msgstr "Erregistroa honekin bikoiztuta dago:"
-
-#: templates/note.html:93 templates/person_status_update_email.txt:11
-#: templates/results.html:117
-msgid "Status"
-msgstr "Egoera"
-
-#: templates/note.html:102 templates/person_status_update_email.txt:12
-msgid "This person has been in contact with someone"
-msgstr "Pertsona hau norbaitekin harremanetan jarri da"
-
-#: templates/note.html:108
-msgid "Missing person's current e-mail address"
-msgstr "Desagertutako pertsonaren uneko helbide elektronikoa"
-
-#: templates/note.html:123
-msgid "Missing person's current phone number"
-msgstr "Desagertutako pertsonaren uneko telefono-zenbakia"
-
-#: templates/person_status_update_email.txt:4
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at %"
-"(site_url)s:"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Erabiltzaile batek \"%(first_name)s %(last_name)s\" pertsonaren egoera-"
-"eguneratze bat bidali du %(site_url)s helbidera:"
+"Oharrak desgaitu egin dira \"%(given_name)s %(family_name)s\" erregistroan."
+" Erregistroa ikusteko, jarraitu esteka honi:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Jakinarazpen hau bidali dizugu, zure helbide elektronikoa pertsona honen "
+"erregistroarekin edo erregistroko oharren batekin erlazionatuta "
+"dagoelako.\n"
 
-#: templates/person_status_update_email.txt:16
-#, python-format
-msgid "You can view the full record at %(view_url)s"
-msgstr "Erregistro osoa ikus dezakezu hemen: %(view_url)s "
-
-#: templates/person_status_update_email.txt:19
-#, python-format
-msgid ""
-"You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
-msgstr ""
-"Jakinarazpen hau jaso duzu, pertsona honi buruzko eguneratzeetara harpidetu "
-"zarelako.\n"
-"Harpidetza kentzeko, jarraitu esteka hau: %(unsubscribe_link)s"
-
-#: templates/query_form.html:15
-msgid "Enter the person's given and family names."
-msgstr "Sartu pertsonaren izena eta abizena."
-
-#: templates/query_form.html:17
-msgid "Enter the person's name."
-msgstr "Sartu pertsonaren izena."
-
-#: templates/query_form.html:22
-#, fuzzy
-msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "Sartu pertsonaren izena edo zati bat."
-
-#: templates/query_form.html:24
-msgid "Enter the person's name or parts of the name."
-msgstr "Sartu pertsonaren izena edo zati bat."
-
-#: templates/query_form.html:100
-msgid ""
-"More than 100 results; only showing the first 100.  Try entering more of the "
-"name"
-msgstr ""
-"100 emaitza baino gehiago; lehen 100 emaitzak soilik erakusten dira. Saiatu "
-"izena osatuago sartuta."
-
-#: templates/query_form.html:107
-msgid "Provide information about this person"
-msgstr "Eman pertsonari buruzko informazioa"
-
-#: templates/query_form.html:111 templates/query_form.html.py:114
-msgid "Search for this person"
-msgstr "Bilatu pertsona"
-
-#: templates/restoration_email.txt:4
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Oharrak gaitu egin dira \"%(given_name)s %(family_name)s\" erregistroan. "
+"Erregistroa ikusteko, jarraitu esteka honi:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Jakinarazpen hau bidali dizugu, zure helbide elektronikoa pertsona honen "
+"erregistroarekin edo erregistroko oharren batekin erlazionatuta "
+"dagoelako.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -1025,7 +387,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"\"%(first_name)s %(last_name)s\" erregistroaren \n"
+"\"%(given_name)s %(family_name)s\" erregistroaren \n"
 "(ezabatuta zegoen) egileak erregistroa leheneratu du. Erregistroa\n"
 "ikusteko, jarraitu esteka hau:\n"
 "\n"
@@ -1035,177 +397,1033 @@ msgstr ""
 "pertsona honen erregistroarekin edo erregistroari buruzko ohar batekin "
 "erlazionatuta.\n"
 
-#: templates/restore.html:22
-msgid "Are you sure you want to restore this record from deletion?"
-msgstr "Ziur ezabatutako erregistro hau leheneratu nahi duzula?"
-
-#: templates/restore.html:31
-msgid "Yes, restore this record"
-msgstr "Bai, leheneratu erregistroa"
-
-#: templates/results.html:23
-msgid "Search Results for"
-msgstr "Honen bilaketa-emaitzak:"
-
-#: templates/results.html:28
-msgid "Records Similar to"
-msgstr "Honen antzeko erregistroak:"
-
-#: templates/results.html:33 templates/results.html.py:43
-msgid "There is one existing record with a similar name."
-msgstr "Antzeko izena duen erregistro bat dago."
-
-#: templates/results.html:35
-msgid "There are some existing records with similar names."
-msgstr "Antzeko izena duen hainbat erregistro dago."
-
-#: templates/results.html:37
-msgid "Please check whether it matches the person you were planning to report."
-msgstr ""
-"Begiratu sortu nahi duzun erregistroari dagokion pertsonarekin bat datorren."
-
-#: templates/results.html:45
-#, python-format
-msgid "There are %(num_results)s existing records with similar names."
-msgstr "Antzeko izena duten %(num_results)s erregistro daude."
-
-#: templates/results.html:49
-msgid "Click here to view results."
-msgstr "Egin klik hemen emaitzak ikusteko."
-
-#: templates/results.html:53
-msgid "To view or add information, select a name below."
-msgstr "Informazioa ikusteko edo gehitzeko, hautatu beheko izena."
-
-#: templates/results.html:54
-msgid "Switch to duplicate marking mode"
-msgstr "Aldatu bikoiztuak markatutako modura"
-
-#: templates/results.html:55
-msgid "Switch to normal view mode"
-msgstr "Aldatu ikuspegi normalera"
-
-#: templates/results.html:56 templates/view.html:115
-msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
-
-#: templates/results.html:124 templates/view.html:60
-#, fuzzy
-msgid "Provided by:"
-msgstr "Mezuaren egilea:"
-
-#: templates/results.html:137
-msgid "Select up to 3 records to mark as duplicate:"
-msgstr "Hautatu gehienez 3 erregistro bikoiztu gisa markatzeko:"
-
-#: templates/results.html:145
-msgid "Records selected"
-msgstr "erregistro hautatu dira"
-
-#: templates/results.html:155
-msgid ""
-"If none of these records match the person you had in mind, you can click "
-"below to create a new record."
-msgstr ""
-"Erregistro hauek zuk uste zenuen pertsonarekin bat ez badatoz, behean klik "
-"egin dezakezu erregistro bat sortzeko."
-
-#: templates/results.html:159
-msgid "No results found for"
-msgstr "Ez da emaitzarik aurkitu honentzat"
-
-#: templates/results.html:162
-msgid "We have nothing matching your search."
-msgstr "Ez dugu zure bilaketarekin bat datorren erregistrorik aurkitu."
-
-#: templates/results.html:166 templates/small-create.html:23
-msgid "Follow this link to create a new record"
-msgstr "Jarraitu esteka hau erregistroa sortzeko"
-
-#: templates/results.html:181 templates/small-create.html:20
-msgid "Create a new record for"
-msgstr "Sortu honen erregistroa:"
-
-#: templates/results.html:183
-msgid "Create a new record for a missing person"
-msgstr "Sortu desagertutako pertsona baten erregistroa"
-
-#: templates/reveal.html:21
-msgid "Show sensitive information"
-msgstr "Erakutsi isilpeko informazioa"
-
-#: templates/reveal.html:29
-msgid "Proceed"
-msgstr "Jarraitu"
-
-#: templates/subscribe.html:21 templates/view.html:301
-msgid "Subscribe to updates about this person"
-msgstr "Harpidetu pertsona honi buruzko eguneratzeetara"
-
-#: templates/subscribe_captcha.html:22
-#, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "Harpidetu honi buruzko eguneratzeetara: %(first_name)s %(last_name)s"
-
-#: templates/subscribe_captcha.html:24
-msgid "Please confirm your e-mail address to subscribe to updates"
-msgstr "Berretsi helbide elektronikoa eguneratzeetara harpidetzeko"
-
-#: templates/subscribe_captcha.html:26
-msgid "Please enter your e-mail address to subscribe to updates"
-msgstr "Sartu helbide elektronikoa eguneratzeetara harpidetzeko"
-
-#: templates/subscribe_captcha.html:30
-msgid "Your e-mail address:"
-msgstr "Zure helbide elektronikoa:"
-
-#: templates/subscribe_captcha.html:40
-msgid "Subscribe"
-msgstr "Harpidetu"
-
-#: templates/subscription_confirmation_email.txt:4
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s %(last_name)s\" "
-"at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"Ohar berri bat gehitu da \"%(given_name)s %(family_name)s\" erregistroan.\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"\"%(first_name)s %(last_name)s\" pertsonari buruzko egoera-eguneratzeetara "
-"harpidetu zara %(site_url)s helbidean.\n"
+"\"%(given_name)s %(family_name)s\" erregistroaren oharretara harpidetu "
+"zara. Hemen ikus dezakezu erregistroa:\n"
 "\n"
-"Erregistro osoa hemen ikus dezakezu: %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
-"Harpidetza kentzeko, jarraitu esteka hau: %(unsubscribe_link)s\n"
+"Harpidetza kentzeko, jarraitu esteka honi: %(unsubscribe_link)s\n"
 
-#: templates/view.html:58
-msgid "Identifying information"
-msgstr "Informazio identifikatzailea"
+msgid "(click to reveal)"
+msgstr "(egin klik ikusteko)"
 
-#: templates/view.html:171
-msgid "Home country"
-msgstr "Jaioterria"
+msgid "(unknown)"
+msgstr "(ezezaguna)"
 
-#: templates/view.html:269
-msgid "Possible duplicates"
-msgstr "Bikoiztu posibleak"
+#, python-format
+msgid "<a href=\"%(logout_url)s\">Sign out</a>"
+msgstr "<a href=\"%(logout_url)s\">Amaitu saioa</a>"
 
-#: templates/view.html:310
+msgid "A message for this person or others seeking this person"
+msgstr "Pertsonarentzako edo pertsonaren bila ari direnentzako mezua"
+
+msgid "About 1 month (30 days) from now"
+msgstr "Duela 1 hilabete (30 egun) inguru"
+
+msgid "About 1 year (360 days) from now"
+msgstr "Duela 1 urte (360 egun) inguru"
+
+msgid "About 2 months (60 days) from now"
+msgstr "Duela 2 hilabete (60 egun) inguru"
+
+msgid "About 3 months (90 days) from now"
+msgstr "Duela 3 hilabete (90 egun) inguru"
+
+msgid "About 6 months (180 days) from now"
+msgstr "Duela 6 hilabete (180 egun) inguru"
+
+msgid "About you (required)"
+msgstr "Zuri buruz (beharrezkoa)"
+
+msgid "Administration"
+msgstr "Administrazioa"
+
+msgid "Age"
+msgstr "Adina"
+
+#, fuzzy
+msgid "Alternate family names"
+msgstr "Abizena"
+
+msgid "Alternate given names"
+msgstr ""
+
+#, fuzzy
+msgid "Alternate names"
+msgstr "Kale-helbidea"
+
+msgid "Are you sure this note isn't spam?"
+msgstr "Ziur ohar hau spama ez dela?"
+
+msgid "Are you sure you want to mark this note as spam?"
+msgstr "Ziur ohar hau spam gisa markatu nahi duzula?"
+
+msgid "Are you sure you want to restore this record from deletion?"
+msgstr "Ziur ezabatutako erregistro hau leheneratu nahi duzula?"
+
+msgid "Atom feed of updates about this person"
+msgstr "Pertsona honi buruzko eguneratzeen Atom jarioa"
+
+msgid "Author's e-mail address"
+msgstr "Egilearen helbide elektronikoa"
+
+msgid "Author's name"
+msgstr "Egilearen izena"
+
+msgid "Author's phone number"
+msgstr "Egilearen telefono-zenbakia"
+
 msgid "Back to results list"
 msgstr "Itzuli emaitzen zerrendara"
 
-#: templates/view.html:321
-msgid "Status updates for this person"
-msgstr "Pertsona honen egoera-eguneratzeak"
+msgid "Back to start"
+msgstr "Itzuli hasierara"
 
-#: templates/view.html:328
-msgid "No status updates have been posted"
-msgstr "Ez da egoera-eguneratzerik bidali"
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Ezin da ID hau duen oharra aurkitu: %(id)s"
 
-#: templates/view.html:339
+msgid "Cancel"
+msgstr "Utzi"
+
+msgid "City"
+msgstr "Hiria"
+
+msgid "Click here to view results."
+msgstr "Egin klik hemen emaitzak ikusteko."
+
+msgid "Close window"
+msgstr "Itxi leihoa"
+
+msgid "Compare these records"
+msgstr "Alderatu erregistro hauek"
+
+msgid "Copy and paste the following HTML code to put this tool on your site"
+msgstr "Kopiatu eta itsatsi HTML kode hau tresna zure gunean ezartzeko"
+
+msgid "Create a new record for"
+msgstr "Sortu honen erregistroa:"
+
+msgid "Create a new record for a missing person"
+msgstr "Sortu desagertutako pertsona baten erregistroa"
+
+msgid "Crisis events"
+msgstr ""
+
+#, python-format
+msgid "Currently tracking about %(num_people)s records."
+msgstr "Unean %(num_people)s erregistro ingururen jarraipena egiten ari da."
+
+msgid "Date cannot be in the future.  Please go back and try again."
+msgstr "Datak ezin du etorkizunekoa izan. Joan atzera eta saiatu berriro."
+
+msgid "Date of birth"
+msgstr "Jaioteguna"
+
 msgid "Delete this record"
 msgstr "Ezabatu erregistroa"
+
+msgid "Describe how to identify this person."
+msgstr "Azaldu pertsona nola identifika daitekeen."
+
+#, fuzzy
+msgid "Describe the physical characteristics of this person."
+msgstr "Azaldu pertsona nola identifika daitekeen."
+
+msgid "Description"
+msgstr "Azalpena"
+
+msgid "Developers"
+msgstr "Garatzaileak"
+
+msgid "Disable notes on this record"
+msgstr "Desgaitu oharrak erregistro honetan"
+
+msgid "Download the sound as MP3"
+msgstr "Deskargatu soinua MP3 gisa"
+
+msgid "E-mail"
+msgstr "Helbide elektronikoa"
+
+msgid "E-mail address"
+msgstr "Helbide elektronikoa"
+
+msgid "Embed this tool on your site"
+msgstr "Kapsulatu tresna hau zure gunean"
+
+msgid "Embedding the Application"
+msgstr "Aplikazioa kapsulatu"
+
+msgid "Enable notes on this record"
+msgstr "Gaitu oharrak erregistro honetan"
+
+msgid "Enter as YYYY-MM-DD"
+msgstr "Sartu UUUU-HH-EE formatuan"
+
+msgid "Enter the person's given and family names."
+msgstr "Sartu pertsonaren izena eta abizena."
+
+msgid "Enter the person's name or parts of the name."
+msgstr "Sartu pertsonaren izena edo zati bat."
+
+#, fuzzy
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Sartu pertsonaren izena edo zati bat."
+
+msgid "Enter the person's name."
+msgstr "Sartu pertsonaren izena."
+
+msgid "Expiry"
+msgstr "Iraungitze-data"
+
+msgid "Expiry date of this record"
+msgstr "Erregistroaren iraungitze-data"
+
+msgid "Family name"
+msgstr "Abizena"
+
+msgid "Feed of updates about this person"
+msgstr "Pertsona honi buruzko eguneratzeen jarioa"
+
+msgid "Follow this link to create a new record"
+msgstr "Jarraitu esteka hau erregistroa sortzeko"
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by "
+"NTT."
+msgstr ""
+
+msgid "Get a new challenge"
+msgstr "Lortu erronka berri bat"
+
+msgid "Get a visual challenge"
+msgstr "Lortu erronka bisual bat"
+
+msgid "Get an audio challenge"
+msgstr "Lortu audio-erronka bat"
+
+msgid "Given name"
+msgstr "Izena"
+
+msgid "Google Person Finder"
+msgstr "Google Pertsona-bilagailua"
+
+msgid "Have you personally talked with this person AFTER the disaster? (required)"
+msgstr ""
+"Hitz egin al duzu pertsonalki pertsona horrekin ezbeharraren ONDOREN? "
+"(beharrezkoa)"
+
+msgid "Help"
+msgstr "Laguntza"
+
+msgid "Hide Map"
+msgstr "Ezkutatu mapa"
+
+msgid "Hide note"
+msgstr "Ezkutatu oharra"
+
+msgid "Home Address"
+msgstr "Etxeko helbidea"
+
+msgid "Home address"
+msgstr "Etxeko helbidea"
+
+msgid "Home country"
+msgstr "Jaioterria"
+
+msgid "How can this person be reached now?"
+msgstr "Nola jar daiteke pertsona honekin harremanetan orain?"
+
+msgid "How others who are interested in this person can contact you"
+msgstr ""
+"Nola jar daitezke pertsona honetan interesatutako gainerakoak zurekin "
+"harremanetan"
+
+msgid "I am seeking information"
+msgstr "Informazio bila nabil"
+
+msgid "I am this person"
+msgstr "Pertsona hori naiz"
+
+msgid "I do not want any more updates on this record."
+msgstr "Ez dut erregistro honen eguneratze gehiagorik jaso nahi."
+
+msgid "I do not want my information online anymore."
+msgstr "Ez dut nire informazioa linean egoterik nahi."
+
+msgid "I have information about someone"
+msgstr "Norbaiti buruzko informazioa dut"
+
+msgid "I have reason to think this person is missing"
+msgstr "Pertsona hori desagertuta dagoela pentsatzeko arrazoiak ditut"
+
+msgid "I have received information that this person is alive"
+msgstr "Pertsona hori bizirik dagoenari buruzko informazioa jaso dut"
+
+msgid "I have received information that this person is dead"
+msgstr "Pertsona hori hilda dagoenari buruzko informazioa jaso dut"
+
+msgid "I have received spam due to this note."
+msgstr "Spama jaso dut ohar hau dela-eta."
+
+msgid "I have received spam."
+msgstr "Spama jaso dut."
+
+msgid "I prefer not to specify."
+msgstr "Nahiago dut ez zehaztu."
+
+msgid "I'm looking for someone"
+msgstr "Norbaiten bila nabil"
+
+msgid "Identify who you are looking for"
+msgstr "Zehaztu noren bila ari zaren"
+
+msgid "Identify who you have information about"
+msgstr "Zehaztu nori buruzko informazioa duzun"
+
+msgid "Identifying information"
+msgstr "Informazio identifikatzailea"
+
+msgid ""
+"If none of these records match the person you had in mind, you can click "
+"below to create a new record."
+msgstr ""
+"Erregistro hauek zuk uste zenuen pertsonarekin bat ez badatoz, behean "
+"klik egin dezakezu erregistro bat sortzeko."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Oharraren egilea bazara, bilatu posta elektronikoan erregistro honetan "
+"oharrak desgaitu nahi dituzula berresteko esteka. Bestela, itxaron "
+"erregistroaren egileak eskaera berretsi arte."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Oharraren egilea bazara, bilatu posta elektronikoan erregistro honetan "
+"oharrak desgaitu nahi dituzula berresteko esteka. Bestela, itxaron "
+"erregistroaren egileak eskaera berretsi arte."
+
+msgid "If you have a photo of this person, upload it or enter its URL address."
+msgstr "Pertsonaren argazkirik baduzu, kargatu irudia edo sartu URL helbidea."
+
+msgid "Incorrect.  Try again."
+msgstr "Oker. Saiatu berriro."
+
+msgid "Invalid e-mail address. Please try again."
+msgstr "Helbide elektroniko baliogabea. Saiatu berriro."
+
+msgid "Language selection"
+msgstr ""
+
+msgid "Last known location"
+msgstr "Azken kokapen ezaguna"
+
+msgid "Link"
+msgstr "Esteka"
+
+msgid "Mark records as duplicate"
+msgstr "Markatu erregistroak bikoiztu gisa"
+
+msgid "Message (required)"
+msgstr "Mezua (beharrezkoa)"
+
+msgid "Message is required. Please go back and try again."
+msgstr "Mezua beharrezkoa da. Joan atzera eta saiatu berriro."
+
+msgid "Missing person's current contact information"
+msgstr "Desagertutako pertsonaren uneko harremanetarako informazioa"
+
+msgid "Missing person's current e-mail address"
+msgstr "Desagertutako pertsonaren uneko helbide elektronikoa"
+
+msgid "Missing person's current phone number"
+msgstr "Desagertutako pertsonaren uneko telefono-zenbakia"
+
+#, python-format
+msgid ""
+"More information for developers can now be found "
+"%(developers_link_html)shere%(link_end_html)s."
+msgstr ""
+"Garatzaileentzako informazio gehiago eskura daiteke "
+"%(developers_link_html)shemen%(link_end_html)s."
+
+msgid ""
+"More than 100 results; only showing the first 100.  Try entering more of "
+"the name"
+msgstr ""
+"100 emaitza baino gehiago; lehen 100 emaitzak soilik erakusten dira. "
+"Saiatu izena osatuago sartuta."
+
+msgid "Name"
+msgstr "Izena"
+
+msgid "Name (required)"
+msgstr "Izena (beharrezkoa)"
+
+msgid "Name is required.  Please go back and try again."
+msgstr "Izena beharrezkoa da. Joan atzera eta saiatu berriro."
+
+msgid "Neighborhood"
+msgstr "Auzoa"
+
+msgid "No"
+msgstr "Ez"
+
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Ez dago erregistro honen egilearen helbide elektronikorik: %(id)s."
+
+msgid "No messages are found registered to the carrier's message board service."
+msgstr ""
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Ez dago %(id)sIDa duen oharrik."
+
+msgid "No notes have been posted"
+msgstr "Ez da oharrik argitaratu"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Ez dago %(id)sIDa duen pertsonarik."
+
+msgid "No results found for"
+msgstr "Ez da emaitzarik aurkitu honentzat"
+
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "Ez dago \"believed_dead\" egoerarekin oharrak argitaratzeko baimenik."
+
+msgid "Not spam"
+msgstr "Ez da spa"
+
+msgid "Note author"
+msgstr "Oharraren egilea"
+
+msgid "Note text"
+msgstr ""
+
+msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+msgid "Notes for this person"
+msgstr "Pertsona honen oharrak"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr ""
+
+#, python-format
+msgid ""
+"Or add to your site as a %(gadget_link_html)sGoogle "
+"Gadget%(link_end_html)s."
+msgstr ""
+"Edo gehitu zure gunean %(gadget_link_html)sGoogle-ren "
+"gadget%(link_end_html)s gisa."
+
+msgid "Original URL"
+msgstr "Jatorrizko URLa"
+
+msgid "Original author's name"
+msgstr "Jatorrizko egilearen izena"
+
+msgid "Original posting date"
+msgstr "Jatorrizko bidaltze-data"
+
+msgid ""
+"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
+"date.  Please go back and try again."
+msgstr ""
+"Mezua bidali zeneko jatorrizko data ez dago UUUU-HH-EE formatuan, edo "
+"data okerra da. Joan atzera eta saiatu berriro."
+
+msgid "Original site name"
+msgstr "Jatorrizko gunearen izena"
+
+msgid ""
+"PLEASE NOTE: All data entered will be available to the public and "
+"viewable and usable by anyone.  Google does not review or verify the "
+"accuracy of this data."
+msgstr ""
+"OHARRA: sartutako datu guztiak erabilgarri egongo dira publikoarentzat "
+"eta edonork ikusi eta erabili ahal izango ditu. Google-k ez ditu datuen "
+"egiazkotasuna eta zehaztasuna egiaztatzen."
+
+msgid "Person Finder"
+msgstr "Pertsona-bilagailua"
+
+msgid "Phone"
+msgstr "Telefonoa"
+
+msgid "Phone number"
+msgstr "Telefono-zenbakia"
+
+msgid "Photo"
+msgstr "Argazkia"
+
+msgid ""
+"Photo uploaded is in an unrecognized format.  Please go back and try "
+"again."
+msgstr ""
+"Kargatutako argazkiaren formatua ezezaguna da. Joan atzera eta saiatu "
+"berriro."
+
+msgid "Physical characteristics"
+msgstr "Ezaugarri fisikoak"
+
+msgid "Play the sound again"
+msgstr "Erreproduzitu soinua berriro"
+
+msgid ""
+"Please check that you have been in contact with the person after the "
+"earthquake, or change the \"Status of this person\" field."
+msgstr ""
+"Egiaztatu pertsonarekin harremanetan egon zarela lurrikararen ondoren, "
+"edo aldatu \"Pertsonaren egoera\" eremua."
+
+msgid "Please check whether it matches the person you were planning to report."
+msgstr ""
+"Begiratu sortu nahi duzun erregistroari dagokion pertsonarekin bat "
+"datorren."
+
+msgid "Please confirm your e-mail address to subscribe to updates"
+msgstr "Berretsi helbide elektronikoa eguneratzeetara harpidetzeko"
+
+msgid "Please enter your e-mail address to subscribe to updates"
+msgstr "Sartu helbide elektronikoa eguneratzeetara harpidetzeko"
+
+msgid "Please explain why you think these are the same person"
+msgstr "Azaldu zergatik uste duzun pertsona bera direla"
+
+msgid "Please fill in all the required fields."
+msgstr "Bete beharrezko eremu guztiak"
+
+msgid "Please fill in your email address."
+msgstr "Sartu zure helbide elektronikoa."
+
+msgid "Please provide an valid email address."
+msgstr "Eman baliozko helbide elektroniko bat."
+
+msgid "Possible duplicates"
+msgstr "Bikoiztu posibleak"
+
+msgid "Postal or zip code"
+msgstr "Posta-kodea edo zip kodea"
+
+msgid "Posted by"
+msgstr "Mezuaren egilea:"
+
+msgid "Proceed"
+msgstr "Jarraitu"
+
+msgid "Provide information about this person"
+msgstr "Eman pertsonari buruzko informazioa"
+
+#, fuzzy
+msgid "Provided by:"
+msgstr "Mezuaren egilea:"
+
+msgid "Province or state"
+msgstr "Probintzia edo estatua"
+
+msgid "Reason for deletion:"
+msgstr "Ezabatzearen arrazoia:"
+
+msgid "Reason for disabling notes:"
+msgstr "Oharrak desgaitzearen arrazoia:"
+
+msgid "Records Similar to"
+msgstr "Honen antzeko erregistroak:"
+
+msgid "Records selected"
+msgstr "erregistro hautatu dira"
+
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr ""
+
+msgid "Report spam"
+msgstr "Eman spamaren berri"
+
+#, python-format
+msgid "Return to the record for %(given_name)s %(family_name)s."
+msgstr "Itzuli %(given_name)s %(family_name)s erregistrora."
+
+msgid "Reveal note"
+msgstr "Erakutsi oharra"
+
+msgid "Save this record"
+msgstr "Gorde erregistroa"
+
+msgid "Search Results for"
+msgstr "Honen bilaketa-emaitzak:"
+
+msgid "Search for this person"
+msgstr "Bilatu pertsona"
+
+msgid "Select up to 3 records to mark as duplicate:"
+msgstr "Hautatu gehienez 3 erregistro bikoiztu gisa markatzeko:"
+
+msgid "Send email"
+msgstr "Bidali mezu elektronikoa"
+
+msgid "Sex"
+msgstr "Sexua"
+
+msgid "Show Map"
+msgstr "Erakutsi mapa"
+
+msgid "Show sensitive information"
+msgstr "Erakutsi isilpeko informazioa"
+
+msgid "Someone has received information that this person is alive"
+msgstr "Pertsona hori bizirik dagoenari buruzko informazioa jaso du norbaitek"
+
+msgid "Someone has received information that this person is dead"
+msgstr "Pertsona hori hilda dagoenari buruzko informazioa jaso du norbaitek"
+
+msgid "Someone has reported that this person is missing"
+msgstr "Pertsona hori desagertuta dagoela jakinarazi du norbaitek"
+
+msgid "Someone is seeking information about this person"
+msgstr "Norbait pertsona honi buruzko informazioa bilatzen ari da"
+
+msgid "Source of this record"
+msgstr "Erregistroaren iturburua"
+
+msgid "Source of this record (required)"
+msgstr "Erregistroaren iturburua (beharrezkoa)"
+
+msgid "Status"
+msgstr "Egoera"
+
+msgid "Status of this person"
+msgstr "Pertsonaren egoera"
+
+msgid "Street name"
+msgstr "Kale-helbidea"
+
+msgid "Street name only, no number"
+msgstr "Kalearen izena soilik, zenbakirik gabe"
+
+msgid "Subscribe"
+msgstr "Harpidetu"
+
+#, python-format
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "Harpidetu honi buruzko eguneratzeetara: %(given_name)s %(family_name)s"
+
+msgid "Subscribe to updates about this person"
+msgstr "Harpidetu pertsona honi buruzko eguneratzeetara"
+
+msgid "Switch to duplicate marking mode"
+msgstr "Aldatu bikoiztuak markatutako modura"
+
+msgid "Switch to normal view mode"
+msgstr "Aldatu ikuspegi normalera"
+
+msgid "Tell us the status of this person"
+msgstr "Emaguzu pertsona horren egoeraren berri"
+
+msgid "Terms of Service"
+msgstr "Zerbitzu-baldintzak"
+
+# Copyright 2010 Google Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# limitations under the License. #: create.py:53
+msgid ""
+"The Given name and Family name are both required.  Please go back and try"
+" again."
+msgstr "Izena eta abizena beharrezkoak dira. Joan atzera eta saiatu berriro."
+
+msgid "The Original author's name is required.  Please go back and try again."
+msgstr "Jatorrizko egilearen izena beharrezkoa da. Joan atzera eta saiatu berriro."
+
+msgid "The author has disabled notes on this record."
+msgstr "Egileak oharrak desgaitu ditu erregistro honetan."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Egileak egoera-eguneratzeak desgaitu ditu erregistro honetan."
+
+msgid "The provided image is too large.  Please upload a smaller one."
+msgstr "Kargatutako irudia handiegia da. Kargatu irudi txikiago bat."
+
+msgid "The reason this note is being marked as spam:"
+msgstr "Ohar hau spam gisa markatzearen arrazoia:"
+
+msgid "The record cannot be extended."
+msgstr ""
+
+msgid "The record has been deleted."
+msgstr "Erregistroa ezabatu da."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr ""
+
+msgid ""
+"The status you selected indicates that you are this person.  If this is "
+"true, please also select 'Yes' to indicate that you have contacted this "
+"person."
+msgstr ""
+"Hautatu duzun egoerak pertsona hori zarela adierazten du. Egia bada, "
+"hautatu 'Bai' pertsona horrekin harremanetan jarri zarela baieztatzeko."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr " %(token)s tokena baliogabea da"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr " %(token)s tokena baliogabea da."
+
+#, python-format
+msgid "There are %(num_results)s existing records with similar names."
+msgstr "Antzeko izena duten %(num_results)s erregistro daude."
+
+msgid "There are some existing records with similar names."
+msgstr "Antzeko izena duen hainbat erregistro dago."
+
+msgid "There is one existing record with a similar name."
+msgstr "Antzeko izena duen erregistro bat dago."
+
+msgid "There was a problem processing the image.  Please try a different image."
+msgstr ""
+"Arazo bat gertatu da irudia prozesatzerakoan. Saiatu beste irudi bat "
+"kargatzen."
+
+msgid ""
+"There was an error processing your request.  Sorry for the inconvenience."
+"  Our administrators will investigate the source of the problem, but "
+"please check that the format of your request is correct."
+msgstr ""
+"Errore bat gertatu da eskaera prozesatzerakoan. Barkatu eragozpenak. Gure"
+" administratzaileek arazoaren jatorria aztertuko dute, baina egiaztatu "
+"eskaeraren formatua zuzena dela."
+
+#, python-format
+msgid ""
+"These gadgets are made available under the %(apache_link_html)sApache 2.0"
+" license%(link_end_html)s."
+msgstr ""
+"Gadget hauek %(apache_link_html)sApache 2.0 license%(link_end_html)s "
+"lizentzia dute."
+
+msgid "This is a new record."
+msgstr "Erregistro berria da."
+
+msgid "This link is invalid."
+msgstr "Esteka baliogabea da."
+
+msgid "This note has been marked as spam."
+msgstr "Oharra spam gisa markatu da."
+
+msgid "This note is inappropriate."
+msgstr "Oharra desegokia da."
+
+msgid "This note is incorrect or untrue."
+msgstr "Oharrak gezurra dio edo oker dago."
+
+msgid "This note is spam."
+msgstr "Oharra spama da."
+
+msgid "This person has been in contact with someone"
+msgstr "Pertsona hau norbaitekin harremanetan jarri da"
+
+msgid "This person has posted a message"
+msgstr "Pertsona horrek mezu bat idatzi du"
+
+#, fuzzy
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Erregistroa ezabatu da."
+
+msgid "This record has served its purpose."
+msgstr "Erregistroak bere helburua bete du."
+
+msgid "This record is a duplicate of"
+msgstr "Erregistroa honekin bikoiztuta dago:"
+
+msgid "This record is copied from another source."
+msgstr "Erregistroa beste iturburu batetik kopiatu da."
+
+msgid "This record is inappropriate."
+msgstr "Erregistroa desegokia da."
+
+msgid "This record is spam."
+msgstr "Erregistroa spama da."
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
+
+msgid "To view or add information, select a name below."
+msgstr "Informazioa ikusteko edo gehitzeko, hautatu beheko izena."
+
+msgid ""
+"Type an address or open the map below and indicate the location by moving"
+" the pin."
+msgstr ""
+"Idatzi helbidea edo ireki beheko mapa eta zehaztu kokapena markatzailea "
+"mugituta."
+
+msgid "Type the two words:"
+msgstr "Idatzi bi hitzak:"
+
+msgid "Type what you hear:"
+msgstr "Idatzi entzuten duzuna:"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "URL of original record"
+msgstr "Jatorrizko erregistroaren URLa"
+
+msgid "Unspecified"
+msgstr "Zehaztu gabe"
+
+msgid "Upload"
+msgstr "Kargatu"
+
+msgid "View the record"
+msgstr ""
+
+msgid "We have nothing matching your search."
+msgstr "Ez dugu zure bilaketarekin bat datorren erregistrorik aurkitu."
+
+msgid "What is this person's name?"
+msgstr "Zein da pertsonaren izena?"
+
+msgid "What is your situation?"
+msgstr "Zein da zure egoera?"
+
+msgid "When should this record disappear?"
+msgstr "Noiz desagertu beharko luke erregistro horrek?"
+
+msgid "Where did this information come from?"
+msgstr "Nondik jaso da informazioa?"
+
+msgid "Where is this person from?"
+msgstr "Nongoa da pertsona?"
+
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
+msgid "Yes"
+msgstr "Bai"
+
+msgid "Yes, ask the record author to disable notes"
+msgstr "Bai, eskatu erregistroaren egileari oharrak desgaitzeko"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Bai, eskatu erregistroaren egileari oharrak gaitzeko"
+
+msgid "Yes, delete the record"
+msgstr "Bai, ezabatu erregistroa"
+
+msgid "Yes, disable notes on this record."
+msgstr "Bai, desgaitu oharrak erregistro honetan."
+
+msgid "Yes, extend the record"
+msgstr ""
+
+msgid "Yes, restore this record"
+msgstr "Bai, leheneratu erregistroa"
+
+msgid "Yes, these are the same person"
+msgstr "Bai, pertsona bera dira"
+
+msgid "Yes, update the note"
+msgstr "Bai, eguneratu oharra"
+
+msgid "You are already subscribed. "
+msgstr "Dagoeneko harpidetuta zaude. "
+
+msgid "You are already unsubscribed."
+msgstr "Dagoeneko kendu duzu harpidetza."
+
+#, python-format
+msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
+msgstr "<span class=\"email\">%(email)s</span> helbidearekin hasi duzu saioa."
+
+#, python-format
+msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
+msgstr "Unean ez duzu saioa hasita. <a href=\"%(login_url)s\">Hasi saioa</a>"
+
+#, python-format
+msgid ""
+"You can <a target=\"_blank\" href=\"%(view_url)s\">view the record</a> "
+"before deleting it."
+msgstr ""
+"<a target=\"_blank\" href=\"%(view_url)s\">Erregistroa ikus</a> dezakezu "
+"hura ezabatu aurretik."
+
+#, python-format
+msgid "You can view the full record at %(view_url)s"
+msgstr "Erregistro osoa ikus dezakezu hemen: %(view_url)s "
+
+msgid "You have successfully subscribed."
+msgstr "Behar bezala harpidetu zara."
+
+msgid "You have successfully unsubscribed."
+msgstr "Harpidetza behar bezala kendu duzu."
+
+msgid ""
+"You received this notification because you have subscribed to updates on "
+"the following person:\n"
+msgstr ""
+
+msgid "Your e-mail address"
+msgstr "Zure helbide elektronikoa"
+
+msgid "Your e-mail address:"
+msgstr "Zure helbide elektronikoa:"
+
+msgid "Your email"
+msgstr "Zure helbide elektronikoa"
+
+msgid "Your name"
+msgstr "Zure izena"
+
+msgid ""
+"Your name is required in the \"About you\" section.  Please go back and "
+"try again."
+msgstr ""
+"Zure izena beharrezkoa da \"Zuri buruz\" atalean. Joan atzera eta saiatu "
+"berriro."
+
+msgid ""
+"Your name is required in the \"Source\" section.  Please go back and try "
+"again."
+msgstr ""
+"Zure izena beharrezkoa da \"Iturburua\" atalean. Joan atzera eta saiatu "
+"berriro."
+
+msgid "Your phone number"
+msgstr "Zure telefono-zenbakia"
+
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"Eskaera behar bezala prozesatu da. Begiratu sarrera-ontzia eta berretsi "
+"oharra argitaratu nahi duzula kapsulatutako URLari jarraituta."
+
+#, python-format
+msgid ""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Berretsi %(action)s egin nahi dituzula \"%(given_name)s "
+"%(family_name)s\" erregistroko oharrak"
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Person Finder] Berretsi \"%(given_name)s %(family_name)s\" erregistroan "
+"gehitu duzun oharra"
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr "[Person Finder] Honen ezabatze-oharra: \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] \"%(given_name)s %(family_name)s\" erregistroan oharrak "
+"gaitzea"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Oharrak desgaituta daude \"%(given_name)s %(family_name)s\""
+" erregistroan"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Oharrak gaituta daude \"%(given_name)s %(family_name)s\" "
+"erregistroan"
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Honen erregistro-leheneratze oharra: \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
+msgstr "[Person Finder] Honen egoera-eguneratzea: %(given_name)s %(family_name)s"
+
+#, python-format
+msgid ""
+"[Person Finder] You are subscribed to status updates for %(given_name)s "
+"%(family_name)s"
+msgstr ""
+"[Person Finder] Honen egoera-eguneratzeetara harpidetuta zaude: "
+"%(given_name)s %(family_name)s"
+
+msgid "at"
+msgstr "ordua:"
+
+msgid "female"
+msgstr "emakumea"
+
+msgid "male"
+msgstr "gizona"
+
+msgid "on"
+msgstr "-"
+
+msgid "other"
+msgstr "beste bat"
+
