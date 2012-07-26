@@ -21,15 +21,192 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  Щоб переконатися, що нотатки вмикаються чи вимикаються лише з дозволу "
+"автора архіву, йому надсилається повідомлення для підтвердження. Якщо Ви "
+"автор, перевірте свою електронну пошту після того, як натиснете кнопку "
+"нижче.\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Шановний(-а) %(author_name)s! Користувач просить увімкнути в архіві "
+"нотатки про особу \"%(given_name)s %(family_name)s\". Вашу електронну "
+"адресу вказано як адресу автора цього архіву. Щоб увімкнути нотатки в "
+"цьому архіві, перейдіть за цим посиланням упродовж 3 днів:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Шановний(-а) %(author_name)s! Користувач просить вимкнути в архіві "
+"нотатки про особу \"%(given_name)s %(family_name)s\". Вашу електронну "
+"адресу вказано як адресу автора цього архіву. Щоб вимкнути нотатки в "
+"цьому архіві, перейдіть за цим посиланням упродовж 3 днів:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Шановний(-а) %(author_name)s! Ви щойно ввели в архів нотатку про особу "
+"\"%(given_name)s %(family_name)s\". Щоб опублікувати свою нотатку, "
+"перейдіть за цим посиланням упродовж 3 днів:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      Дійсно видалити запис про особу \"%(first_name)s %(last_name)s\"?\n"
+"      Дійсно видалити запис про особу \"%(given_name)s %(family_name)s\"?"
+"\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Дійсно вимкнути нотатки про особу \"%(given_name)s %(family_name)s\"?"
+"\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Дійсно вимкнути в архіві нотатки про особу \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Дійсно ввімкнути нотатки про особу \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Дійсно продовжити термін дії для запису \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Підтвердження нотатки\n"
 "    "
 
 msgid ""
@@ -73,17 +250,58 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    Щоб переконатися, що нотатки вмикаються чи вимикаються лише з дозволу"
+" автора архіву, йому надсилається повідомлення для підтвердження. Якщо Ви"
+" автор, перевірте свою електронну пошту після того, як натиснете кнопку "
+"нижче.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Архів і надалі відображатиметься на цьому сайті, але ніхто більше не "
+"зможе публікувати в ньому нотатки.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Щоб опублікувати нотатку, введіть нижче свою електронну адресу та "
+"перейдіть за посиланням для підтвердження, яке отримаєте.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"Користувач видалив запис про особу \"%(first_name)s %(last_name)s\"\n"
+"Користувач видалив запис про особу \"%(given_name)s %(family_name)s\"\n"
 "за адресою %(site_url)s.\n"
 "\n"
 "Ми повідомляємо вас про це видалення, оскільки вашу електронну адресу\n"
@@ -92,51 +310,88 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
 "\n"
-"NOTE: If you believe this record was deleted in error, you can\n"
-"restore it by following this link within the next %(days_until_deletion)s"
-" days:\n"
-"\n"
-"    %(restore_url)s\n"
+"Користувач видалив запис \"%(given_name)s %(family_name)s\" на сайті "
+"%(site_url)s. Ми сповіщаємо Вас про видалення, оскільки Вашу електронну "
+"адресу вказано як адресу автора цього запису.\n"
+
+#, python-format
+msgid ""
 "\n"
 "After %(days_until_deletion)s days, the record will be permanently "
 "deleted.\n"
 msgstr ""
-"\n"
-"Користувач видалив запис про особу \"%(first_name)s %(last_name)s\"\n"
-"за адресою %(site_url)s.\n"
-"\n"
-"Ми повідомляємо вас про це видалення, оскільки вашу електронну адресу\n"
-"вказано як адресу автора цього запису.\n"
-"\n"
-"ПРИМІТКА. Якщо ви вважаєте, що цей запис було видалено помилково, його "
-"можна\n"
-"відновити, перейшовши за цим посиланням впродовж наступних "
-"%(days_until_deletion)s дн.:\n"
-"\n"
-"    %(restore_url)s\n"
 "\n"
 "Через %(days_until_deletion)s дн. запис буде видалено назавжди.\n"
 
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s"
+" days:\n"
+"\n"
+"    %(restore_url)s\n"
 msgstr ""
 "\n"
-"Користувач опублікував оновлення статусу про особу \"%(first_name)s "
-"%(last_name)s\" за адресою %(site_url)s:"
+"ПРИМІТКА. Якщо Ви вважаєте, що цей запис видалено помилково, його можна "
+"відновити впродовж наступних %(days_until_deletion)s дн., перейшовши за "
+"посиланням:\n"
+"\n"
+"    %(restore_url)s\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Зараз в архіві вимкнено нотатки про особу \"%(given_name)s "
+"%(family_name)s\". Щоб переглянути архів, перейдіть за цим посиланням:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Ми сповіщаємо Вас, оскільки Вашу електронну адресу пов’язано з цим "
+"особовим архівом або нотаткою в ньому.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Зараз в архіві ввімкнено нотатки про особу \"%(given_name)s "
+"%(family_name)s\". Щоб переглянути архів, перейдіть за цим посиланням:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Ми сповіщаємо Вас, оскільки Вашу електронну адресу пов’язано з цим "
+"особовим архівом або нотаткою в ньому.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -146,7 +401,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Автор запису для \"%(first_name)s %(last_name)s\"\n"
+"Автор запису для \"%(given_name)s %(family_name)s\"\n"
 "(який було попередньо видалено) відновив запис. Щоб переглянути\n"
 "запис, перейдіть за цим посиланням:\n"
 "\n"
@@ -158,18 +413,29 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"В архіві з’явилася нова нотатка про особу \"%(given_name)s "
+"%(family_name)s\".\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"Ви підписалися на оновлення статусу про особу \"%(first_name)s "
-"%(last_name)s\" за адресою %(site_url)s.\n"
+"Ви підписалися на нотатки про особу \"%(given_name)s %(family_name)s\". Цей"
+" архів можна переглянути на сторінці\n"
 "\n"
-"Повний запис можна переглянути за адресою %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
 "Щоб скасувати підписку, перейдіть за цим посиланням: %(unsubscribe_link)s"
 "\n"
@@ -211,16 +477,14 @@ msgstr "Адміністрування"
 msgid "Age"
 msgstr "Вік"
 
-#, fuzzy
 msgid "Alternate family names"
-msgstr "Прізвище"
+msgstr "Додаткові прізвища"
 
 msgid "Alternate given names"
-msgstr ""
+msgstr "Додаткові імена"
 
-#, fuzzy
 msgid "Alternate names"
-msgstr "Назва вулиці"
+msgstr "Додаткові імена"
 
 msgid "Are you sure this note isn't spam?"
 msgstr "Ви впевнені, що це повідомлення не є спамом?"
@@ -249,6 +513,10 @@ msgstr "Повернутися до списку результатів"
 msgid "Back to start"
 msgstr "Повернутися до початкової сторінки"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Не вдається знайти нотатку з ідентифікатором %(id)s"
+
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -275,6 +543,9 @@ msgstr "Створити новий запис для"
 msgid "Create a new record for a missing person"
 msgstr "Створити новий запис про безвісти зниклу особу"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "Записи, які відстежуються на цей момент: %(num_people)s."
@@ -291,15 +562,17 @@ msgstr "Видалити цей запис"
 msgid "Describe how to identify this person."
 msgstr "Опишіть, як ідентифікувати цю особу."
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "Опишіть, як ідентифікувати цю особу."
+msgstr "Опишіть фізичні риси цієї особи."
 
 msgid "Description"
 msgstr "Опис"
 
 msgid "Developers"
 msgstr "Розробникам"
+
+msgid "Disable notes on this record"
+msgstr "Вимкнути нотатки в цьому архіві"
 
 msgid "Download the sound as MP3"
 msgstr "Завантажити звук у форматі MP3"
@@ -316,6 +589,9 @@ msgstr "Вставити цей інструмент на свій веб-сай
 msgid "Embedding the Application"
 msgstr "Вставлення програми"
 
+msgid "Enable notes on this record"
+msgstr "Увімкнути нотатки в цьому архіві"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "Введіть у форматі РРРР-ММ-ДД"
 
@@ -325,9 +601,8 @@ msgstr "Введіть ім’я та прізвище особи."
 msgid "Enter the person's name or parts of the name."
 msgstr "Введіть ім'я та прізвище особи або їх частину."
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "Введіть ім'я та прізвище особи або їх частину."
+msgstr "Введіть ім’я, частини імені чи номер мобільного телефону особи."
 
 msgid "Enter the person's name."
 msgstr "Введіть ім’я особи."
@@ -348,15 +623,11 @@ msgid "Follow this link to create a new record"
 msgstr "Натисніть на це посилання, щоб створити новий запис"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
+"Для не мобільних телефонів використовуйте службу 171, яка надається "
+"компанією NTT (Nippon Telegraph and Telephone)."
 
 msgid "Get a new challenge"
 msgstr "Отримати новий запит"
@@ -408,6 +679,9 @@ msgstr "Я шукаю інформацію"
 msgid "I am this person"
 msgstr "Я є цією особою"
 
+msgid "I do not want any more updates on this record."
+msgstr "Я більше не хочу отримувати оновлення щодо цього архіву."
+
 msgid "I do not want my information online anymore."
 msgstr "Я більше не хочу, щоб моя інформація була доступна онлайн."
 
@@ -451,6 +725,24 @@ msgstr ""
 "Якщо жоден запис не відповідає потрібній вам особі, можна натиснути "
 "кнопку нижче, щоб створити новий запис."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Якщо Ви автор цієї нотатки, перевірте, чи Ви отримали електронний лист із"
+" посиланням, за допомогою якого можна підтвердити вимкнення нотаток у "
+"цьому архіві. Або зачекайте, доки автор архіву підтвердить Ваш запит."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Якщо Ви автор цієї нотатки, перевірте, чи Ви отримали електронний лист із"
+" посиланням, за допомогою якого можна підтвердити ввімкнення нотаток у "
+"цьому архіві. Або зачекайте, доки автор архіву підтвердить Ваш запит."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr ""
 "Якщо ви маєте фото цієї особи, завантажте його чи введіть URL-адресу цієї"
@@ -461,6 +753,9 @@ msgstr "Неправильно. Повторіть спробу."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "Недійсна електронна адреса. Повторіть спробу."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "Останнє відоме місцезнаходження"
@@ -516,23 +811,51 @@ msgstr "Район"
 msgid "No"
 msgstr "Ні"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Немає електронної адреси автора архіву %(id)s."
+
 msgid "No messages are found registered to the carrier's message board service."
 msgstr ""
+"Не знайдено повідомлень, зареєстрованих у службі \"дошка оголошень\" "
+"оператора."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Немає нотатки з ідентифікатором %(id)s."
+
+msgid "No notes have been posted"
+msgstr "Немає опублікованих нотаток"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Немає особи з ідентифікатором %(id)s."
 
 msgid "No results found for"
 msgstr "Не знайдено жодного результату для запита"
 
-msgid "No status updates have been posted"
-msgstr "Жодних оновлень статусу не опубліковано"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "Заборонено публікувати нотатки зі статусом \"вважається_померлим\"."
 
 msgid "Not spam"
 msgstr "Не спам"
 
+msgid "Note author"
+msgstr "Автор нотатки"
+
+msgid "Note text"
+msgstr "Текст примітки"
+
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
+"Примітка. Додаткові імена можуть створюватися автоматично та бути "
+"неточними."
+
+msgid "Notes for this person"
+msgstr "Нотатки про цю особу"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "Число або діапазон (напр., 20–30)"
 
 #, python-format
 msgid ""
@@ -560,9 +883,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Назва оригінального веб-сайту"
-
-msgid "Other information"
-msgstr "Інша інформація"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -620,6 +940,12 @@ msgstr "Поясніть, чому ви вважаєте, що це одна і 
 msgid "Please fill in all the required fields."
 msgstr "Заповніть усі обов’язкові поля."
 
+msgid "Please fill in your email address."
+msgstr "Введіть електронну адресу."
+
+msgid "Please provide an valid email address."
+msgstr "Введіть дійсну електронну адресу."
+
 msgid "Possible duplicates"
 msgstr "Можливі дублікати"
 
@@ -635,15 +961,17 @@ msgstr "Продовжити"
 msgid "Provide information about this person"
 msgstr "Надати інформацію про цю особу"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "Автор публікації"
+msgstr "Надано:"
 
 msgid "Province or state"
 msgstr "Провінція чи штат"
 
 msgid "Reason for deletion:"
 msgstr "Причина видалення:"
+
+msgid "Reason for disabling notes:"
+msgstr "Причина вимкнення нотаток:"
 
 msgid "Records Similar to"
 msgstr "Результати, подібні до запиту"
@@ -653,7 +981,7 @@ msgstr "записів вибрано"
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "Записи з іменами й адресами, що відповідають запиту \"%(query)s\""
 
 msgid "Report spam"
 msgstr "Повідомити про спам"
@@ -676,6 +1004,9 @@ msgstr "Шукати цю особу"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Виберіть до 3 записів, щоб позначити їх як дублікати:"
+
+msgid "Send email"
+msgstr "Надіслати електронний лист"
 
 msgid "Sex"
 msgstr "Стать"
@@ -710,9 +1041,6 @@ msgstr "Статус"
 msgid "Status of this person"
 msgstr "Статус цієї особи"
 
-msgid "Status updates for this person"
-msgstr "Оновлення статусу для цієї особи"
-
 msgid "Street name"
 msgstr "Назва вулиці"
 
@@ -723,8 +1051,8 @@ msgid "Subscribe"
 msgstr "Підписатися"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "Підписатися на оновлення про таку особу: %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "Підписатися на оновлення про таку особу: %(given_name)s %(family_name)s"
 
 msgid "Subscribe to updates about this person"
 msgstr "Підписатися на оновлення про цю особу"
@@ -764,14 +1092,27 @@ msgstr ""
 "Поле \"Ім'я та прізвище першого автора\" є обов'язковим. Поверніться та "
 "повторіть спробу."
 
+msgid "The author has disabled notes on this record."
+msgstr "Автор вимкнув нотатки в цьому архіві."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Автор вимкнув оновлення статусу в цьому архіві."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "Розмір зображення завеликий. Завантажте фотографію меншого розміру."
 
 msgid "The reason this note is being marked as spam:"
 msgstr "Причина позначення цього повідомлення як спаму:"
 
+msgid "The record cannot be extended."
+msgstr "Неможливо подовжити термін дії запису."
+
 msgid "The record has been deleted."
 msgstr "Запис видалено."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "Термін дії запису подовжено до %(expiry_date)s."
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -780,6 +1121,14 @@ msgid ""
 msgstr ""
 "Вибраний вами статус указує, що ви є цією особою. Якщо це так, виберіть "
 "також \"Так\" на підтвердження, що ви зв’язалися з цією особою."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "Маркер %(token)s недійсний"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "Маркер %(token)s недійсний."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -839,18 +1188,13 @@ msgstr "Ця особа вже контактує з кимось"
 msgid "This person has posted a message"
 msgstr "Ця особа опублікувала повідомлення"
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "Запис видалено."
+msgstr "Запис цієї особи не існує чи його було видалено."
 
 msgid "This record has served its purpose."
 msgstr "Цей запис виконав свою роль."
 
 msgid "This record is a duplicate of"
-msgstr "Цей запис є дублікатом до"
-
-#, fuzzy
-msgid "This record is a duplicate of another record:"
 msgstr "Цей запис є дублікатом до"
 
 msgid "This record is copied from another source."
@@ -861,6 +1205,17 @@ msgstr "Цей запис неприйнятний."
 
 msgid "This record is spam."
 msgstr "Цей запис є спамом."
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "Щоб скасувати підписку, перейдіть за цим посиланням"
 
 msgid "To view or add information, select a name below."
 msgstr "Щоб переглянути чи додати інформацію, виберіть ім'я та/чи прізвище нижче."
@@ -890,6 +1245,9 @@ msgstr "Не зазначено"
 msgid "Upload"
 msgstr "Завантажити"
 
+msgid "View the record"
+msgstr "Переглянути запис"
+
 msgid "We have nothing matching your search."
 msgstr "Не знайдено жодного результату, який відповідає вашому пошуковому запиту."
 
@@ -908,11 +1266,28 @@ msgstr "Звідки у вас ця інформація?"
 msgid "Where is this person from?"
 msgstr "Звідки ця особа?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Так"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "Так, попросити автора архіву вимкнути нотатки"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Так, попросити автора архіву ввімкнути нотатки"
+
 msgid "Yes, delete the record"
 msgstr "Так, видалити цей запис"
+
+msgid "Yes, disable notes on this record."
+msgstr "Так, вимкнути нотатки в цьому архіві."
+
+msgid "Yes, extend the record"
+msgstr "Так, подовжити термін дії запису"
 
 msgid "Yes, restore this record"
 msgstr "Так, відновити цей запис"
@@ -955,21 +1330,21 @@ msgstr "Ви успішно підписалися."
 msgid "You have successfully unsubscribed."
 msgstr "Ви успішно скасували підписку."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
-"Ви отримали це сповіщення, оскільки підписалися на оновлення про цю "
-"особу.\n"
-"Щоб скасувати підписку, перейдіть за посиланням: %(unsubscribe_link)s"
+"Ви отримали це сповіщення, оскільки підписалися на оновлення про таку "
+"особу:\n"
 
 msgid "Your e-mail address"
 msgstr "Ваша електронна адреса"
 
 msgid "Your e-mail address:"
 msgstr "Ваша електронна адреса:"
+
+msgid "Your email"
+msgstr "Ваша електронна адреса"
 
 msgid "Your name"
 msgstr "Ваші ім'я та прізвище"
@@ -991,19 +1366,65 @@ msgstr ""
 msgid "Your phone number"
 msgstr "Ваш номер телефону"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
 msgstr ""
-"[Служба пошуку людей] Сповіщення про видалення запису про особу "
-"\"%(first_name)s %(last_name)s\""
+"Ваш запит успішно оброблено. Перевірте папку з вхідними повідомленнями та"
+" підтвердьте, що хочете опублікувати свою нотатку, перейшовши за "
+"вставленою URL-адресою."
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Підтвердити %(action)s нотаток про особу "
+"\"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Підтвердити нотатку про особу \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Сповіщення про видалення запису про особу "
+"\"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Увімкнути сповіщення для нотаток про особу "
+"\"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Зараз вимкнено нотатки про особу \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Служба пошуку людей] Зараз увімкнено нотатки про особу \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 "[Служба пошуку людей] Сповіщення про відновлення запису про особу "
-"\"%(first_name)s %(last_name)s\""
+"\"%(given_name)s %(family_name)s\""
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"

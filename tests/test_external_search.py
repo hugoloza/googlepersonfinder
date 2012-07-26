@@ -35,15 +35,17 @@ from google.appengine.api import urlfetch_errors
 
 class MockPerson:
     """Mock Person with minimal attributes."""
-    def __init__(self, subdomain, record_id, first_name, last_name):
-        self.subdomain = subdomain
+    def __init__(self, repo, record_id, given_name, family_name,
+                 is_expired=False):
+        self.repo = repo
         self.record_id = record_id
-        self.key_name = '%s:%s' % (subdomain, record_id)
-        self.first_name = first_name
-        self.last_name = last_name
-        self.alternate_first_names = self.alternate_last_names = ''
+        self.key_name = '%s:%s' % (repo, record_id)
+        self.given_name = given_name
+        self.family_name = family_name
+        self.alternate_names = ''
         self.names_prefixes = text_query.TextQuery(
-            '%s %s' % (first_name, last_name)).query_words
+            '%s %s' % (given_name, family_name)).query_words
+        self.is_expired = is_expired
 
     @staticmethod
     def get_by_key_name(key_names):
@@ -56,6 +58,7 @@ MOCK_PERSONS = [
     MockPerson('japan', 'test/3', 'Ogai', 'Mori'),
     MockPerson('japan', 'test/4', 'Ogai', 'Mori'),
     MockPerson('japan', 'test/5', 'Natsume', 'Souseki'),
+    MockPerson('japan', 'test/6', 'Natsume', 'Souseki', True),
 ]
 
 
@@ -101,8 +104,16 @@ class ExternalSearchTests(unittest.TestCase):
         self.orig_person = model.Person
         model.Person = MockPerson
 
+        logger = logging.getLogger()
+
+        # Don't log to stderr...
+        self.original_handlers = logger.handlers
+        logger.handlers = []
+
+        # ...instead log to our mock logging handler.
         self.mock_logging_handler = MockLoggingHandler()
-        logging.getLogger().addHandler(self.mock_logging_handler)
+        logger.addHandler(self.mock_logging_handler)
+        logger.setLevel(logging.INFO)
 
         # The first two calls of utils.get_utcnow_seconds() at line 45 and 49 in
         # external_search.py consult the following date setting for debug.
@@ -111,7 +122,9 @@ class ExternalSearchTests(unittest.TestCase):
     def tearDown(self):
         self.mox.UnsetStubs()
         model.Person = self.orig_person
-        logging.getLogger().removeHandler(self.mock_logging_handler)
+        logger = logging.getLogger()
+        logger.handlers = self.original_handlers  # restore original handlers
+        logger.setLevel(logging.WARNING)  # restore original log level
 
     def advance_seconds(self, seconds):
         utils.set_utcnow_for_test(
@@ -124,6 +137,8 @@ class ExternalSearchTests(unittest.TestCase):
                 {'person_record_id': 'test/2'},
                 {'person_record_id': 'test/3'},
                 {'person_record_id': 'test/4'},
+                {'person_record_id': 'test/5'},
+                {'person_record_id': 'test/6'},
             ],
             'all_entries': []
         })
@@ -133,10 +148,11 @@ class ExternalSearchTests(unittest.TestCase):
         results = external_search.search(
             'japan', text_query.TextQuery('mori'), 100,
             ['http://backend/?q=%s'])
-        self.assertEquals(3, len(results))
+        self.assertEquals(4, len(results))
         self.assertEquals('test/1', results[0].record_id)
         self.assertEquals('test/3', results[1].record_id)
         self.assertEquals('test/4', results[2].record_id)
+        self.assertEquals('test/5', results[3].record_id)
         self.mox.VerifyAll()
 
     def test_search_broken_content(self):
@@ -317,6 +333,7 @@ class ExternalSearchTests(unittest.TestCase):
             'name_entries': [{'person_record_id': 'test/1'}],
             'all_entries': [],
         })
+        deactivation_message_html='de<i>acti</i>vated'
         bad_response = MockUrlFetchResponse(500, '')
         urlfetch.fetch('http://backend1/?q=mori', deadline=IsSeconds(0.9))\
             .WithSideEffects(lambda url, deadline: self.advance_seconds(0.2))\
@@ -339,5 +356,5 @@ class ExternalSearchTests(unittest.TestCase):
 # pushd tools; source common.sh; popd
 # python2.5 tests/test_external_search.py
 if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     unittest.main()
