@@ -42,11 +42,11 @@ def fetch_with_load_balancing(urls, fetch_timeout=1.0, total_timeout=5.0):
     Returns:
         A urlfetch.Response object, or None if the timeout has been exceeded.
     """
-    end_time = utils.get_utcnow_seconds() + total_timeout
+    end_time = utils.get_utcnow_timestamp() + total_timeout
     shuffled_urls = urls[:]
     random.shuffle(shuffled_urls)
     for url in shuffled_urls:
-        seconds_left = end_time - utils.get_utcnow_seconds()
+        seconds_left = end_time - utils.get_utcnow_timestamp()
         # Don't retry if the remaining time limit is too short to do anything.
         if seconds_left < 0.1:
             logging.info('Fetch retry timed out.')
@@ -75,11 +75,11 @@ def remove_non_name_matches(entries, query_obj):
     return filtered_entries
 
 
-def search(subdomain, query_obj, max_results, backends):
+def search(repo, query_obj, max_results, backends):
     """Search persons using external search backends.
 
     Args:
-        subdomain: PF's subdomain from which the query was sent.
+        repo: PF's repository for which the query was sent.
         query_obj: TextQuery instance representing the input query.
         max_results: Maximum number of entries to return.
         backends: List of backend IPs or hostnames to access.
@@ -111,14 +111,16 @@ def search(subdomain, query_obj, max_results, backends):
     # TODO(ryok): Remove once the backends stop returning the old data format.
     if isinstance(ids[0], dict):
         ids = [d['person_record_id'] for d in ids]
-    key_names = ['%s:%s' % (subdomain, id) for id in ids]
+    key_names = ['%s:%s' % (repo, id) for id in ids]
     persons = model.Person.get_by_key_name(key_names)
     address_match_begin = len(data['name_entries'])
     # The entries returned from backends may include ones that are already taken
     # down in the production repository.  We need to ensure those are not
     # included in the returned results.
-    name_matches = [p for p in persons[:address_match_begin] if p]
-    address_matches = [p for p in persons[address_match_begin:] if p]
+    name_matches = [p for p in persons[:address_match_begin] if
+                    p and not p.is_expired]
+    address_matches = [p for p in persons[address_match_begin:] if
+                       p and not p.is_expired]
     logging.debug('external_search.search matches name: %d, all: %d' %
                   (len(name_matches), len(address_matches)))
 
