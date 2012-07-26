@@ -21,15 +21,183 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  "
+"為了確保註記功能的停用或啟用是經過記錄作者本人的許可，我們會寄送一封確認郵件給記錄作者。如果您是作者，請在您按一下底下的按鈕後，記得檢查您的電子郵件信箱。"
+"\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"親愛的 %(author_name)s，您好：目前有一位使用者要求啟用「%(given_name)s "
+"%(family_name)s」這筆記錄的註記功能。由於這筆記錄的作者資料中登記了您的電子郵件地址，因此如果您確定要啟用這筆記錄的註記功能，請於 3 "
+"日內前往以下連結：\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"親愛的 %(author_name)s，您好：目前有一位使用者要求停用「%(given_name)s "
+"%(family_name)s」這筆記錄的註記功能。由於這筆記錄的作者資料中登記了您的電子郵件地址，因此如果您確定要停用這筆記錄的註記功能，請於 3 "
+"日內前往以下連結：\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"親愛的 %(author_name)s，您好：您剛剛在「%(given_name)s "
+"%(family_name)s」這筆記錄中輸入了註記。如要發佈您的註記，請於 3 日內前往以下連結：\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      您確定要刪除「%(last_name)s%(first_name)s」的記錄嗎？\n"
+"      您確定要刪除「%(family_name)s%(given_name)s」的記錄嗎？\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      確定要停用「%(given_name)s %(family_name)s」這筆記錄的註記功能嗎？\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      確定要停用「%(given_name)s %(family_name)s」這筆記錄的註記功能嗎？\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      確定要啟用「%(given_name)s %(family_name)s」這筆記錄的註記功能嗎？\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      您確定要延長「%(given_name)s %(family_name)s」這筆記錄的效期嗎？\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      確認您的註記\n"
 "    "
 
 msgid ""
@@ -72,17 +240,55 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>。\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    "
+"為了確保註記功能的停用或啟用是經過記錄作者本人的許可，我們會寄送一封確認郵件給記錄作者。如果您是作者，請在您按一下底下的按鈕後，記得檢查您的電子郵件信箱。"
+"\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  相關記錄仍會顯示在網站上，但所有人皆無法再針對該筆記錄發佈註記。\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  如要發佈註記，請在下方輸入您的電子郵件地址，系統隨即會寄送一封郵件給您，您只需點選當中的確認連結即可。\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"有人已將「%(last_name)s%(first_name)s」的記錄\n"
+"有人已將「%(family_name)s%(given_name)s」的記錄\n"
 "從 %(site_url)s 中刪除。\n"
 "\n"
 "由於系統根據您的郵件地址判定您曾經為這筆記錄添加附註，\n"
@@ -91,44 +297,81 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
 "\n"
-"NOTE: If you believe this record was deleted in error, you can\n"
-"restore it by following this link within the next %(days_until_deletion)s"
-" days:\n"
-"\n"
-"    %(restore_url)s\n"
+"使用者已將「%(given_name)s %(family_name)s」這筆記錄從 "
+"%(site_url)s中刪除。由於這筆記錄的登記作者是您的電子郵件地址，因此我們特地通知您記錄已遭刪除。\n"
+
+#, python-format
+msgid ""
 "\n"
 "After %(days_until_deletion)s days, the record will be permanently "
 "deleted.\n"
 msgstr ""
-"\n"
-"有人已將「%(last_name)s%(first_name)s」的記錄從 %(site_url)s 中刪除。\n"
-"\n"
-"由於系統根據您的郵件地址判定您為這筆記錄的登錄者，\n"
-"因此特地發送這則刪除通知給您。\n"
-"\n"
-"注意：如果您確信這筆記錄不應遭到刪除，請在 %(days_until_deletion)s 天內前往以下連結還原記錄：\n"
-"\n"
-"    %(restore_url)s\n"
 "\n"
 "系統將在 %(days_until_deletion)s 天後永久刪除這筆記錄。\n"
 
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s"
+" days:\n"
+"\n"
+"    %(restore_url)s\n"
 msgstr ""
+"\n"
+"注意：如果您確信這筆記錄遭到誤刪，請於 %(days_until_deletion)s 天內前往以下連結還原記錄：\n"
+"\n"
+"    %(restore_url)s\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"系統已停用「%(given_name)s %(family_name)s」這筆記錄的註記功能。如要查看這筆記錄，請前往以下連結：\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"由於這筆尋人記錄或是當中註記登記了您的電子郵件地址，因此我們特別發送通知給您。\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"系統已啟用「%(given_name)s %(family_name)s」這筆記錄的註記功能。如要查看這筆記錄，請前往以下連結：\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"由於這筆尋人記錄或是當中註記登記了您的電子郵件地址，因此我們特別發送通知給您。\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -138,7 +381,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"「%(last_name)s%(first_name)s」的記錄登錄者\n"
+"「%(family_name)s%(given_name)s」的記錄登錄者\n"
 "已將該筆原本已遭刪除的記錄還原。如要檢視該筆記錄，\n"
 "請前往以下連結：\n"
 "\n"
@@ -150,19 +393,29 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"「%(given_name)s %(family_name)s」這筆記錄中有一則新註記。\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"您已訂閱「%(last_name)s%(first_name)s」在 %(site_url)s 的狀態更新。\n"
+"您已訂閱「%(given_name)s %(family_name)s」這筆記錄的註記。您可前往以下連結查看這筆記錄：\n"
 "\n"
-"完整記錄請見 %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
-"如要取消訂閱，請前往以下連結：%(unsubscribe_link)s\n"
+"如要取消訂閱，請造訪以下連結： %(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(按一下即可顯示)"
@@ -202,13 +455,13 @@ msgid "Age"
 msgstr "年齡"
 
 msgid "Alternate family names"
-msgstr "其他使用過的姓氏"
+msgstr "其他姓氏"
 
 msgid "Alternate given names"
-msgstr "其他使用過的名字"
+msgstr "其他名字"
 
 msgid "Alternate names"
-msgstr "其他別名"
+msgstr "其他名稱"
 
 msgid "Are you sure this note isn't spam?"
 msgstr "您確定這則附註不是垃圾資訊嗎？"
@@ -237,6 +490,10 @@ msgstr "回到結果清單"
 msgid "Back to start"
 msgstr "回到首頁"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "找不到編號為  %(id)s"
+
 msgid "Cancel"
 msgstr "取消"
 
@@ -261,6 +518,9 @@ msgstr "建立此項目的新記錄："
 msgid "Create a new record for a missing person"
 msgstr "建立失蹤人員的新記錄"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "目前登錄的資料約有 %(num_people)s 筆。"
@@ -277,15 +537,17 @@ msgstr "刪除這筆記錄"
 msgid "Describe how to identify this person."
 msgstr "請描述這個人的外貌與基本特徵。"
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "請描述這個人的外貌與基本特徵。"
+msgstr "描述這位使用者的外貌特徵。"
 
 msgid "Description"
 msgstr "說明"
 
 msgid "Developers"
 msgstr "開發人員"
+
+msgid "Disable notes on this record"
+msgstr "停用這筆記錄的註記功能"
 
 msgid "Download the sound as MP3"
 msgstr "以 MP3 格式下載聲音"
@@ -302,6 +564,9 @@ msgstr "在您的網站上嵌入此工具"
 msgid "Embedding the Application"
 msgstr "嵌入應用程式"
 
+msgid "Enable notes on this record"
+msgstr "啟用這筆記錄的註記功能"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "輸入格式為 YYYY-MM-DD (年年年年-月月-日日)"
 
@@ -311,9 +576,8 @@ msgstr "輸入這個人的名字和姓氏。"
 msgid "Enter the person's name or parts of the name."
 msgstr "輸入這個人的姓名或是部分姓名。"
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "輸入這個人的姓名或是部分姓名。"
+msgstr "輸入使用者的姓名、部分名稱或手機號碼。"
 
 msgid "Enter the person's name."
 msgstr "輸入這個人的名字。"
@@ -336,7 +600,7 @@ msgstr "請前往此連結來建立新記錄"
 msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
-msgstr ""
+msgstr "如果是手機以外的電話，請使用 NTT 所提供的 171 災害緊急留言服務。"
 
 msgid "Get a new challenge"
 msgstr "取得新的驗證問題"
@@ -386,6 +650,9 @@ msgstr "我正在找尋這個人的消息"
 msgid "I am this person"
 msgstr "我就是這個人"
 
+msgid "I do not want any more updates on this record."
+msgstr "我不想再收到這筆記錄的最新動態。"
+
 msgid "I do not want my information online anymore."
 msgstr "我不想再讓其他人在線上看到我的資訊。"
 
@@ -427,6 +694,18 @@ msgid ""
 "below to create a new record."
 msgstr "如果這些記錄都不符合您要尋找的人，您可以按一下下方來建立新記錄。"
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr "如果您是這則註記的作者，請至您的信箱找出系統寄送的郵件，然後透過當中的連結確認停用這筆記錄的註記功能。如果您不是作者，請等候記錄作者確認您的要求。"
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr "如果您是這則註記的作者，請至您的信箱找出系統寄送的郵件，然後透過當中的連結確認啟用這筆記錄的註記功能。如果您不是作者，請等候記錄作者確認您的要求。"
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr "如果您有這個人的相片，請上傳相片或是輸入相片網址。"
 
@@ -435,6 +714,9 @@ msgstr "錯誤，請再試一次。"
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "電子郵件地址無效，請再試一次。"
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "這個人最後出現的地點"
@@ -486,26 +768,47 @@ msgstr "社區"
 msgid "No"
 msgstr "否"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "編號 %(id)s的記錄未登記作者電子郵件地址。"
+
 msgid "No messages are found registered to the carrier's message board service."
-msgstr ""
+msgstr "行動通訊業者的留言板服務中尚無訊息。"
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "找不到以下編號的註記： %(id)s。"
+
+msgid "No notes have been posted"
+msgstr "沒有已發佈的註記"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "沒有以下編號的失蹤人士： %(id)s。"
 
 msgid "No results found for"
 msgstr "此項目無搜尋結果"
 
-msgid "No status updates have been posted"
-msgstr "尚未張貼任何狀態更新"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "您未獲授權發佈狀態為「believed_dead」的註記。"
 
 msgid "Not spam"
 msgstr "非垃圾資訊"
 
+msgid "Note author"
+msgstr "註記作者"
+
 msgid "Note text"
-msgstr ""
+msgstr "留言文字"
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
+msgstr "注意：其他名稱可能是由機器產生而不盡正確。"
+
+msgid "Notes for this person"
+msgstr "這位失蹤人士的相關註記"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "號碼或範圍 (例如 20-30)"
 
 #, python-format
 msgid ""
@@ -529,9 +832,6 @@ msgstr "原始的張貼日期格式不是 YYYY-MM-DD (年年年年-月月-日日
 
 msgid "Original site name"
 msgstr "原始網站名稱"
-
-msgid "Other information"
-msgstr "其他資訊"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -582,6 +882,12 @@ msgstr "請解釋為什麼您認為他們是同一個人"
 msgid "Please fill in all the required fields."
 msgstr "請填寫所有必填欄位。"
 
+msgid "Please fill in your email address."
+msgstr "請填入您的電子郵件地址。"
+
+msgid "Please provide an valid email address."
+msgstr "請提供有效的電子郵件地址。"
+
 msgid "Possible duplicates"
 msgstr "可能的重複項目"
 
@@ -597,15 +903,17 @@ msgstr "繼續"
 msgid "Provide information about this person"
 msgstr "提供這個人的相關資訊"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "張貼者"
+msgstr "提供者："
 
 msgid "Province or state"
 msgstr "省/自治區/直轄市"
 
 msgid "Reason for deletion:"
 msgstr "刪除原因："
+
+msgid "Reason for disabling notes:"
+msgstr "停用註記功能的原因："
 
 msgid "Records Similar to"
 msgstr "此項目的相似記錄："
@@ -615,7 +923,7 @@ msgstr "已選取的記錄筆數："
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "名稱和地址符合「%(query)s」的記錄"
 
 msgid "Report spam"
 msgstr "檢舉垃圾資訊"
@@ -638,6 +946,9 @@ msgstr "搜尋這個人"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "最多選取 3 筆記錄並將其標示為重複項目："
+
+msgid "Send email"
+msgstr "傳送電子郵件"
 
 msgid "Sex"
 msgstr "性別"
@@ -672,9 +983,6 @@ msgstr "狀態"
 msgid "Status of this person"
 msgstr "這個人的狀況"
 
-msgid "Status updates for this person"
-msgstr "這個人的狀態更新"
-
 msgid "Street name"
 msgstr "街道名稱"
 
@@ -685,8 +993,8 @@ msgid "Subscribe"
 msgstr "訂閱"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "訂閱%(last_name)s%(first_name)s的最新消息"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "訂閱%(family_name)s%(given_name)s的最新消息"
 
 msgid "Subscribe to updates about this person"
 msgstr "訂閱這個人的最新消息"
@@ -722,20 +1030,41 @@ msgstr "[名字] 及 [姓氏] 欄位不可留空，請回到上一步再試一�
 msgid "The Original author's name is required.  Please go back and try again."
 msgstr "[原提供者的姓名] 欄位為必填。請回到上一步並再試一次。"
 
+msgid "The author has disabled notes on this record."
+msgstr "作者已停用這筆記錄的註記功能。"
+
+msgid "The author has disabled status updates on this record."
+msgstr "作者已停用這筆記錄的狀態更新功能。"
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "提供的圖片檔案大小太大，請上傳檔案較小的圖片。"
 
 msgid "The reason this note is being marked as spam:"
 msgstr "這則附註被標示為垃圾資訊的原因："
 
+msgid "The record cannot be extended."
+msgstr "記錄效期無法延長。"
+
 msgid "The record has been deleted."
 msgstr "記錄已經刪除。"
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "記錄效期已延長至 %(expiry_date)s。"
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
 "true, please also select 'Yes' to indicate that you have contacted this "
 "person."
 msgstr "您所選擇的狀態表示這是您本人，如果選擇無誤，請一併選取 [是]，表示您已經與這個人聯絡。"
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "憑證  %(token)s  無效"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "憑證  %(token)s  無效。"
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -786,9 +1115,8 @@ msgstr "這個人已與某人聯絡"
 msgid "This person has posted a message"
 msgstr "這個人有張貼訊息"
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "記錄已經刪除。"
+msgstr "系統沒有或已刪除這位使用者的資料。"
 
 msgid "This record has served its purpose."
 msgstr "這筆記錄已達到其目的。"
@@ -805,8 +1133,16 @@ msgstr "這筆記錄內容不當。"
 msgid "This record is spam."
 msgstr "這筆記錄是垃圾資訊。"
 
-msgid "To unsubscribe, follow this link"
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
 msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "如要取消訂閱，請前往這個連結"
 
 msgid "To view or add information, select a name below."
 msgstr "若要查看或新增資訊，請從下方選擇姓名。"
@@ -834,6 +1170,9 @@ msgstr "未指定"
 msgid "Upload"
 msgstr "上傳"
 
+msgid "View the record"
+msgstr "檢視記錄"
+
 msgid "We have nothing matching your search."
 msgstr "系統找不到相符的搜尋結果。"
 
@@ -852,11 +1191,28 @@ msgstr "此消息的出處為何？"
 msgid "Where is this person from?"
 msgstr "這個人是那裡人？"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "是"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "是，要求記錄作者停用註記功能"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "是，要求記錄作者啟用註記功能"
+
 msgid "Yes, delete the record"
 msgstr "是，刪除這筆記錄"
+
+msgid "Yes, disable notes on this record."
+msgstr "是，停用這筆記錄的註記功能。"
+
+msgid "Yes, extend the record"
+msgstr "是，延長記錄效期"
 
 msgid "Yes, restore this record"
 msgstr "是，還原這筆記錄"
@@ -900,13 +1256,16 @@ msgstr "取消訂閱成功。"
 msgid ""
 "You received this notification because you have subscribed to updates on "
 "the following person:\n"
-msgstr ""
+msgstr "由於您訂閱了以下使用者的更新，因此我們特地發送這封郵件通知您：\n"
 
 msgid "Your e-mail address"
 msgstr "您的電子郵件位址"
 
 msgid "Your e-mail address:"
 msgstr "您的電子郵件地址："
+
+msgid "Your email"
+msgstr "您的電子郵件"
 
 msgid "Your name"
 msgstr "您的姓名"
@@ -924,15 +1283,48 @@ msgstr "請務必在 [來源] 區段中輸入您的姓名。請回到上一步�
 msgid "Your phone number"
 msgstr "您的電話號碼"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr "[尋人工具]「%(last_name)s%(first_name)s」的刪除通知"
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr "您的要求已處理完畢，請查看您的收件匣，並前往郵件內附的網址，確認發佈您的註記。"
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
-msgstr "[尋人工具]「%(last_name)s%(first_name)s」的記錄還原通知"
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[尋人工具] 確認 %(action)s 「%(given_name)s %(family_name)s」的註記"
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr "[尋人工具] 確認您針對「%(given_name)s %(family_name)s」所發佈的註記"
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr "[尋人工具]「%(family_name)s%(given_name)s」的刪除通知"
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[尋人工具] 啟用「%(given_name)s %(family_name)s」的註記通知"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[尋人工具] 已停止「%(given_name)s %(family_name)s」的註記功能"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[尋人工具] 已啟用「%(given_name)s %(family_name)s」的註記功能"
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[尋人工具]「%(family_name)s%(given_name)s」的記錄還原通知"
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
