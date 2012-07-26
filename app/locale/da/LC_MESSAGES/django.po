@@ -21,16 +21,192 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  Der sendes en bekræftelse til journalens forfatter for at sikre, at "
+"noter kun aktiveres eller deaktiveres med forfatterens tilladelse. Hvis "
+"du er forfatteren, skal du tjekke din e-mail, når du har klikket på "
+"knappen nedenfor.\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kære %(author_name)s En bruger har anmodet om aktivering af noter til "
+"journalen for \"%(given_name)s %(family_name)s\". Din e-mailadresse "
+"registreres som forfatter til denne journal. Hvis du vil aktivere noter "
+"for denne journal, skal du følge dette link inden for tre dage:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kære %(author_name)s En bruger har anmodet om, at du deaktiverer noter "
+"til journalen for \"%(given_name)s %(family_name)s\". Din e-mailadresse "
+"registreres som forfatter til denne journal. Hvis du vil deaktivere noter"
+" for denne journal, skal du følge dette link inden for tre dage:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kære %(author_name)s Du har netop angivet en note til journalen for "
+"\"%(given_name)s %(family_name)s\". Hvis du vil offentliggøre din note, "
+"skal du følge dette link inden for tre dage:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      Er du sikker på, du vil slette journalen for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Er du sikker på, du vil slette journalen for \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Er du sikker på, at du vil deaktivere noter for \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Er du sikker på, at du vil deaktivere noter til journalen for "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Er du sikker på, at du vil aktivere noter for \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Er du sikker på, at du vil forlænge udløbsdatoen for journalen "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Bekræft din note\n"
 "    "
 
 msgid ""
@@ -74,17 +250,58 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    Der sendes en bekræftelse til journalens forfatter for at sikre, at "
+"noter kun aktiveres eller deaktiveres med forfatterens tilladelse. Hvis "
+"du er forfatteren, skal du tjekke din e-mail, når du har klikket på "
+"knappen nedenfor.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Journalen er fortsat synlig på dette websted, men det er ikke muligt at"
+" indsende yderligere noter til den.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Hvis du vil indsende din note, skal du angive din e-mailadresse "
+"nedenfor og følge det link til bekræftelse, som du modtager.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"En bruger har slettet journalen for \"%(first_name)s %(last_name)s\"\n"
+"En bruger har slettet journalen for \"%(given_name)s %(family_name)s\"\n"
 "på %(site_url)s.\n"
 "\n"
 "Vi oplyser dig om sletningen, fordi din e-mail-adresse er\n"
@@ -93,51 +310,88 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+"\n"
+"En bruger har slettet journalen for \"%(given_name)s %(family_name)s\" på"
+" %(site_url)s. Vi sender dig en e-mail om sletningen, da din e-mail-"
+"adresse er angivet i systemet som forfatter af denne journal.\n"
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+"\n"
+"Efter %(days_until_deletion)s dage slettes journalen permanent.\n"
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
 "\n"
-"En bruger har slettet journalen for \"%(first_name)s %(last_name)s\"\n"
-"på %(site_url)s.\n"
-"\n"
-"Vi oplyser dig om sletningen, fordi din e-mail-adresse er\n"
-"angivet som forfatter af denne journal.\n"
-"\n"
-"BEMÆRK: Hvis du mener, at denne journal er blevet slettet ved en fejl, "
-"kan du\n"
-"gendanne den ved at følge det følgende link inden for de næste "
+"BEMÆRK! Hvis du mener, at denne journal blev slettet ved en fejl, kan du "
+"gendanne den ved at følge dette link inden for de næste "
 "%(days_until_deletion)s dage:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"Efter %(days_until_deletion)s dage, bliver journalen slettet permanent.\n"
 
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
 msgstr ""
 "\n"
-"En bruger har indsendt en statusopdatering for \"%(first_name)s "
-"%(last_name)s\" på %(site_url)s:"
+"Noter er nu deaktiveret for journalen for \"%(given_name)s "
+"%(family_name)s\". Du kan få vist journalen ved at følge dette link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Vi underretter dig, fordi din e-mailadresse er knyttet til denne "
+"personjournal eller en note til journalen.\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Noter er nu aktiveret for journalen for \"%(given_name)s %(family_name)s\"."
+" Du kan få vist journalen ved at følge dette link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Vi underretter dig, fordi din e-mailadresse er knyttet til denne "
+"personjournal eller en note til journalen.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -147,7 +401,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Forfatteren af journalen for \"%(first_name)s %(last_name)s\"\n"
+"Forfatteren af journalen for \"%(given_name)s %(family_name)s\"\n"
 "(som tidligere er blevet slettet) har gendannet journalen.  For at få "
 "vist\n"
 "journalen, skal du følge dette link:\n"
@@ -161,20 +415,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"Der er en ny note til journalen for \"%(given_name)s %(family_name)s\".\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"Du har abonneret på statusopdateringer for \"%(first_name)s "
-"%(last_name)s\" på %(site_url)s.\n"
+"Du har abonneret på noter til \"%(given_name)s %(family_name)s\". Du kan få"
+" vist denne journal på\n"
 "\n"
-"Du kan få vist hele journalen på %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
-"Følg dette link for at afmelde abonnementet: %(unsubscribe_link)s\n"
+"Du kan ophæve abonnementet ved at følge dette link: %(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(klik for at se)"
@@ -213,16 +477,14 @@ msgstr "Administration"
 msgid "Age"
 msgstr "Alder"
 
-#, fuzzy
 msgid "Alternate family names"
-msgstr "Efternavn"
+msgstr "Alternative efternavne"
 
 msgid "Alternate given names"
-msgstr ""
+msgstr "Alternative fornavne"
 
-#, fuzzy
 msgid "Alternate names"
-msgstr "Vejnavn"
+msgstr "Alternative navne"
 
 msgid "Are you sure this note isn't spam?"
 msgstr "Er du sikker på, at denne bemærkning ikke er spam?"
@@ -251,6 +513,10 @@ msgstr "Tilbage til resultatlisten"
 msgid "Back to start"
 msgstr "Tilbage til start "
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Der kan ikke findes en note med dette id %(id)s"
+
 msgid "Cancel"
 msgstr "Annuller"
 
@@ -277,6 +543,9 @@ msgstr "Opret en ny journal for"
 msgid "Create a new record for a missing person"
 msgstr "Opret en ny journal for en savnet person"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "Der spores ca. %(num_people)s journaler i øjeblikket."
@@ -293,15 +562,17 @@ msgstr "Slet denne journal"
 msgid "Describe how to identify this person."
 msgstr "Beskriv, hvordan man kan identificere denne person."
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "Beskriv, hvordan man kan identificere denne person."
+msgstr "Beskriv denne persons fysiske træk."
 
 msgid "Description"
 msgstr "Beskrivelse"
 
 msgid "Developers"
 msgstr "Udviklere"
+
+msgid "Disable notes on this record"
+msgstr "Deaktiver noter for denne journal"
 
 msgid "Download the sound as MP3"
 msgstr "Download lyden som MP3"
@@ -318,6 +589,9 @@ msgstr "Integrer dette værktøj på dit websted"
 msgid "Embedding the Application"
 msgstr "Sådan integrerer du programmet"
 
+msgid "Enable notes on this record"
+msgstr "Aktiver noter for denne journal"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "Indtast som ÅÅÅÅ-MM-DD"
 
@@ -327,9 +601,8 @@ msgstr "Indtast personens for- og efternavn"
 msgid "Enter the person's name or parts of the name."
 msgstr "Indtast personens navn eller dele af navnet."
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "Indtast personens navn eller dele af navnet."
+msgstr "Indtast personens navn, dele af navnet eller mobiltelefonnummer."
 
 msgid "Enter the person's name."
 msgstr "Indtast personens navn."
@@ -350,15 +623,11 @@ msgid "Follow this link to create a new record"
 msgstr "Følg dette link for at oprette en ny journal"
 
 msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
-
-msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
+"Brug 171-tjenesten, der leveres af NTT, hvis du ikke bruger en "
+"mobiltelefon."
 
 msgid "Get a new challenge"
 msgstr "Få en ny udfordring"
@@ -410,6 +679,9 @@ msgstr "Jeg søger oplysninger "
 msgid "I am this person"
 msgstr "Jeg er denne person"
 
+msgid "I do not want any more updates on this record."
+msgstr "Jeg vil ikke have flere opdateringer om denne journal."
+
 msgid "I do not want my information online anymore."
 msgstr "Mine oplysninger skal ikke være online længere."
 
@@ -453,6 +725,26 @@ msgstr ""
 "Hvis ingen af disse journaler matcher den tiltænkte person, kan du klikke"
 " herunder for at oprette en ny journal."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Hvis du er forfatteren til denne note, skal du tjekke din e-mail for at "
+"finde et link, som du kan bruge til at bekræfte, at du vil deaktivere "
+"noter for denne journal. Ellers skal du vente, til journalens forfatter "
+"bekræfter din anmodning."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Hvis du er forfatteren til denne note, skal du tjekke din e-mail for at "
+"finde et link, som du kan bruge til at bekræfte, at du vil aktivere noter"
+" for denne journal. Ellers skal du vente, til journalens forfatter "
+"bekræfter din anmodning."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr ""
 "Hvis du har et billede af denne person, skal du uploade det eller "
@@ -463,6 +755,9 @@ msgstr "Forkert. Prøv igen."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "Ugyldig e-mail-adresse. Prøv igen."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "Sidste kendte placering"
@@ -518,23 +813,51 @@ msgstr "Nabolag"
 msgid "No"
 msgstr "Nej"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Der er ingen forfatter-e-mail for journalen %(id)s."
+
 msgid "No messages are found registered to the carrier's message board service."
 msgstr ""
+"Der blev ikke fundet nogen beskeder, der er registreret til udbyderens "
+"forum."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Der er ingen note med dette id: %(id)s."
+
+msgid "No notes have been posted"
+msgstr "Der er ikke indsendt nogen noter"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Der er ingen person med dette id: %(id)s."
 
 msgid "No results found for"
 msgstr "Der blev ikke fundet nogen resultater for"
 
-msgid "No status updates have been posted"
-msgstr "Der er ikke oprettet nogen statusopdateringer"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "Ikke autoriseret til at indsende noter med statussen \"believed_dead\"."
 
 msgid "Not spam"
 msgstr "Ikke spam"
 
+msgid "Note author"
+msgstr "Notens forfatter"
+
+msgid "Note text"
+msgstr "Notetekst"
+
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
+"Bemærk! Alternative navne kan være maskingenererede og er muligvis "
+"forkerte."
+
+msgid "Notes for this person"
+msgstr "Noter for denne person"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "Antal eller interval (f.eks. 20-30)"
 
 #, python-format
 msgid ""
@@ -562,9 +885,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Navnet på det oprindelige websted"
-
-msgid "Other information"
-msgstr "Andre oplysninger"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -621,6 +941,12 @@ msgstr "Forklar, hvorfor du mener, at de er en og samme person"
 msgid "Please fill in all the required fields."
 msgstr "Udfyld de påkrævede felter."
 
+msgid "Please fill in your email address."
+msgstr "Angiv din e-mailadresse."
+
+msgid "Please provide an valid email address."
+msgstr "Angiv en gyldig e-mailadresse."
+
 msgid "Possible duplicates"
 msgstr "Mulige kopier"
 
@@ -636,15 +962,17 @@ msgstr "Fortsæt"
 msgid "Provide information about this person"
 msgstr "Angiv oplysninger om denne person"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "Oprettet af"
+msgstr "Leveret af:"
 
 msgid "Province or state"
 msgstr "Område eller stat"
 
 msgid "Reason for deletion:"
 msgstr "Årsag til sletning:"
+
+msgid "Reason for disabling notes:"
+msgstr "Årsag til deaktivering af noter:"
 
 msgid "Records Similar to"
 msgstr "Journaler, der ligner"
@@ -654,7 +982,7 @@ msgstr "journaler er valgt"
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "Journaler med navne og adresser, der matcher \"%(query)s\""
 
 msgid "Report spam"
 msgstr "Rapporter spam"
@@ -677,6 +1005,9 @@ msgstr "Søg efter denne person"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Vælg 3 journaler, der skal markeres som kopier:"
+
+msgid "Send email"
+msgstr "Send e-mail"
 
 msgid "Sex"
 msgstr "Køn"
@@ -711,9 +1042,6 @@ msgstr "Status"
 msgid "Status of this person"
 msgstr "Personstatus"
 
-msgid "Status updates for this person"
-msgstr "Statusopdateringer for denne person"
-
 msgid "Street name"
 msgstr "Vejnavn"
 
@@ -724,8 +1052,8 @@ msgid "Subscribe"
 msgstr "Abonner"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "Abonner på opdateringer om %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "Abonner på opdateringer om %(given_name)s %(family_name)s"
 
 msgid "Subscribe to updates about this person"
 msgstr "Abonner på opdateringer om denne person"
@@ -763,14 +1091,27 @@ msgstr ""
 "Du skal angive navnet på den oprindelige forfatter. Gå tilbage, og prøv "
 "igen."
 
+msgid "The author has disabled notes on this record."
+msgstr "Forfatteren har deaktiveret noter for denne journal."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Forfatteren har deaktiveret statusopdateringer for denne journal."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "Det vedhæftede billede er for stort. Prøv at uploade et mindre billede."
 
 msgid "The reason this note is being marked as spam:"
 msgstr "Årsagen til, at denne bemærkning bliver markeret som spam:"
 
+msgid "The record cannot be extended."
+msgstr "Journalen kan ikke forlænges."
+
 msgid "The record has been deleted."
 msgstr "Journalen er slettet."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "Journalen er blevet forlænget til %(expiry_date)s."
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -780,6 +1121,14 @@ msgstr ""
 "Den status, du har valgt, antyder, at du er denne person. Hvis det "
 "passer, skal du også vælge \"Ja\" for at angive, at du har kontaktet "
 "denne person."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "Tokenet %(token)s var ugyldigt"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "Tokenet %(token)s var ugyldigt."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -837,18 +1186,13 @@ msgstr "Denne person har været i kontakt med nogen"
 msgid "This person has posted a message"
 msgstr "Denne person har sendt en besked"
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "Journalen er slettet."
+msgstr "Denne persons post eksisterer ikke eller er blevet slettet."
 
 msgid "This record has served its purpose."
 msgstr "Denne journal har tjent dens formål."
 
 msgid "This record is a duplicate of"
-msgstr "Denne journal er en kopi af"
-
-#, fuzzy
-msgid "This record is a duplicate of another record:"
 msgstr "Denne journal er en kopi af"
 
 msgid "This record is copied from another source."
@@ -859,6 +1203,17 @@ msgstr "Denne journal er upassende."
 
 msgid "This record is spam."
 msgstr "Denne journal er spam."
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "Følg dette link for at ophæve anonnementet"
 
 msgid "To view or add information, select a name below."
 msgstr "Vælg et af navnene nedenfor for at se eller tilføje oplysninger."
@@ -888,6 +1243,9 @@ msgstr "Ikke angivet"
 msgid "Upload"
 msgstr "Upload"
 
+msgid "View the record"
+msgstr "Vis denne journal"
+
 msgid "We have nothing matching your search."
 msgstr "Vi har ikke noget, der matcher din søgning."
 
@@ -906,11 +1264,28 @@ msgstr "Hvor stammer disse oplysninger fra?"
 msgid "Where is this person from?"
 msgstr "Hvor kommer denne person fra?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Ja"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "Ja, bed journalens forfatter om at deaktivere noter"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Ja, bed journalens forfatter om at aktivere noter"
+
 msgid "Yes, delete the record"
 msgstr "Ja, slet journalen"
+
+msgid "Yes, disable notes on this record."
+msgstr "Ja, deaktiver noter for denne journal"
+
+msgid "Yes, extend the record"
+msgstr "Ja, forlæng journalen"
 
 msgid "Yes, restore this record"
 msgstr "Ja, gendan denne journal"
@@ -953,21 +1328,21 @@ msgstr "Du har nu abonneret."
 msgid "You have successfully unsubscribed."
 msgstr "Du har nu afmeldt abonnementet."
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
 "Du har modtaget denne meddelelse, fordi du har abonneret på opdateringer "
-"om denne person.\n"
-"Følg dette link for at afmelde abonnementet: %(unsubscribe_link)s"
+"om følgende person:\n"
 
 msgid "Your e-mail address"
 msgstr "Din e-mail-adresse"
 
 msgid "Your e-mail address:"
 msgstr "Din e-mail-adresse:"
+
+msgid "Your email"
+msgstr "Din e-mailadresse"
 
 msgid "Your name"
 msgstr "Dit navn"
@@ -985,17 +1360,63 @@ msgstr "Du skal angive dit navn i sektionen \"Kilde\". Gå tilbage, og prøv ige
 msgid "Your phone number"
 msgstr "Dit telefonnummer"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr "[Person Finder] Meddelelse om sletning af \"%(first_name)s %(last_name)s\""
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"Din anmodning er blevet behandlet. Tjek din indbakke, og bekræft, at du "
+"vil indsende din note ved at følge den indlejrede webadresse."
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
-"[Person Finder] Meddelelse om gendannelse af journal for \"%(first_name)s"
-" %(last_name)s\""
+"[Person Finder] Bekræft %(action)s for noter til \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr "[Person Finder] Bekræft din note til \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Person Finder] Meddelelse om sletning af \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Bekræft underretning om noter for \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Noter er nu deaktiveret for \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Noter er nu aktiveret for \"%(given_name)s "
+"%(family_name)s\""
+
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] Meddelelse om gendannelse af journal for \"%(given_name)s"
+" %(family_name)s\""
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
