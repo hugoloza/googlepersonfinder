@@ -33,13 +33,13 @@ STATUS_CODES = {
 }
 
 
-class Review(utils.Handler):
+class Handler(utils.BaseHandler):
     def get(self):
-        if not self.is_authorized(users.get_current_user()):
+        if not self.is_current_user_authorized():
             return self.redirect(users.create_login_url('/admin/review'))
-        status = self.request.get('status') or 'all'
 
         # Make the navigation links.
+        status = self.request.get('status') or 'all'
         nav_html = ''
         for option in [
             'all', 'unspecified', 'information_sought', 'is_note_author',
@@ -51,7 +51,7 @@ class Review(utils.Handler):
                     self.get_url('/admin/review', status=option), option)
 
         # Construct the query for notes.
-        query = model.Note.all_in_subdomain(self.subdomain
+        query = model.Note.all_in_repo(self.repo
                          ).filter('reviewed =', False
                          ).filter('hidden =', False
                          ).order('-entry_date')
@@ -63,7 +63,7 @@ class Review(utils.Handler):
         skip = self.params.skip or 0
         notes = query.fetch(NOTES_PER_PAGE + 1, skip)
         for note in notes[:NOTES_PER_PAGE]:
-            person = model.Person.get(self.subdomain, note.person_record_id)
+            person = model.Person.get(self.repo, note.person_record_id)
             if person:
                 # Copy in the fields of the associated Person.
                 for name in person.properties():
@@ -87,17 +87,20 @@ class Review(utils.Handler):
             next_url = None
 
         return self.render(
-            'templates/admin_review.html',
-            notes=notes, nav_html=nav_html, next_url=next_url,
-            first=skip + 1, last=skip + len(notes[:NOTES_PER_PAGE]))
+            'admin_review.html',
+            notes=notes,
+            nav_html=nav_html, next_url=next_url,
+            first=skip + 1,
+            last=skip + len(notes[:NOTES_PER_PAGE]))
 
     def post(self):
-        if not self.is_authorized(users.get_current_user()):
+        if not self.is_current_user_authorized():
             return self.redirect(users.create_login_url('/admin/review'))
+
         notes = []
         for name, value in self.request.params.items():
             if name.startswith('note.'):
-                note = model.Note.get(self.subdomain, name[5:])
+                note = model.Note.get(self.repo, name[5:])
                 if note:
                     if value in ['accept', 'flag']:
                         note.reviewed = True
@@ -107,10 +110,10 @@ class Review(utils.Handler):
         db.put(notes)
         self.redirect('/admin/review', status=self.params.status)
 
-    def is_authorized(self, user):
-      #TODO: Make domain name configurable.
-      return user and user.email().endswith('@google.com')
-
-
-if __name__ == '__main__':
-    utils.run(('/admin/review', Review))
+    def is_current_user_authorized(self):
+        if users.is_current_user_admin():  # admins can always review
+            return True
+        domain = self.config.authorized_reviewer_domain
+        if domain:  # also allow any user from the configured domain
+            user = users.get_current_user()
+            return user and user.email().endswith('@' + domain)
