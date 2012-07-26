@@ -35,7 +35,6 @@ class Handler(utils.BaseHandler):
         show_private_info = reveal.verify(content_id, self.params.signature)
 
         self.render('flag_note.html',
-                    onload_function='load_language_api()',
                     note=note,
                     captcha_html=captcha_html,
                     reveal_url=reveal_url,
@@ -49,8 +48,13 @@ class Handler(utils.BaseHandler):
             return self.error(400, 'No note with ID: %r' % self.params.id)
 
         captcha_response = note.hidden and self.get_captcha_response()
-        if not note.hidden or captcha_response.is_valid or self.is_test_mode():
+        if not note.hidden or captcha_response.is_valid or self.env.test_mode:
             note.hidden = not note.hidden
+            # When "hidden" changes, update source_date and entry_date (melwitt)
+            # http://code.google.com/p/googlepersonfinder/issues/detail?id=58
+            now = utils.get_utcnow()
+            note.source_date = now
+            note.entry_date = now
             db.put(note)
 
             model.UserActionLog.put_new(
@@ -61,7 +65,6 @@ class Handler(utils.BaseHandler):
         elif not captcha_response.is_valid:
             captcha_html = self.get_captcha_html(captcha_response.error_code)
             self.render('flag_note.html',
-                        onload_function='load_language_api()',
                         note=note,
                         captcha_html=captcha_html,
                         signature=self.params.signature)

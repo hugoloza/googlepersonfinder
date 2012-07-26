@@ -35,7 +35,6 @@ import urlparse
 import django.utils.html
 from google.appengine.api import images
 from google.appengine.api import mail
-from google.appengine.api import memcache
 from google.appengine.api import taskqueue
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -75,12 +74,18 @@ GLOBAL_PATH_RE = re.compile(r'^/(global|personfinder)(/?|/.*)$')
 
 # ==== String formatting =======================================================
 
+def format_boolean(value):
+    return value and 'true' or 'false'
+
 def format_utc_datetime(dt):
-    if dt is None:
+    if not dt:
         return ''
-    integer_dt = datetime(
-        dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
-    return integer_dt.isoformat() + 'Z'
+    return dt.replace(microsecond=0).isoformat() + 'Z'
+
+def format_utc_timestamp(timestamp):
+    if not isinstance(timestamp, (int, float)):
+        return ''
+    return format_utc_datetime(datetime.utcfromtimestamp(timestamp))
 
 def format_sitemaps_datetime(dt):
     integer_dt = datetime(
@@ -172,7 +177,6 @@ def validate_expiry(value):
     try:
         value = int(value)
     except Exception, e:
-        logging.debug('validate_expiry exception: %s', e)
         return None
     return value > 0 and value or None
 
@@ -227,7 +231,7 @@ def validate_timestamp(string):
 
 def validate_image(bytestring):
     try:
-        image = ''
+        image = None
         if bytestring:
             image = images.Image(bytestring)
             image.width
@@ -255,6 +259,38 @@ def validate_repo(string):
                      'lowercase letters, digits, and hyphens.')
 
 
+RESOURCE_NAME_RE = re.compile('^[a-z0-9._-]+$')
+
+def validate_resource_name(string):
+    """A resource name or bundle label."""
+    string = (string or '').strip().lower()
+    if not string:
+        return None
+    if RESOURCE_NAME_RE.match(string):
+        return string
+    raise ValueError('Invalid resource name or bundle name: %r' % string)
+
+
+LANG_RE = re.compile('^[A-Za-z0-9-]+$')
+
+def validate_lang(string):
+    """A BCP 47 language tag."""
+    string = (string or '').strip().lower()
+    if not string:
+        return None
+    if LANG_RE.match(string):
+        return string
+    raise ValueError('Invalid language tag: %r' % string)
+
+
+def validate_cache_seconds(string):
+    """A number of seconds to cache a Resource in RAM."""
+    string = (string or '').strip()
+    if string:
+        return float(string)
+    return 1.0
+
+
 # ==== Other utilities =========================================================
 
 def url_is_safe(url):
@@ -267,14 +303,12 @@ def get_app_name():
     from google.appengine.api import app_identity
     return app_identity.get_application_id()
 
-def sanitize_urls(person):
+def sanitize_urls(record):
     """Clean up URLs to protect against XSS."""
-    if person.photo_url:
-        if not url_is_safe(person.photo_url):
-            person.photo_url = None
-    if person.source_url:
-        if not url_is_safe(person.source_url):
-            person.source_url = None
+    for field in ['photo_url', 'source_url']:
+        url = getattr(record, field, None)
+        if url and not url_is_safe(url):
+            setattr(record, field, None)
 
 def get_host(host=None):
     host = host or os.environ['HTTP_HOST']
@@ -311,32 +345,35 @@ def get_secret(name):
     if secret:
         return secret.secret
 
-# a datetime.datetime object representing debug time.
+# The current time for testing as a datetime object, or None if using real time.
 _utcnow_for_test = None
 
 def set_utcnow_for_test(now):
-    """Set current time for debug purposes.  For convenience, this accepts a
-    datetime object or a timestamp in seconds since 1970-01-01 00:00:00 UTC."""
+    """Sets the current time for testing purposes.  Pass in a datetime object
+    or a timestamp in epoch seconds; or pass None to revert to real time."""
     global _utcnow_for_test
     if isinstance(now, (int, float)):
-        now = datetime.utcfromtimestamp(now)
+        now = datetime.utcfromtimestamp(float(now))
     _utcnow_for_test = now
 
 def get_utcnow():
-    """Return current time in utc, or debug value if set."""
+    """Returns the current UTC datetime (settable with set_utcnow_for_test)."""
     global _utcnow_for_test
-    return _utcnow_for_test or datetime.utcnow()
+    return (_utcnow_for_test is None) and datetime.utcnow() or _utcnow_for_test
 
-def get_utcnow_seconds():
-    """Return current time in seconds in utc, or debug value if set."""
-    now = get_utcnow()
-    return calendar.timegm(now.utctimetuple()) + now.microsecond * 1e-6
+def get_timestamp(dt):
+    """Converts datetime object to a float value in epoch seconds."""
+    return calendar.timegm(dt.utctimetuple()) + dt.microsecond * 1e-6
+
+def get_utcnow_timestamp():
+    """Returns the current time in epoch seconds (settable with
+    set_utcnow_for_test)."""
+    return get_timestamp(get_utcnow())
 
 def log_api_action(handler, action, num_person_records=0, num_note_records=0,
                    people_skipped=0, notes_skipped=0):
-    """Log an api action."""
-    log = handler.config and handler.config.api_action_logging
-    if log:
+    """Log an API action."""
+    if handler.config and handler.config.api_action_logging:
         model.ApiActionLog.record_action(
             handler.repo, handler.params.key,
             handler.params.version.version, action,
@@ -345,40 +382,39 @@ def log_api_action(handler, action, num_person_records=0, num_note_records=0,
             handler.request.headers.get('User-Agent'),
             handler.request.remote_addr, handler.request.url)
 
-def get_full_name(first_name, last_name, config):
-    """Return full name string obtained by concatenating first_name and
-    last_name in the order specified by config.family_name_first, or just
-    first_name if config.use_family_name is False."""
+def get_full_name(given_name, family_name, config):
+    """Return full name string obtained by concatenating given_name and
+    family_name in the order specified by config.family_name_first, or just
+    given_name if config.use_family_name is False."""
     if config.use_family_name:
-        separator = (first_name and last_name) and u' ' or u''
+        separator = (given_name and family_name) and u' ' or u''
         if config.family_name_first:
-            return separator.join([last_name, first_name])
+            return separator.join([family_name, given_name])
         else:
-            return separator.join([first_name, last_name])
+            return separator.join([given_name, family_name])
     else:
-        return first_name
+        return given_name
 
 def get_person_full_name(person, config):
-    """Return person's full name.  "person" can be any object with "first_name"
-    and "last_name" attributes."""
-    return get_full_name(person.first_name, person.last_name, config)
+    """Return person's full name.  "person" can be any object with "given_name"
+    and "family_name" attributes."""
+    return get_full_name(person.given_name, person.family_name, config)
 
-def send_confirmation_email_to_record_author(handler, person,
-                                             action, embed_url, record_id):
+def send_confirmation_email_to_record_author(
+    handler, person, action, confirm_url, record_id):
     """Send the author an email to confirm enabling/disabling notes
     of a record."""
     if not person.author_email:
         return handler.error(
-            400,
-            _('No author email for record %(id)s.') % {'id' : record_id})
+            400, _('No author email for record %(id)s.') % {'id' : record_id})
 
     # i18n: Subject line of an e-mail message confirming the author
     # wants to disable notes for this record
     subject = _(
         '[Person Finder] Confirm %(action)s of notes on '
-        '"%(first_name)s %(last_name)s"'
-        ) % {'action': action, 'first_name': person.first_name,
-             'last_name': person.last_name}
+        '"%(given_name)s %(family_name)s"'
+        ) % {'action': action, 'given_name': person.given_name,
+             'family_name': person.family_name}
 
     # send e-mail to record author confirming the lock of this record.
     template_name = '%s_notes_email.txt' % action
@@ -388,10 +424,10 @@ def send_confirmation_email_to_record_author(handler, person,
         body=handler.render_to_string(
             template_name,
             author_name=person.author_name,
-            first_name=person.first_name,
-            last_name=person.last_name,
+            given_name=person.given_name,
+            family_name=person.family_name,
             site_url=handler.get_url('/'),
-            embed_url=embed_url
+            confirm_url=confirm_url
         )
     )
 
@@ -406,11 +442,11 @@ def get_repo_url(request, repo, scheme=None):
 def get_url(request, repo, action, charset='utf-8', scheme=None, **params):
     """Constructs the absolute URL for a given action and query parameters,
     preserving the current repo and the 'small' and 'style' parameters."""
-    repo_url = get_repo_url(request, repo, scheme) + '/' + action.lstrip('/')
+    repo_url = get_repo_url(request, repo or 'global', scheme)
     params['small'] = params.get('small', request.get('small', None))
     params['style'] = params.get('style', request.get('style', None))
     query = urlencode(params, charset)
-    return repo_url + (query and '?' + query or '')
+    return repo_url + '/' + action.lstrip('/') + (query and '?' + query or '')
 
 
 # ==== Struct ==================================================================
@@ -430,9 +466,6 @@ class BaseHandler(webapp.RequestHandler):
     # Handlers that don't need a repository name can set this to False.
     repo_required = True
 
-    # Handlers that don't use a repository can set this to True.
-    ignore_repo = False
-
     # Handlers that require HTTPS can set this to True.
     https_required = False
 
@@ -443,11 +476,13 @@ class BaseHandler(webapp.RequestHandler):
     auto_params = {
         'add_note': validate_yes,
         'age': validate_age,
-        'alternate_first_names': strip,
-        'alternate_last_names': strip,
+        'alternate_family_names': strip,
+        'alternate_given_names': strip,
         'author_email': strip,
+        'author_made_contact': validate_yes,
         'author_name': strip,
         'author_phone': strip,
+        'cache_seconds': validate_cache_seconds,
         'clone': validate_yes,
         'confirm': validate_yes,
         'content_id': strip,
@@ -458,11 +493,8 @@ class BaseHandler(webapp.RequestHandler):
         'email_of_found_person': strip,
         'error': strip,
         'expiry_option': validate_expiry,
-        'first_name': strip,
-        'flush_cache': validate_yes,
-        'flush_memcache': validate_yes,
-        'flush_config_cache': strip,
-        'found': validate_yes,
+        'family_name': strip,
+        'given_name': strip,
         'home_city': strip,
         'home_country': strip,
         'home_neighborhood': strip,
@@ -474,12 +506,13 @@ class BaseHandler(webapp.RequestHandler):
         'id2': strip,
         'id3': strip,
         'key': strip,
-        'lang': strip,
+        'lang': validate_lang,
         'last_known_location': strip,
-        'last_name': strip,
         'max_results': validate_int,
         'min_entry_date': validate_datetime,
         'new_repo': validate_repo,
+        'note_photo': validate_image,
+        'note_photo_url': strip,
         'omit_notes': validate_yes,
         'operation': strip,
         'person_record_id': strip,
@@ -487,6 +520,11 @@ class BaseHandler(webapp.RequestHandler):
         'photo': validate_image,
         'photo_url': strip,
         'query': strip,
+        'resource_bundle': validate_resource_name,
+        'resource_bundle_original': validate_resource_name,
+        'resource_lang': validate_lang,
+        'resource_name': validate_resource_name,
+        'resource_set_preview': validate_yes,
         'role': validate_role,
         'sex': validate_sex,
         'signature': strip,
@@ -529,7 +567,7 @@ class BaseHandler(webapp.RequestHandler):
             return redirect_url + '?' + '&'.join(query_params)
         return ''
 
-    def redirect(self, path, repo=None, **params):
+    def redirect(self, path, repo=None, permanent=False, **params):
         # This will prepend the repo to the path to create a working URL,
         # unless the path has a global prefix or is an absolute URL.
         if re.match('^[a-z]+:', path) or GLOBAL_PATH_RE.match(path):
@@ -537,7 +575,7 @@ class BaseHandler(webapp.RequestHandler):
               path += '?' + urlencode(params, self.charset)
         else:
             path = self.get_url(path, repo, **params)
-        return webapp.RequestHandler.redirect(self, path)
+        return webapp.RequestHandler.redirect(self, path, permanent=permanent)
 
     def render(self, name, language_override=None, cache_seconds=0,
                get_vars=lambda: {}, **vars):
@@ -673,15 +711,6 @@ class BaseHandler(webapp.RequestHandler):
                 return date + timedelta(0, 3600*self.config.time_zone_offset)
             return date
 
-    def get_repo_menu_html(self):
-        result = '''
-<style>body { font-family: arial; font-size: 13px; }</style>
-'''
-        for option in self.env.repo_options:
-            url = self.get_url('', repo=option.repo)
-            result += '<a href="%s">%s</a><br>' % (url, option.title)
-        return result
-
     def initialize(self, request, response, env):
         webapp.RequestHandler.initialize(self, request, response)
         self.params = Struct()
@@ -689,11 +718,6 @@ class BaseHandler(webapp.RequestHandler):
         self.repo = env.repo
         self.config = env.config
         self.charset = env.charset
-
-        # Log AppEngine-specific request headers.
-        for name in self.request.headers.keys():
-            if name.lower().startswith('x-appengine'):
-                logging.debug('%s: %s' % (name, self.request.headers[name]))
 
         # Validate query parameters.
         for name, validator in self.auto_params.items():
@@ -703,21 +727,6 @@ class BaseHandler(webapp.RequestHandler):
             except Exception, e:
                 setattr(self.params, name, validator(None))
                 return self.error(400, 'Invalid parameter %s: %s' % (name, e))
-
-        if self.params.flush_cache:
-            # Useful for debugging and testing.
-            resources.clear_caches()
-            memcache.flush_all()
-
-        if self.params.flush_memcache:
-            memcache.flush_all()
-
-        flush_what = self.params.flush_config_cache
-        if flush_what == "all":
-            logging.info('Flushing complete config_cache')
-            config.cache.flush()
-        elif flush_what != "nothing":
-            config.cache.delete(flush_what)
 
         # Log the User-Agent header.
         sample_rate = float(
@@ -731,7 +740,7 @@ class BaseHandler(webapp.RequestHandler):
 
         # Check for SSL (unless running on localhost for development).
         if self.https_required and self.env.domain != 'localhost':
-            if scheme != 'https':
+            if self.env.scheme != 'https':
                 return self.error(403, 'HTTPS is required.')
 
         # Check for an authorization key.
@@ -755,22 +764,15 @@ class BaseHandler(webapp.RequestHandler):
         if not model.Repo.get_by_key_name(self.repo):
             if legacy_redirect.do_redirect(self):
                 return legacy_redirect.redirect(self)
-            html = 'No such repository.'
+            html = 'No such repository. '
             if self.env.repo_options:
-                html += ' Select one:<p>' + self.get_repo_menu_html()
+                html += 'Select:<p>' + self.render_to_string('repo-menu.html')
             return self.error(404, message_html=html)
 
         # If this repository has been deactivated, terminate with a message.
         if self.config.deactivated and not self.ignore_deactivation:
             self.env.language_menu = []
+            self.env.robots_ok = True
             self.render('message.html', cls='deactivation',
                         message_html=self.config.deactivation_message_html)
             self.terminate_response()
-
-    def is_test_mode(self):
-        """Returns True if the request is in test mode. Request is considered
-        to be in test mode if the remote IP address is the localhost and if
-        the 'test_mode' HTTP parameter exists and is set to 'yes'."""
-        post_is_test_mode = validate_yes(self.request.get('test_mode', ''))
-        client_is_localhost = os.environ['REMOTE_ADDR'] == '127.0.0.1'
-        return post_is_test_mode and client_is_localhost

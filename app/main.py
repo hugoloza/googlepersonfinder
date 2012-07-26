@@ -22,19 +22,25 @@ import mimetypes
 import re
 import urlparse
 
+from google.appengine.api import memcache
 from google.appengine.ext import webapp
 
 import config
 import const
+import legacy_redirect
 import pfif
 import resources
 import utils
 
 
+# When no action or repo is specified, redirect to this action.
+HOME_ACTION = 'home.html'
+
 # Map of URL actions to Python module and class names.
 # TODO(kpy): Remove the need for this configuration information, either by
 # regularizing the module and class names or adding a URL attribute to handlers.
 HANDLER_CLASSES = dict((x, x.replace('/', '_') + '.Handler') for x in [
+  'start',
   'query',
   'results',
   'create',
@@ -58,21 +64,18 @@ HANDLER_CLASSES = dict((x, x.replace('/', '_') + '.Handler') for x in [
   'confirm_post_flagged_note',
   'admin',
   'admin/dashboard',
+  'admin/resources',
   'admin/review',
 ])
 
 # Exceptional cases where the module name doesn't match the URL.
 HANDLER_CLASSES[''] = 'start.Handler'
-HANDLER_CLASSES['start'] = 'start.Handler'
-HANDLER_CLASSES['howitworks'] = 'googleorg.Handler'
-HANDLER_CLASSES['faq'] = 'googleorg.Handler'
-HANDLER_CLASSES['responders'] = 'googleorg.Handler'
-HANDLER_CLASSES['admin/set_utcnow_for_test'] = 'set_utcnow.Handler'
 HANDLER_CLASSES['api/read'] = 'api.Read'
 HANDLER_CLASSES['api/write'] = 'api.Write'
 HANDLER_CLASSES['api/search'] = 'api.Search'
 HANDLER_CLASSES['api/subscribe'] = 'api.Subscribe'
 HANDLER_CLASSES['api/unsubscribe'] = 'api.Unsubscribe'
+HANDLER_CLASSES['feeds/repo'] = 'feeds.Repo'
 HANDLER_CLASSES['feeds/note'] = 'feeds.Note'
 HANDLER_CLASSES['feeds/person'] = 'feeds.Person'
 HANDLER_CLASSES['sitemap'] = 'sitemap.SiteMap'
@@ -83,12 +86,21 @@ HANDLER_CLASSES['tasks/count/reindex'] = 'tasks.Reindex'
 HANDLER_CLASSES['tasks/count/update_status'] = 'tasks.UpdateStatus'
 HANDLER_CLASSES['tasks/delete_expired'] = 'tasks.DeleteExpired'
 HANDLER_CLASSES['tasks/delete_old'] = 'tasks.DeleteOld'
+HANDLER_CLASSES['tasks/clean_up_in_test_mode'] = 'tasks.CleanUpInTestMode'
 
 def get_repo_and_action(request):
     """Determines the repo and action for a request.  The action is the part
     of the URL path after the repo, with no leading or trailing slashes."""
     scheme, netloc, path, _, _ = urlparse.urlsplit(request.url)
     parts = path.lstrip('/').split('/')
+
+    # TODO(kpy): Remove support for legacy URLs in mid-January 2012.
+    import legacy_redirect
+    if legacy_redirect.get_subdomain(request):
+        repo = legacy_redirect.get_subdomain(request)
+        action = '/'.join(parts)
+        return repo, action
+
     # Depending on whether we're serving from appspot directly or
     # google.org/personfinder we could have /global or /personfinder/global
     # as the 'global' prefix.
@@ -142,18 +154,18 @@ def select_lang(request, config=None):
             request.cookies.get('django_language', None) or
             default_lang or
             django_setup.LANGUAGE_CODE)
-    lang = re.sub('[^A-Za-z-]', '', lang)
+    lang = re.sub('[^A-Za-z0-9-]', '', lang)
     return const.LANGUAGE_SYNONYMS.get(lang, lang)
 
-
-def get_repo_options(lang):
+def get_repo_options(request, lang):
     """Returns a list of the names and titles of the active repositories."""
     options = []
     for repo in config.get('active_repos') or []:
         titles = config.get_for_repo(repo, 'repo_titles', {})
         default_title = (titles.values() or ['?'])[0]
         title = titles.get(lang, titles.get('en', default_title))
-        options.append(utils.Struct(repo=repo, title=title))
+        url = utils.get_repo_url(request, repo)
+        options.append(utils.Struct(repo=repo, title=title, url=url))
     return options
 
 def get_language_options(request, config=None):
@@ -183,7 +195,9 @@ def setup_env(request):
     that are commonly used by most handlers."""
     env = utils.Struct()
     env.repo, env.action = get_repo_and_action(request)
-    env.config = env.repo and config.Configuration(env.repo)
+    env.config = config.Configuration(env.repo or '*')
+    env.test_mode = (request.remote_addr == '127.0.0.1' and
+                     request.get('test_mode'))
 
     # TODO(kpy): Make these global config settings and get rid of get_secret().
     env.analytics_id = get_secret('analytics_id')
@@ -196,14 +210,20 @@ def setup_env(request):
     env.virtual_keyboard_layout = const.VIRTUAL_KEYBOARD_LAYOUTS.get(env.lang)
     env.back_chevron = env.rtl and u'\xbb' or u'\xab'
 
+    # Determine the resource bundle to use.
+    env.default_resource_bundle = config.get('default_resource_bundle', '1')
+    env.resource_bundle = (request.cookies.get('resource_bundle', '') or
+                           env.default_resource_bundle)
+
     # Information about the request.
     env.url = utils.set_url_param(request.url, 'lang', env.lang)
     env.scheme, env.netloc, env.path, _, _ = urlparse.urlsplit(request.url)
     env.domain = env.netloc.split(':')[0]
+    env.global_url = utils.get_repo_url(request, 'global')
 
     # Commonly used information that's rendered or localized for templates.
     env.language_options = get_language_options(request, env.config)
-    env.repo_options = get_repo_options(env.lang)
+    env.repo_options = get_repo_options(request, env.lang)
     env.expiry_options = [
         utils.Struct(value=value, text=const.PERSON_EXPIRY_TEXT[value])
         for value in sorted(const.PERSON_EXPIRY_TEXT.keys(), key=int)
@@ -215,9 +235,17 @@ def setup_env(request):
             not env.config or env.config.allow_believed_dead_via_ui)
     ]
 
+    # Fields related to "small mode" (for embedding in an <iframe>).
+    env.small = request.get('small', '').lower() == 'yes'
+    # Optional "target" attribute for links to non-small pages.
+    env.target_attr = env.small and ' target="_blank" ' or ''
+
     # Repo-specific information.
     if env.repo:
+        # repo_url is the root URL for the repository.
         env.repo_url = utils.get_repo_url(request, env.repo)
+        # start_url is like repo_url but preserves 'small' and 'style' params.
+        env.start_url = utils.get_url(request, env.repo, '')
         env.repo_path = urlparse.urlsplit(env.repo_url)[2]
         env.repo_title = get_localized_message(
             env.config.repo_titles, env.lang, '?')
@@ -229,17 +257,30 @@ def setup_env(request):
             env.config.view_page_custom_htmls, env.lang, '')
         env.seek_query_form_custom_html = get_localized_message(
             env.config.seek_query_form_custom_htmls, env.lang, '')
+        # If the repository is deactivated, we should not show test mode
+        # notification.
+        env.repo_test_mode = (
+            env.config.test_mode and not env.config.deactivated)
 
-        # Preformat the name from the 'first_name' and 'last_name' parameters.
-        first = request.get('first_name', '').strip()
-        last = request.get('last_name', '').strip()
-        env.params_full_name = utils.get_full_name(first, last, env.config)
-
-        # URLs that are used in the base template.
-        env.start_url = utils.get_url(request, env.repo, '/')
-        env.embed_url = utils.get_url(request, env.repo, '/embed')
+        # Preformat the name from the 'given_name' and 'family_name' parameters.
+        given_name = request.get('given_name', '').strip()
+        family_name = request.get('family_name', '').strip()
+        env.params_full_name = utils.get_full_name(
+            given_name, family_name, env.config)
 
     return env
+
+def flush_caches(*keywords):
+    """Flushes the specified set of caches.  Pass '*' to flush everything."""
+    if '*' in keywords or 'resource' in keywords:
+       resources.clear_caches()
+    if '*' in keywords or 'memcache' in keywords:
+       memcache.flush_all()
+    if '*' in keywords or 'config' in keywords:
+       config.cache.flush()
+    for keyword in keywords:
+        if keyword.startswith('config/'):
+            config.cache.delete(keyword[7:])
 
 
 class Main(webapp.RequestHandler):
@@ -249,33 +290,67 @@ class Main(webapp.RequestHandler):
     def initialize(self, request, response):
         webapp.RequestHandler.initialize(self, request, response)
 
+        # If requested, set the clock before doing anything clock-related.
+        # Only works on localhost for testing.  Specify ?utcnow=1293840000 to
+        # set the clock to 2011-01-01, or ?utcnow=real to revert to real time.
+        utcnow = request.get('utcnow')
+        if request.remote_addr == '127.0.0.1' and utcnow:
+            if utcnow == 'real':
+                utils.set_utcnow_for_test(None)
+            else:
+                utils.set_utcnow_for_test(float(utcnow))
+
+        # If requested, flush caches before we touch anything that uses them.
+        flush_caches(*request.get('flush', '').split(','))
+
+        # check for legacy redirect:
+        # TODO(lschumacher|kpy): remove support for legacy URLS Q1 2012.
+        if legacy_redirect.do_redirect(self):
+            # stub out get/head to prevent failures.
+            self.get = self.head = lambda *args: None
+            return legacy_redirect.redirect(self)
+
         # Gather commonly used information into self.env.
         self.env = setup_env(request)
         request.charset = self.env.charset  # used for parsing query params
 
         # Activate the selected language.
         response.headers['Content-Language'] = self.env.lang
-        response.headers['Set-Cookie'] = 'django_language=' + self.env.lang
+        response.headers['Set-Cookie'] = \
+            'django_language=%s; path=/' % self.env.lang
         django_setup.activate(self.env.lang)
 
+        # Activate the appropriate resource bundle.
+        resources.set_active_bundle_name(self.env.resource_bundle)
+
     def serve(self):
-        action, lang = self.env.action, self.env.lang
-        if action in HANDLER_CLASSES:
+        request, response, env = self.request, self.response, self.env
+        if not env.action and not env.repo:
+            # Redirect to the default home page.
+            self.redirect(env.global_url + '/' + HOME_ACTION)
+        elif env.action in HANDLER_CLASSES:
             # Dispatch to the handler for the specified action.
-            module_name, class_name = HANDLER_CLASSES[action].split('.')
+            module_name, class_name = HANDLER_CLASSES[env.action].split('.')
             handler = getattr(__import__(module_name), class_name)()
-            handler.initialize(self.request, self.response, self.env)
-            getattr(handler, self.request.method.lower())()  # get() or post()
-        elif not action.endswith('.template'):  # don't serve template code
+            handler.initialize(request, response, env)
+            getattr(handler, request.method.lower())()  # get() or post()
+        elif env.action.endswith('.template'):
+            # Don't serve template source code.
+            response.set_status(404)
+            response.out.write('Not found')
+        else:
             # Serve a static page or file.
-            extra_key = (self.env.repo, self.env.charset)
-            get_vars = lambda: {'env': self.env, 'config': self.env.config}
-            content = resources.get_rendered(action, lang, extra_key, get_vars)
+            env.robots_ok = True
+            get_vars = lambda: {'env': env, 'config': env.config}
+            content = resources.get_rendered(
+                env.action, env.lang, (env.repo, env.charset), get_vars)
             if content is None:
-                return self.error(404)
-            content_type, content_encoding = mimetypes.guess_type(action)
-            self.response.headers['Content-Type'] = content_type
-            self.response.out.write(content)
+                response.set_status(404)
+                response.out.write('Not found')
+            else:
+                content_type, encoding = mimetypes.guess_type(env.action)
+                response.headers['Content-Type'] = content_type or 'text/plain'
+                response.out.write(content)
 
     def get(self):
         self.serve()

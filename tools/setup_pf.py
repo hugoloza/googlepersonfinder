@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from datetime import datetime
+
 import const
 from model import *
 from utils import *
@@ -44,24 +46,21 @@ def reset_datastore():
 def setup_repos():
     db.put([Repo(key_name='haiti'),
             Repo(key_name='japan'),
-            Repo(key_name='pakistan'),
-            Repo(key_name='lang-test')])
+            Repo(key_name='pakistan')])
     # Set some repositories active so they show on the main page.
-    config.set(active_repos=['japan', 'haiti', 'lang-test'])
+    config.set(active_repos=['japan', 'haiti'])
 
 def setup_configs():
-    """Installs the configuration settings for Haiti, Chile, China, Pakistan."""
+    """Installs configuration settings used for testing by server_tests."""
     COMMON_KEYWORDS = ['person', 'people', 'finder', 'person finder',
                        'people finder', 'crisis', 'survivor', 'family']
 
-    # NOTE: the following two CAPTCHA keys are dummy keys for testing only. They
-    # should be replaced with secret keys upon launch.
+    # NOTE: the following two CAPTCHA keys are dummy keys for testing only.
+    # They should be replaced with real keys upon launch.
     config.set(captcha_private_key='6LfiOr8SAAAAAFyxGzWkhjo_GRXxYoDEbNkt60F2',
                captcha_public_key='6LfiOr8SAAAAAM3wRtnLdgiVfud8uxCqVVJWCs-z',
-    # TODO(kpy): Update this for Translate API v3 and personfinder.google.org.
-    # Google Language API key registered for person-finder.appspot.com
-               language_api_key='ABQIAAAAkyNXK1D6CLHJNPVQfiU8DhQowImlwyPaNDI' +
-                                'ohCJwgv-5lcExKBTP5o1_bXlgQjGi0stsXRtN-p8fdw')
+    # A Google Translate API key with a very low quota, just for testing.
+               translate_api_key='AIzaSyCXdz9x7LDL3BvieEP8Wcze64CC_iqslSE')
 
     config.set_for_repo(
         'haiti',
@@ -80,7 +79,7 @@ def setup_configs():
             u'ha\xefti', u's\xe9isme', 'tremblement', 'tremblement de terre',
             'famille', 'recherche de personnes', 'terremoto'
         ] + COMMON_KEYWORDS),
-        # If false, hide the last_name field and use only first_name.
+        # If false, hide the family_name field and use only given_name.
         use_family_name=True,
         # Presentation order for the given name and family name.
         family_name_first=False,
@@ -106,6 +105,8 @@ def setup_configs():
         results_page_custom_htmls={'en': '', 'fr': ''},
         view_page_custom_htmls={'en': '', 'fr': ''},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
+        published_date=get_timestamp(datetime(2010, 1, 12)),
+        updated_date=get_timestamp(datetime(2010, 1, 12)),
     )
 
     config.set_for_repo(
@@ -140,7 +141,9 @@ def setup_configs():
         time_zone_offset=9,  # UTC+9
         time_zone_abbreviation='JST',
         jp_mobile_carrier_redirect=True,
-        jp_tier2_mobile_redirect_url='http://sagasu-m.appspot.com'
+        jp_tier2_mobile_redirect_url='http://sagasu-m.appspot.com',
+        published_date=get_timestamp(datetime(2011, 3, 11)),
+        updated_date=get_timestamp(datetime(2011, 3, 11)),
     )
 
     config.set_for_repo(
@@ -168,8 +171,11 @@ def setup_configs():
         results_page_custom_htmls={'en': '', 'fr': ''},
         view_page_custom_htmls={'en': '', 'fr': ''},
         seek_query_form_custom_htmls={'en': '', 'fr': ''},
+        published_date=get_timestamp(datetime(2010, 8, 6)),
+        updated_date=get_timestamp(datetime(2010, 8, 6)),
     )
 
+def setup_lang_test_config():
     config.set_for_repo(
         'lang-test',
         # We set short titles to avoid exceeding the field's 500-char limit.

@@ -22,14 +22,12 @@ from datetime import timedelta
 from google.appengine.api import datastore_errors
 from google.appengine.api import memcache
 from google.appengine.ext import db
+
 import config
 import indexing
 import pfif
 import prefix
-
-# The domain name of this application.  The application hosts multiple
-# repositories; each repository ID is a subdomain prefixed to this domain.
-HOME_DOMAIN = 'personfinder.google.org'  # TODO(kpy) get rid of this?
+from const import HOME_DOMAIN
 
 # default # of days for a record to expire.
 DEFAULT_EXPIRATION_DAYS = 40
@@ -138,7 +136,7 @@ class Base(db.Model):
     # 3. tasks.DeleteExpired sets is_expired to True; record vanishes from UI.
     # 4. delete.EXPIRED_TTL_DAYS days pass.
     # 5. tasks.DeleteExpired wipes the record.
-    
+
     # We set default=False to ensure all entities are indexed by is_expired.
     # NOTE: is_expired should ONLY be modified in Person.put_expiry_flags().
     is_expired = db.BooleanProperty(required=False, default=False)
@@ -147,9 +145,9 @@ class Base(db.Model):
     def all(cls, keys_only=False, filter_expired=True):
         """Returns a query for all records of this kind; by default this
         filters out the records marked as expired.
-        
+
         Args:
-          keys_only - If true, return only the keys.  
+          keys_only - If true, return only the keys.
           filter_expired - If true, omit records with is_expired == True.
         Returns:
           query - A Query object for the results.
@@ -205,6 +203,8 @@ class Base(db.Model):
     @classmethod
     def create_original(cls, repo, **kwargs):
         """Creates a new original entity with the given field values."""
+        # TODO(ryok): Consider switching to URL-like record id format,
+        # which is more consitent with repo id format.
         record_id = '%s.%s/%s.%d' % (
             repo, HOME_DOMAIN, cls.__name__.lower(), UniqueId.create_id())
         return cls(key_name=repo + ':' + record_id, repo=repo, **kwargs)
@@ -256,15 +256,11 @@ class Person(Base):
     source_name = db.StringProperty(default='')
     source_url = db.StringProperty(default='')
 
-    full_name = db.StringProperty()
-    first_name = db.StringProperty()
-    last_name = db.StringProperty()
-    # alternate_{first|last}_name field may contain any additional names that do
-    # not fit into first_name or last_name.  What those additional names mean
-    # varies across languages (e.g. in Japanese, users are directed to input
-    # readings (phonetic representations) of their names.)
-    alternate_first_names = db.StringProperty(default='')
-    alternate_last_names = db.StringProperty(default='')
+    full_name = db.StringProperty(multiline=True)
+    given_name = db.StringProperty()
+    family_name = db.StringProperty()
+    alternate_names = db.StringProperty(default='', multiline=True)
+    description = db.TextProperty(default='')
     sex = db.StringProperty(default='', choices=pfif.PERSON_SEX_VALUES)
     date_of_birth = db.StringProperty(default='')  # YYYY, YYYY-MM, YYYY-MM-DD
     age = db.StringProperty(default='')  # NN or NN-MM
@@ -275,14 +271,12 @@ class Person(Base):
     home_postal_code = db.StringProperty(default='')
     home_country = db.StringProperty(default='')
     photo_url = db.TextProperty(default='')
-    other = db.TextProperty(default='')
-
+    profile_urls = db.TextProperty(default='')
 
     # This reference points to a locally stored Photo entity.  ONLY set this
     # property when storing a new Photo object that is owned by this Person
     # record and can be safely deleted when the Person is deleted.
     photo = db.ReferenceProperty(default=None)
-    
 
     # The following properties are not part of the PFIF data model; they are
     # cached on the Person for efficiency.
@@ -291,8 +285,9 @@ class Person(Base):
     # with the latest source_date with the 'status' field present.
     latest_status = db.StringProperty(default='')
     latest_status_source_date = db.DateTimeProperty()
-    # Value of the 'found' and 'source_date' properties on the Note
-    # with the latest source_date with the 'found' field present.
+    # Value of the 'author_made_contact' and 'source_date' properties on the
+    # Note with the latest source_date with the 'author_made_contact' field
+    # present.
     latest_found = db.BooleanProperty()
     latest_found_source_date = db.DateTimeProperty()
 
@@ -300,14 +295,14 @@ class Person(Base):
     # This reflects any change to the Person page.
     last_modified = db.DateTimeProperty(auto_now=True)
 
-    # This flag is set to true only when the record author disabled 
+    # This flag is set to true only when the record author disabled
     # adding new notes to a record.
     notes_disabled = db.BooleanProperty(default=False)
 
     # attributes used by indexing.py
     names_prefixes = db.StringListProperty()
-    _fields_to_index_properties = ['first_name', 'last_name']
-    _fields_to_index_by_prefix_properties = ['first_name', 'last_name']
+    _fields_to_index_properties = ['given_name', 'family_name']
+    _fields_to_index_by_prefix_properties = ['given_name', 'family_name']
 
     @staticmethod
     def past_due_records(repo):
@@ -321,8 +316,8 @@ class Person(Base):
     @staticmethod
     def potentially_expired_records(repo,
                                     days_to_expire=DEFAULT_EXPIRATION_DAYS):
-        """Returns a query for all Person records with source date 
-        older than days_to_expire (or empty source_date), regardless of 
+        """Returns a query for all Person records with source date
+        older than days_to_expire (or empty source_date), regardless of
         is_expired flags value."""
         import utils
         cutoff_date = utils.get_utcnow() - timedelta(days_to_expire)
@@ -378,7 +373,7 @@ class Person(Base):
         return linked_persons
 
     def get_associated_emails(self):
-        """Gets a set of all the e-mail addresses to notify when this record 
+        """Gets a set of all the e-mail addresses to notify when this record
         is changed."""
         email_addresses = set([note.author_email for note in self.get_notes()
                                if note.author_email])
@@ -389,7 +384,7 @@ class Person(Base):
     def get_effective_expiry_date(self):
         """Gets the expiry_date, or if no expiry_date is present, returns the
         source_date plus the configurable default_expiration_days interval.
-        
+
         If there's no source_date, we use original_creation_date.
         Returns:
           A datetime date (not None).
@@ -401,15 +396,15 @@ class Person(Base):
                 self.repo, 'default_expiration_days') or (
                 DEFAULT_EXPIRATION_DAYS)
             # in theory, we should always have original_creation_date, but since
-            # it was only added recently, we might have legacy 
+            # it was only added recently, we might have legacy
             # records without it.
-            start_date = (self.source_date or self.original_creation_date or 
+            start_date = (self.source_date or self.original_creation_date or
                           utils.get_utcnow())
             return start_date + timedelta(expiration_days)
-    
+
     def put_expiry_flags(self):
         """Updates the is_expired flags on this Person and related Notes to
-        make them consistent with the effective_expiry_date() on this Person, 
+        make them consistent with the effective_expiry_date() on this Person,
         and commits the changes to the datastore."""
         import utils
         now = utils.get_utcnow()
@@ -425,7 +420,7 @@ class Person(Base):
                 self.original_creation_date = self.source_date
 
             # If the record is expiring (being replaced with a placeholder,
-            # see http://zesty.ca/pfif/1.3/#data-expiry) or un-expiring (being 
+            # see http://zesty.ca/pfif/1.3/#data-expiry) or un-expiring (being
             # restored from deletion), we want the source_date and entry_date
             # updated so downstream clients will see this as the newest state.
             self.source_date = now
@@ -443,17 +438,14 @@ class Person(Base):
     def wipe_contents(self):
         """Sets all the content fields to None (leaving timestamps and the
         expiry flag untouched), stores the empty record, and permanently
-        deletes any related Notes and Photo.  Call this method ONLY on records
+        deletes any related Notes and Photos.  Call this method ONLY on records
         that have already expired."""
-
         # We rely on put_expiry_flags to have properly set the source_date,
         # entry_date, and is_expired flags on Notes, as necessary.
         assert self.is_expired
 
-        # Delete all related Notes (they will have is_expired == True by now).
-        db.delete(self.get_notes(filter_expired=False))
-        if self.photo:
-            db.delete(self.photo)  # Delete the locally stored Photo, if any.
+        # Permanently delete all related Photos and Notes, but not self.
+        self.delete_related_entities()
 
         for name, property in self.properties().items():
             # Leave the repo, is_expired flag, and timestamps untouched.
@@ -462,14 +454,30 @@ class Person(Base):
                 setattr(self, name, property.default)
         self.put()  # Store the empty placeholder record.
 
+    def delete_related_entities(self, delete_self=False):
+        """Permanently delete all related Photos and Notes, and also self if
+        delete_self is True."""
+        # Delete all related Notes.
+        notes = self.get_notes(filter_expired=False)
+        # Delete the locally stored Photos.  We use get_value_for_datastore to
+        # get just the keys and prevent auto-fetching the Photo data.
+        photo = Person.photo.get_value_for_datastore(self)
+        note_photos = [Note.photo.get_value_for_datastore(n) for n in notes]
+
+        entities_to_delete = filter(None, notes + [photo] + note_photos)
+        if delete_self:
+            entities_to_delete.append(self)
+        db.delete(entities_to_delete)
+
     def update_from_note(self, note):
         """Updates any necessary fields on the Person to reflect a new Note."""
         # We want to transfer only the *non-empty, newer* values to the Person.
-        if note.found is not None:  # for boolean, None means unspecified
+        if note.author_made_contact is not None:  # for boolean, None means
+                                                  # unspecified
             # datetime stupidly refuses to compare to None, so check for None.
             if (self.latest_found_source_date is None or
                 note.source_date >= self.latest_found_source_date):
-                self.latest_found = note.found
+                self.latest_found = note.author_made_contact
                 self.latest_found_source_date = note.source_date
         if note.status:  # for string, '' means unspecified
             if (self.latest_status_source_date is None or
@@ -487,7 +495,7 @@ class Person(Base):
 
 #old indexing
 prefix.add_prefix_properties(
-    Person, 'first_name', 'last_name', 'home_street', 'home_neighborhood',
+    Person, 'given_name', 'family_name', 'home_street', 'home_neighborhood',
     'home_city', 'home_state', 'home_postal_code')
 
 
@@ -515,11 +523,17 @@ class Note(Base):
     source_date = db.DateTimeProperty()
 
     status = db.StringProperty(default='', choices=pfif.NOTE_STATUS_VALUES)
-    found = db.BooleanProperty()
+    author_made_contact = db.BooleanProperty()
     email_of_found_person = db.StringProperty(default='')
     phone_of_found_person = db.StringProperty(default='')
     last_known_location = db.StringProperty(default='')
     text = db.TextProperty(default='')
+    photo_url = db.TextProperty(default='')
+
+    # This reference points to a locally stored Photo entity.  ONLY set this
+    # property when storing a new Photo object that is owned by this Note
+    # record and can be safely deleted when the Note is deleted.
+    photo = db.ReferenceProperty(default=None)
 
     # True if the note has been marked as spam. Will cause the note to be
     # initially hidden from display upon loading a record page.
@@ -531,7 +545,7 @@ class Note(Base):
     def get_note_record_id(self):
         return self.record_id
     note_record_id = property(get_note_record_id)
-    
+
     @staticmethod
     def get_by_person_record_id(
         repo, person_record_id, filter_expired=True):
@@ -546,28 +560,41 @@ class Note(Base):
         query = Note.all_in_repo(repo, filter_expired=filter_expired
             ).filter('person_record_id =', person_record_id
             ).order('source_date')
-        notes = query.fetch(Note.FETCH_LIMIT) 
+        notes = query.fetch(Note.FETCH_LIMIT)
         while notes:
             for note in notes:
                 yield note
             query.with_cursor(query.cursor())  # Continue where fetch left off.
-            notes = query.fetch(Note.FETCH_LIMIT)       
+            notes = query.fetch(Note.FETCH_LIMIT)
 
 class NoteWithBadWords(Note):
     # Spam score given by SpamDetector
     spam_score = db.FloatProperty(default=0)
     # True is the note is confirmed by its author through email
     confirmed = db.BooleanProperty(default=False)
-    # Once the note is confirmed, this field stores the copy of 
-    # this note in Note table. It will be useful if we want to 
+    # Once the note is confirmed, this field stores the copy of
+    # this note in Note table. It will be useful if we want to
     # delete the notes with bad words, even when they are confirmed.
     confirmed_copy_id = db.StringProperty(default='')
 
 class Photo(db.Model):
-    """An entity kind for storing uploaded photos."""
-    bin_data = db.BlobProperty()
-    date = db.DateTimeProperty(auto_now_add=True)
+    """An uploaded image file.  Key name: repo + ':' + photo_id."""
 
+    # Even though the repo is part of the key_name, it is also stored
+    # redundantly as a separate property so it can be indexed and queried upon.
+    repo = db.StringProperty(required=True)
+    image_data = db.BlobProperty()  # sanitized, resized image in PNG format
+    upload_date = db.DateTimeProperty(auto_now_add=True)
+
+    @staticmethod
+    def create(repo, **kwargs):
+        """Creates a Photo entity with the given field values."""
+        id = UniqueId.create_id()
+        return Photo(key_name='%s:%s' % (repo, id), repo=repo, **kwargs)
+
+    @staticmethod
+    def get(repo, id):
+        return Photo.get_by_key_name('%s:%s' % (repo, id))
 
 
 class Authorization(db.Model):
@@ -643,15 +670,16 @@ def encode_count_name(count_name):
 class ApiActionLog(db.Model):
     """Log of api key usage."""
     # actions
+    REPO = 'repo'
     DELETE = 'delete'
     READ = 'read'
     SEARCH = 'search'
     WRITE = 'write'
-    SUBSCRIBE = 'subscribe'    
+    SUBSCRIBE = 'subscribe'
     UNSUBSCRIBE = 'unsubscribe'
-    ACTIONS = [DELETE, READ, SEARCH, WRITE, SUBSCRIBE, UNSUBSCRIBE]
+    ACTIONS = [REPO, DELETE, READ, SEARCH, WRITE, SUBSCRIBE, UNSUBSCRIBE]
 
-    repo = db.StringProperty(required=True)
+    repo = db.StringProperty()
     api_key = db.StringProperty()
     action = db.StringProperty(required=True, choices=ACTIONS)
     person_records = db.IntegerProperty()

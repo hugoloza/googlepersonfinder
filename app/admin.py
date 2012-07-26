@@ -22,6 +22,7 @@ from model import *
 from utils import *
 import const
 import reveal
+import tasks
 
 class Handler(BaseHandler):
     # After a repository is deactivated, we still need the admin page to be
@@ -46,12 +47,13 @@ class Handler(BaseHandler):
                     user=user,
                     repo_options=repo_options,
                     config=self.config, config_json=config_json,
-                    start_url=self.get_url('/'),
                     login_url=users.create_login_url(self.request.url),
                     logout_url=users.create_logout_url(self.request.url),
                     language_exonyms_json=sorted_exonyms_json,
                     onload_function="add_initial_languages()",
-                    id=self.env.domain + '/person.')
+                    id=self.env.domain + '/person.',
+                    test_mode_min_age_hours=
+                        tasks.CleanUpInTestMode.DELETION_AGE_SECONDS / 3600.0)
 
     def post(self):
         if self.params.operation == 'delete':
@@ -85,7 +87,10 @@ class Handler(BaseHandler):
                 results_page_custom_htmls={'en': '', 'fr': ''},
                 view_page_custom_htmls={'en': '', 'fr': ''},
                 seek_query_form_custom_htmls={'en': '', 'fr': ''},
-                badwords='',
+                bad_words='',
+                published_date=get_utcnow_timestamp(),
+                updated_date=get_utcnow_timestamp(),
+                test_mode=False,
             )
             self.redirect('/admin', new_repo)
 
@@ -101,6 +106,7 @@ class Handler(BaseHandler):
                 'deactivated', 'start_page_custom_htmls',
                 'results_page_custom_htmls', 'view_page_custom_htmls',
                 'seek_query_form_custom_htmls',
+                'test_mode',
             ]:
                 try:
                     values[name] = simplejson.loads(self.request.get(name))
@@ -108,9 +114,15 @@ class Handler(BaseHandler):
                     return self.error(
                         400, 'The setting for %s was not valid JSON.' % name)
 
-            for name in ['keywords', 'deactivation_message_html', 'badwords']:
+            for name in ['keywords', 'deactivation_message_html', 'bad_words']:
                 # These settings are literal strings (not JSON).
                 values[name] = self.request.get(name)
+
+            # Update updated_date if any of the following settings are changed.
+            for name in ['deactivated']:
+                if config.get_for_repo(self.repo, name) != values[name]:
+                    values['updated_date'] = get_utcnow_timestamp()
+                    break
 
             config.set_for_repo(self.repo, **values)
             self.redirect('/admin')

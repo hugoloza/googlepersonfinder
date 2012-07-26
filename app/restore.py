@@ -61,7 +61,7 @@ class Handler(utils.BaseHandler):
             return self.error(400, unicode(err))
 
         captcha_response = self.get_captcha_response()
-        if not captcha_response.is_valid and not self.is_test_mode():
+        if not captcha_response.is_valid and not self.env.test_mode:
             captcha_html = self.get_captcha_html(captcha_response.error_code)
             self.render('restore.html',
                         captcha_html=captcha_html,
@@ -79,10 +79,10 @@ class Handler(utils.BaseHandler):
         record_url = self.get_url('/view', person.repo, id=person.record_id)
         subject = _(
             '[Person Finder] Record restoration notice for '
-            '"%(first_name)s %(last_name)s"'
+            '"%(given_name)s %(family_name)s"'
         ) % {
-            'first_name': person.first_name,
-            'last_name': person.last_name
+            'given_name': person.given_name,
+            'family_name': person.family_name
         }
         email_addresses = person.get_associated_emails()
         for address in email_addresses:
@@ -91,8 +91,8 @@ class Handler(utils.BaseHandler):
                 to=address,
                 body=self.render_to_string(
                     'restoration_email.txt',
-                    first_name=person.first_name,
-                    last_name=person.last_name,
+                    given_name=person.given_name,
+                    family_name=person.family_name,
                     record_url=record_url
                 )
             )
