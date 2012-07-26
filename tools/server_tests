@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Starts up an appserver and runs end-to-end tests against it.
+#
+# Use -k to select particular test classes or methods by a substring match:
+#     tools/server_tests -k ConfigTests
+#     tools/server_tests -k test_delete_and_restore
+# 
+# Specify -v to show the name of each test as it runs (rather than just dots).
+# Specify -s to see the messages printed by all tests as they run (by default,
+#     stdout/stderr will be captured and then shown only for failing tests).
+
 pushd "$(dirname $0)" >/dev/null && source common.sh && popd >/dev/null
 
 echo
@@ -8,4 +18,10 @@ $TOOLS_DIR/update_messages
 
 echo
 echo "--- Running server tests"
-$PYTHON $TESTS_DIR/server_tests.py "$@"
+# Both production App Engine and dev_appserver run in the UTC timezone.
+# However, the App Engine SDK uses datetime.now(), not datetime.utcnow().  
+# This means that auto_now properties will get local times when written by
+# server_tests.py, but UTC times when written by the dev_appserver.  So,
+# to make tests work properly, we have to set the local time zone to UTC.
+TZ=UTC time $PYTHON $TESTS_DIR/server_tests.py \
+    --pyargs --tb=short "$@" server_test_cases

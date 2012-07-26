@@ -16,9 +16,15 @@
 from utils import *
 
 
-class Embed(Handler):
+class Handler(BaseHandler):
     def get(self):
-        self.render('templates/embed.html', close_button=self.params.small)
-
-if __name__ == '__main__':
-    run(('/embed', Embed))
+        env = self.env
+        self.render('embed.html', close_button=self.params.small,
+                    gadget_link_html=anchor_start(
+                        '%s/gadget?lang=%s' % (env.repo_url, env.lang)),
+                    apache_link_html=anchor_start(
+                        'http://www.apache.org/licenses/LICENSE-2.0.html'),
+                    developers_link_html=anchor_start(
+                        'http://code.google.com/p/googlepersonfinder'),
+                    link_end_html='</a>'
+)
