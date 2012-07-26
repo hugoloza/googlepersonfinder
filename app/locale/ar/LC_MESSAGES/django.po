@@ -21,22 +21,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  للتأكد من تعطيل الملاحظات أو تمكينها بإذن مؤلف السجل فقط، سيتم إرسال "
+"رسالة تأكيد إلى مؤلف السجل. إذا كنت المؤلف، فتحقق من بريدك الإلكتروني بعد"
+" النقر على الزر أدناه.\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\">\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"عزيزنا %(author_name)s، لقد طلب أحد المستخدمين تمكين الملاحظات على سجل "
+"\"%(given_name)s %(family_name)s\". تم تسجيل عنوان بريدك الإلكتروني كمؤلف "
+"لهذا السجل. ولتمكين الملاحظات على هذا السجل، اتبع هذا الرابط في غضون 3 "
+"أيام:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"عزيزنا %(author_name)s، لقد طلب أحد المستخدمين تعطيل الملاحظات على سجل "
+"\"%(given_name)s %(family_name)s\". تم تسجيل عنوان بريدك الإلكتروني كمؤلف "
+"لهذا السجل. ولتعطيل الملاحظات على هذا السجل، اتبع هذا الرابط في غضون 3 "
+"أيام:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"عزيزنا %(author_name)s، لقد أدخلت للتو ملاحظة على سجل \"%(given_name)s "
+"%(family_name)s\". لنشر الملاحظة، اتبع هذا الرابط في غضون 3 أيام:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
 "                  <input type=\"button\"\n"
-"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
-"\t\t\t id=\"extend_btn\">\n"
-"\t\t</a>\n"
-"\t\t"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
 "                Warning: this record will expire in less than a day.\n"
-"\t\t"
+"                "
 msgid_plural ""
 "\n"
 "                Warning: this record will expire in less than %(days)s "
@@ -48,21 +141,70 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      هل تريد بالتأكيد حذف سجل \"%(first_name)s %(last_name)s\"؟\n"
+"      هل تريد بالتأكيد حذف سجل \"%(given_name)s %(family_name)s\"؟\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      هل تريد بالتأكيد تعطيل الملاحظات على \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      هل تريد بالتأكيد تعطيل الملاحظات على سجل \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      هل تريد بالتأكيد تمكين الملاحظات على \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 
 #, python-format
 msgid ""
 "\n"
 "      Are you sure you want to extend the expiration for record "
-"\"%(first_name)s %(last_name)s\"?\n"
+"\"%(given_name)s %(family_name)s\"?\n"
 "    "
 msgstr ""
+"\n"
+"      هل تريد بالتأكيد مد تاريخ انتهاء الصلاحية للسجل \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      تأكيد الملاحظة\n"
+"    "
 
 msgid ""
 "\n"
@@ -104,17 +246,57 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    للتأكد من تعطيل الملاحظات أو تمكينها بإذن مؤلف السجل فقط، سيتم إرسال "
+"رسالة تأكيد إلى مؤلف السجل. إذا كنت المؤلف، فتحقق من بريدك الإلكتروني بعد"
+" النقر على الزر أدناه.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  سيظل السجل مرئيًا على هذا الموقع، ولكن لن يتمكن أي شخص من نشر المزيد من"
+" الملاحظات عليه.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  لنشر ملاحظتك، الرجاء إدخال عنوان بريدك الإلكتروني أدناه واتبع رابط "
+"التأكيد الذي ستتلقاه.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"A لقد حذف مستخدم السجل لـ \"%(first_name)s %(last_name)s\"\n"
+"A لقد حذف مستخدم السجل لـ \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "ونحن نخطرك بالحذف لأن عنوان بريدك الإلكتروني\n"
@@ -123,19 +305,15 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
 msgstr ""
-
-#, python-format
-msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
-msgstr ""
+"حذف مستخدم السجل لـ \"%(given_name)s %(family_name)s\" على %(site_url)s. "
+"نبلغك بالحذف لأنه تم تسجيل عنوان بريدك الإلكتروني كمؤلف لهذا السجل.\n"
 
 #, python-format
 msgid ""
@@ -143,6 +321,8 @@ msgid ""
 "After %(days_until_deletion)s days, the record will be permanently "
 "deleted.\n"
 msgstr ""
+"\n"
+"بعد %(days_until_deletion)s يوم، سيتم حذف السجل نهائيًا.\n"
 
 #, python-format
 msgid ""
@@ -153,11 +333,58 @@ msgid ""
 "\n"
 "    %(restore_url)s\n"
 msgstr ""
+"\n"
+"ملاحظة: إذا كنت تعتقد أنه تم حذف هذا السجل عن طريق الخطأ، فيمكنك استعادته"
+" عن طريق اتباع هذا الرابط في غضون %(days_until_deletion)s أيام تالية:\n"
+"\n"
+"    %(restore_url)s\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"تم الآن تعطيل الملاحظات على سجل \"%(given_name)s %(family_name)s\". لعرض "
+"السجل، اتبع هذا الرابط:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"نبلغك لأن عنوان بريدك الإلكتروني مقترن بسجل هذا الشخص أو ملاحظة على "
+"السجل.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"تم الآن تمكين الملاحظات على سجل لـ\"%(given_name)s %(family_name)s\". لعرض "
+"السجل، اتبع هذا الرابط:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"نبلغك لأن عنوان بريدك الإلكتروني مقترن بسجل هذا الشخص أو ملاحظة على "
+"السجل.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -167,7 +394,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"لقد استرد مؤلف السجل \"%(first_name)s %(last_name)s\"\n"
+"لقد استرد مؤلف السجل \"%(given_name)s %(family_name)s\"\n"
 "(الذي تم حذفه مسبقًا) السجل.  لعرض\n"
 "السجل، اتبع هذا الرابط:\n"
 "\n"
@@ -179,18 +406,28 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"هناك ملاحظة جددة على سجل \"%(given_name)s %(family_name)s\".\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"لقد اشتركت في تحديث حالة \"%(first_name)s\" على "
-"%(last_name)s%(site_url)s.\n"
+"لقد اشتركت في الملاحظات على \"%(given_name)s %(family_name)s\". يمكنك عرض "
+"هذا السجل على\n"
 "\n"
-"يمكنك عرض السجل بالكامل على %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
 "لإلغاء الاشتراك، اتبع هذا الرابط: %(unsubscribe_link)s\n"
 
@@ -231,16 +468,14 @@ msgstr "الإدارة"
 msgid "Age"
 msgstr "العمر"
 
-#, fuzzy
 msgid "Alternate family names"
-msgstr "اسم العائلة"
+msgstr "أسماء بديلة للأسرة"
 
 msgid "Alternate given names"
-msgstr ""
+msgstr "أسماء أولى بديلة"
 
-#, fuzzy
 msgid "Alternate names"
-msgstr "اسم الشارع"
+msgstr "أسماء بديلة"
 
 msgid "Are you sure this note isn't spam?"
 msgstr "هل أنت متأكد من أن هذه الملاحظة لم تكن غير مرغوب فيها؟"
@@ -269,6 +504,10 @@ msgstr "الرجوع إلى قائمة النتائج"
 msgid "Back to start"
 msgstr "الرجوع إلى البداية"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "تعذر العثور على الملاحظة باستخدام المعرف %(id)s"
+
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -293,6 +532,9 @@ msgstr "إنشاء سجل جديد لـ"
 msgid "Create a new record for a missing person"
 msgstr "إنشاء سجل جديد لشخص مفقود"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "جارٍ حاليًا تتبع حوالي %(num_people)s من السجلات."
@@ -309,15 +551,17 @@ msgstr "حذف هذا السجل"
 msgid "Describe how to identify this person."
 msgstr "صف كيفية تحديد هوية هذا الشخص."
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "صف كيفية تحديد هوية هذا الشخص."
+msgstr "صف الصفات المميزة لجسد هذا الشخص."
 
 msgid "Description"
 msgstr "الوصف"
 
 msgid "Developers"
 msgstr "مطورو التطبيق"
+
+msgid "Disable notes on this record"
+msgstr "تعطيل الملاحظات على هذا السجل"
 
 msgid "Download the sound as MP3"
 msgstr "تنزيل الصوت بصيغة MP3"
@@ -334,6 +578,9 @@ msgstr "تضمين هذه الأداة في موقعك"
 msgid "Embedding the Application"
 msgstr "تضمين التطبيق"
 
+msgid "Enable notes on this record"
+msgstr "تمكين الملاحظات على هذا السجل"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "إدخال بتنسيق (يوم - شهر - سنة)"
 
@@ -343,9 +590,8 @@ msgstr "أدخل الاسم الأول للشخص واسم عائلته."
 msgid "Enter the person's name or parts of the name."
 msgstr "أدخل اسم الشخص أو أجزاء منه."
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "أدخل اسم الشخص أو أجزاء منه."
+msgstr "أدخل اسم الشخص أو أجزاء من الاسم أو رقم الهاتف الجوال."
 
 msgid "Enter the person's name."
 msgstr "أدخل اسم الشخص."
@@ -369,6 +615,8 @@ msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
+"بالنسبة إلى الأرقام بخلاف الهواتف الجوالة، يرجى استخدام خدمة 171 التي "
+"تقدمها NTT."
 
 msgid "Get a new challenge"
 msgstr "الحصول على تحدٍ جديد"
@@ -418,6 +666,9 @@ msgstr "أسعى للحصول على معلومات"
 msgid "I am this person"
 msgstr "أنا هذا الشخص"
 
+msgid "I do not want any more updates on this record."
+msgstr "لا أريد المزيد من التحديثات على هذا السجل."
+
 msgid "I do not want my information online anymore."
 msgstr "لا أريد أن تظهر معلوماتي عبر الإنترنت بعد الآن."
 
@@ -461,6 +712,24 @@ msgstr ""
 "إذا لم يكن هناك أي سجل من هذه السجلات يتطابق مع الشخص الذي في ذهنك، "
 "فيمكنك النقر أدناه لإنشاء سجل جديد."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"إذا كنت مؤلف هذه الملاحظة، فالرجاء التحقق من بريدك الإلكتروني للحصول على "
+"رابط لتأكيد رغبتك في تعطيل الملاحظات على هذا السجل. وإلا، فالرجاء انتظار "
+"تأكيد مؤلف السجل لطلبك."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"إذا كنت مؤلف هذه الملاحظة، فالرجاء التحقق من بريدك الإلكتروني للحصول على "
+"رابط لتأكيد رغبتك في تمكين الملاحظات على هذا السجل. وإلا، فالرجاء انتظار "
+"تأكيد مؤلف السجل لطلبك."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr "إذا كان لديك صورة لهذا الشخص، فحمّلها أو أدخل عنوان URL لها."
 
@@ -469,6 +738,9 @@ msgstr "غير صحيح.  حاول مرة أخرى."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "عنوان بريد إلكتروني غير صالح. الرجاء المحاولة مرة أخرى."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "آخر موقع معروف للشخص المفقود"
@@ -522,26 +794,47 @@ msgstr "الحي"
 msgid "No"
 msgstr "لا"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "ليس هناك عنوان بريد إلكتروني لمؤلف السجل %(id)s."
+
 msgid "No messages are found registered to the carrier's message board service."
-msgstr ""
+msgstr "لم يتم العثور على أي رسائل مسجلة في خدمة منتدى الرسائل لمشغل شبكة الجوال."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "ليست هناك ملاحظة بالمعرف: %(id)s."
+
+msgid "No notes have been posted"
+msgstr "لم يتم نشر أية ملاحظات"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "ليس هناك شخص بالمعرف: %(id)s."
 
 msgid "No results found for"
 msgstr "لم يتم العثور على أية نتائج لـ"
 
-msgid "No status updates have been posted"
-msgstr "لم يتم نشر أي تحديثات للحالة"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "غير مصرح بنشر ملاحظات بالحالة \"believed_dead\"."
 
 msgid "Not spam"
 msgstr "ليست رسائل غير مرغوب فيها"
 
+msgid "Note author"
+msgstr "مؤلف الملاحظة"
+
 msgid "Note text"
-msgstr ""
+msgstr "نص الملاحظة"
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
+msgstr "ملاحظة: ربما يتم إنشاء الأسماء البديلة آليًا وقد لا تكون دقيقة."
+
+msgid "Notes for this person"
+msgstr "ملاحظات هذا الشخص"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "الرقم أو النطاق (مثل 20-30)"
 
 #, python-format
 msgid ""
@@ -567,9 +860,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "اسم الموقع الأصلي"
-
-msgid "Other information"
-msgstr "معلومات أخرى"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -627,6 +917,12 @@ msgstr "الرجاء توضيح سبب اعتقادك أن هؤلاء يمثلو
 msgid "Please fill in all the required fields."
 msgstr "الرجاء ملء جميع الحقول المطلوبة."
 
+msgid "Please fill in your email address."
+msgstr "الرجاء ملء عنوان بريدك الإلكتروني."
+
+msgid "Please provide an valid email address."
+msgstr "الرجاء تقديم عنوان بريد إلكتروني صالح."
+
 msgid "Possible duplicates"
 msgstr "النتائج المكررة المحتملة"
 
@@ -642,15 +938,17 @@ msgstr "متابعة"
 msgid "Provide information about this person"
 msgstr "تقديم معلومات عن هذا الشخص"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "تم النشر بواسطة"
+msgstr "تقدمها:"
 
 msgid "Province or state"
 msgstr "الإقليم أو الدولة"
 
 msgid "Reason for deletion:"
 msgstr "أسباب الحذف:"
+
+msgid "Reason for disabling notes:"
+msgstr "سبب تعطيل الملاحظات:"
 
 msgid "Records Similar to"
 msgstr "السجلات مماثلة لـ"
@@ -660,7 +958,7 @@ msgstr "تم تحديد السجلات"
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "سجلات تشتمل على أسماء وعناوين تطابق \"%(query)s\""
 
 msgid "Report spam"
 msgstr "الإبلاغ عن الرسائل غير المرغوب فيها"
@@ -683,6 +981,9 @@ msgstr "البحث عن هذا الشخص"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "حدد 3 سجلات كحد أقصى لوضع علامة عليها كمكررة:"
+
+msgid "Send email"
+msgstr "إرسال رسالة إلكترونية"
 
 msgid "Sex"
 msgstr "الجنس"
@@ -717,9 +1018,6 @@ msgstr "الحالة"
 msgid "Status of this person"
 msgstr "حالة هذا الشخص"
 
-msgid "Status updates for this person"
-msgstr "تحديثات الحالة لهذا الشخص"
-
 msgid "Street name"
 msgstr "اسم الشارع"
 
@@ -730,8 +1028,8 @@ msgid "Subscribe"
 msgstr "الاشتراك"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "الاشتراك في التحديثات حول %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "الاشتراك في التحديثات حول %(given_name)s %(family_name)s"
 
 msgid "Subscribe to updates about this person"
 msgstr "الاشتراك في التحديثات حول هذا الشخص"
@@ -767,6 +1065,12 @@ msgstr "الاسم الأول واسم العائلة كلاهما مطلوبا�
 msgid "The Original author's name is required.  Please go back and try again."
 msgstr "اسم المؤلف الأصلي مطلوب.  الرجاء الرجوع وإعادة المحاولة."
 
+msgid "The author has disabled notes on this record."
+msgstr "لقد عطّل المؤلف الملاحظات على هذا السجل."
+
+msgid "The author has disabled status updates on this record."
+msgstr "لقد عطّل المؤلف تحديثات الحالة على هذا السجل."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "حجم الصورة المقدمة أكبر مما يجب.  الرجاء تحميل صورة بحجم أصغر."
 
@@ -774,14 +1078,14 @@ msgid "The reason this note is being marked as spam:"
 msgstr "السبب في وضع علامة على هذه الملاحظة كغير مرغوب فيها:"
 
 msgid "The record cannot be extended."
-msgstr ""
+msgstr "لا يمكن مد تاريخ صلاحية السجل."
 
 msgid "The record has been deleted."
 msgstr "تم حذف السجل."
 
 #, python-format
 msgid "The record has been extended to %(expiry_date)s."
-msgstr ""
+msgstr "تم مد تاريخ صلاحية السجل إلى %(expiry_date)s."
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -790,6 +1094,14 @@ msgid ""
 msgstr ""
 "تشير الحالة التي حددتها إلى أنك هذا الشخص.  إذا كان هذا صحيحًا، فالرجاء "
 "تحديد \"نعم\" لتوضح أنك اتصلت بهذا الشخص."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "الرمز المميز %(token)s غير صالح"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "الرمز المميز %(token)s غير صالح."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -844,9 +1156,8 @@ msgstr "هذا الشخص كان على اتصال بشخص ما"
 msgid "This person has posted a message"
 msgstr "لقد نشر هذا الشخص رسالة"
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "تم حذف السجل."
+msgstr "إدخال هذا الشخص غير موجود أو تم حذفه."
 
 msgid "This record has served its purpose."
 msgstr "هذا السجل أدى الغرض الذي أنشئ لأجله."
@@ -863,8 +1174,16 @@ msgstr "هذا السجل غير مناسب."
 msgid "This record is spam."
 msgstr "هذا السجل غير مرغوب فيه."
 
-msgid "To unsubscribe, follow this link"
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
 msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "لإلغاء الاشتراك، اتبع هذا الرابط."
 
 msgid "To view or add information, select a name below."
 msgstr "لعرض معلومات أو إضافتها، حدد اسمًا أدناه."
@@ -893,7 +1212,7 @@ msgid "Upload"
 msgstr "تحميل"
 
 msgid "View the record"
-msgstr ""
+msgstr "عرض السجل"
 
 msgid "We have nothing matching your search."
 msgstr "ليس لدينا أي شيء يتطابق مع بحثك."
@@ -913,14 +1232,28 @@ msgstr "ما مصدر هذه المعلومات؟"
 msgid "Where is this person from?"
 msgstr "من أين جاء هذا الشخص؟"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "نعم"
+
+msgid "Yes, ask the record author to disable notes"
+msgstr "نعم، طلب تعطيل الملاحظات من مؤلف السجل"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "نعم، طلب تمكين الملاحظات من مؤلف السجل"
 
 msgid "Yes, delete the record"
 msgstr "نعم، حذف هذا السجل"
 
+msgid "Yes, disable notes on this record."
+msgstr "نعم، تعطيل الملاحظات على هذا السجل."
+
 msgid "Yes, extend the record"
-msgstr ""
+msgstr "نعم، مد تاريخ صلاحية السجل"
 
 msgid "Yes, restore this record"
 msgstr "نعم، استرداد هذا السجل"
@@ -964,13 +1297,16 @@ msgstr "تم إلغاء اشتراكك بنجاح."
 msgid ""
 "You received this notification because you have subscribed to updates on "
 "the following person:\n"
-msgstr ""
+msgstr "لقد تلقيت هذا الإشعار لأنك اشتركت في خدمة تلقي تحديثات عن الشخص التالي:\n"
 
 msgid "Your e-mail address"
 msgstr "عنوان بريدك الإلكتروني"
 
 msgid "Your e-mail address:"
 msgstr "عنوان بريدك الإلكتروني:"
+
+msgid "Your email"
+msgstr "عنوان بريدك الإلكتروني"
 
 msgid "Your name"
 msgstr "اسمك"
@@ -988,15 +1324,58 @@ msgstr "اسمك مطلوب في قسم \"المصدر\".  الرجاء الرج
 msgid "Your phone number"
 msgstr "رقم هاتفك"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr "[الباحث عن الأشخاص] إشعار حذف \"%(first_name)s %(last_name)s\""
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"تمت معالجة طلبك بنجاح. الرجاء التحقق من البريد الوارد وتأكيد رغبتك في نشر"
+" الملاحظة من خلال اتباع عنوان URL المضمّن."
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
-msgstr "[الباحث عن الأشخاص] إشعار استعادة سجل \"%(first_name)s %(last_name)s\""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[الباحث عن الأشخاص] تأكيد %(action)s من الملاحظات على \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr "[الباحث عن الأشخاص] إشعار حذف \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[الباحث عن الأشخاص] تمكين إشعار الملاحظات لـ \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[الباحث عن الأشخاص] تم الآن تعطيل الملاحظات لـ \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[الباحث عن الأشخاص] تم الآن تمكين الملاحظات على \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[الباحث عن الأشخاص] إشعار استعادة سجل \"%(given_name)s %(family_name)s\""
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
