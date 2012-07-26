@@ -21,27 +21,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  यह सुनिश्चित करने के लिए कि नोट केवल रिकॉर्ड लेखक की अनुमति से ही अक्षम"
+" या सक्षम किए जाते हैं, रिकॉर्ड लेखक को एक पुष्टिकरण संदेश भेजा जाएगा. "
+"अगर आप लेखक हैं, तो नीचे दिया गया बटन क्लिक करने के बाद अपना ई-मेल देखें."
+"\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\">\n"
-"                  <input type=\"button\"\n"
-"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
-"\t\t\t id=\"extend_btn\">\n"
-"\t\t</a>\n"
-"\t\t"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
 msgstr ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\"> <input type=\"button\" value=\"समाप्ति "
-"तिथि को %(extension_days)s दिनों तक आगे बढ़ाएं\" id=\"extend_btn\"> </a>"
 "\n"
-"\t\t"
+"प्रिय %(author_name)s, एक उपयोगकर्ता ने \"%(given_name)s %(family_name)s\" "
+"के लिए रिकॉर्ड पर नोट सक्षम करने का अनुरोध किया है. आपके ईमेल पते को इस "
+"रिकॉर्ड के लेखक के रूप में रिकॉर्ड किया गया है. इस रिकॉर्ड पर नोट सक्षम "
+"करने के लिए, 3 दिन के भीतर इस लिंक का अनुसरण करें:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"प्रिय %(author_name)s, एक उपयोगकर्ता ने अनुरोध किया है कि आप "
+"\"%(given_name)s %(family_name)s\" के लिए रिकॉर्ड पर नोट को अक्षम कर दें. "
+"आपके ईमेल पते को इस रिकॉर्ड के लेखक के रूप में रिकॉर्ड किया गया है. इस "
+"रिकॉर्ड पर नोट सक्षम करने के लिए, 3 दिन के भीतर इस लिंक का अनुसरण करें:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"प्रिय %(author_name)s, आपने अभी-अभी \"%(given_name)s %(family_name)s\" के "
+"लिए रिकॉर्ड पर एक नोट दर्ज किया है. अपना नोट प्रकाशित करने के लिए, 3 दिन "
+"के भीतर इस लिंक का अनुसरण करें:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
 
 #, python-format
 msgid ""
 "\n"
 "                Warning: this record will expire in less than a day.\n"
-"\t\t"
+"                "
 msgid_plural ""
 "\n"
 "                Warning: this record will expire in less than %(days)s "
@@ -53,21 +143,66 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to extend the expiration for record "
-"\"%(first_name)s %(last_name)s\"?\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      क्या आप वाकई \"%(first_name)s %(last_name)s\" रिकॉर्ड की समाप्ति "
+"      क्या आप वाकई \"%(given_name)s %(family_name)s\" पर नोट अक्षम करना "
+"चाहते हैं?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      क्या आप वाकई \"%(given_name)s %(family_name)s\" के रिकॉर्ड पर नोट "
+"अक्षम करना चाहते हैं?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      क्या आप वाकई \"%(given_name)s %(family_name)s\" पर नोट सक्षम करना "
+"चाहते हैं?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      क्या आप वाकई \"%(given_name)s %(family_name)s\" रिकॉर्ड की समाप्ति "
 "तिथि आगे बढ़ाना चाहते हैं?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      अपने नोट की पुष्टि करें\n"
 "    "
 
 msgid ""
@@ -94,10 +229,51 @@ msgid ""
 "    "
 msgstr ""
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    यह सुनिश्चित करने के लिए कि नोट केवल रिकॉर्ड लेखक की अनुमति से ही "
+"अक्षम या सक्षम किए जाते हैं, रिकॉर्ड लेखक को एक पुष्टिकरण संदेश भेजा "
+"जाएगा. अगर आप लेखक हैं, तो नीचे दिया गया बटन क्लिक करने के बाद अपना ई-मेल"
+" देखें.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  रिकॉर्ड फिर भी इस साइट पर दृश्यमान रहेगा, लेकिन कोई भी उस पर आगे नोट "
+"पोस्ट नहीं कर पाएगा.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  अपना नोट पोस्ट करने के लिए, कृपया नीचे अपना ई-मेल पता दर्ज करें और आपको"
+" प्राप्त होने वाले पुष्टिकरण लिंक का अनुसरण करें.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
@@ -107,27 +283,17 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
 msgstr ""
 "\n"
-"एक उपयोगकर्ता ने \"%(first_name)s %(last_name)s\" के रिकॉर्ड को "
+"एक उपयोगकर्ता ने \"%(given_name)s %(family_name)s\" के रिकॉर्ड को "
 "%(site_url)s से हटा दिया है. हम आपको हटाए जाने के बारे में इसलिए सूचित कर"
 " रहे हैं क्योंकि आपका ई-मेल पता इस रिकॉर्ड के लेखक के रूप में रिकॉर्ड "
 "किया गया है.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
-msgstr ""
-"\n"
-"एक उपयोगकर्ता ने \"%(first_name)s %(last_name)s\" के लिए %(site_url)s पर "
-"एक स्थिति अपडेट पोस्ट किया है.\n"
 
 #, python-format
 msgid ""
@@ -158,7 +324,49 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"नोट अब \"%(given_name)s %(family_name)s\" के लिए रिकॉर्ड पर अक्षम हैं. "
+"रिकॉर्ड देखने के लिए, इस लिंक का अनुसरण करें:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"हम आपको इसलिए सूचित कर रहे हैं क्योंकि आपका ई-मेल पता इस व्यक्ति के "
+"रिकॉर्ड या रिकॉर्ड पर नोट से संबद्ध है.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"नोट अब \"%(given_name)s %(family_name)s\" के लिए रिकॉर्ड पर सक्षम हैं. "
+"रिकॉर्ड देखने के लिए, इस लिंक का अनुसरण करें:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"हम आपको इसलिए सूचित कर रहे हैं क्योंकि आपका ई-मेल पता इस व्यक्ति के "
+"रिकॉर्ड या रिकॉर्ड पर नोट से संबद्ध है.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -171,13 +379,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"\"%(given_name)s %(family_name)s\" के लिए रिकॉर्ड पर एक नया नोट हैं.\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
+"\n"
+"आपने \"%(given_name)s %(family_name)s\" पर नोट की सदस्यता ली है. आप यह "
+"रिकॉर्ड\n"
+"\n"
+"     %(view_url)s\n"
+"\n"
+"सदस्यता त्यागने के लिए, इस लिंक का अनुसरण करें: %(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(प्रकट करने के लिए क्लिक करें)"
@@ -253,6 +478,10 @@ msgstr "परिणाम सूची पर वापस जाएं"
 msgid "Back to start"
 msgstr "प्रारंभ पर वापस जाएं"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "id %(id)s"
+
 msgid "Cancel"
 msgstr "रद्द करें"
 
@@ -279,6 +508,9 @@ msgstr "इसके लिए एक नया रिकॉर्ड बना�
 msgid "Create a new record for a missing person"
 msgstr "किसी गुम व्यक्ति के लिए एक नया रिकॉर्ड बनाएं"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "वर्तमान में लगभग %(num_people)s रिकॉर्ड ट्रैक किए जा रहे हैं."
@@ -304,6 +536,9 @@ msgstr "वर्णन"
 msgid "Developers"
 msgstr "डेवलपर"
 
+msgid "Disable notes on this record"
+msgstr "इस रिकॉर्ड पर नोट अक्षम करें"
+
 msgid "Download the sound as MP3"
 msgstr ""
 
@@ -318,6 +553,9 @@ msgstr "इस टूल को अपनी साइट पर एम्बे
 
 msgid "Embedding the Application"
 msgstr "एप्लिकेशन एम्बेड करना"
+
+msgid "Enable notes on this record"
+msgstr "इस रिकॉर्ड पर नोट सक्षम करें"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "DD-MM-YYYY के रूप में दर्ज करें"
@@ -406,6 +644,9 @@ msgstr "मैं जानकारी ढूंढ रहा/रही हू�
 msgid "I am this person"
 msgstr "मैं यह व्यक्ति हूं"
 
+msgid "I do not want any more updates on this record."
+msgstr "मैं इस रिकॉर्ड पर और अधिक अपडेट नहीं चाहता/चाहती."
+
 msgid "I do not want my information online anymore."
 msgstr ""
 
@@ -449,6 +690,26 @@ msgstr ""
 "अगर इन रिकॉर्ड में से कोई भी उस व्यक्ति से मेल नहीं खाता जो आपके मन में "
 "था, तो आप एक नया रिकॉर्ड बनाने के लिए नीचे क्लिक कर सकते हैं."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"अगर आप इस नोट के लेखक हैं, तो कृपया इस बात की पुष्टि करने के लिए लिंक "
+"हेतु अपना ई-मेल देखें कि आप इस रिकॉर्ड पर नोट अक्षम करना चाहते हैं. "
+"अन्यथा, अपने अनुरोध की पुष्टि करने के लिए कृपया रिकॉर्ड लेखक की प्रतीक्षा"
+" करें."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"अगर आप इस नोट के लेखक हैं, तो कृपया इस बात की पुष्टि करने के लिए लिंक "
+"हेतु अपना ई-मेल देखें कि आप इस रिकॉर्ड पर नोट सक्षम करना चाहते हैं. "
+"अन्यथा, अपने अनुरोध की पुष्टि करने के लिए कृपया रिकॉर्ड लेखक की प्रतीक्षा"
+" करें."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr ""
 "अगर आपके पास इस व्यक्ति का कोई फ़ोटो है, तो इसे अपलोड करें या इसका URL पता"
@@ -458,6 +719,9 @@ msgid "Incorrect.  Try again."
 msgstr ""
 
 msgid "Invalid e-mail address. Please try again."
+msgstr ""
+
+msgid "Language selection"
 msgstr ""
 
 msgid "Last known location"
@@ -512,20 +776,35 @@ msgstr "पड़ोसी"
 msgid "No"
 msgstr "नहीं"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "रिकॉर्ड %(id)sके लिए कोई लेखक ईमेल नहीं है."
+
 msgid "No messages are found registered to the carrier's message board service."
 msgstr "कैरियर की संदेश बोर्ड सेवा में कोई भी संदेश पंजीकृत नहीं हैं."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "इस ID वाला कोई नोट नहीं है: %(id)s."
+
+msgid "No notes have been posted"
+msgstr "कोई नोट पोस्ट नहीं किए गए हैं"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "इस ID वाला कोई व्यक्ति नहीं है: %(id)s."
 
 msgid "No results found for"
 msgstr "इसके लिए कोई परिणाम नहीं मिले"
 
-msgid "No status updates have been posted"
-msgstr "कोई स्थिति अपडेट पोस्ट नहीं किए गए हैं"
-
 msgid "Not authorized to post notes with the status \"believed_dead\"."
-msgstr ""
+msgstr "\"believed_dead\" स्थिति वाले नोट पोस्ट करने के लिए प्राधिकृत नहीं."
 
 msgid "Not spam"
 msgstr ""
+
+msgid "Note author"
+msgstr "नोट लेखक"
 
 msgid "Note text"
 msgstr "नोट पाठ"
@@ -534,6 +813,9 @@ msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr ""
 "नोट: वैकल्पिक नाम मशीन द्वारा जेनरेट किए हुए हो सकते हैं और हो सकता है कि"
 " वे सटीक न हों."
+
+msgid "Notes for this person"
+msgstr "इस व्यक्ति के लिए नोट"
 
 msgid "Number or range (e.g. 20-30)"
 msgstr "संख्या या श्रेणी (उदा. 20-30)"
@@ -562,9 +844,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "मूल साइट नाम"
-
-msgid "Other information"
-msgstr "अन्य जानकारी"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -624,6 +903,12 @@ msgstr "कृपया व्याख्या करें कि आपक�
 msgid "Please fill in all the required fields."
 msgstr ""
 
+msgid "Please fill in your email address."
+msgstr "कृपया अपना ईमेल पता भरें."
+
+msgid "Please provide an valid email address."
+msgstr "कृपया एक मान्य ईमेल पता प्रदान करें."
+
 msgid "Possible duplicates"
 msgstr "संभव डुप्लिकेट"
 
@@ -647,6 +932,9 @@ msgstr "प्रांत या प्रदेश"
 
 msgid "Reason for deletion:"
 msgstr ""
+
+msgid "Reason for disabling notes:"
+msgstr "नोट अक्षम करने का कारण:"
 
 msgid "Records Similar to"
 msgstr "इसके समान रिकॉर्ड"
@@ -679,6 +967,9 @@ msgstr "इस व्यक्ति की खोज करें"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "डुप्लिकेट के रूप में चिह्नित करने के लिए 3 रिकॉर्ड तक चयनित करें:"
+
+msgid "Send email"
+msgstr "ईमेल भेजें"
 
 msgid "Sex"
 msgstr "लिंग"
@@ -713,9 +1004,6 @@ msgstr "स्थिति"
 msgid "Status of this person"
 msgstr "इस व्यक्ति की स्थिति"
 
-msgid "Status updates for this person"
-msgstr "इस व्यक्ति के लिए स्थिति अपडेट"
-
 msgid "Street name"
 msgstr "स्ट्रीट नाम"
 
@@ -726,7 +1014,7 @@ msgid "Subscribe"
 msgstr ""
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
 msgstr ""
 
 msgid "Subscribe to updates about this person"
@@ -764,6 +1052,12 @@ msgstr ""
 msgid "The Original author's name is required.  Please go back and try again."
 msgstr "मूल लेखक का नाम आवश्यक है.  कृपया वापस जाएं और पुनः प्रयास करें."
 
+msgid "The author has disabled notes on this record."
+msgstr "लेखक ने इस रिकॉर्ड पर नोट अक्षम कर दिए हैं."
+
+msgid "The author has disabled status updates on this record."
+msgstr "लेखक ने इस रिकॉर्ड पर स्थिति अपडेट अक्षम कर दिए हैं."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "प्रदान की गई छवि बहुत बड़ी है.  कृपया कोई छोटी छवि अपलोड करें."
 
@@ -785,6 +1079,14 @@ msgid ""
 "true, please also select 'Yes' to indicate that you have contacted this "
 "person."
 msgstr ""
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "टोकन %(token)s अमान्य था"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "टोकन %(token)s अमान्य था."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -856,6 +1158,14 @@ msgstr ""
 msgid "This record is spam."
 msgstr ""
 
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
 msgid "To unsubscribe, follow this link"
 msgstr "सदस्यता त्यागने के लिए, इस लिंक का अनुसरण करें"
 
@@ -908,11 +1218,25 @@ msgstr "यह जानकारी कहां से मिली थी?"
 msgid "Where is this person from?"
 msgstr "यह व्यक्ति कहां से है?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "हां"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "हां, नोट अक्षम करने के लिए रिकॉर्ड लेखक से कहें"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "हां, नोट सक्षम करने के लिए रिकॉर्ड लेखक से कहें"
+
 msgid "Yes, delete the record"
 msgstr ""
+
+msgid "Yes, disable notes on this record."
+msgstr "हां, इस रिकॉर्ड पर नोट अक्षम करें."
 
 msgid "Yes, extend the record"
 msgstr "हां, रिकॉर्ड की अंतिम तिथि आगे बढ़ाएं"
@@ -971,6 +1295,9 @@ msgstr "आपका ई-मेल पता"
 msgid "Your e-mail address:"
 msgstr ""
 
+msgid "Your email"
+msgstr "आपका ईमेल"
+
 msgid "Your name"
 msgstr "आपका नाम"
 
@@ -991,14 +1318,58 @@ msgstr ""
 msgid "Your phone number"
 msgstr "आपका फ़ोन नंबर"
 
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"आपका अनुरोध सफलतापूर्वक संसाधित कर दिया गया है. कृपया अपना इनबॉक्स देखें "
+"और इस बात की पुष्टि करें कि आप एम्बेड किए गए url का अनुसरण करके अपना नोट "
+"पोस्ट करना चाहते हैं."
+
 #, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+msgid ""
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[व्यक्ति फ़ाइंडर]  %(action)s %(given_name)s %(family_name)s की पुष्टि "
+"करें"
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[व्यक्ति फ़ाइंडर] \"%(given_name)s %(family_name)s\" पर अपने नोट की पुष्टि "
+"करें"
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
 msgstr ""
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[व्यक्ति फ़ाइंडर] \"%(given_name)s %(family_name)s\" के लिए नोट सूचना सक्षम"
+" कर रहा है"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[व्यक्ति फ़ाइंडर] अब \"%(given_name)s %(family_name)s\" के लिए नोट अक्षम हैं"
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[व्यक्ति फ़ाइंडर] अब \"%(given_name)s %(family_name)s\" के लिए नोट सक्षम हैं"
+
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 
 #, python-format

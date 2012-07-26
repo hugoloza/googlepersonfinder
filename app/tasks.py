@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import calendar
 import datetime
 import time
 
@@ -20,17 +21,18 @@ from google.appengine.api import quota
 from google.appengine.api import taskqueue
 from google.appengine.ext import db
 
+import config
 import delete
 import model
 import utils
-    
+
 CPU_MEGACYCLES_PER_REQUEST = 1000
-EXPIRED_TTL = datetime.timedelta(delete.EXPIRED_TTL_DAYS, 0, 0) 
+EXPIRED_TTL = datetime.timedelta(delete.EXPIRED_TTL_DAYS, 0, 0)
 FETCH_LIMIT = 100
 
 
 
-class ScanForExpired(utils.Handler):
+class ScanForExpired(utils.BaseHandler):
     """Common logic for scanning the Person table looking for things to delete.
 
     The common logic handles iterating through the query, updating the expiry
@@ -40,28 +42,26 @@ class ScanForExpired(utils.Handler):
     deleted.
 
     Subclasses set the query and task_name."""
-    subdomain_required = False
+    repo_required = False
 
     def task_name(self):
         """Subclasses should implement this."""
         pass
-        
+
     def query(self):
-        """Subclasses should implement this.""" 
+        """Subclasses should implement this."""
         pass
 
     def schedule_next_task(self, query):
         """Schedule the next task for to carry on with this query.
-        
+
         we pass the query as a parameter to make testing easier.
         """
-        self.add_task_for_subdomain(
-            self.subdomain, self.task_name(),
-            self.URL, cursor=query.cursor(),
-            queue_name='expiry')
+        self.add_task_for_repo(self.repo, self.task_name(), self.ACTION,
+                               cursor=query.cursor(), queue_name='expiry')
 
     def get(self):
-        if self.subdomain:
+        if self.repo:
             query = self.query()
             if self.params.cursor:
                 query.with_cursor(self.params.cursor)
@@ -74,7 +74,7 @@ class ScanForExpired(utils.Handler):
                     break
                 was_expired = person.is_expired
                 person.put_expiry_flags()
-                if (utils.get_utcnow() - person.get_effective_expiry_date() > 
+                if (utils.get_utcnow() - person.get_effective_expiry_date() >
                     EXPIRED_TTL):
                     person.wipe_contents()
                 else:
@@ -82,29 +82,109 @@ class ScanForExpired(utils.Handler):
                     if person.is_expired and not was_expired:
                         delete.delete_person(self, person)
         else:
-            for subdomain in model.Subdomain.list():
-                self.add_task_for_subdomain(subdomain, self.task_name(), 
-                                            self.URL)
+            for repo in model.Repo.list():
+                self.add_task_for_repo(repo, self.task_name(), self.ACTION)
 
 class DeleteExpired(ScanForExpired):
     """Scan for person records with expiry date thats past."""
-    URL = '/tasks/delete_expired'
+    ACTION = 'tasks/delete_expired'
 
     def task_name(self):
         return 'delete-expired'
 
     def query(self):
-        return model.Person.past_due_records(self.subdomain)
-    
+        return model.Person.past_due_records(self.repo)
+
 class DeleteOld(ScanForExpired):
     """Scan for person records with old source dates for expiration."""
-    URL = '/tasks/delete_old'
-    
+    ACTION = 'tasks/delete_old'
+
     def task_name(self):
         return 'delete-old'
 
     def query(self):
-        return model.Person.potentially_expired_records(self.subdomain)
+        return model.Person.potentially_expired_records(self.repo)
+
+class CleanUpInTestMode(utils.BaseHandler):
+    """If the repository is in "test mode", this task deletes all entries older
+    than DELETION_AGE_SECONDS (defined below), regardless of their actual
+    expiration specification.
+
+    We delete entries quickly so that most of the test data does not persist in
+    real mode, and to reduce the effect of spam.
+    """
+    repo_required = False
+    ACTION = 'tasks/clean_up_in_test_mode'
+
+    # Entries older than this age in seconds are deleted in test mode.
+    #
+    # If you are maintaining a single repository and switching it between test
+    # mode (for drills) and real mode (for real crises), you should be sure to
+    # switch to real mode within DELETION_AGE_SECONDS after a real crisis occurs,
+    # because:
+    # - When the crisis happens, the users may be confused and enter real
+    #   information on the repository, even though it's still in test mode.
+    #   (All pages show "test mode" message, but some users may be still
+    #   confused.)
+    # - If we fail to make the switch in DELETION_AGE_SECONDS, such real entries
+    #   are deleted.
+    # - If we make the switch in DELETION_AGE_SECONDS, such entries are not deleted,
+    #   and handled as a part of real mode data.
+    DELETION_AGE_SECONDS = 6 * 3600
+
+    def task_name(self):
+        return 'clean-up-in-test-mode'
+
+    def schedule_next_task(self, query, utcnow):
+        """Schedule the next task for to carry on with this query.
+
+        We pass the query as a parameter to make testing easier.
+        """
+        self.add_task_for_repo(
+                self.repo,
+                self.task_name(),
+                self.ACTION,
+                utcnow=str(calendar.timegm(utcnow.utctimetuple())),
+                cursor=query.cursor(),
+                queue_name='clean_up_in_test_mode')
+
+    def in_test_mode(self, repo):
+        """Returns True if the repository is in test mode."""
+        return config.get('test_mode', repo=repo)
+
+    def get(self):
+        if self.repo:
+            # To reuse the cursor from the previous task, we need to apply
+            # exactly the same filter. So we use utcnow previously used
+            # instead of the current time.
+            utcnow = self.params.utcnow or utils.get_utcnow()
+            max_entry_date = (
+                    utcnow -
+                    datetime.timedelta(
+                            seconds=CleanUpInTestMode.DELETION_AGE_SECONDS))
+            query = model.Person.all_in_repo(self.repo)
+            query.filter('entry_date <=', max_entry_date)
+            if self.params.cursor:
+                query.with_cursor(self.params.cursor)
+            # Uses query.get() instead of "for person in query".
+            # If we use for-loop, query.cursor() points to an unexpected
+            # position.
+            person = query.get()
+            # When the repository is no longer in test mode, aborts the
+            # deletion.
+            while person and self.in_test_mode(self.repo):
+                person.delete_related_entities(delete_self=True)
+                if quota.get_request_cpu_usage() > CPU_MEGACYCLES_PER_REQUEST:
+                    # Stop before running into the hard limit on CPU time per
+                    # request, to avoid aborting in the middle of an operation.
+                    # Add task back in, restart at current spot:
+                    self.schedule_next_task(query, utcnow)
+                    break
+                person = query.get()
+        else:
+            for repo in model.Repo.list():
+                if self.in_test_mode(repo):
+                    self.add_task_for_repo(repo, self.task_name(), self.ACTION)
 
 def run_count(make_query, update_counter, counter):
     """Scans the entities matching a query for a limited amount of CPU time."""
@@ -126,27 +206,26 @@ def run_count(make_query, update_counter, counter):
         counter.last_key = str(entities[-1].key())
 
 
-class CountBase(utils.Handler):
+class CountBase(utils.BaseHandler):
     """A base handler for counting tasks.  Making a request to this handler
-    without a subdomain will start tasks for all subdomains in parallel.
+    without a specified repo will start tasks for all repositories in parallel.
     Each subclass of this class handles one scan through the datastore."""
-    subdomain_required = False  # Run at the root domain, not a subdomain.
+    repo_required = False  # can run without a repo
 
     SCAN_NAME = ''  # Each subclass should choose a unique scan_name.
-    URL = ''  # Each subclass should set the URL path that it handles. 
+    ACTION = ''  # Each subclass should set the action path that it handles.
 
     def get(self):
-        if self.is_subdomain():  # Do some counting.
+        if self.repo:  # Do some counting.
             counter = model.Counter.get_unfinished_or_create(
-                self.subdomain, self.SCAN_NAME)
+                self.repo, self.SCAN_NAME)
             run_count(self.make_query, self.update_counter, counter)
             counter.put()
             if counter.last_key:  # Continue counting in another task.
-                self.add_task_for_subdomain(
-                    self.subdomain, self.SCAN_NAME, self.URL)
-        else:  # Launch counting tasks for all subdomains.
-            for subdomain in model.Subdomain.list():
-                self.add_task_for_subdomain(subdomain, self.SCAN_NAME, self.URL)
+                self.add_task_for_repo(self.repo, self.SCAN_NAME, self.ACTION)
+        else:  # Launch counting tasks for all repositories.
+            for repo in model.Repo.list():
+                self.add_task_for_repo(repo, self.SCAN_NAME, self.ACTION)
 
     def make_query(self):
         """Subclasses should implement this.  This will be called to get the
@@ -160,10 +239,10 @@ class CountBase(utils.Handler):
 
 class CountPerson(CountBase):
     SCAN_NAME = 'person'
-    URL = '/tasks/count/person'
+    ACTION = 'tasks/count/person'
 
     def make_query(self):
-        return model.Person.all().filter('subdomain =', self.subdomain)
+        return model.Person.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, person):
         found = ''
@@ -184,20 +263,20 @@ class CountPerson(CountBase):
 
 class CountNote(CountBase):
     SCAN_NAME = 'note'
-    URL = '/tasks/count/note'
+    ACTION = 'tasks/count/note'
 
     def make_query(self):
-        return model.Note.all().filter('subdomain =', self.subdomain)
+        return model.Note.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, note):
-        found = ''
-        if note.found is not None:
-            found = note.found and 'TRUE' or 'FALSE'
+        author_made_contact = ''
+        if note.author_made_contact is not None:
+            author_made_contact = note.author_made_contact and 'TRUE' or 'FALSE'
 
         counter.increment('all')
         counter.increment('status=' + (note.status or ''))
         counter.increment('original_domain=' + (note.original_domain or ''))
-        counter.increment('found=' + found)
+        counter.increment('author_made_contact=' + author_made_contact)
         if note.linked_person_record_id:
             counter.increment('linked_person')
         if note.last_known_location:
@@ -210,16 +289,16 @@ class AddReviewedProperty(CountBase):
     'reviewed' property existed; 'reviewed' has to be set to False so that
     the Notes will be indexed."""
     SCAN_NAME = 'unreview-note'
-    URL = '/tasks/count/unreview_note'
+    ACTION = 'tasks/count/unreview_note'
 
     def make_query(self):
-        return model.Note.all().filter('subdomain =', self.subdomain)
+        return model.Note.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, note):
         if not note.reviewed:
             note.reviewed = False
             note.put()
-        
+
 
 class UpdateStatus(CountBase):
     """This task looks for Person records with the status 'believed_dead',
@@ -227,10 +306,10 @@ class UpdateStatus(CountBase):
     This is designed specifically to address bogus 'believed_dead' notes that
     are flagged as spam.  (This is a cleanup task, not a counting task.)"""
     SCAN_NAME = 'update-status'
-    URL = '/tasks/count/update_status'
+    ACTION = 'tasks/count/update_status'
 
     def make_query(self):
-        return model.Person.all().filter('subdomain =', self.subdomain
+        return model.Person.all().filter('repo =', self.repo
                           ).filter('latest_status =', 'believed_dead')
 
     def update_counter(self, counter, person):
@@ -249,21 +328,11 @@ class UpdateStatus(CountBase):
 class Reindex(CountBase):
     """A handler for re-indexing Persons."""
     SCAN_NAME = 'reindex'
-    URL = '/tasks/count/reindex'
+    ACTION = 'tasks/count/reindex'
 
     def make_query(self):
-        return model.Person.all().filter('subdomain =', self.subdomain)
+        return model.Person.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, person):
         person.update_index(['old', 'new'])
         person.put()
-
-
-if __name__ == '__main__':
-    utils.run((CountPerson.URL, CountPerson),
-              (CountNote.URL, CountNote),
-              (DeleteExpired.URL, DeleteExpired),
-              (DeleteOld.URL, DeleteOld),
-              (UpdateStatus.URL, UpdateStatus),
-              (Reindex.URL, Reindex))
-

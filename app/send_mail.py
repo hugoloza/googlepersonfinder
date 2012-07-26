@@ -14,22 +14,29 @@
 # limitations under the License.
 
 from google.appengine.api import mail
+from google.appengine.api import mail_errors
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+import logging
 
 class EmailSender(webapp.RequestHandler):
     """Simple handler to send email; intended to be called from a taskqueue
     task so email sending can be throttled to stay below app engine quotas."""
     def post(self):
-        mail.send_mail(sender=self.request.get('sender'),
-                       subject=self.request.get('subject'),
-                       to=self.request.get('to'),
-                       body=self.request.get('body'))
+        subject = self.request.get('subject')
+        to = self.request.get('to')
+        logging.info('Sending mail: recipient %r, subject %r' % (to, subject))
+        try:
+            mail.send_mail(sender=self.request.get('sender'),
+                           subject=subject,
+                           to=to,
+                           body=self.request.get('body'))
+        except mail_errors.Error, e:
+            # we swallow mail_error exceptions on send, since they're not ever
+            # transient
+            logging.error('EmailSender (to: %s, subject: %s), '
+                          'failed with exception %s' % (to, subject, e))
 
-def main():
-    run_wsgi_app(webapp.WSGIApplication([
-        ('/global/admin/send_mail', EmailSender),
-    ]))
 
 if __name__ == '__main__':
-    main()
+    run_wsgi_app(webapp.WSGIApplication([('.*', EmailSender)]))
