@@ -13,20 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unittest initialization for handlers."""
+"""Unittest initialization for handlers.  No actual tests"""
 
 __author__ = 'lschumacher@google.com (Lee Schumacher)'
 
+import main
 import model
 import webob
+import urllib
 
 from google.appengine.ext import webapp
 
-def initialize_handler(handler, path, subdomain='haiti', env=None):
-    model.Subdomain(key_name=subdomain).put()
-    request = webapp.Request(
-        webob.Request.blank('/' + subdomain + path, environ=env).environ)
+def initialize_handler(
+        handler, action, repo='haiti', environ=None, params=None):
+    model.Repo(key_name=repo).put()
+    params_str = ('?' + urllib.urlencode(params)) if params else ''
+    request = webapp.Request(webob.Request.blank(
+        '/' + repo + '/' + action + params_str, environ=environ).environ)
     response = webapp.Response()
-    handler.initialize(request, response)
+    handler.initialize(request, response, main.setup_env(request))
     return handler
-

@@ -21,26 +21,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  레코드 작성자가 허가하는 경우에만 메모를 사용 또는 사용중지로 설정할 수 있도록 레코드 작성자에게 확인 메일이 발송됩니다. "
+"레코드 작성자인 경우 아래 버튼을 클릭한 후에 이메일을 확인해 주세요.\n"
+"\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\">\n"
-"                  <input type=\"button\"\n"
-"\t\t\t value=\"Extend expiration date by %(extension_days)s days\" \n"
-"\t\t\t id=\"extend_btn\">\n"
-"\t\t</a>\n"
-"\t\t"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
 msgstr ""
 "\n"
-"\t\t<a href=\"%(extend_url)s\"> <input type=\"button\" value=\"유효기간 연장: "
-"%(extension_days)s 일\" id=\"extend_btn\"> </a>\n"
-"\t\t"
+"\n"
+"안녕하십니까? %(author_name)s님, 사용자가 '%(given_name)s %(family_name)s'님에 대한 레코드에서 "
+"메모를 사용하도록 설정할 것을 요청했습니다. 회원님의 이메일 주소가 이 레코드의 작성자로 기록되어 있습니다. 이 레코드에 대해 "
+"메모를 사용하도록 설정하려면 3일 이내에 다음 링크를 클릭하세요.\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"안녕하십니까? %(author_name)s님, 사용자가 '%(given_name)s %(family_name)s'님에 대한 레코드에서 "
+"메모를 사용중지할 것을 요청했습니다. 회원님의 이메일 주소가 이 레코드의 작성자로 기록되어 있습니다. 이 레코드에 대해 메모를 "
+"사용중지하도록 설정하려면 3일 이내에 다음 링크를 클릭하세요.\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"안녕하십니까? %(author_name)s님, 방금 '%(given_name)s %(family_name)s'님에 대한 레코드에 메모를"
+" 입력하셨습니다. 메모를 게시하려면 3일 이내에 다음 링크를 클릭하세요.\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
 
 #, python-format
 msgid ""
 "\n"
 "                Warning: this record will expire in less than a day.\n"
-"\t\t"
+"                "
 msgid_plural ""
 "\n"
 "                Warning: this record will expire in less than %(days)s "
@@ -52,23 +138,65 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      \"%(first_name)s %(last_name)s\"에 대한 레코드를 삭제하시겠습니까?\n"
+"      \"%(given_name)s %(family_name)s\"에 대한 레코드를 삭제하시겠습니까?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      '%(given_name)s %(family_name)s'님에 대한 메모를 사용중지하시겠습니까?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      '%(given_name)s %(family_name)s'님에 대한 레코드에서 메모를 사용중지하시겠습니까?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      '%(given_name)s %(family_name)s'님에 대한 메모를 사용하도록 설정하시겠습니까?\n"
 "    "
 
 #, python-format
 msgid ""
 "\n"
 "      Are you sure you want to extend the expiration for record "
-"\"%(first_name)s %(last_name)s\"?\n"
+"\"%(given_name)s %(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      '%(first_name)s %(last_name)s'님의 레코드에 대한 유효기간을 연장하시겠습니까?\n"
+"      '%(given_name)s %(family_name)s'님의 레코드에 대한 유효기간을 연장하시겠습니까?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      메모 확인\n"
 "    "
 
 msgid ""
@@ -111,10 +239,47 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>에서 원본 레코드를 볼 수 있습니다.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    레코드 작성자가 허가하는 경우에만 메모를 사용 또는 사용중지로 설정할 수 있도록 레코드 작성자에게 확인 메일이 발송됩니다. "
+"레코드 작성자인 경우 아래 버튼을 클릭한 후에 이메일을 확인해 주세요.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  레코드는 계속 이 사이트에 표시되지만 아무도 더 이상 메모를 게시할 수 없습니다.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  메모를 게시하려면 아래에 이메일 주소를 입력하고 발송된 확인 링크를 클릭하세요.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
@@ -122,7 +287,7 @@ msgid ""
 msgstr ""
 "\n"
 "사용자가 \n"
-"%(site_url)s에 있는 \"%(first_name)s %(last_name)s\"에 대한 레코드를 삭제했습니다.\n"
+"%(site_url)s에 있는 \"%(given_name)s %(family_name)s\"에 대한 레코드를 삭제했습니다.\n"
 "\n"
 "사용자의 이메일 주소가 이 레코드에 대한 메모의 작성자로 기록되어 있기 때문에\n"
 "삭제에 대해 알려드립니다.\n"
@@ -130,25 +295,15 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
 msgstr ""
 "\n"
-"1명의 사용자가 '%(first_name)s %(last_name)s'님에 대한 레코드를 삭제했습니다(위치: "
+"1명의 사용자가 '%(given_name)s %(family_name)s'님에 대한 레코드를 삭제했습니다(위치: "
 "%(site_url)s). 사용 중인 이메일 주소가 이 레코드의 작성자로 기록되어 있기 때문에 삭제에 대해 알려드립니다.\n"
-
-#, python-format
-msgid ""
-"\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
-msgstr ""
-"\n"
-"1명의 사용자가 '%(first_name)s %(last_name)s'님에 대한 상태 업데이트를 게시했습니다(위치: "
-"%(site_url)s).\n"
 
 #, python-format
 msgid ""
@@ -177,7 +332,47 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"이제 '%(given_name)s %(family_name)s'님에 대한 레코드에서 메모를 사용중지하도록 설정되었습니다. 레코드를 "
+"보려면 다음 링크를 클릭하세요.\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"이 사람 레코드 또는 레코드의 메모에 대해 회원님의 이메일 주소가 입력되어 있어서 알림을 전송합니다.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"이제 '%(given_name)s %(family_name)s'님에 대한 레코드에서 메모를 사용하도록 설정되었습니다. 레코드를 보려면 "
+"다음 링크를 클릭하세요.\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"이 사람 레코드 또는 레코드의 메모에 대해 회원님의 이메일 주소가 입력되어 있어서 알림을 전송합니다.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -187,7 +382,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"\"%(first_name)s %(last_name)s\"\n"
+"\"%(given_name)s %(family_name)s\"\n"
 "(이전에 삭제됨)에 대한 레코드의 작성자가 레코드를 복원했습니다.  레코드를 보려면\n"
 "다음 링크를 클릭합니다.\n"
 "\n"
@@ -199,20 +394,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"'%(given_name)s %(family_name)s'님에 대한 레코드에 새 메모가 있습니다.\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"사용자는 %(site_url)s에서 \"%(first_name)s %(last_name)s\"에 대한 상태 업데이트를 받아보기로 "
-"했습니다.\n"
+"'%(given_name)s %(family_name)s'님에 대한 메모를 구독하기로 하셨습니다. 이 레코드는 다음 위치에서 볼 수 "
+"있습니다.\n"
 "\n"
-"%(view_url)s에서 전체 레코드를 볼 수 있으며\n"
+"     %(view_url)s\n"
 "\n"
-"받아보지 않으려면 %(unsubscribe_link)s 링크를 따릅니다.\n"
+"구독을 취소하려면 다음 링크를 클릭하세요. %(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(표시하려면 클릭)"
@@ -287,6 +492,10 @@ msgstr "결과 목록으로 돌아가기"
 msgid "Back to start"
 msgstr "시작으로 돌아가기"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "다음 ID에 대한 메모를 찾을 수 없습니다. %(id)s"
+
 msgid "Cancel"
 msgstr "취소"
 
@@ -310,6 +519,9 @@ msgstr "새 레코드 만들기"
 
 msgid "Create a new record for a missing person"
 msgstr "실종된 사람에 대한 새 레코드 만들기"
+
+msgid "Crisis events"
+msgstr ""
 
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
@@ -336,6 +548,9 @@ msgstr "설명"
 msgid "Developers"
 msgstr "개발자"
 
+msgid "Disable notes on this record"
+msgstr "이 레코드에서 메모 사용중지"
+
 msgid "Download the sound as MP3"
 msgstr "사운드를 MP3로 다운로드"
 
@@ -350,6 +565,9 @@ msgstr "이 도구를 내 사이트로 퍼가기"
 
 msgid "Embedding the Application"
 msgstr "응용프로그램 퍼가기"
+
+msgid "Enable notes on this record"
+msgstr "이 레코드에서 메모 사용"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "YYYY-MM-DD 형식으로 입력"
@@ -434,6 +652,9 @@ msgstr "정보를 찾고 있습니다."
 msgid "I am this person"
 msgstr "내가 이 사람입니다."
 
+msgid "I do not want any more updates on this record."
+msgstr "이 레코드에 대한 업데이트를 더 이상 받지 않겠습니다."
+
 msgid "I do not want my information online anymore."
 msgstr "내 정보를 더 이상 온라인으로 게재해 두지 않겠습니다."
 
@@ -475,6 +696,22 @@ msgid ""
 "below to create a new record."
 msgstr "이러한 레코드 중 찾는 사람과 일치하는 레코드가 없는 경우 아래에서 클릭하여 새 레코드를 만들 수 있습니다."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"이 메모의 작성자인 경우 이메일에 있는 링크를 통해 이 레코드에서 메모를 사용중지할 것임을 확인하세요. 작성자가 아닌 경우 레코드 "
+"작성자가 요청을 확인할 때까지 기다려 주세요."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"이 메모의 작성자인 경우 이메일에 있는 링크를 통해 이 레코드에서 메모를 사용할 것임을 확인하세요. 작성자가 아닌 경우 레코드 "
+"작성자가 요청을 확인할 때까지 기다려 주세요."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr "이 사람의 사진이 있는 경우 사진을 업로드하거나 URL 주소를 입력하세요."
 
@@ -483,6 +720,9 @@ msgstr "틀렸습니다. 다시 시도해 주세요."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "이메일 주소가 잘못되었습니다. 다시 시도해 주세요."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "마지막으로 확인된 위치"
@@ -534,26 +774,44 @@ msgstr "인근 지역"
 msgid "No"
 msgstr "아니요"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "레코드 %(id)s에 대한 작성자 이메일이 없습니다."
+
 msgid "No messages are found registered to the carrier's message board service."
 msgstr "이동통신사의 메시지 보드 서비스에 등록된 메시지가 없습니다."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "ID %(id)s에 대한 메모가 없습니다."
+
+msgid "No notes have been posted"
+msgstr "게시된 메모가 없습니다."
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "ID가 %(id)s인 사람이 없습니다."
 
 msgid "No results found for"
 msgstr "다음 이름에 대한 결과를 찾을 수 없음"
 
-msgid "No status updates have been posted"
-msgstr "상태 업데이트가 게시되지 않음"
-
 msgid "Not authorized to post notes with the status \"believed_dead\"."
-msgstr ""
+msgstr "'사망 추정' 상태인 메모를 게시할 권한이 없습니다."
 
 msgid "Not spam"
 msgstr "스팸 아님"
+
+msgid "Note author"
+msgstr "메모 작성자"
 
 msgid "Note text"
 msgstr "참고 텍스트"
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
 msgstr "참고: 보조 이름은 컴퓨터가 생성한 것일 수 있으며 정확하지 않을 수 있습니다."
+
+msgid "Notes for this person"
+msgstr "다음 사람에 대한 메모"
 
 msgid "Number or range (e.g. 20-30)"
 msgstr "숫자 또는 범위(예: 20-30)"
@@ -580,9 +838,6 @@ msgstr "원래 게시 날짜가 YYYY-MM-DD 형식이 아니거나 존재하지 �
 
 msgid "Original site name"
 msgstr "처음 사이트 이름"
-
-msgid "Other information"
-msgstr "기타 정보"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -635,6 +890,12 @@ msgstr "동일한 사람이라고 생각하는 이유를 설명하세요."
 msgid "Please fill in all the required fields."
 msgstr "모든 필수 입력란을 작성하세요."
 
+msgid "Please fill in your email address."
+msgstr "이메일 주소를 입력하세요."
+
+msgid "Please provide an valid email address."
+msgstr "유효한 이메일 주소를 입력하세요."
+
 msgid "Possible duplicates"
 msgstr "가능한 중복 레코드"
 
@@ -658,6 +919,9 @@ msgstr "시/도"
 
 msgid "Reason for deletion:"
 msgstr "삭제 사유:"
+
+msgid "Reason for disabling notes:"
+msgstr "메모 사용중지 이유:"
 
 msgid "Records Similar to"
 msgstr "유사한 레코드"
@@ -690,6 +954,9 @@ msgstr "검색"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "중복으로 표시할 레코드를 3개까지 선택:"
+
+msgid "Send email"
+msgstr "이메일 보내기"
 
 msgid "Sex"
 msgstr "성별"
@@ -724,9 +991,6 @@ msgstr "상태"
 msgid "Status of this person"
 msgstr "이 사람의 상태"
 
-msgid "Status updates for this person"
-msgstr "이 사람의 상태 업데이트"
-
 msgid "Street name"
 msgstr "상세 주소"
 
@@ -737,8 +1001,8 @@ msgid "Subscribe"
 msgstr "구독"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "%(first_name)s %(last_name)s에 관한 소식 구독"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "%(given_name)s %(family_name)s에 관한 소식 구독"
 
 msgid "Subscribe to updates about this person"
 msgstr "이 사람에 관한 소식 구독"
@@ -774,6 +1038,12 @@ msgstr "이름과 성을 모두 입력해야 합니다. 이전으로 돌아가 �
 msgid "The Original author's name is required.  Please go back and try again."
 msgstr "원래 작성자의 이름을 입력해야 합니다. 이전으로 돌아가 다시 시도해 주세요."
 
+msgid "The author has disabled notes on this record."
+msgstr "작성자가 이 레코드에서 메모를 사용중지했습니다."
+
+msgid "The author has disabled status updates on this record."
+msgstr "작성자가 이 레코드에서 상태 업데이트를 사용중지했습니다."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "제공한 이미지가 너무 큽니다. 더 작은 크기의 이미지를 업로드해 주세요."
 
@@ -795,6 +1065,14 @@ msgid ""
 "true, please also select 'Yes' to indicate that you have contacted this "
 "person."
 msgstr "선택한 상태로 볼 때 이 사용자는 본인에 해당합니다. 사실이라면 '예'를 선택하여 이 사람과 연락했음을 표시하세요."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "토큰 %(token)s 이(가) 잘못되었습니다."
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "토큰 %(token)s 이(가) 잘못되었습니다."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -865,6 +1143,14 @@ msgstr "이 레코드는 부적절합니다."
 msgid "This record is spam."
 msgstr "이 레코드는 스팸입니다."
 
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
 msgid "To unsubscribe, follow this link"
 msgstr "구독을 취소하려면 다음 링크를 따르세요."
 
@@ -915,11 +1201,25 @@ msgstr "이 정보의 출처는 어디입니까?"
 msgid "Where is this person from?"
 msgstr "어디에 살던 사람입니까?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "예"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr "예, 레코드 작성자에게 메모 사용중지를 요청합니다."
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "예, 레코드 작성자에게 메모 사용을 요청합니다."
+
 msgid "Yes, delete the record"
 msgstr "예, 기록 삭제"
+
+msgid "Yes, disable notes on this record."
+msgstr "예, 이 레코드에서 메모를 사용중지합니다."
 
 msgid "Yes, extend the record"
 msgstr "레코드 유효기간을 연장합니다."
@@ -974,6 +1274,9 @@ msgstr "이메일 주소"
 msgid "Your e-mail address:"
 msgstr "이메일 주소:"
 
+msgid "Your email"
+msgstr "이메일"
+
 msgid "Your name"
 msgstr "이름"
 
@@ -990,15 +1293,52 @@ msgstr "\"소스\" 섹션에 이름을 입력해야 합니다. 이전으로 돌�
 msgid "Your phone number"
 msgstr "전화번호"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
-msgstr "[Person Finder] \"%(first_name)s %(last_name)s\" 삭제 고지"
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr "요청이 처리되었습니다. 받은편지함에서 이메일을 열어보고, 첨부된 URL을 클릭해 메모를 게시할 것임을 확인하시기 바랍니다."
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
-msgstr "[Person Finder] \"%(first_name)s %(last_name)s\" 레코드 복원 고지"
+"[Person Finder] Confirm %(action)s of notes on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] %(action)s 을(를) '%(given_name)s %(family_name)s'님에 대한 메모에서 "
+"수행할 것임을 확인하세요."
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr "[Person Finder] '%(given_name)s %(family_name)s'님에 대한 메모를 확인하세요."
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr "[Person Finder] \"%(given_name)s %(family_name)s\" 삭제 고지"
+
+#, python-format
+msgid ""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Person Finder] '%(given_name)s %(family_name)s'님에 대한 메모 알림을 사용하도록 설정합니다."
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+"[Person Finder] 이제 '%(given_name)s %(family_name)s'님에 대한 메모를 사용중지하도록 "
+"설정되었습니다."
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Person Finder] 이제 '%(given_name)s %(family_name)s'님에 대한 메모를 사용하도록 설정되었습니다."
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Person Finder] \"%(given_name)s %(family_name)s\" 레코드 복원 고지"
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
