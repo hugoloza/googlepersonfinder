@@ -19,7 +19,7 @@ import sys
 from google.appengine.ext import db
 
 def iterate(query, callback=lambda x: x, batch_size=1000, verbose=True):
-    """Utility to iterate over query, applying callback to each row."""
+    """Utility for iterating over a query, applying the callback to each row."""
     start = time.time()
     count = 0
     results = query.fetch(batch_size)
@@ -34,69 +34,8 @@ def iterate(query, callback=lambda x: x, batch_size=1000, verbose=True):
             print '%s rows processed in %.1fs' % (count, time.time() - rstart)
             print 'total time: %.1fs' % (time.time() - start)
         results = query.with_cursor(query.cursor()).fetch(batch_size)
-    callback(None)
+    callback()
     print 'total rows: %s, total time: %.1fs' % (count, time.time() - start)
-
-
-# regex for matching a url that links to our photo db.
-# match group 1 will be the id of the photo.
-PHOTO_REGEX = re.compile('http://.*\.person-finder.appspot.com/photo\?id=(.*)')
-
-class PhotoFilter(object):
-    """Utility for finding photos with dangling URLs.
-
-    Use filter_photo_url as the parameter to iterate, ppl_count will contain
-    count of persons updated.
-    """
-
-    # batch size.
-    MAX_PPL_COUNT = 1000
-
-    def __init__(self, out_file):
-        """Write list of people updated to out_file."""
-        self.ppl = []
-        self.ppl_count = 0
-        self.output = out_file
-
-    def write_ppl(self):
-        """Write record of users modified """
-        for p in self.ppl:
-            if p.photo_url and p.photo:
-                self.output.write('%s: %s; %s\n' % (p.record_id, p.photo_url,
-                                                    p.photo.key().id()))
-
-    def save_person(self, person):
-        """Handle batch write back to db."""
-        if person:
-            self.ppl.append(person)
-            self.ppl_count += 1
-        if not person or len(self.ppl) >= PhotoFilter.MAX_PPL_COUNT:
-            if self.ppl:
-                print >>sys.stderr, 'saving %s records' % len(self.ppl)
-                db.put(self.ppl)
-                self.write_ppl()
-            self.ppl = []
-
-    def filter_photo_url(self, p):
-        """Decide if this person needs its photo link updated.
-
-        Use None parameter to flush results at the end."""
-
-        if not p:
-            # write out remaining records.
-            self.save_person()
-            return
-        if p.photo_url and not p.photo:
-            match = PHOTO_REGEX.match(p.photo_url)
-            if match:
-                try:
-                    photo_id = int(match.group(1))
-                    p.photo = db.Key.from_path('Photo', photo_id)
-                    self.save_person(p)
-                except Exception, e:
-                    print >> sys.stderr, \
-                        'error from matching person %s: %s' % (p.record_id,
-                                                               e.message)
 
 
 def dangling_pic(pic):
