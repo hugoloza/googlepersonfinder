@@ -440,6 +440,7 @@ class Person(Base):
         expiry flag untouched), stores the empty record, and permanently
         deletes any related Notes and Photos.  Call this method ONLY on records
         that have already expired."""
+
         # We rely on put_expiry_flags to have properly set the source_date,
         # entry_date, and is_expired flags on Notes, as necessary.
         assert self.is_expired
@@ -529,11 +530,6 @@ class Note(Base):
     last_known_location = db.StringProperty(default='')
     text = db.TextProperty(default='')
     photo_url = db.TextProperty(default='')
-
-    # This reference points to a locally stored Photo entity.  ONLY set this
-    # property when storing a new Photo object that is owned by this Note
-    # record and can be safely deleted when the Note is deleted.
-    photo = db.ReferenceProperty(default=None)
 
     # True if the note has been marked as spam. Will cause the note to be
     # initially hidden from display upon loading a record page.
