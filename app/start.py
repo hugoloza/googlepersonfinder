@@ -13,42 +13,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import datetime
-
-import model
-import utils
+from utils import *
+from model import *
 
 
-class Handler(utils.Handler):
-    subdomain_required = False
+class Handler(BaseHandler):
+    repo_required = False
 
     def get(self):
         redirect_url = self.maybe_redirect_jp_tier2_mobile()
         if redirect_url:
             return self.redirect(redirect_url)
 
-        if not self.subdomain:
-            self.write('''
-<style>body { font-family: arial; font-size: 13px; }</style>
-<p>Select a Person Finder site:<ul>
-''')
-            for key in model.Subdomain.all(keys_only=True):
-                url = self.get_start_url(key.name())
-                self.write('<li><a href="%s">%s</a>' % (url, key.name()))
-            self.write('</ul>')
-            return
+        self.env.robots_ok = True
+        self.render('start.html', cache_seconds=0, get_vars=self.get_vars)
 
+    def get_vars(self):
         # Round off the count so people don't expect it to change every time
         # they add a record.
-        person_count = model.Counter.get_count(self.subdomain, 'person.all')
+        person_count = Counter.get_count(self.repo, 'person.all')
         if person_count < 100:
             num_people = 0  # No approximate count will be displayed.
         else:
             # 100, 200, 300, etc.
             num_people = int(round(person_count, -2))
 
-        self.render('templates/main.html',
-                    num_people=num_people,
-                    seek_url=self.get_url('/query', role='seek'),
-                    provide_url=self.get_url('/query', role='provide'))
+        return {'num_people': num_people,
+                'seek_url': self.get_url('/query', role='seek'),
+                'provide_url': self.get_url('/query', role='provide')}
