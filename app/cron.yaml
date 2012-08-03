@@ -1,7 +1,22 @@
 cron:
-- description: update counts
-  url: /tasks/count
-  schedule: every 60 minutes
+- description: update person counts
+  url: /global/tasks/count/person
+  schedule: every 20 minutes
+- description: update note counts
+  url: /global/tasks/count/note
+  schedule: every 20 minutes
+- description: update person statuses
+  url: /global/tasks/count/update_status
+  schedule: every 5 minutes
 - description: sitemap ping
   url: /sitemap/ping?search_engine=google
   schedule: every 15 minutes
+- description: delete expired
+  url: /global/tasks/delete_expired
+  schedule: every 60 minutes
+- description: delete old
+  url: /global/tasks/delete_old
+  schedule: every 60 minutes
+- description: clean up in test mode
+  url: /global/tasks/clean_up_in_test_mode
+  schedule: every 60 minutes
