@@ -24,64 +24,65 @@ import utils
 
 from django.utils.translation import ugettext as _
 
+# When a record is restored after undeletion, its new expiry date is this
+# length of time into the future.
+RESTORED_RECORD_TTL = datetime.timedelta(60, 0, 0)
+
+
 class RestoreError(Exception): 
-    """Error for missing expired record."""
+    """Container for user-facing error messages about the restore operation."""
     pass
 
-class Restore(utils.Handler):
-    """Used to restore a record from deleted/expired status. It will "undelete"
-    a previously deleted record, as long as the person has not already
-    been removed from the system."""
 
-    # how long before the 
-    DEFAULT_EXPIRATION_DELTA = datetime.timedelta(60, 0, 0)
+class Handler(utils.BaseHandler):
+    """This handler lets the user restore a record that has expired but hasn't
+    been wiped yet.  This can 'undelete' a deleted record, as long as it has
+    been less than within delete.EXPIRED_TTL_DAYS days after deletion."""
 
     def get(self):
-        """Prompts a user with a CAPTCHA to re-instate the supplied record.
-        There must be a valid token supplied as post param "token"."""
+        """Prompts a user with a CAPTCHA to restore the specified record.
+        There must be a valid token supplied in the 'token' query parameter."""
         try:
             person, token = self.get_person_and_verify_params()
-        except RestoreError, err:
-            return self.error(400, unicode(err))
+        except RestoreError, e:
+            return self.error(400, unicode(e))
 
-        self.render('templates/restore.html',
+        self.render('restore.html',
                     captcha_html=self.get_captcha_html(),
-                    token=token, id=self.params.id)
+                    token=token, 
+                    id=self.params.id)
 
     def post(self):
-        """If the submitted CAPTCHA is valid, re-instates the record and
-        removes the person. Otherwise, display another CAPTCHA to the
-        user for authentication."""
-
-        captcha_response = self.get_captcha_response()
+        """If the Turing test response is valid, restores the record by setting
+        its expiry date into the future.  Otherwise, offer another test."""
         try: 
             person, token = self.get_person_and_verify_params()
         except RestoreError, err:
             return self.error(400, unicode(err))
 
-        if not captcha_response.is_valid and not self.is_test_mode():
+        captcha_response = self.get_captcha_response()
+        if not captcha_response.is_valid and not self.env.test_mode:
             captcha_html = self.get_captcha_html(captcha_response.error_code)
-            self.render('templates/restore.html',
-                        captcha_html=captcha_html, token=token,
+            self.render('restore.html',
+                        captcha_html=captcha_html,
+                        token=token,
                         id=self.params.id)
             return
 
-        person.expiry_date = (utils.get_utcnow() + 
-                              Restore.DEFAULT_EXPIRATION_DELTA)
-        person.mark_for_expiry()
+        # Log the user action.
+        model.UserActionLog.put_new('restore', person)
 
-        model.PersonAction(person_record_id=person.record_id,
-                           subdomain=person.subdomain, time=utils.get_utcnow(),
-                           action='restore').put()
+        # Move the expiry date into the future to cause the record to reappear.
+        person.expiry_date = utils.get_utcnow() + RESTORED_RECORD_TTL
+        person.put_expiry_flags()
 
-        record_url = self.get_url(
-            '/view', id=person.record_id, subdomain=person.subdomain)
+        record_url = self.get_url('/view', person.repo, id=person.record_id)
         subject = _(
             '[Person Finder] Record restoration notice for '
-            '"%(first_name)s %(last_name)s"'
+            '"%(given_name)s %(family_name)s"'
         ) % {
-            'first_name': person.first_name,
-            'last_name': person.last_name
+            'given_name': person.given_name,
+            'family_name': person.family_name
         }
         email_addresses = person.get_associated_emails()
         for address in email_addresses:
@@ -90,8 +91,8 @@ class Restore(utils.Handler):
                 to=address,
                 body=self.render_to_string(
                     'restoration_email.txt',
-                    first_name=person.first_name,
-                    last_name=person.last_name,
+                    given_name=person.given_name,
+                    family_name=person.family_name,
                     record_url=record_url
                 )
             )
@@ -113,9 +114,5 @@ class Restore(utils.Handler):
         token = self.request.get('token')
         data = 'restore:%s' % self.params.id
         if not reveal.verify(data, token):
-            raise RestoreError('invalid token')
+            raise RestoreError('The token was invalid')
         return (person, token)
-
-
-if __name__ == '__main__':
-    utils.run(('/restore', Restore))

@@ -18,18 +18,25 @@ __author__ = 'eyalf@google.com (Eyal Fink)'
 import unicodedata
 import logging
 import re
+import jautils
 
 
 class TextQuery():
     """This class encapsulates the processing we are doing both for indexed
-    strings like first_name and last_name and for a query string.  Currently
+    strings like given_name and family_name and for a query string.  Currently
     the processing includes normalization (see doc below) and splitting to
     words.  Future stuff we might add: indexing of phone numbers, extracting
     of locations for geo-search, synonym support."""
 
     def __init__(self, query):
         self.query = query
-        self.normalized = normalize(query) 
+
+        query = unicode(query or '')
+        # Do we need a Japanese specific logic to normalize the query?
+        if jautils.should_normalize(query):
+            self.normalized = jautils.normalize(query)
+        else:
+            self.normalized = normalize(query)
 
         # Split out each CJK ideograph as its own word.
         # The main CJK ideograph range is from U+4E00 to U+9FFF.
