@@ -38,6 +38,7 @@ for python in \
 done
 
 if [ -z "$PYTHON" ]; then
+    DEFAULT_PYTHON=$(which python)
     if [[ "$($DEFAULT_PYTHON -V 2>&1)" =~ "Python 2.5" ]]; then
         export PYTHON="$DEFAULT_PYTHON"
     fi
@@ -55,6 +56,7 @@ export PYTHONPATH=\
 "$APPENGINE_DIR":\
 "$APPENGINE_DIR/lib/fancy_urllib":\
 "$APPENGINE_DIR/lib/webob":\
+"$APPENGINE_DIR/lib/webob_0_9":\
 "$APPENGINE_DIR/lib/yaml/lib":\
 "$APPENGINE_DIR/lib/django_1_2"
 
