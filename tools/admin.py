@@ -1,4 +1,4 @@
-# Copyright 2010 Google Inc.
+# Copyright 2011 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 from model import *
 from utils import *
 import logging
+import pickle
 
 
 class Mapper(object):
@@ -78,7 +79,7 @@ class Reindexer(Mapper):
 
 def Person_repr(person):
     return '<Person %s %r %r>' % (
-          person.record_id, person.first_name, person.last_name)
+          person.record_id, person.given_name, person.family_name)
 
 def Note_repr(note):
     return '<Note %s for %s by %r at %s>' % (
@@ -88,10 +89,10 @@ def Note_repr(note):
 Person.__repr__ = Person_repr
 Note.__repr__ = Note_repr
 
-def expand_id(subdomain, id):
+def expand_id(repo, id):
     id = str(id)
     if '/' not in id:
-        id = subdomain + '.' + HOME_DOMAIN + '/person.' + id
+        id = repo + '.' + HOME_DOMAIN + '/person.' + id
     return id
 
 def clear_found(id):
@@ -99,24 +100,69 @@ def clear_found(id):
     person.found = False
     db.put(person)
 
-def get_person(subdomain, id):
-    return Person.get(subdomain, expand_id(subdomain, id))
+def get_person(repo, id):
+    return Person.get(repo, expand_id(repo, id))
 
-def get_notes(subdomain, id):
-    return list(Note.all_in_subdomain(subdomain).filter(
-        'person_record_id =', expand_id(subdomain, id)))
+def get_notes(repo, id):
+    return list(Note.all_in_repo(repo).filter(
+        'person_record_id =', expand_id(repo, id)))
 
-def delete_person(subdomain, id):
-    db.delete(get_entities_for_person(subdomain, id))
+def delete_person(person):
+    """Deletes a Person, possibly leaving behind an empty placeholder."""
+    if person.is_original():
+        person.expiry_date = get_utcnow()
+        person.put_expiry_flags()
+        person.wipe_contents()
+    else:
+        person.delete_related_entities(delete_self=True)
 
-def get_entities_for_person(subdomain, id):
-    person = get_person(subdomain, id)
-    notes = get_notes(subdomain, id)
-    entities = [person] + notes
-    if person.photo_url:
-        if person.photo_url.startswith('/photo?id='):
-            id = person.photo_url.split('=', 1)[1]
-            photo = Photo.get_by_id(id)
-            if photo:
-                entities.append(photo)
-    return entities
+def delete_repo(repo):
+    """Deletes a Repo and associated Person, Note, Authorization, Subscription
+    (but not Counter, ApiActionLog, or UserAgentLog) entities."""
+    for person in Person.all_in_repo(repo, filter_expired=False):
+        delete_person(person)
+    entities = [Repo.get_by_key_name(repo)]
+    for cls in [Person, Note, Authorization, Subscription]:
+        entities += list(cls.all().filter('repo =', repo))
+    min_key = db.Key.from_path('ConfigEntry', repo + ':')
+    max_key = db.Key.from_path('ConfigEntry', repo + ';')
+    entities += list(config.ConfigEntry.all().filter('__key__ >', min_key
+                                            ).filter('__key__ <', max_key))
+    db.delete(entities)
+
+def get_all_resources():
+    """Gets all the Resource entities and returns a dictionary of the contents.
+
+    The resulting dictionary has the structure: {
+      <bundle_name>: {
+        'created': <bundle_created_datetime>,
+        'resources': {
+            <resource_name>: {
+                'cache_seconds': <cache_seconds>
+                'content': <content_string>
+                'last_modified': <last_modified_datetime>
+            }
+        }
+    }
+    """
+    import resources
+    bundle_dicts = {}
+    for b in resources.ResourceBundle.all():
+        resource_dicts = {}
+        for r in resources.Resource.all().ancestor(b):
+            resource_dicts[r.key().name()] = {
+                'cache_seconds': r.cache_seconds,
+                'content': r.content,
+                'last_modified': r.last_modified
+            }
+        bundle_dicts[b.key().name()] = {
+            'created': b.created,
+            'resources': resource_dicts
+        }
+    return bundle_dicts
+
+def download_resources(filename):
+    """Downloads all the Resource data into a backup file in pickle format."""
+    file = open(filename, 'w')
+    pickle.dump(get_all_resources(), file)
+    file.close()
