@@ -18,16 +18,15 @@ from utils import *
 import prefix
 import pfif
 import reveal
-import sys
+import subscribe
 
 from django.utils.translation import ugettext as _
 
 # Fields to show for side-by-side comparison.
-COMPARE_FIELDS = pfif.PFIF_1_2.fields['person'] + \
-    ['alternate_first_names', 'alternate_last_names']
+COMPARE_FIELDS = pfif.PFIF_1_4.fields['person']
 
 
-class MultiView(Handler):
+class Handler(BaseHandler):
     def get(self):
         # To handle multiple persons, we create a single object where
         # each property is a list of values, one for each person.
@@ -41,14 +40,22 @@ class MultiView(Handler):
             id = self.request.get('id%d' % i)
             if not id:
                 break
-            p = Person.get(self.subdomain, id)
+            p = Person.get(self.repo, id)
 
             for prop in COMPARE_FIELDS:
                 val = getattr(p, prop)
                 if prop == 'sex':  # convert enum value to localized text
                     val = get_person_sex_text(p)
+                # sanitize urls - sanitize_urls() not usable here.
+                if prop.endswith('_url'): 
+                    if not url_is_safe(val):
+                        val = None
                 person[prop].append(val)
                 any[prop] = any[prop] or val
+
+        # Compute the local times for the date fields on the person.
+        person['source_date_local'] = map(
+            self.to_local_time, person['source_date'])
 
         # Check if private info should be revealed.
         content_id = 'multiview:' + ','.join(person['person_record_id'])
@@ -60,14 +67,14 @@ class MultiView(Handler):
         # Add a calculated full name property - used in the title.
         person['full_name'] = [
             fname + ' ' + lname
-            for fname, lname in zip(person['first_name'], person['last_name'])]
+            for fname, lname in zip(person['given_name'], person['family_name'])]
         standalone = self.request.get('standalone')
 
         # Note: we're not showing notes and linked persons information
         # here at the moment.
-        self.render('templates/multiview.html',
+        self.render('multiview.html',
                     person=person, any=any, standalone=standalone,
-                    cols=len(person['first_name']) + 1,
+                    cols=len(person['given_name']) + 1,
                     onload_function='view_page_loaded()', markdup=True,
                     show_private_info=show_private_info, reveal_url=reveal_url)
 
@@ -94,9 +101,12 @@ class MultiView(Handler):
         if len(ids) > 1:
             notes = []
             for person_id in ids:
+                person = Person.get(self.repo, person_id)
+                person_notes = []
                 for other_id in ids - set([person_id]):
                     note = Note.create_original(
-                        self.subdomain,
+                        self.repo,
+                        entry_date=get_utcnow(),                        
                         person_record_id=person_id,
                         linked_person_record_id=other_id,
                         text=self.params.text,
@@ -104,9 +114,15 @@ class MultiView(Handler):
                         author_phone=self.params.author_phone,
                         author_email=self.params.author_email,
                         source_date=get_utcnow())
-                    notes.append(note)
+                    person_notes.append(note)
+                # Notify person's subscribers of all new duplicates. We do not
+                # follow links since each Person record in the ids list gets its
+                # own note. However, 1) when > 2 records are marked as
+                # duplicates, subscribers will still receive multiple
+                # notifications, and 2) subscribers to already-linked Persons
+                # will not be notified of the new link.
+                subscribe.send_notifications(self, person, person_notes, False)
+                notes += person_notes
+            # Write all notes to store
             db.put(notes)
         self.redirect('/view', id=self.params.id1)
-
-if __name__ == '__main__':
-    run(('/multiview', MultiView))
