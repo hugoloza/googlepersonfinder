@@ -1,21 +1,18 @@
-{% extends "base.html.template" %}
-{% comment %}
-Copyright 2010 Google Inc.
+{# Copyright 2010 Google Inc.  Licensed under the Apache License, Version   #}
+{# 2.0 (the "License"); you may not use this file except in compliance with #}
+{# the License.  You may obtain a copy of the License at:                   #}
+{#     http://www.apache.org/licenses/LICENSE-2.0                           #}
+{# Unless required by applicable law or agreed to in writing, software      #}
+{# distributed under the License is distributed on an "AS IS" BASIS,        #}
+{# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. #}
+{# See the License for the specific language governing permissions and      #}
+{# limitations under the License.                                           #}
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+{# Template for the page of search results.                                 #}
 
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-{% endcomment %}
-
+{% extends "app-base.html.template" %}
 {% load i18n %}
+
 {% block content %}
 {% include "query_form.html.template" %}
 {% if results %}
@@ -77,8 +74,8 @@ limitations under the License.
             <input style='display:none; float:{{env.rtl|yesno:"right,left"}}' type='checkbox' name='dup' value='{{result.record_id}}' onclick='check_dup(this);' class='duplicate-checkbox'>
             <span class='resultDataTitle'>
               {{result.full_name}}
-              {% if result.alternate_full_name %}
-                ({{result.alternate_full_name}})
+              {% if config.use_alternate_names and result.alternate_names %}
+                ({{result.alternate_names}})
               {% endif %}
             </span>
             <ul>
@@ -163,8 +160,8 @@ limitations under the License.
 {% if not params.small and not jp_phone_number_query %}
   <form method="get" action="{{env.repo_path}}/create">
     <input type="hidden" name="query" value="{{params.query}}">
-    <input type="hidden" name="first_name" value="{{params.first_name}}">
-    <input type="hidden" name="last_name" value="{{params.last_name}}">
+    <input type="hidden" name="given_name" value="{{params.given_name}}">
+    <input type="hidden" name="family_name" value="{{params.family_name}}">
     <input type="hidden" name="role" value="{{params.role}}">
     {% ifequal params.role 'provide' %}
       <input type="submit" value="{% trans "Create a new record for" %} {{env.params_full_name}}">

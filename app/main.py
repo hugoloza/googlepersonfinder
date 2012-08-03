@@ -34,7 +34,7 @@ import utils
 
 
 # When no action or repo is specified, redirect to this action.
-HOME_ACTION = 'howitworks'
+HOME_ACTION = 'home.html'
 
 # Map of URL actions to Python module and class names.
 # TODO(kpy): Remove the need for this configuration information, either by
@@ -70,14 +70,12 @@ HANDLER_CLASSES = dict((x, x.replace('/', '_') + '.Handler') for x in [
 
 # Exceptional cases where the module name doesn't match the URL.
 HANDLER_CLASSES[''] = 'start.Handler'
-HANDLER_CLASSES['howitworks'] = 'googleorg.Handler'
-HANDLER_CLASSES['faq'] = 'googleorg.Handler'
-HANDLER_CLASSES['responders'] = 'googleorg.Handler'
 HANDLER_CLASSES['api/read'] = 'api.Read'
 HANDLER_CLASSES['api/write'] = 'api.Write'
 HANDLER_CLASSES['api/search'] = 'api.Search'
 HANDLER_CLASSES['api/subscribe'] = 'api.Subscribe'
 HANDLER_CLASSES['api/unsubscribe'] = 'api.Unsubscribe'
+HANDLER_CLASSES['feeds/repo'] = 'feeds.Repo'
 HANDLER_CLASSES['feeds/note'] = 'feeds.Note'
 HANDLER_CLASSES['feeds/person'] = 'feeds.Person'
 HANDLER_CLASSES['sitemap'] = 'sitemap.SiteMap'
@@ -88,6 +86,7 @@ HANDLER_CLASSES['tasks/count/reindex'] = 'tasks.Reindex'
 HANDLER_CLASSES['tasks/count/update_status'] = 'tasks.UpdateStatus'
 HANDLER_CLASSES['tasks/delete_expired'] = 'tasks.DeleteExpired'
 HANDLER_CLASSES['tasks/delete_old'] = 'tasks.DeleteOld'
+HANDLER_CLASSES['tasks/clean_up_in_test_mode'] = 'tasks.CleanUpInTestMode'
 
 def get_repo_and_action(request):
     """Determines the repo and action for a request.  The action is the part
@@ -196,7 +195,7 @@ def setup_env(request):
     that are commonly used by most handlers."""
     env = utils.Struct()
     env.repo, env.action = get_repo_and_action(request)
-    env.config = env.repo and config.Configuration(env.repo)
+    env.config = config.Configuration(env.repo or '*')
     env.test_mode = (request.remote_addr == '127.0.0.1' and
                      request.get('test_mode'))
 
@@ -236,9 +235,17 @@ def setup_env(request):
             not env.config or env.config.allow_believed_dead_via_ui)
     ]
 
+    # Fields related to "small mode" (for embedding in an <iframe>).
+    env.small = request.get('small', '').lower() == 'yes'
+    # Optional "target" attribute for links to non-small pages.
+    env.target_attr = env.small and ' target="_blank" ' or ''
+
     # Repo-specific information.
     if env.repo:
+        # repo_url is the root URL for the repository.
         env.repo_url = utils.get_repo_url(request, env.repo)
+        # start_url is like repo_url but preserves 'small' and 'style' params.
+        env.start_url = utils.get_url(request, env.repo, '')
         env.repo_path = urlparse.urlsplit(env.repo_url)[2]
         env.repo_title = get_localized_message(
             env.config.repo_titles, env.lang, '?')
@@ -250,11 +257,16 @@ def setup_env(request):
             env.config.view_page_custom_htmls, env.lang, '')
         env.seek_query_form_custom_html = get_localized_message(
             env.config.seek_query_form_custom_htmls, env.lang, '')
+        # If the repository is deactivated, we should not show test mode
+        # notification.
+        env.repo_test_mode = (
+            env.config.test_mode and not env.config.deactivated)
 
-        # Preformat the name from the 'first_name' and 'last_name' parameters.
-        first = request.get('first_name', '').strip()
-        last = request.get('last_name', '').strip()
-        env.params_full_name = utils.get_full_name(first, last, env.config)
+        # Preformat the name from the 'given_name' and 'family_name' parameters.
+        given_name = request.get('given_name', '').strip()
+        family_name = request.get('family_name', '').strip()
+        env.params_full_name = utils.get_full_name(
+            given_name, family_name, env.config)
 
     return env
 
@@ -324,7 +336,8 @@ class Main(webapp.RequestHandler):
             getattr(handler, request.method.lower())()  # get() or post()
         elif env.action.endswith('.template'):
             # Don't serve template source code.
-            return self.error(404)
+            response.set_status(404)
+            response.out.write('Not found')
         else:
             # Serve a static page or file.
             env.robots_ok = True
@@ -332,10 +345,12 @@ class Main(webapp.RequestHandler):
             content = resources.get_rendered(
                 env.action, env.lang, (env.repo, env.charset), get_vars)
             if content is None:
-                return self.error(404)
-            content_type, content_encoding = mimetypes.guess_type(env.action)
-            response.headers['Content-Type'] = content_type or 'text/plain'
-            response.out.write(content)
+                response.set_status(404)
+                response.out.write('Not found')
+            else:
+                content_type, encoding = mimetypes.guess_type(env.action)
+                response.headers['Content-Type'] = content_type or 'text/plain'
+                response.out.write(content)
 
     def get(self):
         self.serve()

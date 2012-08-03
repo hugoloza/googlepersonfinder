@@ -1,21 +1,18 @@
-{% extends "base.html.template" %}
-{% comment %}
-Copyright 2010 Google Inc.
+{# Copyright 2010 Google Inc.  Licensed under the Apache License, Version   #}
+{# 2.0 (the "License"); you may not use this file except in compliance with #}
+{# the License.  You may obtain a copy of the License at:                   #}
+{#     http://www.apache.org/licenses/LICENSE-2.0                           #}
+{# Unless required by applicable law or agreed to in writing, software      #}
+{# distributed under the License is distributed on an "AS IS" BASIS,        #}
+{# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. #}
+{# See the License for the specific language governing permissions and      #}
+{# limitations under the License.                                           #}
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+{# Template for the multiview page (see multiview.py).                      #}
 
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-{% endcomment %}
-
+{% extends "app-base.html.template" %}
 {% load i18n %}
+
 {% block title %}
   {% for val in person.full_name %}{{val}} - {% endfor %} {{block.super}}
 {% endblock %}
@@ -44,7 +41,7 @@ limitations under the License.
           {% if config.use_family_name and config.family_name_first %}
             <tr>
               <td class="label">{% trans "Family name" %}:</td>
-              {% for val in person.last_name %}
+              {% for val in person.family_name %}
                 <td class="field">{{val}}</td>
               {% endfor %}
             </tr>
@@ -65,7 +62,7 @@ limitations under the License.
                 {% trans "Name" %}:
               {% endif %}
             </td>
-            {% for val in person.first_name %}
+            {% for val in person.given_name %}
               <td class="field">{{val}}</td>
             {% endfor %}
             </tr>
@@ -76,44 +73,18 @@ limitations under the License.
             <tr>
             {% endif %}
               <td class="label">{% trans "Family name" %}:</td>
-              {% for val in person.last_name %}
+              {% for val in person.family_name %}
                 <td class="field">{{val}}</td>
               {% endfor %}
             </tr>
           {% endif %}
           {% if config.use_alternate_names %}
-            {% if config.use_family_name and config.family_name_first %}
-              <tr>
-                <td class="label">{% trans "Alternate family names" %}:</td>
-                {% for val in person.alternate_last_names %}
-                  <td class="field">{{val}}</td>
-                {% endfor %}
-              </tr>
-            {% endif %}
-            {% if not config.use_family_name or config.family_name_first %}
-              <tr class="sectionbottom">
-            {% else %}
-              <tr>
-            {% endif %}
-              <td class="label">
-                {% if config.use_family_name %}
-                  {% trans "Alternate given names" %}:
-                {% else %}
-                  {% trans "Alternate names" %}:
-                {% endif %}
-              </td>
-              {% for val in person.alternate_first_names %}
+            <tr class="sectionbottom">
+              <td class="label">{% trans "Alternate names" %}:</td>
+              {% for val in person.alternate_names %}
                 <td class="field">{{val}}</td>
               {% endfor %}
-              </tr>
-            {% if config.use_family_name and not config.family_name_first %}
-              <tr class="sectionbottom">
-                <td class="label">{% trans "Alternate family names" %}:</td>
-                {% for val in person.alternate_last_names %}
-                  <td class="field">{{val}}</td>
-                {% endfor %}
-              </tr>
-            {% endif %}
+            </tr>
           {% endif %}
           <tr>
             <td colspan="{{cols}}" class="physical sectiontop">
@@ -175,15 +146,15 @@ limitations under the License.
               {% endfor %}
             </tr>
           {% endif %}
-          {% if any.other %}
+          {% if any.description %}
           <tr>
-            <td colspan="{{cols}}" class="other sectiontop">
-              <h3>{% trans "Other information" %}</h3>
+            <td colspan="{{cols}}" class="description sectiontop">
+              <h3>{% trans "Description" %}</h3>
             </td>
           </tr>
           <tr class="sectionbottom">
             <td class="label">&nbsp;</td>
-            {% for val in person.other %}
+            {% for val in person.description %}
             <td class="field">
               <textarea readonly="readonly" cols=30 rows=5
                 >{{val}}</textarea>
@@ -299,4 +270,3 @@ limitations under the License.
   {% include "add_note.html.template" %}
 </form>
 {% endblock %}
-{% block footer %}{# Explicitly remove Back to Start from bottom of page.#}{% endblock %}
