@@ -19,12 +19,15 @@ to guard the display of sensitive information."""
 __author__ = 'kpy@google.com (Ka-Ping Yee)'
 
 import cgi
-import logging
+import os
 import pickle
 import random
 import sha
 import time
+
 from google.appengine.api import users
+from recaptcha.client import captcha
+
 from model import Secret
 from utils import *
 
@@ -98,27 +101,24 @@ def make_reveal_url(handler, content_id):
 # 3.  If reveal.verify() returns False, then replace the sensitive information
 #     with a link to make_reveal_url(self, content_id).
 
-class Reveal(Handler):
+class Handler(BaseHandler):
     def get(self):
         # For now, signing in is sufficient to reveal information.
         # We could put a Turing test here instead.
         user = users.get_current_user()
-        self.render('templates/reveal.html', user=user,
-                    login_url=users.create_login_url(self.request.url))
+        self.render('reveal.html',
+                    user=user,
+                    captcha_html=self.get_captcha_html())
 
     def post(self):
-        user = users.get_current_user()
-        if user:
-            logging.info('revealing %r to user %r' %
-                         (self.params.content_id, user.email()))
+        captcha_response = self.get_captcha_response()
+        if captcha_response.is_valid or self.env.test_mode:
             signature = sign(self.params.content_id)
             self.redirect(
                 set_url_param(self.params.target, 'signature', signature))
         else:
-            self.redirect('/reveal',
-                target=self.params.target,
-                content_id=self.params.content_id
-            )
-
-if __name__ == '__main__':
-    run(('/reveal', Reveal))
+            self.render(
+                'reveal.html',
+                user=users.get_current_user(),
+                captcha_html=self.get_captcha_html(),
+                content_id=self.params.content_id)
