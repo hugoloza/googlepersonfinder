@@ -24,7 +24,7 @@ import unittest
 import django.utils.translation
 from google.appengine.ext import db
 from google.appengine.ext import webapp
-from nose.tools import assert_raises
+from pytest import raises
 
 import config
 import pfif
@@ -107,14 +107,14 @@ class UtilsTests(unittest.TestCase):
         assert utils.strip(u'    ') == u''
         assert utils.strip('  x  ') == 'x'
         assert utils.strip(u'  x  ') == u'x'
-        assert_raises(Exception, utils.strip, None)
+        raises(Exception, utils.strip, None)
 
     def test_validate_yes(self):
         assert utils.validate_yes('yes') == 'yes'
         assert utils.validate_yes('YES') == 'yes'
         assert utils.validate_yes('no') == ''
         assert utils.validate_yes('y') == ''
-        assert_raises(Exception, utils.validate_yes, None)
+        raises(Exception, utils.validate_yes, None)
 
     def test_validate_role(self):
         assert utils.validate_role('provide') == 'provide'
@@ -122,7 +122,7 @@ class UtilsTests(unittest.TestCase):
         assert utils.validate_role('seek') == 'seek'
         assert utils.validate_role('pro') == 'seek'
         assert utils.validate_role('provider') == 'seek'
-        assert_raises(Exception, utils.validate_role, None)
+        raises(Exception, utils.validate_role, None)
 
     def test_validate_expiry(self):
         assert utils.validate_expiry(100) == 100
@@ -135,7 +135,7 @@ class UtilsTests(unittest.TestCase):
                 version]
         assert utils.validate_version('') == pfif.PFIF_VERSIONS[
             pfif.PFIF_DEFAULT_VERSION]
-        assert_raises(Exception, utils.validate_version, '1.0')
+        raises(Exception, utils.validate_version, '1.0')
 
     def test_validate_age(self):
         assert utils.validate_age('20') == '20'
@@ -189,14 +189,14 @@ class HandlerTests(unittest.TestCase):
     def test_parameter_validation(self):
         _, _, handler = self.handler_for_url(
             '/haiti/start?'
-            'first_name=++John++&'
-            'last_name=Doe&'
-            'found=YES&'
+            'given_name=++John++&'
+            'family_name=Doe&'
+            'author_made_contact=YES&'
             'role=PROVIDE&')
 
-        assert handler.params.first_name == 'John'
-        assert handler.params.last_name == 'Doe'
-        assert handler.params.found == 'yes'
+        assert handler.params.given_name == 'John'
+        assert handler.params.family_name == 'Doe'
+        assert handler.params.author_made_contact == 'yes'
         assert handler.params.role == 'provide'
 
     def test_nonexistent_repo(self):
