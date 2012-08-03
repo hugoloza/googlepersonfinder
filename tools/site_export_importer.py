@@ -75,14 +75,14 @@ def maybe_add_required_keys(a_dict, required_keys, dummy_value=u'?'):
 
 
 def create_person(person_dict):
-    # TODO(kpy): Add the subdomain argument to importer.create_person.
+    # TODO(kpy): Pass a subdomain argument to importer.create_person.
     try:
         return importer.create_person(person_dict)
     except AssertionError:
         pass
     try:
         person_dict = maybe_add_required_keys(
-            person_dict, (u'first_name', u'last_name'))
+            person_dict, (u'given_name', u'family_name'))
         return importer.create_person(person_dict)
     except AssertionError:
         logging.info(
@@ -91,7 +91,7 @@ def create_person(person_dict):
 
 
 def create_note(note_dict):
-    # TODO(kpy): Add the subdomain argument to importer.create_note.
+    # TODO(kpy): Pass a subdomain argument to importer.create_note.
     try:
         return importer.create_note(note_dict)
     except AssertionError:
