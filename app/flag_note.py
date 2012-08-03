@@ -19,57 +19,52 @@ from recaptcha.client import captcha
 import model
 import reveal
 import utils
-from utils import datetime
 
-
-class FlagNote(utils.Handler):
-    """Marks a specified note as hidden [spam], and tracks it in the
-    NoteFlag table."""
+class Handler(utils.BaseHandler):
+    """Marks a specified note as hidden (spam)."""
     def get(self):
-        note = model.Note.get(self.subdomain, self.params.id)
+        note = model.Note.get(self.repo, self.params.id)
         if not note:
             return self.error(400, 'No note with ID: %r' % self.params.id)
         note.status_text = utils.get_note_status_text(note)
-        captcha_html = note.hidden and utils.get_captcha_html() or ''
+        captcha_html = note.hidden and self.get_captcha_html() or ''
 
         # Check if private info should be revealed.
         content_id = 'view:' + note.person_record_id
         reveal_url = reveal.make_reveal_url(self, content_id)
         show_private_info = reveal.verify(content_id, self.params.signature)
 
-        self.render('templates/flag_note.html',
-                    onload_function='load_language_api()',
-                    note=note, captcha_html=captcha_html, reveal_url=reveal_url,
-                    flag_note_page=True, show_private_info=show_private_info,
+        self.render('flag_note.html',
+                    note=note,
+                    captcha_html=captcha_html,
+                    reveal_url=reveal_url,
+                    flag_note_page=True,
+                    show_private_info=show_private_info,
                     signature=self.params.signature)
 
     def post(self):
-        note = model.Note.get(self.subdomain, self.params.id)
+        note = model.Note.get(self.repo, self.params.id)
         if not note:
             return self.error(400, 'No note with ID: %r' % self.params.id)
 
-        captcha_response = note.hidden and utils.get_captcha_response(
-            self.request)
-        if not note.hidden or captcha_response.is_valid or self.is_test_mode():
-            # Mark the appropriate changes
+        captcha_response = note.hidden and self.get_captcha_response()
+        if not note.hidden or captcha_response.is_valid or self.env.test_mode:
             note.hidden = not note.hidden
+            # When "hidden" changes, update source_date and entry_date (melwitt)
+            # http://code.google.com/p/googlepersonfinder/issues/detail?id=58
+            now = utils.get_utcnow()
+            note.source_date = now
+            note.entry_date = now
             db.put(note)
 
-            # Track change in NoteFlag table
-            reason_for_report = self.request.get('reason_for_report', '')
-            model.NoteFlag(subdomain=self.subdomain,
-                           note_record_id=self.params.id,
-                           time=datetime.now(), spam=note.hidden,
-                           reason_for_report=reason_for_report).put()
+            model.UserActionLog.put_new(
+                (note.hidden and 'hide') or 'unhide',
+                note, self.request.get('reason_for_report', ''))
             self.redirect(self.get_url('/view', id=note.person_record_id,
                                        signature=self.params.signature))
         elif not captcha_response.is_valid:
-            captcha_html = utils.get_captcha_html(captcha_response.error_code)
-            self.render('templates/flag_note.html',
-                        onload_function='load_language_api()',
-                        note=note, captcha_html=captcha_html,
+            captcha_html = self.get_captcha_html(captcha_response.error_code)
+            self.render('flag_note.html',
+                        note=note,
+                        captcha_html=captcha_html,
                         signature=self.params.signature)
-
-
-if __name__ == '__main__':
-    utils.run(('/flag_note', FlagNote))
