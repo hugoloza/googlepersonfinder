@@ -46,6 +46,8 @@ from urlparse import urlsplit, urljoin
 from htmlentitydefs import name2codepoint
 import sys, re
 
+RE_TYPE = type(re.compile(''))
+
 def regex(template, *params, **kwargs):
     """Compile a regular expression, substituting in any passed parameters
     for placeholders of the form __0__, __1__, __2__, etc. in the template.
@@ -150,7 +152,7 @@ def setcookies(cookiejar, host, lines):
 RAW = object() # This sentinel value for 'charset' means "don't decode".
 
 def fetch(url, data='', agent=None, referrer=None, charset=None, verbose=0,
-          cookiejar={}, type=None):
+          cookiejar={}, type=None, method=None):
     """Make an HTTP or HTTPS request.  If 'data' is given, do a POST;
     otherwise do a GET.  If 'agent' and/or 'referrer' are given, include
     them as User-Agent and Referer headers in the request, respectively.
@@ -170,7 +172,8 @@ def fetch(url, data='', agent=None, referrer=None, charset=None, verbose=0,
     host = host.split('@')[-1]
 
     # Prepare the POST data.
-    method = data and 'POST' or 'GET'
+    if not method:
+        method = data and 'POST' or 'GET'
     if data and not isinstance(data, str): # Unicode not allowed here
         data = urlencode(data)
 
@@ -180,7 +183,7 @@ def fetch(url, data='', agent=None, referrer=None, charset=None, verbose=0,
 
     # Make the HTTP or HTTPS request using Python or cURL.
     if verbose:
-        print >>sys.stderr, 'fetch:', url
+        print >>sys.stderr, '>', method, url
     import socket
     if scheme == 'http' or scheme == 'https' and hasattr(socket, 'ssl'):
         if query:
@@ -311,11 +314,13 @@ class Session:
         return self.url
 
     def follow(self, anchor, region=None):
-        """Find the first link that has the given anchor text, and follow it.
-        The anchor may be given as a string or a compiled RE.  If 'region' is
-        specified, only that region is searched for a matching link, instead
-        of the whole document."""
-        link = (region or self.doc).first('a', content=anchor)
+        """If 'anchor' is an element, follow the link in its 'href' attribute;
+        if 'anchor' is a string or compiled RE, find the first link with that
+        anchor text, and follow it.  If 'region' is specified, only that region
+        is searched for a matching link, instead of the whole document."""
+        link = anchor
+        if isinstance(anchor, basestring) or type(anchor) is RE_TYPE:
+            link = (region or self.doc).first('a', content=anchor)
         if not link:
             raise ScrapeError('link %r not found' % anchor)
         if not link.get('href', ''):
@@ -361,7 +366,7 @@ class Session:
         """Put a cookie in this session's cookie jar.  'cookieline' should
         have the format "<name>=<value>; domain=<domain>; path=<path>"."""
         scheme, host, path, query, fragment = urlsplit(self.url)
-        host = host.split('@')[-1].split(':')[0]
+        host = host.split('@')[-1]
         setcookies(self.cookiejar, host, [cookieline])
 
 # This pattern has been carefully tuned, but re.search can still cause a
@@ -409,8 +414,10 @@ urlquoted.update(dict((c, c) for c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
                                       'abcdefghijklmnopqrstuvwxyz' +
                                       '0123456789._-'))
 def urlquote(text):
+    if type(text) is unicode:
+        text = text.encode('utf-8')
     return ''.join(map(urlquoted.get, text))
-    
+
 def urlencode(params):
     pairs = ['%s=%s' % (urlquote(key), urlquote(value).replace('%20', '+'))
              for key, value in params.items()]
@@ -447,7 +454,7 @@ def striptags(html):
         pos = endmatch.end()
     chunks.append(html[pos:])
     html = ''.join(chunks)
-        
+
     # Break up the text into paragraphs and lines, then remove all other tags.
     paragraphs = []
     for paragraph in parasplitter.split(html):
@@ -687,7 +694,7 @@ class Region:
                     elif selections:
                         params[select['name']] = selections[0]
             for textarea in self.all('textarea'):
-                if 'disabled' not in textarea:
+                if 'disabled' not in textarea and 'readonly' not in textarea:
                     params[textarea['name']] = textarea.content
             return params
 
