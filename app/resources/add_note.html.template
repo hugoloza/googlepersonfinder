@@ -100,12 +100,12 @@
                         <tr>
                           <td>
                             <div id="map_canvas_show_link" style="display: none">
-                              <a href='#' onclick="toggle('map_canvas', document.getElementById('last_known_location').value); return false;" >
+                              <a href='#' onclick="toggle('map_canvas', $('last_known_location').value); return false;" >
                               {% trans "Show Map" %}
                               </a>
                             </div>
                             <div id="map_canvas_hide_link" style="display: none">
-                              <a href='#' onclick="toggle('map_canvas', document.getElementById('last_known_location').value); return false;" >
+                              <a href='#' onclick="toggle('map_canvas', $('last_known_location').value); return false;" >
                               {% trans "Hide Map" %}
                               </a>
                             </div>
