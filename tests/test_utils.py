@@ -1,3 +1,5 @@
+#!/usr/bin/python2.5
+# encoding: utf-8
 # Copyright 2010 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +21,14 @@ import os
 import tempfile
 import unittest
 
+import django.utils.translation
+from google.appengine.ext import db
 from google.appengine.ext import webapp
-from nose.tools import assert_raises
+from pytest import raises
 
 import config
+import pfif
+import main
 import model
 import utils
 
@@ -30,12 +36,29 @@ import utils
 class UtilsTests(unittest.TestCase):
     """Test the loose odds and ends."""
 
-    def test_to_utf8(self):
-        assert utils.to_utf8('abc') == 'abc'
-        assert utils.to_utf8(u'abc') == 'abc'
-        assert utils.to_utf8(u'\u4f60\u597d') == '\xe4\xbd\xa0\xe5\xa5\xbd'
-        assert utils.to_utf8('\xe4\xbd\xa0\xe5\xa5\xbd') == \
+    def test_get_app_name(self):
+        app_id = 'test'
+        os.environ['APPLICATION_ID'] = app_id
+        assert utils.get_app_name() == app_id
+        os.environ['APPLICATION_ID'] = 's~' + app_id
+        assert utils.get_app_name() == app_id
+
+    def test_get_host(self):
+        host = 'foo.appspot.com'
+        os.environ['HTTP_HOST'] = host
+        assert utils.get_host() == host
+        os.environ['HTTP_HOST'] = 'foo.' + host
+        assert utils.get_host() == host
+
+    def test_encode(self):
+        assert utils.encode('abc') == 'abc'
+        assert utils.encode(u'abc') == 'abc'
+        assert utils.encode(u'\u4f60\u597d') == '\xe4\xbd\xa0\xe5\xa5\xbd'
+        assert utils.encode('\xe4\xbd\xa0\xe5\xa5\xbd') == \
             '\xe4\xbd\xa0\xe5\xa5\xbd'
+        assert utils.encode('abc', 'shift_jis') == 'abc'
+        assert utils.encode(u'abc', 'shift_jis') == 'abc'
+        assert utils.encode(u'\uffe3\u2015', 'shift_jis') == '\x81P\x81\\'
 
     def test_urlencode(self):
         assert utils.urlencode({'foo': 'bar',
@@ -84,14 +107,14 @@ class UtilsTests(unittest.TestCase):
         assert utils.strip(u'    ') == u''
         assert utils.strip('  x  ') == 'x'
         assert utils.strip(u'  x  ') == u'x'
-        assert_raises(Exception, utils.strip, None)
+        raises(Exception, utils.strip, None)
 
     def test_validate_yes(self):
         assert utils.validate_yes('yes') == 'yes'
         assert utils.validate_yes('YES') == 'yes'
         assert utils.validate_yes('no') == ''
         assert utils.validate_yes('y') == ''
-        assert_raises(Exception, utils.validate_yes, None)
+        raises(Exception, utils.validate_yes, None)
 
     def test_validate_role(self):
         assert utils.validate_role('provide') == 'provide'
@@ -99,99 +122,100 @@ class UtilsTests(unittest.TestCase):
         assert utils.validate_role('seek') == 'seek'
         assert utils.validate_role('pro') == 'seek'
         assert utils.validate_role('provider') == 'seek'
-        assert_raises(Exception, utils.validate_role, None)
+        raises(Exception, utils.validate_role, None)
 
-      # TODO: test_validate_image
+    def test_validate_expiry(self):
+        assert utils.validate_expiry(100) == 100
+        assert utils.validate_expiry('abc') == None
+        assert utils.validate_expiry(-100) == None
+
+    def test_validate_version(self):
+        for version in pfif.PFIF_VERSIONS:
+            assert utils.validate_version(version) == pfif.PFIF_VERSIONS[
+                version]
+        assert utils.validate_version('') == pfif.PFIF_VERSIONS[
+            pfif.PFIF_DEFAULT_VERSION]
+        raises(Exception, utils.validate_version, '1.0')
+
+    def test_validate_age(self):
+        assert utils.validate_age('20') == '20'
+        assert utils.validate_age(' 20 ') == '20'
+        assert utils.validate_age(u'２０') == '20'
+        assert utils.validate_age('20-30') == '20-30'
+        assert utils.validate_age('20 - 30') == '20-30'
+        assert utils.validate_age(u'２０〜３０') == '20-30'
+        assert utils.validate_age(u'２０　ー　３０') == '20-30'
+        assert utils.validate_age('20 !') == ''
+        assert utils.validate_age('2 0') == ''
+
+    # TODO: test_validate_image
+
+    def test_set_utcnow_for_test(self):
+        max_delta = datetime.timedelta(0,0,100)
+        utcnow = datetime.datetime.utcnow()
+        utilsnow = utils.get_utcnow()
+        # max sure we're getting the current time.
+        assert (utilsnow - utcnow) < max_delta
+        # now set the utils time.
+        test_time = datetime.datetime(2011, 1, 1, 0, 0)
+        utils.set_utcnow_for_test(test_time)
+        assert utils.get_utcnow() == test_time
+        # now unset.
+        utils.set_utcnow_for_test(None)
+        assert utils.get_utcnow()
+        assert utils.get_utcnow() != test_time
 
 
 class HandlerTests(unittest.TestCase):
     """Tests for the base handler implementation."""
 
     def setUp(self):
-        # Set up temp file to contain a template whose content we can change
-        fd, self._template_path = tempfile.mkstemp()
-        os.close(fd)
-
-        # Stash the template ROOT hardwired into the module and install our own
-        self._stored_root = utils.ROOT
-        utils.ROOT = os.path.dirname(self._template_path)
-        self._template_name = os.path.basename(self._template_path)
-
-        model.Subdomain(key_name='haiti').put()
-
-        config.set_for_subdomain(
+        model.Repo(key_name='haiti').put()
+        config.set_for_repo(
             'haiti',
-            subdomain_titles={'en': 'Haiti Earthquake'},
+            repo_titles={'en': 'Haiti Earthquake'},
             language_menu_options=['en', 'ht', 'fr', 'es'])
 
     def tearDown(self):
-        # Cleanup the template file
-        os.unlink(self._template_path)
-
-        # Restore the original template ROOT
-        utils.ROOT = self._stored_root
-
-    def reset_global_cache(self):
-        """Resets the cache that the handler classes."""
-        utils.global_cache = {}
-        utils.global_cache_insert_time = {}
-
-    def set_template_content(self, content):
-        template = None
-        try:
-            template = open(self._template_path, mode='w')
-            template.write(content)
-        finally:
-            if template:
-                template.close()
-            # Reset the internal template cache used by appengine to ensure our
-            # content is re-read
-            webapp.template.template_cache = {}
+        db.delete(config.ConfigEntry.all())
 
     def handler_for_url(self, url):
         request = webapp.Request(webapp.Request.blank(url).environ)
         response = webapp.Response()
-        handler = utils.Handler()
-        handler.initialize(request, response)
+        handler = utils.BaseHandler()
+        handler.initialize(request, response, main.setup_env(request))
         return (request, response, handler)
 
     def test_parameter_validation(self):
         _, _, handler = self.handler_for_url(
-            '/main?'
-            'subdomain=haiti&'
-            'first_name=++John++&'
-            'last_name=Doe&'
-            'found=YES&'
+            '/haiti/start?'
+            'given_name=++John++&'
+            'family_name=Doe&'
+            'author_made_contact=YES&'
             'role=PROVIDE&')
 
-        assert handler.params.first_name == 'John'
-        assert handler.params.last_name == 'Doe'
-        assert handler.params.found == 'yes'
+        assert handler.params.given_name == 'John'
+        assert handler.params.family_name == 'Doe'
+        assert handler.params.author_made_contact == 'yes'
         assert handler.params.role == 'provide'
 
-    def test_caches(self):
-        self.reset_global_cache()
-        self.set_template_content('hello')
+    def test_nonexistent_repo(self):
+        request, response, handler = self.handler_for_url('/x/start')
+        assert response.status == 404
+        assert 'No such repository' in response.out.getvalue()
+        assert 'class="error"' in response.out.getvalue()  # error template
 
-        _, response, handler = self.handler_for_url('/main?subdomain=haiti')
-        handler.render(self._template_name, cache_time=3600)
-        assert response.out.getvalue() == 'hello'
+    def test_set_allow_believed_dead_via_ui(self):
+        """Verify the configuration of allow_believed_dead_via_ui."""
+        # Set allow_believed_dead_via_ui to be True
+        config.set_for_repo('haiti', allow_believed_dead_via_ui=True)
+        _, response, handler = self.handler_for_url('/haiti/start')
+        assert handler.config.allow_believed_dead_via_ui == True
 
-        self.set_template_content('goodbye')
-
-        _, response, handler = self.handler_for_url('/main?subdomain=haiti')
-        handler.render(self._template_name, cache_time=3600)
-        assert response.out.getvalue() == 'hello'
-
-        self.reset_global_cache()
-
-        _, response, handler = self.handler_for_url('/main?subdomain=haiti')
-        handler.render(self._template_name, cache_time=3600)
-        assert response.out.getvalue() == 'goodbye'
-
-    def test_nonexistent_subdomain(self):
-        request, response, handler = self.handler_for_url('/main?subdomain=x')
-        assert 'No such domain' in response.out.getvalue()
+        # Set allow_believed_dead_via_ui to be False
+        config.set_for_repo('haiti', allow_believed_dead_via_ui=False)
+        _, response, handler = self.handler_for_url('/haiti/start')
+        assert handler.config.allow_believed_dead_via_ui == False
 
 
 if __name__ == '__main__':
