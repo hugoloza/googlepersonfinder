@@ -25,31 +25,31 @@ import prefix
 MAX_RESULTS = 100
 
 
-class Results(Handler):
+class Handler(BaseHandler):
     def search(self, query):
         """Performs a search and adds view_url attributes to the results."""
         results = None
         if self.config.external_search_backends:
-            results = external_search.search(self.subdomain, query, MAX_RESULTS,
+            results = external_search.search(
+                self.repo, query, MAX_RESULTS,
                 self.config.external_search_backends)
-        if results is None:
-            results = indexing.search(self.subdomain, query, MAX_RESULTS)
+        # External search backends are not always complete. Fall back to the
+        # original search when they fail or return no results.
+        if not results:
+            results = indexing.search(self.repo, query, MAX_RESULTS)
 
         for result in results:
             result.view_url = self.get_url('/view',
                                            id=result.record_id,
                                            role=self.params.role,
                                            query=self.params.query,
-                                           first_name=self.params.first_name,
-                                           last_name=self.params.last_name)
+                                           given_name=self.params.given_name,
+                                           family_name=self.params.family_name)
             result.latest_note_status = get_person_status_text(result)
             if result.is_clone():
                 result.provider_name = result.get_original_domain()
             result.full_name = get_person_full_name(result, self.config)
-            if self.config.use_alternate_names:
-                result.alternate_full_name = get_full_name(
-                    result.alternate_first_names, result.alternate_last_names,
-                    self.config)
+            sanitize_urls(result)
         return results
 
     def reject_query(self, query):
@@ -61,28 +61,28 @@ class Results(Handler):
         return self.get_url('/results',
                             small='no',
                             query=query,
-                            first_name=self.params.first_name,
-                            last_name=self.params.last_name)
+                            given_name=self.params.given_name,
+                            family_name=self.params.family_name)
 
     def get(self):
         create_url = self.get_url('/create',
                                   small='no',
                                   role=self.params.role,
-                                  first_name=self.params.first_name,
-                                  last_name=self.params.last_name)
+                                  given_name=self.params.given_name,
+                                  family_name=self.params.family_name)
         min_query_word_length = self.config.min_query_word_length
 
         if self.params.role == 'provide':
-            # The order of last name and first name does matter (see the scoring
-            # function in indexing.py).
+            # The order of family name and given name does matter (see the
+            # scoring function in indexing.py).
             query_txt = get_full_name(
-                self.params.first_name, self.params.last_name, self.config)
+                self.params.given_name, self.params.family_name, self.config)
             query = TextQuery(query_txt)
             results_url = self.get_results_url(query_txt)
             # Ensure that required parameters are present.
-            if not self.params.first_name:
+            if not self.params.given_name:
                 return self.reject_query(query)
-            if self.config.use_family_name and not self.params.last_name:
+            if self.config.use_family_name and not self.params.family_name:
                 return self.reject_query(query)
             if (len(query.query_words) == 0 or
                 max(map(len, query.query_words)) < min_query_word_length):
@@ -101,14 +101,15 @@ class Results(Handler):
             if results:
                 # Perhaps the person you wanted to report has already been
                 # reported?
-                return self.render('templates/results.html',
-                                   results=results, num_results=len(results),
+                return self.render('results.html',
+                                   results=results,
+                                   num_results=len(results),
                                    results_url=results_url,
                                    create_url=create_url)
             else:
                 if self.params.small:
                     # show a link to a create page.
-                    return self.render('templates/small-create.html',
+                    return self.render('small-create.html',
                                        create_url=create_url)
                 else:
                     # No matches; proceed to create a new record.
@@ -134,9 +135,8 @@ class Results(Handler):
             results_url = self.get_results_url(self.params.query)
 
             # Show the (possibly empty) matches.
-            return self.render('templates/results.html',
-                               results=results, num_results=len(results),
-                               results_url=results_url, create_url=create_url)
-
-if __name__ == '__main__':
-    run(('/results', Results))
+            return self.render('results.html',
+                               results=results,
+                               num_results=len(results),
+                               results_url=results_url,
+                               create_url=create_url)
