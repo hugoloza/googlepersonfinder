@@ -13,60 +13,187 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import delete
-import logging
+import calendar
+import datetime
 import time
-import urllib
-import hashlib
-from utils import *
-from model import *
-from google.appengine.api import taskqueue
+
 from google.appengine.api import quota
-from google.appengine.ext import blobstore
-from google.appengine.ext.webapp import blobstore_handlers
+from google.appengine.api import taskqueue
+from google.appengine.ext import db
 
-COUNT_FETCH_LIMIT = 100
-REINDEX_FETCH_LIMIT = 10
-MAX_PUT_RETRIES = 3
+import config
+import delete
+import model
+import utils
+
+CPU_MEGACYCLES_PER_REQUEST = 1000
+EXPIRED_TTL = datetime.timedelta(delete.EXPIRED_TTL_DAYS, 0, 0)
+FETCH_LIMIT = 100
 
 
-class ClearTombstones(Handler):
-    """Scans the tombstone table, deleting each record and associated entities
-    if their TTL has expired. The TTL is declared in app/delete.py as
-    TOMBSTONE_TTL_DAYS."""
-    subdomain_required = False # Run at the root domain, not a subdomain.
+
+class ScanForExpired(utils.BaseHandler):
+    """Common logic for scanning the Person table looking for things to delete.
+
+    The common logic handles iterating through the query, updating the expiry
+    date and wiping/deleting as needed. The is_expired flag on all records whose
+    expiry_date has passed.  Records that expired more than EXPIRED_TTL in the
+    past will also have their data fields, notes, and photos permanently
+    deleted.
+
+    Subclasses set the query and task_name."""
+    repo_required = False
+
+    def task_name(self):
+        """Subclasses should implement this."""
+        pass
+
+    def query(self):
+        """Subclasses should implement this."""
+        pass
+
+    def schedule_next_task(self, query):
+        """Schedule the next task for to carry on with this query.
+
+        we pass the query as a parameter to make testing easier.
+        """
+        self.add_task_for_repo(self.repo, self.task_name(), self.ACTION,
+                               cursor=query.cursor(), queue_name='expiry')
 
     def get(self):
-        def get_notes_by_person_tombstone(tombstone, limit=200):
-            return NoteTombstone.get_by_tombstone_record_id(
-                tombstone.subdomain, tombstone.record_id, limit=limit)
-        # Only delete tombstones more than 3 days old
-        time_boundary = datetime.datetime.now() - \
-            timedelta(days=delete.TOMBSTONE_TTL_DAYS)
-        query = PersonTombstone.all().filter('timestamp <', time_boundary)
-        for tombstone in query:
-            notes = get_notes_by_person_tombstone(tombstone)
-            while notes:
-                db.delete(notes)
-                notes = get_notes_by_person_tombstone(tombstone)
-            if (hasattr(tombstone, 'photo_url') and
-                tombstone.photo_url[:10] == '/photo?id='):
-                photo = Photo.get_by_id(
-                    int(tombstone.photo_url.split('=', 1)[1]))
-                if photo:
-                    db.delete(photo)
-            db.delete(tombstone)
+        if self.repo:
+            query = self.query()
+            if self.params.cursor:
+                query.with_cursor(self.params.cursor)
+            for person in query:
+                if quota.get_request_cpu_usage() > CPU_MEGACYCLES_PER_REQUEST:
+                    # Stop before running into the hard limit on CPU time per
+                    # request, to avoid aborting in the middle of an operation.
+                    # Add task back in, restart at current spot:
+                    self.schedule_next_task(query)
+                    break
+                was_expired = person.is_expired
+                person.put_expiry_flags()
+                if (utils.get_utcnow() - person.get_effective_expiry_date() >
+                    EXPIRED_TTL):
+                    person.wipe_contents()
+                else:
+                    # treat this as a regular deletion.
+                    if person.is_expired and not was_expired:
+                        delete.delete_person(self, person)
+        else:
+            for repo in model.Repo.list():
+                self.add_task_for_repo(repo, self.task_name(), self.ACTION)
 
+class DeleteExpired(ScanForExpired):
+    """Scan for person records with expiry date thats past."""
+    ACTION = 'tasks/delete_expired'
 
-def run_count(make_query, update_counter, counter, cpu_megacycles):
+    def task_name(self):
+        return 'delete-expired'
+
+    def query(self):
+        return model.Person.past_due_records(self.repo)
+
+class DeleteOld(ScanForExpired):
+    """Scan for person records with old source dates for expiration."""
+    ACTION = 'tasks/delete_old'
+
+    def task_name(self):
+        return 'delete-old'
+
+    def query(self):
+        return model.Person.potentially_expired_records(self.repo)
+
+class CleanUpInTestMode(utils.BaseHandler):
+    """If the repository is in "test mode", this task deletes all entries older
+    than DELETION_AGE_SECONDS (defined below), regardless of their actual
+    expiration specification.
+
+    We delete entries quickly so that most of the test data does not persist in
+    real mode, and to reduce the effect of spam.
+    """
+    repo_required = False
+    ACTION = 'tasks/clean_up_in_test_mode'
+
+    # Entries older than this age in seconds are deleted in test mode.
+    #
+    # If you are maintaining a single repository and switching it between test
+    # mode (for drills) and real mode (for real crises), you should be sure to
+    # switch to real mode within DELETION_AGE_SECONDS after a real crisis occurs,
+    # because:
+    # - When the crisis happens, the users may be confused and enter real
+    #   information on the repository, even though it's still in test mode.
+    #   (All pages show "test mode" message, but some users may be still
+    #   confused.)
+    # - If we fail to make the switch in DELETION_AGE_SECONDS, such real entries
+    #   are deleted.
+    # - If we make the switch in DELETION_AGE_SECONDS, such entries are not deleted,
+    #   and handled as a part of real mode data.
+    DELETION_AGE_SECONDS = 6 * 3600
+
+    def task_name(self):
+        return 'clean-up-in-test-mode'
+
+    def schedule_next_task(self, query, utcnow):
+        """Schedule the next task for to carry on with this query.
+
+        We pass the query as a parameter to make testing easier.
+        """
+        self.add_task_for_repo(
+                self.repo,
+                self.task_name(),
+                self.ACTION,
+                utcnow=str(calendar.timegm(utcnow.utctimetuple())),
+                cursor=query.cursor(),
+                queue_name='clean_up_in_test_mode')
+
+    def in_test_mode(self, repo):
+        """Returns True if the repository is in test mode."""
+        return config.get('test_mode', repo=repo)
+
+    def get(self):
+        if self.repo:
+            # To reuse the cursor from the previous task, we need to apply
+            # exactly the same filter. So we use utcnow previously used
+            # instead of the current time.
+            utcnow = self.params.utcnow or utils.get_utcnow()
+            max_entry_date = (
+                    utcnow -
+                    datetime.timedelta(
+                            seconds=CleanUpInTestMode.DELETION_AGE_SECONDS))
+            query = model.Person.all_in_repo(self.repo)
+            query.filter('entry_date <=', max_entry_date)
+            if self.params.cursor:
+                query.with_cursor(self.params.cursor)
+            # Uses query.get() instead of "for person in query".
+            # If we use for-loop, query.cursor() points to an unexpected
+            # position.
+            person = query.get()
+            # When the repository is no longer in test mode, aborts the
+            # deletion.
+            while person and self.in_test_mode(self.repo):
+                person.delete_related_entities(delete_self=True)
+                if quota.get_request_cpu_usage() > CPU_MEGACYCLES_PER_REQUEST:
+                    # Stop before running into the hard limit on CPU time per
+                    # request, to avoid aborting in the middle of an operation.
+                    # Add task back in, restart at current spot:
+                    self.schedule_next_task(query, utcnow)
+                    break
+                person = query.get()
+        else:
+            for repo in model.Repo.list():
+                if self.in_test_mode(repo):
+                    self.add_task_for_repo(repo, self.task_name(), self.ACTION)
+
+def run_count(make_query, update_counter, counter):
     """Scans the entities matching a query for a limited amount of CPU time."""
-    cpu_limit = quota.get_request_cpu_usage() + cpu_megacycles
-    while quota.get_request_cpu_usage() < cpu_limit:
+    while quota.get_request_cpu_usage() < CPU_MEGACYCLES_PER_REQUEST:
         # Get the next batch of entities.
         query = make_query()
         if counter.last_key:
             query = query.filter('__key__ >', db.Key(counter.last_key))
-        entities = query.order('__key__').fetch(COUNT_FETCH_LIMIT)
+        entities = query.order('__key__').fetch(FETCH_LIMIT)
         if not entities:
             counter.last_key = ''
             break
@@ -79,66 +206,26 @@ def run_count(make_query, update_counter, counter, cpu_megacycles):
         counter.last_key = str(entities[-1].key())
 
 
-def run_reindexing(subdomain, offset, cpu_megacycles):
-    """Reindex entries for a limited amount of CPU time."""
-    processed = 0
-    cpu_limit = quota.get_request_cpu_usage() + cpu_megacycles
-    while quota.get_request_cpu_usage() < cpu_limit:
-        query = Person.all().filter('subdomain =', subdomain)
-        query = query.order('__key__')
-        persons = query.fetch(limit=REINDEX_FETCH_LIMIT,
-                              offset=offset+processed)
-        if len(persons) == 0:
-            # Finished.
-            break
-        for person in persons:
-            if quota.get_request_cpu_usage() > cpu_limit:
-                break
-            person.update_index(['old', 'new'])
-            success = False
-            # Try putting to datastore up to MAX_PUT_RETRIES times.
-            for i in range(MAX_PUT_RETRIES):
-                try:
-                    db.put(person)
-                    success = True
-                    break
-                except:
-                    # Failed, retry.
-                    pass
-            if not success:
-                # All attempts failed. Do not continue.
-                break
-            processed += 1
-    return processed
-
-
-class CountBase(Handler):
+class CountBase(utils.BaseHandler):
     """A base handler for counting tasks.  Making a request to this handler
-    without a subdomain will start tasks for all subdomains in parallel.
+    without a specified repo will start tasks for all repositories in parallel.
     Each subclass of this class handles one scan through the datastore."""
-    subdomain_required = False  # Run at the root domain, not a subdomain.
+    repo_required = False  # can run without a repo
 
     SCAN_NAME = ''  # Each subclass should choose a unique scan_name.
-    URL = ''  # Each subclass should set the URL path that it handles. 
+    ACTION = ''  # Each subclass should set the action path that it handles.
 
     def get(self):
-        if self.subdomain:  # Do some counting.
-            counter = Counter.get_unfinished_or_create(
-                self.subdomain, self.SCAN_NAME)
-            run_count(self.make_query, self.update_counter, counter, 1000)
+        if self.repo:  # Do some counting.
+            counter = model.Counter.get_unfinished_or_create(
+                self.repo, self.SCAN_NAME)
+            run_count(self.make_query, self.update_counter, counter)
             counter.put()
             if counter.last_key:  # Continue counting in another task.
-                self.add_task(self.subdomain)
-        else:  # Launch counting tasks for all subdomains.
-            for subdomain in Subdomain.list():
-                self.add_task(subdomain)
-
-    def add_task(self, subdomain):
-        """Queues up a task for an individual subdomain."""  
-        task_name = '%s-%s-%s' % (
-            subdomain, self.SCAN_NAME, int(time.time()*1000))
-        taskqueue.add(name=task_name, method='GET', url=self.URL,
-                      params={'subdomain': subdomain})
+                self.add_task_for_repo(self.repo, self.SCAN_NAME, self.ACTION)
+        else:  # Launch counting tasks for all repositories.
+            for repo in model.Repo.list():
+                self.add_task_for_repo(repo, self.SCAN_NAME, self.ACTION)
 
     def make_query(self):
         """Subclasses should implement this.  This will be called to get the
@@ -152,10 +239,10 @@ class CountBase(Handler):
 
 class CountPerson(CountBase):
     SCAN_NAME = 'person'
-    URL = '/tasks/count/person'
+    ACTION = 'tasks/count/person'
 
     def make_query(self):
-        return Person.all().filter('subdomain =', self.subdomain)
+        return model.Person.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, person):
         found = ''
@@ -163,31 +250,54 @@ class CountPerson(CountBase):
             found = person.latest_found and 'TRUE' or 'FALSE'
 
         counter.increment('all')
+        counter.increment('original_domain=' + (person.original_domain or ''))
+        counter.increment('sex=' + (person.sex or ''))
+        counter.increment('home_country=' + (person.home_country or ''))
+        counter.increment('photo=' + (person.photo_url and 'present' or ''))
+        counter.increment('num_notes=%d' % len(person.get_notes()))
         counter.increment('status=' + (person.latest_status or ''))
         counter.increment('found=' + found)
-        counter.increment('sex=' + (person.sex or ''))
-        counter.increment('original_domain=' + (person.original_domain or ''))
-        counter.increment('source_name=' + (person.source_name or ''))
-        counter.increment('photo=' + (person.photo_url and 'present' or ''))
+        counter.increment(
+            'linked_persons=%d' % len(person.get_linked_persons()))
 
 
 class CountNote(CountBase):
     SCAN_NAME = 'note'
-    URL = '/tasks/count/note'
+    ACTION = 'tasks/count/note'
 
     def make_query(self):
-        return Note.all().filter('subdomain =', self.subdomain)
+        return model.Note.all().filter('repo =', self.repo)
 
     def update_counter(self, counter, note):
-        found = ''
-        if note.found is not None:
-            found = note.found and 'TRUE' or 'FALSE'
+        author_made_contact = ''
+        if note.author_made_contact is not None:
+            author_made_contact = note.author_made_contact and 'TRUE' or 'FALSE'
 
         counter.increment('all')
         counter.increment('status=' + (note.status or ''))
-        counter.increment('found=' + found)
-        counter.increment(
-            'location=' + (note.last_known_location and 'present' or ''))
+        counter.increment('original_domain=' + (note.original_domain or ''))
+        counter.increment('author_made_contact=' + author_made_contact)
+        if note.linked_person_record_id:
+            counter.increment('linked_person')
+        if note.last_known_location:
+            counter.increment('last_known_location')
+
+
+class AddReviewedProperty(CountBase):
+    """Sets 'reviewed' to False on all notes that have no 'reviewed' property.
+    This task is for migrating datastores that were created before the
+    'reviewed' property existed; 'reviewed' has to be set to False so that
+    the Notes will be indexed."""
+    SCAN_NAME = 'unreview-note'
+    ACTION = 'tasks/count/unreview_note'
+
+    def make_query(self):
+        return model.Note.all().filter('repo =', self.repo)
+
+    def update_counter(self, counter, note):
+        if not note.reviewed:
+            note.reviewed = False
+            note.put()
 
 
 class UpdateStatus(CountBase):
@@ -196,10 +306,10 @@ class UpdateStatus(CountBase):
     This is designed specifically to address bogus 'believed_dead' notes that
     are flagged as spam.  (This is a cleanup task, not a counting task.)"""
     SCAN_NAME = 'update-status'
-    URL = '/tasks/count/update_status'
+    ACTION = 'tasks/count/update_status'
 
     def make_query(self):
-        return Person.all().filter('subdomain =', self.subdomain
+        return model.Person.all().filter('repo =', self.repo
                           ).filter('latest_status =', 'believed_dead')
 
     def update_counter(self, counter, person):
@@ -215,142 +325,14 @@ class UpdateStatus(CountBase):
         person.put()
 
 
-class Reindex(Handler):
-    """A handler for re-indexing."""
-    subdomain_required = False  # Run at the root domain, not a subdomain.
+class Reindex(CountBase):
+    """A handler for re-indexing Persons."""
+    SCAN_NAME = 'reindex'
+    ACTION = 'tasks/count/reindex'
 
-    def get(self):
-        if self.subdomain:  # Do re-indexing.
-            offset = int(self.request.get('offset', '0'))
-            logging.info('Reindexing %s from offset %d...' %
-                         (self.subdomain, offset))
-            processed = run_reindexing(self.subdomain, offset, 1000)
-            if processed > 0:  # Continue re-indexing in another task.
-                logging.info('Processed entry %d..%d in %s.' %
-                             (offset, offset+processed-1, self.subdomain))
-                self.add_task(self.subdomain, offset + processed)
-            else:
-                logging.info('Finished all %d entries in %s.' %
-                             (offset, self.subdomain))
-        else:  # Launch counting tasks for all subdomains.
-            for subdomain in Subdomain.list():
-                self.add_task(subdomain, 0)
+    def make_query(self):
+        return model.Person.all().filter('repo =', self.repo)
 
-    def add_task(self, subdomain, offset):
-        """Queues up a task for an individual subdomain."""
-        task_name = ('%s-reindexer-offset%d-%d' %
-                     (subdomain, offset, time.time()))
-        taskqueue.add(name=task_name, method='GET', url='/tasks/reindex',
-                      params={'subdomain': subdomain,
-                              'offset': str(offset)})
-
-
-# Form and task to fill in Person#alternate_first_names and
-# Person#alternate_last_names using tab-separated text file.
-
-class UploadAlternateFormHandler(Handler):
-    subdomain_required = False
-    def get(self):
-        upload_url = blobstore.create_upload_url('/tasks/upload_alternate')
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        self.response.out.write('<html><body>')
-        self.response.out.write(
-            '<form action="%s" method="POST" enctype="multipart/form-data">'
-            % upload_url)
-        self.response.out.write(
-            """Upload File: <input type="file" name="file"><br>
-            <input type="submit" name="submit" value="Submit">
-            </form></body></html>""")
-
-
-class UploadAlternateHandler(blobstore_handlers.BlobstoreUploadHandler):
-    def post(self):
-        upload_files = self.get_uploads('file')
-        # I couldn't find a way to pass this from somewhere. Other values in the
-        # form at /tasks/upload_alternate_form is not inherited.
-        # Hard-coded to 'japan' for now.
-        subdomain = 'japan'
-        blob_info = upload_files[0]
-        logging.info('subdomain=%s, blob_key=%s' % (subdomain, blob_info.key()))
-        self.redirect('/tasks/start_fill_alternate?subdomain=%s&blob_key=%s' %
-            (urllib.quote(subdomain),
-             urllib.quote(str(blob_info.key()))))
-
-
-class StartFillAlternateHandler(Handler):
-    def get(self):
-        blob_key = self.request.get('blob_key')
-        add_fill_alternate_task(self.subdomain, blob_key, 0)
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        self.response.out.write('Task started. See AppEngine log for progress.')
-
-
-def run_fill_alternate(subdomain, blob_key, offset, cpu_megacycles):
-    """Fill alternates for a limited amount of CPU time."""
-    processed = 0
-    cpu_limit = quota.get_request_cpu_usage() + cpu_megacycles
-    reader = blobstore.BlobReader(blob_key)
-    reader.seek(offset)
-    while quota.get_request_cpu_usage() < cpu_limit:
-        # Use this for testing with dev_appserver.py.
-        # dev_appserver doesn't support quota.get_request_cpu_usage().
-        if reader.tell() >= offset + 1024 * 1024 * 10: break
-        line = reader.readline()
-        if not line: break
-        line = line.rstrip("\n")
-        if not line: break
-        row = line.split("\t")
-        person = Person.get(subdomain, row[4])
-        if not person:
-            logging.info("%s not found" % row[4])
-            continue
-        if not person.alternate_first_names:
-            person.alternate_first_names = unicode(row[0], 'utf-8')
-        if not person.alternate_last_names:
-            person.alternate_last_names = unicode(row[1], 'utf-8')
+    def update_counter(self, counter, person):
+        person.update_index(['old', 'new'])
         person.put()
-    return reader.tell() - offset
-
-
-def add_fill_alternate_task(subdomain, blob_key, offset):
-    """Queues up a task"""
-    task_name = ('%s-%s-alternate-filler-offset%d-%d' %
-                 (subdomain, hashlib.sha224(blob_key).hexdigest(),
-                  offset, time.time()))
-    taskqueue.add(name=task_name,
-                  method='GET',
-                  url='/tasks/fill_alternate',
-                  params={'subdomain': subdomain,
-                          'blob_key': blob_key,
-                          'offset': str(offset)})
-
-
-class FillAlternate(Handler):
-    def get(self):
-        blob_key = self.request.get('blob_key')
-        offset = int(self.request.get('offset', '0'))
-        logging.info('FillAlternate from %s %s offset %d...' %
-                     (self.subdomain, blob_key, offset))
-        processed = run_fill_alternate(self.subdomain, blob_key, offset, 1000)
-        if processed > 0:  # Continue re-indexing in another task.
-            logging.info('Processed bytes %d..%d in %s %s.' %
-                         (offset,
-                          offset + processed - 1,
-                          self.subdomain, blob_key))
-            add_fill_alternate_task(
-                self.subdomain, blob_key, offset + processed)
-        else:
-            logging.info('Finished all %d bytes in %s %s.' %
-                         (offset, self.subdomain, blob_key))
-
-
-if __name__ == '__main__':
-    run((CountPerson.URL, CountPerson),
-        (CountNote.URL, CountNote),
-        (UpdateStatus.URL, UpdateStatus),
-        ('/tasks/clear_tombstones', ClearTombstones),
-        ('/tasks/upload_alternate_form', UploadAlternateFormHandler),
-        ('/tasks/upload_alternate', UploadAlternateHandler),
-        ('/tasks/start_fill_alternate', StartFillAlternateHandler),
-        ('/tasks/fill_alternate', FillAlternate),
-        ('/tasks/reindex', Reindex))
