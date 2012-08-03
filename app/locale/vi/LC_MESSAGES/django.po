@@ -21,11 +21,116 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  Để đảm bảo ghi chú chỉ được tắt hoặc bật theo sự cho phép của tác giả "
+"hồ sơ, thư xác nhận sẽ được gửi tới tác giả hồ sơ. Nếu bạn là tác giả, "
+"hãy kiểm tra e-mail của mình sau khi nhấp vào nút dưới đây.\n"
+"\n"
+"  "
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kính gửi %(author_name)s, người dùng đã yêu cầu bật ghi chú trên hồ sơ "
+"cho \"%(given_name)s %(family_name)s\". Địa chỉ e-mail của bạn được ghi "
+"là tác giả của hồ sơ này. Để bật ghi chú trên hồ sơ này, nhấp vào liên "
+"kết sau trong vòng 3 ngày:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kính gửi %(author_name)s, người dùng đã yêu cầu bạn tắt ghi chú trên hồ "
+"sơ cho \"%(given_name)s %(family_name)s\". Địa chỉ e-mail của bạn được "
+"ghi là tác giả của hồ sơ này. Để tắt ghi chú trên hồ sơ này, nhấp vào "
+"liên kết sau trong vòng 3 ngày:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Kính gửi %(author_name)s, bạn vừa nhập ghi chú trên hồ sơ cho "
+"\"%(given_name)s %(family_name)s\". Để xuất bản ghi chú của bạn, nhấp vào"
+" liên kết sau trong vòng 3 ngày:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
 "                Warning: this record will expire in less than a day.\n"
-"\t\t"
+"                "
 msgid_plural ""
 "\n"
 "                Warning: this record will expire in less than %(days)s "
@@ -37,22 +142,71 @@ msgstr[1] ""
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
 "    "
 msgstr ""
 "\n"
-"      Bạn có chắc chắn muốn xóa dữ liệu cho \"%(first_name)s "
-"%(last_name)s\"?\n"
+"      Bạn có chắc chắn muốn xóa dữ liệu cho \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Bạn có chắc chắn muốn tắt ghi chú trên \"%(given_name)s "
+"%(family_name)s\" không?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Bạn có chắc chắn muốn tắt ghi chú trên hồ sơ của \"%(given_name)s "
+"%(family_name)s\" không?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Bạn có chắc chắn muốn bật ghi chú trên \"%(given_name)s "
+"%(family_name)s\" không?\n"
 "    "
 
 #, python-format
 msgid ""
 "\n"
 "      Are you sure you want to extend the expiration for record "
-"\"%(first_name)s %(last_name)s\"?\n"
+"\"%(given_name)s %(family_name)s\"?\n"
 "    "
 msgstr ""
+"\n"
+"      Bạn có chắc chắn muốn kéo dài ngày hết hạn cho hồ sơ "
+"\"%(given_name)s %(family_name)s\" không?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Xác nhận ghi chú của bạn\n"
+"    "
 
 msgid ""
 "\n"
@@ -96,17 +250,57 @@ msgstr ""
 "      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
 "    "
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    Để đảm bảo ghi chú chỉ được tắt hoặc bật theo sự cho phép của tác giả"
+" hồ sơ, thư xác nhận sẽ được gửi tới tác giả hồ sơ. Nếu bạn là tác giả, "
+"hãy kiểm tra e-mail của mình sau khi nhấp vào nút dưới đây.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Hồ sơ sẽ vẫn hiển thị trên trang web này, nhưng không ai có thể đăng "
+"ghi chú khác trên hồ sơ đó.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Để đăng ghi chú, vui lòng nhập địa chỉ e-mail của bạn dưới đây và nhấp "
+"vào liên kết xác nhận mà bạn nhận được.\n"
+"  "
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of a note on this record.\n"
 msgstr ""
 "\n"
-"Một người dùng đã xóa dữ liệu cho \"%(first_name)s %(last_name)s\"\n"
+"Một người dùng đã xóa dữ liệu cho \"%(given_name)s %(family_name)s\"\n"
 "tại %(site_url)s.\n"
 "\n"
 "Chúng tôi thông báo cho bạn về việc xóa này vì địa chỉ email của bạn được"
@@ -116,48 +310,88 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
+msgstr ""
+"\n"
+"Một người dùng đã xóa hồ sơ dành cho \"%(given_name)s %(family_name)s\" "
+"tại %(site_url)s. Chúng tôi thông báo cho bạn về việc xóa này do địa chỉ "
+"email của bạn được ghi là tác giả của hồ sơ này.\n"
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+"\n"
+"Sau %(days_until_deletion)s ngày, hồ sơ sẽ bị xóa vĩnh viễn.\n"
+
+#, python-format
+msgid ""
 "\n"
 "NOTE: If you believe this record was deleted in error, you can\n"
 "restore it by following this link within the next %(days_until_deletion)s"
 " days:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"After %(days_until_deletion)s days, the record will be permanently "
-"deleted.\n"
 msgstr ""
 "\n"
-"Một người dùng đã xóa dữ liệu cho \"%(first_name)s %(last_name)s\"\n"
-"tại %(site_url)s.\n"
-"\n"
-"Chúng tôi thông báo cho bạn về việc xóa này vì địa chỉ email của bạn được"
-"\n"
-"ghi là tác giả của dữ liệu này.\n"
-"\n"
-"LƯU Ý: Nếu bạn cho rằng dữ liệu này bị xóa do nhầm lẫn, bạn có thể\n"
-"khôi phục dữ liệu đó bằng cách truy cập vào liên kết sau trong "
+"LƯU Ý: Nếu bạn cho rằng hồ sơ này bị xóa do nhầm lẫn, bạn có thể khôi "
+"phục hồ sơ bằng cách nhấp vào liên kết này trong vòng "
 "%(days_until_deletion)s ngày tiếp theo:\n"
 "\n"
 "    %(restore_url)s\n"
-"\n"
-"Sau %(days_until_deletion)s ngày, dữ liệu sẽ bị xóa vĩnh viễn.\n"
 
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s.\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
 msgstr ""
+"\n"
+"Ghi chú hiện bị tắt trên hồ sơ cho \"%(given_name)s %(family_name)s\". Để"
+" xem hồ sơ, nhấp vào liên kết sau:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Chúng tôi thông báo cho bạn vì địa chỉ e-mail của bạn được liên kết với "
+"hồ sơ của người này hoặc ghi chú trên hồ sơ.\n"
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Ghi chú hiện được bật trên hồ sơ cho \"%(given_name)s %(family_name)s\". "
+"Để xem hồ sơ, nhấp vào liên kết sau:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Chúng tôi thông báo cho bạn vì địa chỉ e-mail của bạn được liên kết với "
+"hồ sơ của người này hoặc ghi chú trên hồ sơ.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -167,7 +401,7 @@ msgid ""
 "person record or a note on the record.\n"
 msgstr ""
 "\n"
-"Tác giả của dữ liệu cho\"%(first_name)s %(last_name)s\"\n"
+"Tác giả của dữ liệu cho\"%(given_name)s %(family_name)s\"\n"
 "(dữ liệu đã bị xóa trước đó) đã khôi phục dữ liệu này.  Để xem\n"
 "dữ liệu, hãy truy cập vào liên kết sau:\n"
 "\n"
@@ -180,20 +414,30 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+"\n"
+"Có một ghi chú mới trên hồ sơ cho \"%(given_name)s %(family_name)s\".\n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
 "\n"
-"Bạn đã đăng ký các cập nhật trạng thái cho \"%(first_name)s "
-"%(last_name)s\" tại %(site_url)s.\n"
+"Bạn đã đăng ký ghi chú trên \"%(given_name)s %(family_name)s\". Bạn có "
+"thể xem hồ sơ này tại\n"
 "\n"
-"Bạn có thể xem dữ liệu đầy đủ tại %(view_url)s\n"
+"     %(view_url)s\n"
 "\n"
-"Để hủy đăng ký, hãy truy cập vào liên kết sau: %(unsubscribe_link)s\n"
+"Để hủy đăng ký, nhấp vào liên kết này: %(unsubscribe_link)s\n"
 
 msgid "(click to reveal)"
 msgstr "(nhấp để hiển thị)"
@@ -232,16 +476,14 @@ msgstr "Quản trị"
 msgid "Age"
 msgstr "Tuổi"
 
-#, fuzzy
 msgid "Alternate family names"
-msgstr "Họ"
+msgstr "Họ thay thế"
 
 msgid "Alternate given names"
-msgstr ""
+msgstr "Tên thánh thay thế"
 
-#, fuzzy
 msgid "Alternate names"
-msgstr "Tên phố"
+msgstr "Tên thay thế"
 
 msgid "Are you sure this note isn't spam?"
 msgstr "Bạn có chắc chắn ghi chú này không phải là spam không?"
@@ -270,6 +512,10 @@ msgstr "Trở lại danh sách kết quả"
 msgid "Back to start"
 msgstr "Quay lại để bắt đầu"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Không tìm được ghi chú có id %(id)s"
+
 msgid "Cancel"
 msgstr "Huỷ"
 
@@ -294,6 +540,9 @@ msgstr "Tạo hồ sơ mới cho"
 msgid "Create a new record for a missing person"
 msgstr "Tạo hồ sơ mới cho người bị mất tích"
 
+msgid "Crisis events"
+msgstr ""
+
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
 msgstr "Hiện đang theo dõi khoảng %(num_people)s hồ sơ."
@@ -310,15 +559,17 @@ msgstr "Xóa dữ liệu này"
 msgid "Describe how to identify this person."
 msgstr "Mô tả cách nhận dạng người này."
 
-#, fuzzy
 msgid "Describe the physical characteristics of this person."
-msgstr "Mô tả cách nhận dạng người này."
+msgstr "Mô tả đặc điểm thể chất của người này."
 
 msgid "Description"
 msgstr "Mô tả"
 
 msgid "Developers"
 msgstr "Nhà phát triển"
+
+msgid "Disable notes on this record"
+msgstr "Tắt ghi chú trên hồ sơ này"
 
 msgid "Download the sound as MP3"
 msgstr "Tải xuống âm thanh dưới dạng MP3"
@@ -335,6 +586,9 @@ msgstr "Nhúng công cụ này vào trang web của bạn"
 msgid "Embedding the Application"
 msgstr "Nhúng Ứng dụng"
 
+msgid "Enable notes on this record"
+msgstr "Bật ghi chú trên hồ sơ này"
+
 msgid "Enter as YYYY-MM-DD"
 msgstr "Nhập dưới dạng Ngày-Tháng-Năm"
 
@@ -344,9 +598,8 @@ msgstr "Nhập họ và tên của người này."
 msgid "Enter the person's name or parts of the name."
 msgstr "Nhập tên hoặc một phần tên của người này."
 
-#, fuzzy
 msgid "Enter the person's name, parts of the name, or mobile phone number."
-msgstr "Nhập tên hoặc một phần tên của người này."
+msgstr "Nhập tên, một phần tên hoặc số điện thoại di động của người này."
 
 msgid "Enter the person's name."
 msgstr "Nhập tên của người này."
@@ -370,6 +623,8 @@ msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
 "NTT."
 msgstr ""
+"Đối với điện thoại không phải là điện thoại di động, vui lòng sử dụng "
+"dịch vụ 171 do NTT cung cấp."
 
 msgid "Get a new challenge"
 msgstr "Nhận thử thách mới"
@@ -419,6 +674,9 @@ msgstr "Tôi đang tìm kiếm thông tin"
 msgid "I am this person"
 msgstr "Tôi là người này"
 
+msgid "I do not want any more updates on this record."
+msgstr "Tôi không muốn bất kỳ cập nhật nào trên hồ sơ này nữa."
+
 msgid "I do not want my information online anymore."
 msgstr "Tôi không muốn thông tin của tôi được đăng trực tuyến nữa."
 
@@ -462,6 +720,24 @@ msgstr ""
 "Nếu không có hồ sơ nào trong các hồ sơ này khớp với người bạn muốn tìm, "
 "bạn có thể nhấp vào bên dưới để tạo một hồ sơ mới."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Nếu bạn là tác giả của ghi chú này, vui lòng kiểm tra e-mail của mình có "
+"liên kết để xác nhận rằng bạn muốn tắt ghi chú trên hồ sơ này. Nếu không,"
+" vui lòng đợi tác giả hồ sơ xác nhận yêu cầu của bạn."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Nếu bạn là tác giả của ghi chú này, vui lòng kiểm tra e-mail của mình có "
+"liên kết để xác nhận rằng bạn muốn bật ghi chú trên hồ sơ này. Nếu không,"
+" vui lòng đợi tác giả hồ sơ xác nhận yêu cầu của bạn."
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr ""
 "Nếu bạn có ảnh người này, hãy tải ảnh đó lên hoặc nhập địa chỉ URL của "
@@ -472,6 +748,9 @@ msgstr "Không đúng.  Thử lại."
 
 msgid "Invalid e-mail address. Please try again."
 msgstr "Địa chỉ email không hợp lệ. Vui lòng thử lại."
+
+msgid "Language selection"
+msgstr ""
 
 msgid "Last known location"
 msgstr "Vị trí cuối cùng được xác định"
@@ -527,26 +806,49 @@ msgstr "Vùng lân cận"
 msgid "No"
 msgstr "Không"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Không có email nào của tác giả về hồ sơ %(id)s."
+
 msgid "No messages are found registered to the carrier's message board service."
 msgstr ""
+"Không tìm thấy tin nhắn nào đã đăng ký dịch vụ tin nhắn của nhà cung cấp "
+"dịch vụ."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Không có ghi chú nào có ID: %(id)s."
+
+msgid "No notes have been posted"
+msgstr "Chưa có ghi chú nào được đăng"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Không có người nào có ID: %(id)s."
 
 msgid "No results found for"
 msgstr "Không tìm thấy kết quả cho"
 
-msgid "No status updates have been posted"
-msgstr "Không có cập nhật tình trạng nào đã được đăng"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "Không được phép đăng ghi chú có trạng thái \"believed_dead\"."
 
 msgid "Not spam"
 msgstr "Không phải spam"
 
+msgid "Note author"
+msgstr "Tác giả ghi chú"
+
 msgid "Note text"
-msgstr ""
+msgstr "Ghi chú"
 
 msgid "Note: Alternate names may be machine generated and may not be accurate."
-msgstr ""
+msgstr "Lưu ý: Tên thay thế có thể được tạo bởi máy và có thể không chính xác."
+
+msgid "Notes for this person"
+msgstr "Ghi chú cho người này"
 
 msgid "Number or range (e.g. 20-30)"
-msgstr ""
+msgstr "Số hoặc khoảng (ví dụ: 20-30)"
 
 #, python-format
 msgid ""
@@ -574,9 +876,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Tên trang web gốc"
-
-msgid "Other information"
-msgstr "Thông tin khác"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -634,6 +933,12 @@ msgstr "Hãy giải thích lý do bạn cho rằng đây là cùng một ngườ
 msgid "Please fill in all the required fields."
 msgstr "Vui lòng điền vào tất cả các trường bắt buộc."
 
+msgid "Please fill in your email address."
+msgstr "Vui lòng điền địa chỉ email của bạn."
+
+msgid "Please provide an valid email address."
+msgstr "Vui lòng cung cấp địa chỉ email hợp lệ."
+
 msgid "Possible duplicates"
 msgstr "Các trùng lặp có thể"
 
@@ -649,15 +954,17 @@ msgstr "Tiếp tục"
 msgid "Provide information about this person"
 msgstr "Cung cấp thông tin về người này"
 
-#, fuzzy
 msgid "Provided by:"
-msgstr "Đăng bởi"
+msgstr "Cung cấp bởi:"
 
 msgid "Province or state"
 msgstr "Tỉnh hoặc tiểu bang"
 
 msgid "Reason for deletion:"
 msgstr "Lý do xóa:"
+
+msgid "Reason for disabling notes:"
+msgstr "Lý do tắt ghi chú:"
 
 msgid "Records Similar to"
 msgstr "Hồ sơ Tương tự với"
@@ -667,7 +974,7 @@ msgstr "Hồ sơ đã chọn"
 
 #, python-format
 msgid "Records with names and addresses matching \"%(query)s\""
-msgstr ""
+msgstr "Các hồ sơ có tên và địa chỉ khớp với \"%(query)s\""
 
 msgid "Report spam"
 msgstr "Báo cáo spam"
@@ -690,6 +997,9 @@ msgstr "Tìm kiếm người này"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Chọn tối đa 3 hồ sơ để đánh dấu là trùng lặp:"
+
+msgid "Send email"
+msgstr "Gửi email"
 
 msgid "Sex"
 msgstr "Giới tính"
@@ -724,9 +1034,6 @@ msgstr "Tình trạng"
 msgid "Status of this person"
 msgstr "Tình trạng của người này"
 
-msgid "Status updates for this person"
-msgstr "Cập nhật về tình trạng của người này"
-
 msgid "Street name"
 msgstr "Tên phố"
 
@@ -737,8 +1044,8 @@ msgid "Subscribe"
 msgstr "Đăng ký"
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
-msgstr "Đăng ký các cập nhật về %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
+msgstr "Đăng ký các cập nhật về %(given_name)s %(family_name)s"
 
 msgid "Subscribe to updates about this person"
 msgstr "Đăng ký các cập nhật về người này"
@@ -765,6 +1072,12 @@ msgstr "Họ và Tên đều là bắt buộc.  Vui lòng quay lại và thử l
 msgid "The Original author's name is required.  Please go back and try again."
 msgstr "Tên của tác giả Gốc là bắt buộc.  Vui lòng quay lại và thử lại."
 
+msgid "The author has disabled notes on this record."
+msgstr "Tác giả đã tắt ghi chú trên hồ sơ này."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Tác giả đã tắt cập nhật trạng thái trên hồ sơ này."
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "Ảnh đã cung cấp quá lớn.  Hãy tải lên một ảnh nhỏ hơn."
 
@@ -772,14 +1085,14 @@ msgid "The reason this note is being marked as spam:"
 msgstr "Lý do mà ghi chú này bị đánh dấu là spam:"
 
 msgid "The record cannot be extended."
-msgstr ""
+msgstr "Không thể gia hạn hồ sơ."
 
 msgid "The record has been deleted."
 msgstr "Dữ liệu này đã bị xóa."
 
 #, python-format
-msgid "The record has been extended to %s."
-msgstr ""
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "Hồ sơ đã được gia hạn tới %(expiry_date)s."
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
@@ -788,6 +1101,14 @@ msgid ""
 msgstr ""
 "Trạng thái bạn đã chọn cho biết bạn là người này.  Nếu điều này đúng, vui"
 " lòng chọn 'Có' để cho biết bạn đã liên lạc với người này."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "Mã thông báo %(token)s không hợp lệ"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "Mã thông báo %(token)s không hợp lệ."
 
 #, python-format
 msgid "There are %(num_results)s existing records with similar names."
@@ -844,9 +1165,8 @@ msgstr "Người này đã liên lạc với một người nào đó"
 msgid "This person has posted a message"
 msgstr "Người này đã đăng tin nhắn"
 
-#, fuzzy
 msgid "This person's entry does not exist or has been deleted."
-msgstr "Dữ liệu này đã bị xóa."
+msgstr "Mục nhập của người này không tồn tại hoặc đã bị xóa."
 
 msgid "This record has served its purpose."
 msgstr "Dữ liệu này đã được sử dụng đúng mục đích."
@@ -863,8 +1183,16 @@ msgstr "Dữ liệu này không thích hợp."
 msgid "This record is spam."
 msgstr "Dữ liệu này là spam."
 
-msgid "To unsubscribe, follow this link"
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
 msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "Để hủy đăng ký, nhấp vào liên kết này"
 
 msgid "To view or add information, select a name below."
 msgstr "Để xem hoặc thêm thông tin, hãy chọn một tên bên dưới."
@@ -895,7 +1223,7 @@ msgid "Upload"
 msgstr "Tải lên"
 
 msgid "View the record"
-msgstr ""
+msgstr "Xem hồ sơ"
 
 msgid "We have nothing matching your search."
 msgstr "Chúng tôi không có hồ sơ nào khớp với tìm kiếm của bạn."
@@ -915,14 +1243,28 @@ msgstr "Thông tin này lấy từ đâu?"
 msgid "Where is this person from?"
 msgstr "Người này từ đâu tới?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Có"
+
+msgid "Yes, ask the record author to disable notes"
+msgstr "Có, yêu cầu tác giả hồ sơ tắt ghi chú"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Có, yêu cầu tác giả hồ sơ bật ghi chú"
 
 msgid "Yes, delete the record"
 msgstr "Có, xóa dữ liệu này"
 
+msgid "Yes, disable notes on this record."
+msgstr "Có, tắt ghi chú trên hồ sơ này."
+
 msgid "Yes, extend the record"
-msgstr ""
+msgstr "Có, hãy gia hạn hồ sơ"
 
 msgid "Yes, restore this record"
 msgstr "Có, khôi phục dữ liệu này"
@@ -969,12 +1311,17 @@ msgid ""
 "You received this notification because you have subscribed to updates on "
 "the following person:\n"
 msgstr ""
+"Bạn nhận được thông báo này do đã đăng ký các thông tin cập nhật về người"
+" sau:\n"
 
 msgid "Your e-mail address"
 msgstr "Địa chỉ email của bạn"
 
 msgid "Your e-mail address:"
 msgstr "Địa chỉ email của bạn:"
+
+msgid "Your email"
+msgstr "Email của bạn"
 
 msgid "Your name"
 msgstr "Tên của bạn"
@@ -996,19 +1343,59 @@ msgstr ""
 msgid "Your phone number"
 msgstr "Số điện thoại của bạn"
 
-#, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
 msgstr ""
-"[Công cụ tìm kiếm người thân] Thông báo xóa \"%(first_name)s "
-"%(last_name)s\""
+"Yêu cầu của bạn đã được xử lý thành công. Vui lòng kiểm tra hộp thư đến "
+"của bạn và xác nhận rằng bạn muốn đăng ghi chú của mình bằng cách nhấp "
+"vào url được nhúng."
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Tìm người] Xác nhận ghi chú của bạn trên \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr ""
+"[Công cụ tìm kiếm người thân] Thông báo xóa \"%(given_name)s "
+"%(family_name)s\""
+
+#, python-format
+msgid "[Person Finder] Disable notes on \"%(given_name)s %(family_name)s\"?"
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Enable notes on \"%(given_name)s %(family_name)s\"?"
+msgstr ""
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Tìm người] Bật thông báo ghi chú cho \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Tìm người] Ghi chú hiện bị tắt cho \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr "[Tìm người] Ghi chú hiện được bật trên \"%(given_name)s %(family_name)s\""
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 "[Công cụ tìm kiếm người thân] Thông báo khôi phục dữ liệu cho "
-"\"%(first_name)s %(last_name)s\""
+"\"%(given_name)s %(family_name)s\""
 
 #, python-format
 msgid "[Person Finder] Status update for %(given_name)s %(family_name)s"
