@@ -21,11 +21,133 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel None\n"
 
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
-"      Are you sure you want to delete the record for \"%(first_name)s "
-"%(last_name)s\"?\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(given_name)s %(family_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(given_name)s "
+"%(family_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                <a href=\"%(extend_url)s\">\n"
+"                  <input type=\"button\"\n"
+"                         value=\"Extend expiration date by "
+"%(extension_days)s days\" \n"
+"                         id=\"extend_btn\">\n"
+"                </a>\n"
+"                "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(given_name)s "
+"%(family_name)s\"?\n"
+"    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(given_name)s %(family_name)s\"?\n"
+"    "
+msgstr ""
+
+msgid ""
+"\n"
+"      Confirm your note\n"
 "    "
 msgstr ""
 
@@ -53,10 +175,37 @@ msgid ""
 "    "
 msgstr ""
 
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
@@ -66,17 +215,15 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has deleted the record for \"%(first_name)s %(last_name)s\"\n"
+"A user has deleted the record for \"%(given_name)s %(family_name)s\"\n"
 "at %(site_url)s.\n"
 "\n"
 "We are notifying you of the deletion because your e-mail address is\n"
 "recorded as the author of this record.\n"
-"\n"
-"NOTE: If you believe this record was deleted in error, you can\n"
-"restore it by following this link within the next %(days_until_deletion)s"
-" days:\n"
-"\n"
-"    %(restore_url)s\n"
+msgstr ""
+
+#, python-format
+msgid ""
 "\n"
 "After %(days_until_deletion)s days, the record will be permanently "
 "deleted.\n"
@@ -85,14 +232,43 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"A user has posted a status update for \"%(first_name)s %(last_name)s\" at"
-" %(site_url)s:"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s"
+" days:\n"
+"\n"
+"    %(restore_url)s\n"
 msgstr ""
 
 #, python-format
 msgid ""
 "\n"
-"The author of the record for \"%(first_name)s %(last_name)s\"\n"
+"Notes are now disabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(given_name)s "
+"%(family_name)s\".  To view the record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(given_name)s %(family_name)s\"\n"
 "(which was previously deleted) has restored the record.  To view the\n"
 "record, follow this link:\n"
 "\n"
@@ -105,10 +281,18 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"You have subscribed to status updates for \"%(first_name)s "
-"%(last_name)s\" at %(site_url)s.\n"
+"There is a new note on the record for \"%(given_name)s %(family_name)s\"."
 "\n"
-"You can view the full record at %(view_url)s\n"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(given_name)s %(family_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
 "\n"
 "To unsubscribe, follow this link: %(unsubscribe_link)s\n"
 msgstr ""
@@ -189,6 +373,10 @@ msgstr "Retounen sou komansman"
 msgid "Back to start"
 msgstr "Retounen sou komansman"
 
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Anile"
 
@@ -214,6 +402,9 @@ msgstr "Kreye yon nouvo dosye pou"
 
 msgid "Create a new record for a missing person"
 msgstr "Kreye yon nouvo dosye pou yon moun ki manke"
+
+msgid "Crisis events"
+msgstr ""
 
 #, python-format
 msgid "Currently tracking about %(num_people)s records."
@@ -242,6 +433,9 @@ msgstr "Deskripsyon"
 msgid "Developers"
 msgstr "Développeurs"
 
+msgid "Disable notes on this record"
+msgstr ""
+
 #, fuzzy
 msgid "Download the sound as MP3"
 msgstr "Telechaje nouvo enfomasyon"
@@ -257,6 +451,9 @@ msgstr "Afiche zouti sa sou sit ou"
 
 msgid "Embedding the Application"
 msgstr "Intégration de l'application"
+
+msgid "Enable notes on this record"
+msgstr ""
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Mete tankou ANE–MWA-JOU"
@@ -291,12 +488,6 @@ msgstr "Ki dènye nouvèl sou moun sa"
 
 msgid "Follow this link to create a new record"
 msgstr "Suiv lyen sa pou kreye yon nouvo dosye"
-
-msgid ""
-"For a person name, Person Finder returns matching records in the "
-"database. For a mobile phone number, redirects you to messages registered"
-" to the mobile carrier."
-msgstr ""
 
 msgid ""
 "For phones other than mobile phones, please use 171 service provided by "
@@ -352,6 +543,9 @@ msgstr "Map chèche enfòmasyon"
 msgid "I am this person"
 msgstr "Mwen se moun sa"
 
+msgid "I do not want any more updates on this record."
+msgstr ""
+
 msgid "I do not want my information online anymore."
 msgstr ""
 
@@ -397,6 +591,18 @@ msgstr ""
 "Si okenn nan dosye sa yo pa match moun ou an, ou met pezesou bouton anba "
 "la pou ou sa kreye yon nouvo dosye."
 
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+
 msgid "If you have a photo of this person, upload it or enter its URL address."
 msgstr "Si ou genyen foto moun sa ajoute li oswa bay URL la."
 
@@ -404,6 +610,9 @@ msgid "Incorrect.  Try again."
 msgstr ""
 
 msgid "Invalid e-mail address. Please try again."
+msgstr ""
+
+msgid "Language selection"
 msgstr ""
 
 msgid "Last known location"
@@ -459,19 +668,43 @@ msgstr "Katye"
 msgid "No"
 msgstr "Non"
 
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr ""
+
 msgid "No messages are found registered to the carrier's message board service."
+msgstr ""
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr ""
+
+msgid "No notes have been posted"
+msgstr ""
+
+#, python-format
+msgid "No person with ID: %(id)s."
 msgstr ""
 
 msgid "No results found for"
 msgstr "Pa gen okenn rezilta pou"
 
-msgid "No status updates have been posted"
-msgstr "Pa gen okenn nouvèl ki afiche"
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr ""
 
 msgid "Not spam"
 msgstr ""
 
+msgid "Note author"
+msgstr ""
+
+msgid "Note text"
+msgstr ""
+
 msgid "Note: Alternate names may be machine generated and may not be accurate."
+msgstr ""
+
+msgid "Notes for this person"
 msgstr ""
 
 msgid "Number or range (e.g. 20-30)"
@@ -501,9 +734,6 @@ msgstr ""
 
 msgid "Original site name"
 msgstr "Non orijinal sit la"
-
-msgid "Other information"
-msgstr "Lòt enfomasyon"
 
 msgid ""
 "PLEASE NOTE: All data entered will be available to the public and "
@@ -560,6 +790,12 @@ msgstr "Tanpri eksplike poukisa ou panse moun sa yo menm moun"
 msgid "Please fill in all the required fields."
 msgstr ""
 
+msgid "Please fill in your email address."
+msgstr ""
+
+msgid "Please provide an valid email address."
+msgstr ""
+
 msgid "Possible duplicates"
 msgstr "Nou genyen dosye ki matche moun sa, li posib ke se menm moun nan"
 
@@ -583,6 +819,9 @@ msgid "Province or state"
 msgstr "Pwovens oswa depatman"
 
 msgid "Reason for deletion:"
+msgstr ""
+
+msgid "Reason for disabling notes:"
 msgstr ""
 
 msgid "Records Similar to"
@@ -616,6 +855,9 @@ msgstr "Chèche moun sa"
 
 msgid "Select up to 3 records to mark as duplicate:"
 msgstr "Seleksyone jiska 3 dosye pou make kòm doub:"
+
+msgid "Send email"
+msgstr ""
 
 msgid "Sex"
 msgstr "Fi oswa Gason"
@@ -651,9 +893,6 @@ msgstr "Eta"
 msgid "Status of this person"
 msgstr "Ki dènye nouvèl sou moun sa"
 
-msgid "Status updates for this person"
-msgstr "Ki dènye nouvèl sou moun sa"
-
 msgid "Street name"
 msgstr "Non lari a"
 
@@ -664,7 +903,7 @@ msgid "Subscribe"
 msgstr ""
 
 #, python-format
-msgid "Subscribe to updates about %(first_name)s %(last_name)s"
+msgid "Subscribe to updates about %(given_name)s %(family_name)s"
 msgstr ""
 
 #, fuzzy
@@ -695,19 +934,40 @@ msgstr ""
 "Non otè orijinal la obligatwa. Tanpri tounen sou paj ou te ye aa epi "
 "eseye ankò."
 
+msgid "The author has disabled notes on this record."
+msgstr ""
+
+msgid "The author has disabled status updates on this record."
+msgstr ""
+
 msgid "The provided image is too large.  Please upload a smaller one."
 msgstr "Imaj ou telechaje a twò gwo, tanpri telechaje yon lòt ki pi piti."
 
 msgid "The reason this note is being marked as spam:"
 msgstr ""
 
+msgid "The record cannot be extended."
+msgstr ""
+
 msgid "The record has been deleted."
+msgstr ""
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
 msgstr ""
 
 msgid ""
 "The status you selected indicates that you are this person.  If this is "
 "true, please also select 'Yes' to indicate that you have contacted this "
 "person."
+msgstr ""
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr ""
+
+#, python-format
+msgid "The token %(token)s was invalid."
 msgstr ""
 
 #, python-format
@@ -774,10 +1034,6 @@ msgstr ""
 msgid "This record is a duplicate of"
 msgstr "Dosye sa se doub de"
 
-#, fuzzy
-msgid "This record is a duplicate of another record:"
-msgstr "Dosye sa se doub de"
-
 msgid "This record is copied from another source."
 msgstr "Nou kopye dosye sa de yon lòt sous de enfomasyon."
 
@@ -788,6 +1044,17 @@ msgstr "Dosye sa se doub de"
 #, fuzzy
 msgid "This record is spam."
 msgstr "Dosye sa se doub de"
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr ""
 
 msgid "To view or add information, select a name below."
 msgstr "Pou ou sa wè oswa ajoute enfomasyon, chawzi youn nan non ki anba yo."
@@ -817,6 +1084,9 @@ msgstr "Pa spesifie"
 msgid "Upload"
 msgstr "Ajoute"
 
+msgid "View the record"
+msgstr ""
+
 msgid "We have nothing matching your search."
 msgstr "Nou pa jwen anyen ki match rechèch ou a."
 
@@ -835,10 +1105,27 @@ msgstr "Kote enfòmasyon sa a sòti? "
 msgid "Where is this person from?"
 msgstr "Ki kote moun sa a sòti?"
 
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
 msgid "Yes"
 msgstr "Wi"
 
+msgid "Yes, ask the record author to disable notes"
+msgstr ""
+
+msgid "Yes, ask the record author to enable notes"
+msgstr ""
+
 msgid "Yes, delete the record"
+msgstr ""
+
+msgid "Yes, disable notes on this record."
+msgstr ""
+
+msgid "Yes, extend the record"
 msgstr ""
 
 #, fuzzy
@@ -881,11 +1168,9 @@ msgstr ""
 msgid "You have successfully unsubscribed."
 msgstr ""
 
-#, python-format
 msgid ""
 "You received this notification because you have subscribed to updates on "
-"this person.\n"
-"To unsubscribe, follow this link: %(unsubscribe_link)s"
+"the following person:\n"
 msgstr ""
 
 msgid "Your e-mail address"
@@ -894,6 +1179,9 @@ msgstr "Email ou"
 #, fuzzy
 msgid "Your e-mail address:"
 msgstr "Email ou"
+
+msgid "Your email"
+msgstr ""
 
 msgid "Your name"
 msgstr "Non ou"
@@ -915,14 +1203,49 @@ msgstr ""
 msgid "Your phone number"
 msgstr "Nimewo telefòn ou"
 
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+
 #, python-format
-msgid "[Person Finder] Deletion notice for \"%(first_name)s %(last_name)s\""
+msgid "[Person Finder] Confirm your note on \"%(given_name)s %(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(given_name)s %(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Disable notes on \"%(given_name)s %(family_name)s\"?"
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Enable notes on \"%(given_name)s %(family_name)s\"?"
 msgstr ""
 
 #, python-format
 msgid ""
-"[Person Finder] Record restoration notice for \"%(first_name)s "
-"%(last_name)s\""
+"[Person Finder] Enabling notes notice for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now disabled for \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Notes are now enabled on \"%(given_name)s "
+"%(family_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"[Person Finder] Record restoration notice for \"%(given_name)s "
+"%(family_name)s\""
 msgstr ""
 
 #, python-format
