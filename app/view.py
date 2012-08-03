@@ -16,6 +16,7 @@
 from google.appengine.api import datastore_errors
 
 from model import *
+from photo import create_photo, PhotoError
 from utils import *
 from detect_spam import SpamDetector
 import extend
@@ -119,6 +120,8 @@ class Handler(BaseHandler):
         person.full_name = get_person_full_name(person, self.config)
 
         sanitize_urls(person)
+        for note in notes:
+            sanitize_urls(note)
 
         self.render('view.html',
                     person=person,
@@ -197,6 +200,8 @@ class Handler(BaseHandler):
                 phone_of_found_person=self.params.phone_of_found_person,
                 last_known_location=self.params.last_known_location,
                 text=self.params.text,
+                photo=photo,
+                photo_url=photo_url,
                 spam_score=spam_score,
                 confirmed=False)
             # Write the new NoteWithBadWords to the datastore
@@ -220,7 +225,9 @@ class Handler(BaseHandler):
                 email_of_found_person=self.params.email_of_found_person,
                 phone_of_found_person=self.params.phone_of_found_person,
                 last_known_location=self.params.last_known_location,
-                text=self.params.text)
+                text=self.params.text,
+                photo=photo,
+                photo_url=photo_url)
             # Write the new regular Note to the datastore
             db.put(note)
 
