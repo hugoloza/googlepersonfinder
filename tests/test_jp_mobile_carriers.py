@@ -82,18 +82,16 @@ class JpMobileCarriersTests(unittest.TestCase):
         assert (au_links[0] == 'http://dengon.ezweb.ne.jp/service.do?' +
             'p1=dmb222&t1=1&p2=08065422684&' +
             'rt=d559531edacd9240e437211465300941')
-        docomo_links = jp_mobile_carriers.DOCOMO_URL_RE.findall(
-            '<a href="http://dengon.docomo.ne.jp/inoticelist.cgi?' +
-            'bi1=1&si=1&ep=0URiwwQpJTpIoYv&sm=09051246550&es=0">')
-        assert (docomo_links[0] == 'http://dengon.docomo.ne.jp/inoticelist.cgi?'
-            + 'bi1=1&si=1&ep=0URiwwQpJTpIoYv&sm=09051246550&es=0')
         soft_bank_links = jp_mobile_carriers.SOFT_BANK_URL_RE.findall(
             '<A HREF="http://dengon.softbank.ne.jp/J?n=HaCr05">')
         assert (soft_bank_links[0] ==
             'http://dengon.softbank.ne.jp/J?n=HaCr05')
-        assert jp_mobile_carriers.WILLCOM_URL_RE.findall(
+        willcom_links = jp_mobile_carriers.WILLCOM_URL_RE.findall(
             '<a href="http://dengon.willcom-inc.com/service.do?' +
             'p1=dmb222&t1=1&p2=08065422684&rt=916c35cbcca01d8a9d">')
+        assert (willcom_links[0] ==
+            'http://dengon.willcom-inc.com/service.do?' +
+            'p1=dmb222&t1=1&p2=08065422684&rt=916c35cbcca01d8a9d')
         emobile_links = jp_mobile_carriers.EMOBILE_URL_RE.findall(
             '<a href="http://dengon.emnet.ne.jp/action/safety/list.do?' +
             'arg1=S17E&cs=true&arg2=08070036335&' +
@@ -150,11 +148,11 @@ class JpMobileCarriersTests(unittest.TestCase):
         number = '08065422684'
         hidden = 'xyz'
         data = jp_mobile_carriers.get_docomo_post_data(number, hidden)
-        assert data['es'] == 0
-        assert data['si'] == 1
-        assert data['bi1'] == 1
-        assert data['ep'] == hidden
-        assert data['sm'] == number
+        assert data['scrid'] == 1
+        assert data['expsv'] == 1
+        assert data['buid1'] == 1
+        assert data['xprm'] == hidden
+        assert data['schmsn'] == number
 
 if __name__ == '__main__':
     unittest.main()
