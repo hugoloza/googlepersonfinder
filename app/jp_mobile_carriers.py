@@ -20,29 +20,27 @@ import urllib2
 
 DOCOMO_URL = 'http://dengon.docomo.ne.jp/inoticelist.cgi'
 DOCOMO_HIDDEN_RE = re.compile(
-    r'\<INPUT TYPE\=\"HIDDEN\" NAME\=\"ep\" VALUE\=\"(\w+)\"\>', re.I)
+    r'<input type="hidden" name="xprm" value="(\w+)" />', re.I)
 
 NUMBER_SEPARATOR_RE = re.compile(
     ur'[\(\)\.\-\s\u2010-\u2015\u2212\u301c\u30fc\ufe58\ufe63\uff0d]')
 PHONE_NUMBER_RE = re.compile(r'^\+?(01181|81)?(\d{9,11})$')
 MOBILE_NUMBER_RE = re.compile(r'^0(7|8|9)0\d{8}$')
 AU_URL_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.ezweb\.ne\.jp\/[^\"]+)"\>', re.I)
-DOCOMO_URL_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.docomo\.ne\.jp\/[^\"]+)"\>', re.I)
+    r'<a href="(http://dengon\.ezweb\.ne\.jp/[^"]+)">', re.I)
 SOFT_BANK_URL_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.softbank\.ne\.jp\/[^\"]+)"\>', re.I)
+    r'<a href="(http://dengon\.softbank\.ne\.jp/[^"]+)">', re.I)
 WILLCOM_URL_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.willcom\-inc\.com\/[^\"]+)"\>', re.I)
+    r'<a href="(http://dengon\.willcom\-inc\.com/[^"]+)">', re.I)
 EMOBILE_URL_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.emnet\.ne\.jp\/[^\"]+)"\>', re.I)
+    r'<a href="(http://dengon\.emnet\.ne\.jp/[^"]+)">', re.I)
 WEB171_URL_RE = re.compile(
     r'<a href="(https://www\.web171\.jp/[^"]+)">', re.I)
 
 # An re for an actual message stored at Docomo
 DOCOMO_MESSAGE_RE = re.compile(
-    r'\<a href\=\"(http:\/\/dengon\.docomo\.ne\.jp\/' +
-    r'inoticelist\.cgi\?[^\"]+)".*\>', re.I)
+    r'<a href="(http://dengon\.docomo\.ne\.jp/' +
+    r'inoticelist\.cgi\?[^"]+)".*>', re.I)
 
 
 def get_phone_number(string):
@@ -122,11 +120,11 @@ def get_docomo_post_data(number, hidden_param):
     Returns:
         a mapping for the POST data.
     """
-    return {'es': 0,
-            'si': 1,
-            'bi1': 1,
-            'ep': hidden_param,
-            'sm': number}
+    return {'scrid': 1,
+            'expsv': 1,
+            'buid1': 1,
+            'xprm': hidden_param,
+            'schmsn': number}
 
 def look_up_number(number):
     """Look up messages for the number, registered in the Japanese mobile
@@ -152,6 +150,7 @@ def look_up_number(number):
 
     # Encode the number and the above param as POST data
     data = get_docomo_post_data(number, hidden_param)
+
     encoded_data = urllib.urlencode(data)
     # Scrape Docomo's answer on the number
     scrape = urllib2.urlopen(DOCOMO_URL, encoded_data).read()
