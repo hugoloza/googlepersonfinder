@@ -633,6 +633,10 @@ class Authorization(db.Model):
     # allowed to have status == 'believed_dead'.
     believed_dead_permission = db.BooleanProperty()
 
+    # If this field is true, this authorization token allows the client
+    # to upload a photo to a PF repository by POST'ing it to /repo/photo.
+    photo_upload_permission = db.BooleanProperty()
+
     # Bookkeeping information for humans, not used programmatically.
     contact_name = db.StringProperty()
     contact_email = db.StringProperty()

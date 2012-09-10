@@ -97,3 +97,18 @@ class Handler(utils.BaseHandler):
             return self.error(404, 'There is no photo for the specified id.')
         self.response.headers['Content-Type'] = 'image/png'
         self.response.out.write(photo.image_data)
+
+    def post(self):
+        if self.env.domain != 'localhost' and self.env.scheme != 'https':
+            return self.error(403, 'HTTPS is required.')
+        if not (self.auth and self.auth.photo_upload_permission):
+            return self.error(403, 'Missing or invalid authorization key')
+        if not self.params.photo:
+            return self.error(400, 'Photo is not uploaded.')
+
+        try:
+            photo, photo_url = create_photo(self.params.photo, self)
+        except PhotoError, e:
+            return self.error(400, e.message)
+        photo.put()
+        self.info(200, message=photo_url)
