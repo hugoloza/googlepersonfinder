@@ -111,4 +111,6 @@ class Handler(utils.BaseHandler):
         except PhotoError, e:
             return self.error(400, e.message)
         photo.put()
-        self.info(200, message=photo_url)
+
+        self.response.set_status(200)
+        self.response.out.write(photo_url)
