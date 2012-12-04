@@ -10,7 +10,7 @@
 
 {# Template fragment for the embedded map (used in create.py and view.py).  #}
 
-{% if env.maps_api_key %}
+{% if env.maps_api_key and env.ui != "jp-mobile" %}
 <style>
 .map {
   width: {{config.map_size_pixels.0}}px;
