@@ -109,6 +109,25 @@ VCS_ABBREVIATIONS = {
 # The result of parsing Subversion's [auto-props] setting.
 svn_auto_props_map = None
 
+
+from posixpath import curdir, sep, pardir, join
+def os_path_relpath(path, start=curdir):
+    """Replacement for os.path.relpath in Python 2.5.
+
+    Author: http://jimmyg.org/work/code/barenecessities/index.html
+    """
+    if not path:
+        raise ValueError("no path specified")
+    start_list = posixpath.abspath(start).split(sep)
+    path_list = posixpath.abspath(path).split(sep)
+    # Work out how much of the filepath is shared by start and path.
+    i = len(posixpath.commonprefix([start_list, path_list]))
+    rel_list = [pardir] * (len(start_list)-i) + path_list[i:]
+    if not rel_list:
+        return curdir
+    return join(*rel_list)
+
+
 def GetEmail(prompt):
   """Prompts the user for their email address and returns it.
 
@@ -1496,7 +1515,7 @@ class MercurialVCS(VersionControlSystem):
     """Get relative path of a file according to the current directory,
     given its logical path in the repo."""
     absname = os.path.join(self.repo_dir, filename)
-    return os.path.relpath(absname)
+    return os_path_relpath(absname)
 
   def GenerateDiff(self, extra_args):
     cmd = ["hg", "diff", "--git", "-r", self.base_rev] + extra_args
