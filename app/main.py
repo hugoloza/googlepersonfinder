@@ -229,7 +229,11 @@ def setup_env(request):
     env.lang = select_lang(request, env.config)
     env.rtl = env.lang in django_setup.LANGUAGES_BIDI
     env.virtual_keyboard_layout = const.VIRTUAL_KEYBOARD_LAYOUTS.get(env.lang)
-    env.back_chevron = env.rtl and u'\xbb' or u'\xab'
+    if env.charset == 'UTF-8':
+      env.back_chevron = u'\xbb' if env.rtl else u'\xab'
+    else:
+      # u'\xbb' and u'\xab' may not be in the charset.
+      env.back_chevron = u'>>' if env.rtl else u'<<'
 
     # Used for parsing query params. This must be done before accessing any
     # query params which may have multi-byte value, such as "given_name" below
@@ -284,6 +288,10 @@ def setup_env(request):
         env.repo_url = utils.get_repo_url(request, env.repo)
         # start_url is like repo_url but preserves parameters such as 'ui'.
         env.start_url = utils.get_url(request, env.repo, '')
+        # URL of the link in the heading. The link on ui=small links to the
+        # normal UI.
+        env.start_url_for_heading = (
+            env.repo_url if env.ui == 'small' else env.start_url)
         env.repo_path = urlparse.urlsplit(env.repo_url)[2]
         env.repo_title = get_localized_message(
             env.config.repo_titles, env.lang, '?')
