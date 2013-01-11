@@ -15,7 +15,7 @@
 
 {% block head %}
   {{block.super}}
-  {% if env.ui != "jp-mobile" %}
+  {% if env.enable_javascript %}
     <script>
       var profile_websites = {{profile_websites_json|safe}};
     </script>
@@ -162,7 +162,7 @@
               </span>
               <span class="value">
                 <select name="sex" id="sex">
-                  <option value="" selected="yes"></option>
+                  <option value="" selected></option>
                   <option value="female">{% trans "female" %}</option>
                   <option value="male">{% trans "male" %}</option>
                   <option value="other">{% trans "other" %}</option>
@@ -172,15 +172,17 @@
             <div class="field">
               <span class="label">
                 <label for="age">{% trans "Age" %}:</label>
-                <div class="hint">
-                  {% trans "Number or range (e.g. 20-30)" %}
-                </div>
               </span>
               <span class="value">
                 <input name="age" id="age"
                     class="short-text-input"
                     autocomplete="off">
               </span>
+            </div>
+            <div class="field">
+              <div class="value hint">
+                {% trans "Number or range (e.g. 20-30)" %}
+              </div>
             </div>
             <div class="end-multi-columns"></div>
           </div>
@@ -197,7 +199,6 @@
                   <label for="home_street">
                     {% trans "Street name" %}:
                   </label>
-                  <div class="hint">{% trans "Street name only, no number" %}</div>
                 </span>
                 <span class="value">
                   <input name="home_street" id="home_street"
@@ -205,6 +206,11 @@
                       value="{{params.home_street}}"
                       autocomplete="off">
                 </span>
+              </div>
+              <div class="field">
+                <div class="value hint">
+                  {% trans "Street name only, no number" %}
+                </div>
               </div>
               <div class="field">
                 <span class="label">
@@ -282,8 +288,7 @@
             <div class="end-multi-columns"></div>
           </div>
 
-          {# Uploading is often not supported in feature phones. #}
-          {% if env.ui != "jp-mobile" %}
+          {% if env.enable_photo_upload %}
             <div class="photo section">
               <h3><label for="photo_url">
                   {% trans "Photo" %}
@@ -314,9 +319,7 @@
                 </span>
                 <span class="value">
                   <input id="photo_upload" type="file" name="photo"
-                      id="photo_upload"
-                      class="medium-text-input"
-                      disabled="disabled">
+                      class="medium-text-input" disabled="disabled">
                 </span>
                 {% comment %} see above comment {% endcomment %}
               </div>
@@ -324,8 +327,7 @@
             </div>
           {% endif %}
 
-          {# Hidden on ui=jp-mobile because it requires JavaScript. #}
-          {% if config.show_profile_entry and env.ui != "jp-mobile" %}
+          {% if config.show_profile_entry and env.enable_javascript %}
             <div class="profile section">
               <h3>{% trans "Profile Pages" %}</h3>
               <div class="hint">
@@ -371,7 +373,7 @@
           {% endif %}
 
           <div class="expiry section">
-            <h3><label for="expiry_date">
+            <h3><label for="expiry_option">
                 {% trans "Expiry" %}
             </label></h3>
             <div class="hint">
@@ -385,7 +387,7 @@
               {% endif %}
             </div>
             <div class="field">
-              <select id="expiry_option" name="expiry_option" value="">
+              <select id="expiry_option" name="expiry_option">
                 {% for duration in env.expiry_options %}
                 <option value="{{duration.value}}">
                   {{duration.text}}
@@ -403,11 +405,7 @@
             <div class="hint">
               {% trans "Where did this information come from?" %}
             </div>
-            {# Only clone=no is supported on ui=jp-mobile #}
-            {# because JavaScript is disabled. #}
-            {% if env.ui == "jp-mobile" %}
-              <input type="hidden" name="clone" value="no">
-            {% else %}
+            {% if env.enable_javascript %}
               <div class="field">
                 <div class="instructions">
                   <div>
@@ -436,6 +434,9 @@
                   </div>
                 </div>
               </div>
+            {% else %}
+              {# Only clone=no is supported when JavaScript is disabled. #}
+              <input type="hidden" name="clone" value="no">
             {% endif %}
             <div class="field">
               <span class="label">
@@ -443,7 +444,7 @@
                     id="author_name_original">
                   {% trans "Your name" %}:
                 </label>
-                {% if env.ui != "jp-mobile" %}
+                {% if env.enable_javascript %}
                   <label for="author_name" class="mandatory"
                       id="author_name_clone" style="display: none">
                     {% trans "Original author's name" %}:
@@ -461,7 +462,7 @@
                 <label for="author_phone" id="author_phone_original">
                   {% trans "Your phone number" %}:
                 </label>
-                {% if env.ui != "jp-mobile" %}
+                {% if env.enable_javascript %}
                   <label for="author_phone"
                       id="author_phone_clone" style="display: none">
                     {% trans "Author's phone number" %}:
@@ -479,7 +480,7 @@
                 <label for="author_email" id="author_email_original">
                   {% trans "Your e-mail address" %}:
                 </label>
-                {% if env.ui != "jp-mobile" %}
+                {% if env.enable_javascript %}
                   <label for="author_email"
                       id="author_email_clone" style="display: none">
                     {% trans "Author's e-mail address" %}:
@@ -492,7 +493,7 @@
                     value="{{params.author_email}}" />
               </span>
             </div>
-            {% if env.ui != "jp-mobile" %}
+            {% if env.enable_javascript %}
               <div class="field" id="source_url_row" style="display: none">
                 <span class="label">
                   <label for="source_url">
@@ -510,13 +511,16 @@
                   <label for="source_date">
                     {% trans "Original posting date" %}:
                   </label>
-                  <div class="hint">{% trans "Enter as YYYY-MM-DD" %}</div>
                 </span>
                 <span class="value">
                   <input name="source_date" id="source_date"
                       class="medium-text-input"
                       value="{{params.source_date}}" />
                 </span>
+              </div>
+              <div class="field" id="source_date_hint_row"
+                  style="display: none">
+                <div class="value hint">{% trans "Enter as YYYY-MM-DD" %}</div>
               </div>
               <div class="field" id="source_name_row" style="display: none">
                 <span class="label">
@@ -539,7 +543,10 @@
             <div class="submit">
               <input type="submit"
                   value="{% trans "Save this record" %}"
-                  onclick="return validate_fields()">
+                  {% if env.enable_javascript %}
+                    onclick="return validate_fields()"
+                  {% endif %}
+                  >
               {% include "errors.html.template" %}
             </div>
           {% endifnotequal %}
