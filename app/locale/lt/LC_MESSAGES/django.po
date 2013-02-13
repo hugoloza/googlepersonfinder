@@ -1,0 +1,1451 @@
+# Copyright 2010 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License.  You may obtain
+# a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2000-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel None\n"
+
+msgid ""
+"\n"
+"\n"
+"  To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"  permission, a confirmation message will be sent to the record author.\n"
+"  If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"\n"
+"  "
+msgstr ""
+"\n"
+"\n"
+"  Siekiant užtikrinti, kad pastabos neleidžiamos arba įgalinamos tik su "
+"įrašo autoriaus leidimu, jam bus siunčiamas patvirtinimo pranešimas. Jei "
+"esate autorius, patikrinkite el. paštą, spustelėję toliau esantį mygtuką."
+"\n"
+"\n"
+"  "
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested enabling notes on the record for\n"
+"\"%(full_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To enable "
+"notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Gerb. %(author_name)s! Naudotojas prašo įgalinti pastabas "
+"apie%(full_name)s įrašą. Jūsų el. pašto adresas įrašytas kaip autoriaus "
+"el. pašto adresas. Jei norite įgalinti šio įrašo pastabas, per 3 dienas "
+"spustelėkite šią nuorodą:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"\n"
+"A user has requested that you disable notes on the record for\n"
+"\"%(full_name)s\".\n"
+"\n"
+"Your e-mail address is recorded as the author of this record.  To disable"
+" notes\n"
+"on this record, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Gerb. %(author_name)s! Naudotojas prašo neleisti pastabų "
+"apie%(full_name)s įrašą. Jūsų el. pašto adresas įrašytas kaip autoriaus "
+"el. pašto adresas. Jei norite neleisti šio įrašo pastabų, per 3 dienas "
+"spustelėkite šią nuorodą:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(author_name)s,\n"
+"You just entered a note on the record for \"%(full_name)s\".  \n"
+"To publish your note, follow this link within 3 days:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Gerb. %(author_name)s! Ką tik įrašėte pastabą apie%(full_name)s įrašą. "
+"Jei norite paskelbti pastabą, per 3 dienas spustelėkite šią nuorodą:\n"
+"\n"
+"   %(confirm_url)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"\n"
+"                Warning: this record will expire in less than a day.\n"
+"                "
+msgid_plural ""
+"\n"
+"                Warning: this record will expire in less than %(days)s "
+"days.\n"
+"                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"              <a href=\"%(extend_url)s\">\n"
+"                <input type=\"button\"\n"
+"                       value=\"Extend expiration date by "
+"%(extension_days)s days\"\n"
+"                       id=\"extend_btn\">\n"
+"              </a>\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the record for \"%(full_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ar tikrai norite ištrinti „%(full_name)s“ įrašą?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on \"%(full_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ar tikrai norite neleisti pastabų apie%(full_name)s?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to disable notes on the record of "
+"\"%(full_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ar tikrai norite neleisti pastabų apie %(full_name)sįrašą?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to enable notes on \"%(full_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ar tikrai norite įgalinti pastabas apie %(full_name)s?\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to extend the expiration for record "
+"\"%(full_name)s\"?\n"
+"    "
+msgstr ""
+"\n"
+"      Ar tikrai norite pratęsti \"%(full_name)s\" priklausančio įrašo "
+"galiojimo laiką?\n"
+"    "
+
+msgid ""
+"\n"
+"      Confirm your note\n"
+"    "
+msgstr ""
+"\n"
+"      Patvirtinkite pastabą\n"
+"    "
+
+msgid ""
+"\n"
+"      If you proceed with deletion,\n"
+"      this record will no longer be searchable or viewable on this site.\n"
+"    "
+msgstr ""
+"\n"
+"      Jei ištrinsite,\n"
+"      šio įrašo nebebus galima ieškoti ar peržiūrėti šioje svetainėje.\n"
+"    "
+
+#, python-format
+msgid ""
+"\n"
+"      The URL you entered doesn't look like a valid %(website)s profile "
+"URL.\n"
+"      Please go to this person's profile page on %(website)s, then copy "
+"and paste\n"
+"      that URL here.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      This record is a copy of a record from another source.\n"
+"      You can delete the record here,\n"
+"      but please be aware that\n"
+"      we might later receive another copy of it from the original source."
+"\n"
+"\n"
+"      <p>\n"
+"      If you would like it permanently deleted,\n"
+"      please contact the original source.\n"
+"      You can view the original record at\n"
+"      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
+"    "
+msgstr ""
+"\n"
+"      Šis įrašas yra kitame šaltinyje esančio įrašo kopija.\n"
+"      Čia esantį įrašą galite ištrinti,\n"
+"      tačiau žinokite, kad\n"
+"      vėliau galime gauti kitą jo kopiją iš pradinio šaltinio.\n"
+"\n"
+"      <p>\n"
+"      Jei norite jį ištrinti visam laikui,\n"
+"      susisiekite su pradiniu šaltiniu.\n"
+"      Pradinį šaltinį galite pamatyti adresu:\n"
+"      <a href=\"%(source_url)s\">%(source_name)s</a>.\n"
+"    "
+
+msgid ""
+"\n"
+"    To ensure that notes are only disabled or enabled with the record "
+"author's\n"
+"    permission, a confirmation message will be sent to the record author."
+"\n"
+"    If you are the author, check your e-mail after clicking the button "
+"below.\n"
+"  "
+msgstr ""
+"\n"
+"    Siekiant užtikrinti, kad pastabos neleidžiamos arba įgalinamos tik su"
+" įrašo autoriaus leidimu, jam bus siunčiamas patvirtinimo pranešimas. Jei"
+" esate autorius, patikrinkite el. paštą, spustelėję toliau esantį "
+"mygtuką.\n"
+"  "
+
+msgid ""
+"\n"
+"  The record will still be visible on this site, but no one will be able "
+"to post\n"
+"  further notes on it.\n"
+"  "
+msgstr ""
+"\n"
+"  Įrašas vis dar bus matomas šioje svetainėje, bet niekas nebegalės "
+"paskelbti pastabų apie jį.\n"
+"  "
+
+msgid ""
+"\n"
+"  To post your note, please enter your e-mail address below and follow "
+"the\n"
+"  confirmation link that you will receive.\n"
+"  "
+msgstr ""
+"\n"
+"  Jei norite paskelbti pastabą, įveskite el. pašto adresą toliau ir "
+"spustelėkite patvirtinimo nuorodą, kurią gausite.\n"
+"  "
+
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(full_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of a note on this record.\n"
+msgstr ""
+"\n"
+"Naudotojas ištrynė „%(full_name)s“ įrašą\n"
+"adresu: %(site_url)s.\n"
+"\n"
+"Šį pranešimą apie ištrynimą siunčiame, nes jūsų el. pašto adresas\n"
+"užfiksuotas, kaip šiame įraše esančio užrašo autoriaus.\n"
+
+#, python-format
+msgid ""
+"\n"
+"A user has deleted the record for \"%(full_name)s\"\n"
+"at %(site_url)s.\n"
+"\n"
+"We are notifying you of the deletion because your e-mail address is\n"
+"recorded as the author of this record.\n"
+msgstr ""
+"\n"
+"Naudotojas ištrynė \"%(full_name)s\" priklausantį įrašą, kuris pateiktas "
+"šiuo adresu: %(site_url)s. Pranešame jums apie ištrynimą, nes jūsų el. "
+"pašto adresas įrašytas kaip šio įrašo autoriaus el. pašto adresas.\n"
+
+#, python-format
+msgid ""
+"\n"
+"After %(days_until_deletion)s days, the record will be permanently "
+"deleted.\n"
+msgstr ""
+"\n"
+"Po %(days_until_deletion)s d. įrašas bus visam laikui ištrintas.\n"
+
+#, python-format
+msgid ""
+"\n"
+"NOTE: If you believe this record was deleted in error, you can\n"
+"restore it by following this link within the next %(days_until_deletion)s"
+" days:\n"
+"\n"
+"    %(restore_url)s\n"
+msgstr ""
+"\n"
+"PASTABA: jei manote, kad šis įrašas buvo ištrintas per klaidą, galite jį "
+"atkurti spustelėdami šią nuorodą per kitas %(days_until_deletion)s d.:\n"
+"\n"
+"    %(restore_url)s\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now disabled on the record for \"%(full_name)s\".  To view the "
+"record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Dabar pastabos apie %(full_name)s įrašą neleidžiamos. Jei norite "
+"peržiūrėti įrašą, spustelėkite šią nuorodą:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Gavote šį pranešimą, nes jūsų el. pašto adresas susietas su šio asmens "
+"įrašu ar pastaba apie šį įrašą.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Notes are now enabled on the record for \"%(full_name)s\".  To view the "
+"record,\n"
+"follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"Dabar pastabos apie %(full_name)s įrašą įgalintos. Jei norite peržiūrėti "
+"įrašą, spustelėkite šią nuorodą:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Gavote šį pranešimą, nes jūsų el. pašto adresas susietas su šio asmens "
+"įrašu ar pastaba apie šį įrašą.\n"
+
+#, python-format
+msgid ""
+"\n"
+"The author of the record for \"%(full_name)s\"\n"
+"(which was previously deleted) has restored the record.  To view the\n"
+"record, follow this link:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"We are notifying you because your e-mail address is associated with this\n"
+"person record or a note on the record.\n"
+msgstr ""
+"\n"
+"„%(full_name)s“ įrašo (kuris anksčiau buvo ištrintas) autorius\n"
+"atstatė įrašą.  Jei norite peržiūrėti\n"
+"įrašą, atverkite šią nuorodą:\n"
+"\n"
+"    %(record_url)s\n"
+"\n"
+"Šį pranešimą siunčiame, nes jūsų el. pašto adresas susijęs su šio\n"
+"asmens įrašu ar jame esančiu užrašu.\n"
+
+#, python-format
+msgid ""
+"\n"
+"There is a new note on the record for \"%(full_name)s\".\n"
+msgstr ""
+"\n"
+"Yra nauja pastaba apie%(full_name)s įrašą. \n"
+
+#, python-format
+msgid ""
+"\n"
+"You have subscribed to notes on \"%(full_name)s\".\n"
+"\n"
+"You can view this record at\n"
+"\n"
+"     %(view_url)s\n"
+"\n"
+"To unsubscribe, follow this link: %(unsubscribe_link)s\n"
+msgstr ""
+"\n"
+"Užsiprenumeravote pastabas apie %(full_name)s. Galite peržiūrėti šį įrašą"
+" adresu:\n"
+"\n"
+"     %(view_url)s\n"
+"\n"
+"Jei norite atsisakyti prenumeratos, spustelėkite šią nuorodą: "
+"%(unsubscribe_link)s\n"
+
+msgid "(click to reveal)"
+msgstr "(spustelėkite, kad atskleistumėte)"
+
+msgid "(unknown)"
+msgstr "(nežinoma)"
+
+#, python-format
+msgid "<a href=\"%(logout_url)s\">Sign out</a>"
+msgstr "<a href=\"%(logout_url)s\">Atsijungti</a>"
+
+msgid "A message for this person or others seeking this person"
+msgstr "Pranešimas šiam asmeniui ar kitiems šio asmens ieškantiems žmonėms"
+
+msgid "About 1 month (30 days) from now"
+msgstr "Apie 1 mėnesį (30 dienų) nuo dabar"
+
+msgid "About 1 year (360 days) from now"
+msgstr "Apie 1 metus (360 dienų) nuo dabar"
+
+msgid "About 2 months (60 days) from now"
+msgstr "Apie 2 mėnesius (60 dienų) nuo dabar"
+
+msgid "About 3 months (90 days) from now"
+msgstr "Apie 3 mėnesius (90 dienų) nuo dabar"
+
+msgid "About 6 months (180 days) from now"
+msgstr "Apie 6 mėnesius (180 dienų) nuo dabar"
+
+msgid "About you (required)"
+msgstr "Apie jus (būtina)"
+
+msgid "Administration"
+msgstr "Administravimas"
+
+msgid "Age"
+msgstr "Amžius"
+
+msgid "Alternate family names"
+msgstr "Papildomos pavardės"
+
+msgid "Alternate given names"
+msgstr "Papildomi nurodyti vardai"
+
+msgid "Alternate names"
+msgstr "Papildomi vardai"
+
+msgid "Are you sure this note isn't spam?"
+msgstr "Ar esate tikri, kad šiame užraše neskelbiamas šlamštas?"
+
+msgid "Are you sure you want to mark this note as spam?"
+msgstr "Ar tikrai norite pažymėti šį užrašą kaip šlamštą?"
+
+msgid "Are you sure you want to restore this record from deletion?"
+msgstr "Ar tikrai norite atstatyti šį ištrintą įrašą?"
+
+msgid "Atom feed of updates about this person"
+msgstr "Naujausių žinių apie šį asmenį sklaidos kanalas „Atom“"
+
+msgid "Author's e-mail address"
+msgstr "Autoriaus el. pašto adresas"
+
+msgid "Author's name"
+msgstr "Autoriaus vardas"
+
+msgid "Author's phone number"
+msgstr "Autoriaus telefono numeris"
+
+msgid "Back to results list"
+msgstr "Grįžti į rezultatų sąrašą"
+
+msgid "Back to start"
+msgstr "Grįžti į pradžią"
+
+#, python-format
+msgid "Can not find note with id %(id)s"
+msgstr "Nepavyko rasti pastabos su šiuo ID: %(id)s"
+
+msgid "Cancel"
+msgstr "Atšaukti"
+
+msgid "City"
+msgstr "Miestas"
+
+msgid "Click here to view results."
+msgstr "Spustelėkite čia, jei norite peržiūrėti rezultatus."
+
+msgid "Close window"
+msgstr "Uždaryti langą"
+
+msgid "Compare these records"
+msgstr "Palyginti šiuos įrašus"
+
+msgid "Copy and paste the following HTML code to put this tool on your site"
+msgstr ""
+"Jei norite įdėti šį įrankį į savo svetainę, nukopijuokite ir įdėkite šį "
+"HTML kodą"
+
+msgid "Create a new record"
+msgstr ""
+
+msgid "Create a new record for"
+msgstr "Sukurti naują įrašą, skirtą"
+
+msgid "Create a new record for a missing person"
+msgstr "Sukurti naują įrašą apie dingusį asmenį"
+
+msgid "Crisis events"
+msgstr ""
+
+#, python-format
+msgid "Currently tracking about %(num_people)s records."
+msgstr "Šiuo metu turime apie %(num_people)s įrašų."
+
+msgid "Date cannot be in the future.  Please go back and try again."
+msgstr "Negalima nurodyti ateities datos. Grįžkite atgal ir bandykite dar kartą."
+
+msgid "Date of birth"
+msgstr "Gimimo data"
+
+msgid "Delete this record"
+msgstr "Ištrinti šį įrašą"
+
+msgid "Describe how to identify this person."
+msgstr "Aprašykite, kaip atpažinti šį asmenį."
+
+msgid "Describe the physical characteristics of this person."
+msgstr "Apibūdinkite fizinius šio asmens bruožus."
+
+msgid "Description"
+msgstr "Aprašas"
+
+msgid "Desktop version"
+msgstr ""
+
+msgid "Developers"
+msgstr "Kūrėjai"
+
+msgid "Disable notes on this record"
+msgstr "Neleisti pastabų apie šį įrašą"
+
+msgid "Does this person have profile pages at other websites?"
+msgstr ""
+
+msgid "Download the sound as MP3"
+msgstr "Atsisiųsti garsą MP3 formatu"
+
+msgid "E-mail"
+msgstr "El. pašto adresas"
+
+msgid "E-mail address"
+msgstr "El. pašto adresas"
+
+msgid "Embed this tool on your site"
+msgstr "Įdėti šį įrankį į savo svetainę"
+
+msgid "Embedding the Application"
+msgstr "Programos įdėjimas"
+
+msgid "Enable notes on this record"
+msgstr "Įgalinti pastabas apie šį įrašą"
+
+msgid "Enter as YYYY-MM-DD"
+msgstr "Įveskite YYYY-MM-DD formatu"
+
+msgid "Enter the person's given and family names."
+msgstr "Įveskite asmens vardą ir pavardę."
+
+msgid "Enter the person's name or parts of the name."
+msgstr "Įveskite asmens vardą arba jo dalį."
+
+msgid "Enter the person's name, parts of the name, or mobile phone number."
+msgstr "Įveskite asmens vardą, dalį vardo ar mobiliojo telefono numerį."
+
+msgid "Enter the person's name."
+msgstr "Įveskite asmens vardą."
+
+msgid "Expiry"
+msgstr "Galiojimas"
+
+msgid "Expiry date of this record"
+msgstr "Šio įrašo galiojimo pabaigos data"
+
+msgid "Family name"
+msgstr "Pavardė"
+
+msgid "Feed of updates about this person"
+msgstr "Naujausių žinių apie šį asmenį sklaidos kanalas"
+
+msgid "Follow this link to create a new record"
+msgstr "Atverkite šią nuorodą, jei norite sukurti naują įrašą"
+
+msgid ""
+"For phones other than mobile phones, please use 171 service provided by "
+"NTT."
+msgstr "Jei naudojate ne mobilųjį telefoną, naudokite 171 paslaugą, pateiktą NTT."
+
+msgid "Full name"
+msgstr ""
+
+msgid "Get a new challenge"
+msgstr "Gauti naują užduotį"
+
+msgid "Get a visual challenge"
+msgstr "Gauti vaizdinę užduotį"
+
+msgid "Get an audio challenge"
+msgstr "Gauti garsinę užduotį"
+
+msgid "Given name"
+msgstr "Vardas"
+
+msgid "Google Person Finder"
+msgstr "„Google“ žmonių ieškojimo priemonė"
+
+msgid "Have you personally talked with this person AFTER the disaster? (required)"
+msgstr "Ar asmeniškai bendravote su šiuo asmeniu PO nelaimės? (būtina)"
+
+msgid "Help"
+msgstr "Pagalba"
+
+msgid "Hide Map"
+msgstr "Nerodyti žemėlapio"
+
+msgid "Hide note"
+msgstr "Slėpti užrašą"
+
+msgid "Home Address"
+msgstr "Namų adresas"
+
+msgid "Home address"
+msgstr "Namų adresas"
+
+msgid "Home country"
+msgstr "Gimtoji šalis"
+
+msgid "How can this person be reached now?"
+msgstr "Kaip dabar galima susisiekti su šiuo asmeniu?"
+
+msgid "How others who are interested in this person can contact you"
+msgstr "Kaip kiti šio asmens ieškantys žmonės gali susisiekti su jumis"
+
+msgid "I am seeking information"
+msgstr "Ieškau informacijos"
+
+msgid "I am this person"
+msgstr "Aš esu šis asmuo"
+
+msgid "I do not want any more updates on this record."
+msgstr "Nebenoriu gauti šio įrašo naujinių."
+
+msgid "I do not want my information online anymore."
+msgstr "Nebenoriu, kad mano informacija būtų internete."
+
+msgid "I have information about someone"
+msgstr "Aš turiu informacijos apie asmenį"
+
+msgid "I have reason to think this person is missing"
+msgstr "Turiu pagrindo manyti, kad šis asmuo yra dingęs"
+
+msgid "I have received information that this person is alive"
+msgstr "Gavau informacijos, jog šis asmuo yra gyvas"
+
+msgid "I have received information that this person is dead"
+msgstr "Gavau informacijos, jog šis asmuo yra miręs"
+
+msgid "I have received spam due to this note."
+msgstr "Dėl šio užrašo gavau šlamšto."
+
+msgid "I have received spam."
+msgstr "Gavau šlamšto."
+
+msgid "I prefer not to specify."
+msgstr "Nenoriu nurodyti."
+
+msgid "I'm looking for someone"
+msgstr "Aš ieškau asmens"
+
+msgid "Identify who you are looking for"
+msgstr "Nurodykite asmenį, kurio ieškote"
+
+msgid "Identify who you have information about"
+msgstr "Nurodykite asmenį, apie kurį turite informacijos"
+
+msgid "Identifying information"
+msgstr "Tapatumo nustatymo informacija"
+
+msgid ""
+"If none of these records match the person you had in mind, you can click "
+"below to create a new record."
+msgstr ""
+"Jei nė vienas iš šių įrašų neatitinka asmens, kurį turėjote omenyje, "
+"galite spustelėti žemiau pateiktą mygtuką ir sukurti naują įrašą."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to disable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Jei esate šios pastabos autorius, patikrinkite el. paštą ir spustelėję "
+"nuorodą patvirtinkite, kad norite neleisti šio įrašo pastabų. Jei ne, "
+"palaukite, kol įrašo autorius patvirtins jūsų užklausą."
+
+msgid ""
+"If you are the author of this note, please check your e-mail for a link "
+"to confirm that you want to enable notes on this record.  Otherwise, "
+"please wait for the record author to confirm your request."
+msgstr ""
+"Jei esate šios pastabos autorius, patikrinkite el. paštą ir spustelėję "
+"nuorodą patvirtinkite, kad norite leisti pastabas apie šį įrašą. Jei ne, "
+"palaukite, kol įrašo autorius patvirtins jūsų užklausą."
+
+msgid "If you have a photo of this person, upload it or enter its URL address."
+msgstr ""
+"Jei turite šio asmens nuotrauką, įkelkite ją arba nurodykite jos URL "
+"adresą."
+
+msgid "Incorrect.  Try again."
+msgstr "Neteisinga. Bandykite dar kartą."
+
+msgid "Invalid e-mail address. Please try again."
+msgstr "Netinkamas el. pašto adresas. Bandykite dar kartą."
+
+msgid "Language selection"
+msgstr ""
+
+msgid "Last known location"
+msgstr "Paskutinė žinoma vieta"
+
+msgid "Link"
+msgstr "Nuoroda"
+
+msgid "Link to profile page"
+msgstr ""
+
+msgid "Mark records as duplicate"
+msgstr "Žymėti įrašus kaip besidubliuojančius"
+
+msgid "Message (required)"
+msgstr "Pranešimas (būtina)"
+
+msgid "Message is required. Please go back and try again."
+msgstr "Būtina įvesti pranešimą. Grįžkite atgal ir bandykite dar kartą."
+
+msgid "Missing person's current contact information"
+msgstr "Dingusio asmens dabartinė kontaktinė informacija"
+
+msgid "Missing person's current e-mail address"
+msgstr "Dingusio asmens dabartinis el. pašto adresas"
+
+msgid "Missing person's current phone number"
+msgstr "Dingusio asmens dabartinis telefono numeris"
+
+#, python-format
+msgid ""
+"More information for developers can now be found "
+"%(developers_link_html)shere%(link_end_html)s."
+msgstr ""
+"Daugiau informacijos kūrėjams žr. "
+"%(developers_link_html)sčia%(link_end_html)s."
+
+msgid ""
+"More than 100 results; only showing the first 100.  Try entering more of "
+"the name"
+msgstr ""
+"Rasta daugiau nei 100 rezultatų, rodomi tik pirmieji 100. Bandykite "
+"įvesti didesnę vardo dalį"
+
+msgid "Name"
+msgstr "Vardas"
+
+msgid "Name (required)"
+msgstr "Vardas (būtina)"
+
+msgid "Name is required.  Please go back and try again."
+msgstr "Būtina įvesti vardą. Grįžkite atgal ir bandykite dar kartą."
+
+msgid "Neighborhood"
+msgstr "Rajonas"
+
+msgid "No"
+msgstr "Ne"
+
+#, python-format
+msgid "No author email for record %(id)s."
+msgstr "Nėra įrašo %(id)sautoriaus el. pašto adreso."
+
+msgid "No messages are found registered to the carrier's message board service."
+msgstr "Operatoriaus pranešimų forumo paslaugoje neužregistruota jokių pranešimų."
+
+#, python-format
+msgid "No note with ID: %(id)s."
+msgstr "Nėra pastabos su šiuo ID: %(id)s."
+
+msgid "No notes have been posted"
+msgstr "Nėra paskelbtų pastabų"
+
+#, python-format
+msgid "No person with ID: %(id)s."
+msgstr "Nėra asmens su šiuo ID: %(id)s."
+
+msgid "No results found for"
+msgstr "Nerasta jokių rezultatų, ieškant"
+
+msgid "Not authorized to post notes with the status \"believed_dead\"."
+msgstr "Nesate įgalioti paskelbti pastabas, kurių būsena „laikomas_mirusiu“."
+
+msgid "Not spam"
+msgstr "Ne šlamštas"
+
+msgid "Note author"
+msgstr "Pastabos autorius"
+
+msgid "Note text"
+msgstr "Pastabos tekstas"
+
+msgid "Notes for this person"
+msgstr "Šio asmens pastabos"
+
+msgid "Number or range (e.g. 20-30)"
+msgstr "Skaičius arba diapazonas (pvz., 20–30)"
+
+#, python-format
+msgid ""
+"Or add to your site as a %(gadget_link_html)sGoogle "
+"Gadget%(link_end_html)s."
+msgstr ""
+"Arba pridėkite į savo svetainę kaip %(gadget_link_html)s„Google“ "
+"programėlę%(link_end_html)s."
+
+msgid "Original URL"
+msgstr "Pirminis URL adresas"
+
+msgid "Original author's name"
+msgstr "Pirminio autoriaus vardas"
+
+msgid "Original posting date"
+msgstr "Pirminio paskelbimo data"
+
+msgid ""
+"Original posting date is not in YYYY-MM-DD format, or is a nonexistent "
+"date.  Please go back and try again."
+msgstr ""
+"Pirminio paskelbimo data neatitinka YYYY-MM-DD formato arba yra "
+"neegzistuojanti data. Grįžkite atgal ir bandykite dar kartą."
+
+msgid "Original site name"
+msgstr "Pirminės svetainės pavadinimas"
+
+msgid ""
+"PLEASE NOTE: All data entered will be available to the public and "
+"viewable and usable by anyone.  Google does not review or verify the "
+"accuracy of this data."
+msgstr ""
+"ATKREIPKITE DĖMESĮ: visi įvesti duomenys bus viešai pasiekiami ir visi "
+"galės juos peržiūrėti bei naudoti. „Google“ neperžiūrės ir netikrins šių "
+"duomenų tikslumo."
+
+msgid "Person Finder"
+msgstr "Žmonių ieškojimo priemonė"
+
+msgid "Phone"
+msgstr "Telefonas"
+
+msgid "Phone number"
+msgstr "Telefono numeris"
+
+msgid "Photo"
+msgstr "Nuotrauka"
+
+msgid ""
+"Photo uploaded is in an unrecognized format.  Please go back and try "
+"again."
+msgstr ""
+"Įkėlėte neatpažįstamo formato nuotrauką. Grįžkite atgal ir bandykite dar "
+"kartą."
+
+msgid "Physical characteristics"
+msgstr "Fiziniai bruožai"
+
+msgid "Play the sound again"
+msgstr "Leisti garsą dar kartą"
+
+msgid ""
+"Please check that you have been in contact with the person after the "
+"earthquake, or change the \"Status of this person\" field."
+msgstr ""
+"Nurodykite, ar bendravote su asmeniu po žemės drebėjimo, arba pakeiskite "
+"lauko „Šio asmens statusas“ reikšmę."
+
+msgid "Please check whether it matches the person you were planning to report."
+msgstr "Patikrinkite, ar nurodytas ne tas asmuo, apie kurį ketinate pranešti."
+
+msgid "Please confirm your e-mail address to subscribe to updates"
+msgstr ""
+"Jei norite prenumeruoti naujausias žinias, patvirtinkite savo el. pašto "
+"adresą"
+
+msgid "Please enter your e-mail address to subscribe to updates"
+msgstr "Jei norite prenumeruoti naujausias žinias, įveskite savo el. pašto adresą"
+
+msgid "Please explain why you think these are the same person"
+msgstr "Paaiškinkite, kodėl manote, jog tai yra tas pats asmuo"
+
+msgid "Please fill in all the required fields."
+msgstr "Užpildykite būtinus laukus."
+
+msgid "Please fill in your email address."
+msgstr "Įveskite el. pašto adresą."
+
+msgid "Please provide an valid email address."
+msgstr "Pateikite teisingą el. pašto adresą."
+
+msgid "Possible duplicates"
+msgstr "Gali būti besidubliuojantys įrašai"
+
+msgid "Postal or zip code"
+msgstr "Pašto kodas"
+
+msgid "Posted by"
+msgstr "Paskelbė"
+
+msgid "Proceed"
+msgstr "Tęsti"
+
+msgid "Profile Pages"
+msgstr ""
+
+msgid "Profile page"
+msgstr ""
+
+msgid "Provide information"
+msgstr ""
+
+msgid "Provide information about this person"
+msgstr "Pateikti informaciją apie šį asmenį"
+
+msgid "Provided by:"
+msgstr "Pateikė:"
+
+msgid "Province or state"
+msgstr "Provincija arba valstija"
+
+msgid "Reason for deletion:"
+msgstr "Ištrynimo priežastis:"
+
+msgid "Reason for disabling notes:"
+msgstr "Priežastys, dėl kurių neleidžiamos pastabos:"
+
+msgid "Records Similar to"
+msgstr "Įrašai, panašūs į"
+
+msgid "Records selected"
+msgstr "įrašai (-ų) pasirinkti (-a)"
+
+#, python-format
+msgid "Records with names and addresses matching \"%(query)s\""
+msgstr "Įrašai su vardais ir adresais, atitinkančiais \"%(query)s\""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Report spam"
+msgstr "Pranešti apie šlamštą"
+
+#, python-format
+msgid "Return to the record for %(full_name)s."
+msgstr "Grįžti prie %(full_name)s įrašo."
+
+msgid "Reveal note"
+msgstr "Rodyti užrašą"
+
+msgid "Save this record"
+msgstr "Išsaugoti šį įrašą"
+
+msgid "Search Results for"
+msgstr "Paieškos rezultatai, ieškant"
+
+msgid "Search for this person"
+msgstr "Ieškoti šio asmens"
+
+msgid "Select a website to add a profile page..."
+msgstr ""
+
+msgid "Select up to 3 records to mark as duplicate:"
+msgstr "Pasirinkite iki 3 įrašų, kuriuos norite pažymėti kaip besidubliuojančius:"
+
+msgid "Send email"
+msgstr "Siųsti el. paštu"
+
+msgid "Sex"
+msgstr "Lytis"
+
+msgid "Show Map"
+msgstr "Rodyti žemėlapį"
+
+msgid "Show sensitive information"
+msgstr "Rodyti slaptą informaciją"
+
+msgid "Someone has received information that this person is alive"
+msgstr "Kažkas gavo informacijos, jog šis asmuo yra gyvas"
+
+msgid "Someone has received information that this person is dead"
+msgstr "Kažkas gavo informacijos, jog šis asmuo yra žuvęs"
+
+msgid "Someone has reported that this person is missing"
+msgstr "Kažkas pranešė, jog šis asmuo yra dingęs"
+
+msgid "Someone is seeking information about this person"
+msgstr "Kažkas ieško informacijos apie šį asmenį"
+
+msgid "Source of this record"
+msgstr "Šio įrašo šaltinis"
+
+msgid "Source of this record (required)"
+msgstr "Šio įrašo šaltinis (būtina)"
+
+msgid "Status"
+msgstr "Statusas"
+
+msgid "Status of this person"
+msgstr "Šio asmens statusas"
+
+msgid "Street name"
+msgstr "Gatvės pavadinimas"
+
+msgid "Street name only, no number"
+msgstr "Tik gatvės pavadinimas, numerio nurodyti nereikia"
+
+msgid "Subscribe"
+msgstr "Prenumeruoti"
+
+#, python-format
+msgid "Subscribe to updates about %(full_name)s"
+msgstr "Prenumeruoti naujausias žinias apie %(full_name)s"
+
+msgid "Subscribe to updates about this person"
+msgstr "Prenumeruoti naujausias žinias apie šį asmenį"
+
+msgid "Switch to address"
+msgstr ""
+
+msgid "Switch to duplicate marking mode"
+msgstr "Įjungti besidubliuojančių įrašų žymėjimo veikseną"
+
+msgid "Switch to lat/long"
+msgstr ""
+
+msgid "Switch to normal view mode"
+msgstr "Įjungti įprastinę peržiūros veikseną"
+
+msgid "Tell us the status of this person"
+msgstr "Nurodykite šio asmens statusą"
+
+msgid "Terms of Service"
+msgstr "Paslaugų teikimo sąlygos"
+
+# Copyright 2010 Google Inc.
+# limitations under the License. #: create.py:53
+msgid ""
+"The Given name and Family name are both required.  Please go back and try"
+" again."
+msgstr ""
+"Būtina įvesti tiek vardą, tiek pavardę. Grįžkite atgal ir bandykite dar "
+"kartą."
+
+msgid "The Original author's name is required.  Please go back and try again."
+msgstr ""
+"Būtina įvesti pirminio autoriaus vardą. Grįžkite atgal ir bandykite dar "
+"kartą."
+
+msgid "The author has disabled notes on this record."
+msgstr "Autorius neleidžia pastabų apie šį įrašą."
+
+msgid "The author has disabled status updates on this record."
+msgstr "Autorius neleidžia šio įrašo būsenos naujinių."
+
+msgid "The provided image is too large.  Please upload a smaller one."
+msgstr "Pateiktas vaizdas yra per didelis. Įkelkite mažesnį."
+
+msgid "The reason this note is being marked as spam:"
+msgstr "Priežastis, dėl kurios šis užrašas žymimas kaip šlamštas:"
+
+msgid "The record cannot be extended."
+msgstr "Įrašo galiojimo laiko negalima pratęsti."
+
+msgid "The record has been deleted."
+msgstr "Įrašas ištrintas."
+
+#, python-format
+msgid "The record has been extended to %(expiry_date)s."
+msgstr "Įrašo galiojimo laikas pratęstas iki %(expiry_date)s."
+
+msgid ""
+"The status you selected indicates that you are this person.  If this is "
+"true, please also select 'Yes' to indicate that you have contacted this "
+"person."
+msgstr ""
+"Pasirinktas statusas rodo, jog jūs esate šis asmuo. Jei tai tiesa, taip "
+"pat pasirinkite „Taip“, kad nurodytumėte, jog susisiekėte su šiuo "
+"asmeniu."
+
+#, python-format
+msgid "The token %(token)s was invalid"
+msgstr "Prieigos raktas %(token)s buvo netinkamas"
+
+#, python-format
+msgid "The token %(token)s was invalid."
+msgstr "Prieigos raktas %(token)s buvo netinkamas."
+
+#, python-format
+msgid "There are %(num_results)s existing records with similar names."
+msgstr "Yra %(num_results)s įrašai (-ų) panašiais vardais."
+
+msgid "There are some existing records with similar names."
+msgstr "Yra keli įrašai panašiais vardais."
+
+msgid "There is one existing record with a similar name."
+msgstr "Yra vienas įrašas panašiu vardu."
+
+msgid "There was a problem processing the image.  Please try a different image."
+msgstr "Įvyko klaida apdorojant vaizdą. Pabandykite įkelti kitą vaizdą."
+
+msgid ""
+"There was an error processing your request.  Sorry for the inconvenience."
+"  Our administrators will investigate the source of the problem, but "
+"please check that the format of your request is correct."
+msgstr ""
+"Įvyko klaida apdorojant jūsų užklausą. Atsiprašome dėl nepatogumų. "
+"Administratoriai ištirs klaidos priežastį, tačiau patikrinkite, ar jūsų "
+"užklausos formatas yra tinkamas."
+
+#, python-format
+msgid ""
+"These gadgets are made available under the %(apache_link_html)sApache 2.0"
+" license%(link_end_html)s."
+msgstr ""
+"Šios programėlės naudojamos pagal %(apache_link_html)s„Apache 2.0“ "
+"licenciją%(link_end_html)s."
+
+msgid "This is a new record."
+msgstr "Tai yra naujas įrašas."
+
+msgid "This link is invalid."
+msgstr "Nuoroda neteisinga."
+
+msgid "This note has been marked as spam."
+msgstr "Šis užrašas pažymėtas kaip šlamštas."
+
+msgid "This note is inappropriate."
+msgstr "Šis užrašas netinkamo pobūdžio."
+
+msgid "This note is incorrect or untrue."
+msgstr "Šis užrašas netinkamas arba melagingas."
+
+msgid "This note is spam."
+msgstr "Šiame užraše skelbiamas šlamštas."
+
+msgid "This person has been in contact with someone"
+msgstr "Šis asmuo su kažkuo bendravo"
+
+msgid "This person has posted a message"
+msgstr "Šis asmuo paskelbė pranešimą"
+
+msgid "This person's entry does not exist or has been deleted."
+msgstr "Šio asmens įrašo nėra arba jis buvo ištrintas."
+
+msgid "This record has served its purpose."
+msgstr "Šis įrašas atliko savo darbą."
+
+msgid "This record is a duplicate of"
+msgstr "Šis įrašas dubliuojasi su"
+
+msgid "This record is copied from another source."
+msgstr "Šis įrašas nukopijuotas iš kito šaltinio."
+
+msgid "This record is inappropriate."
+msgstr "Šis įrašas netinkamo pobūdžio."
+
+msgid "This record is spam."
+msgstr "Šiame įraše skelbiamas šlamštas."
+
+msgid ""
+"This repository is currently in test mode. While test mode is in effect, "
+"records that are over 6 hours old are deleted."
+msgstr ""
+
+msgid "To attach a photo to this note, upload it or enter its URL."
+msgstr ""
+
+msgid "To delete your data, access Person Finder from your desktop."
+msgstr ""
+
+msgid "To unsubscribe, follow this link"
+msgstr "Jei norite atšaukti prenumeratą, spustelėkite šią nuorodą"
+
+msgid "To view or add information, select a name below."
+msgstr ""
+"Jei norite peržiūrėti ar pridėti informacijos, pasirinkite toliau "
+"pateiktą vardą."
+
+msgid ""
+"Type an address or open the map below and indicate the location by "
+"clicking on the map."
+msgstr ""
+
+msgid "Type an address."
+msgstr ""
+
+msgid "Type the two words:"
+msgstr "Įveskite du žodžius:"
+
+msgid "Type what you hear:"
+msgstr "Įveskite girdimą žodį:"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "URL of original record"
+msgstr "Pirminio įrašo URL adresas"
+
+msgid "Unspecified"
+msgstr "Nenurodyta"
+
+msgid "Upload"
+msgstr "Įkelti"
+
+msgid "View the record"
+msgstr "Žiūrėti įrašą"
+
+msgid "We have nothing matching your search."
+msgstr "Nėra jokių įrašų, atitinkančių jūsų paiešką."
+
+msgid "What is this person's name?"
+msgstr "Koks šio asmens vardas?"
+
+msgid "When should this record disappear?"
+msgstr "Kada šis įrašas bus neberodomas?"
+
+msgid "Where did this information come from?"
+msgstr "Iš kur gauta ši informacija?"
+
+msgid "Where is this person from?"
+msgstr "Iš kur kilęs šis asmuo?"
+
+msgid ""
+"While test mode is in effect, records that are over 6 hours old are "
+"deleted regardless of the expiry date."
+msgstr ""
+
+msgid "Yes"
+msgstr "Taip"
+
+msgid "Yes, ask the record author to disable notes"
+msgstr "Taip, prašyti autoriaus neleisti pastabų"
+
+msgid "Yes, ask the record author to enable notes"
+msgstr "Taip, prašyti autoriaus leisti pastabas"
+
+msgid "Yes, delete the record"
+msgstr "Taip, ištrinti įrašą"
+
+msgid "Yes, disable notes on this record."
+msgstr "Taip, neleisti pastabų apie šį įrašą."
+
+msgid "Yes, extend the record"
+msgstr "Taip, pratęsti įrašo galiojimo laiką"
+
+msgid "Yes, restore this record"
+msgstr "Taip, atstatyti šį įrašą"
+
+msgid "Yes, these are the same person"
+msgstr "Taip, tai yra tas pats asmuo"
+
+msgid "Yes, update the note"
+msgstr "Taip, atnaujinti užrašą"
+
+msgid "You are already subscribed. "
+msgstr "Jau esate užsiprenumeravę. "
+
+msgid "You are already unsubscribed."
+msgstr "Jau esate atsisakę prenumeratos."
+
+#, python-format
+msgid "You are currently signed in as <span class=\"email\">%(email)s</span>."
+msgstr "Šiuo metu esate prisijungę kaip <span class=\"email\">%(email)s</span>."
+
+#, python-format
+msgid "You are not currently signed in.  <a href=\"%(login_url)s\">Sign in</a>"
+msgstr "Šiuo metu esate neprisijungę. <a href=\"%(login_url)s\">Prisijungti</a>"
+
+#, python-format
+msgid ""
+"You can <a target=\"_blank\" href=\"%(view_url)s\">view the record</a> "
+"before deleting it."
+msgstr ""
+"Galite <a target=\"_blank\" href=\"%(view_url)s\">peržiūrėti įrašą</a> "
+"prieš jį ištrindami."
+
+#, python-format
+msgid "You can view the full record at %(view_url)s"
+msgstr "Visą įrašą galite peržiūrėti adresu: %(view_url)s"
+
+msgid "You have successfully subscribed."
+msgstr "Sėkmingai užsiprenumeravote."
+
+msgid "You have successfully unsubscribed."
+msgstr "Sėkmingai atsisakėte prenumeratos."
+
+msgid ""
+"You received this notification because you have subscribed to updates on "
+"the following person:\n"
+msgstr "Šį pranešimą gavote, nes prenumeruojate nurodyto asmens naujinius:\n"
+
+msgid "Your e-mail address"
+msgstr "Jūsų el. pašto adresas"
+
+msgid "Your e-mail address:"
+msgstr "Jūsų el. pašto adresas:"
+
+msgid "Your email"
+msgstr "Jūsų el. pašto adresas"
+
+msgid "Your name"
+msgstr "Jūsų vardas"
+
+msgid ""
+"Your name is required in the \"About you\" section.  Please go back and "
+"try again."
+msgstr ""
+"Būtina įvesti savo vardą skiltyje „Apie jus“. Grįžkite atgal ir bandykite"
+" dar kartą."
+
+msgid ""
+"Your name is required in the \"Source\" section.  Please go back and try "
+"again."
+msgstr ""
+"Būtina įvesti savo vardą skiltyje „Šaltinis“. Grįžkite atgal ir bandykite"
+" dar kartą."
+
+msgid "Your phone number"
+msgstr "Jūsų telefono numeris"
+
+msgid ""
+"Your request has been processed successfully. Please check your inbox and"
+" confirm that you want to post your note by following the url embedded."
+msgstr ""
+"Užklausa sėkmingai apdorota. Patikrinkite gautuosius ir spustelėję "
+"įterptąjį URL patvirtinkite, kad norite paskelbti pastabą."
+
+#, python-format
+msgid "[Person Finder] Confirm your note on \"%(full_name)s\""
+msgstr "[Asmenų ieškiklis] Patvirtinkite savo pastabas apie%(full_name)s"
+
+#, python-format
+msgid "[Person Finder] Deletion notice for \"%(full_name)s\""
+msgstr "[Žmonių ieškojimo priemonė] Pranešimas apie „%(full_name)s“ ištrynimą"
+
+#, python-format
+msgid "[Person Finder] Disable notes on \"%(full_name)s\"?"
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Enable notes on \"%(full_name)s\"?"
+msgstr ""
+
+#, python-format
+msgid "[Person Finder] Enabling notes notice for \"%(full_name)s\""
+msgstr "[Asmenų ieškiklis] Įgalinamas %(full_name)s pastabų pranešimas"
+
+#, python-format
+msgid "[Person Finder] Notes are now disabled for \"%(full_name)s\""
+msgstr "[Asmenų ieškiklis] Dabar%(full_name)s pastabos yra neleidžiamos"
+
+#, python-format
+msgid "[Person Finder] Notes are now enabled on \"%(full_name)s\""
+msgstr "[Asmenų ieškiklis] Dabar %(full_name)s pastabos yra leidžiamos"
+
+#, python-format
+msgid "[Person Finder] Record restoration notice for \"%(full_name)s\""
+msgstr ""
+"[Žmonių ieškojimo priemonė] Pranešimas apie „%(full_name)s“ įrašo "
+"atstatymą"
+
+#, python-format
+msgid "[Person Finder] Status update for %(full_name)s"
+msgstr "[Žmonių ieškojimo priemonė] %(full_name)s statuso atnaujinimas"
+
+#, python-format
+msgid "[Person Finder] You are subscribed to status updates for %(full_name)s"
+msgstr ""
+"[Žmonių ieškojimo priemonė] Užsiprenumeravote %(full_name)s statuso "
+"atnaujinimus"
+
+msgid "at"
+msgstr " "
+
+msgid "female"
+msgstr "moteris"
+
+msgid "in test mode"
+msgstr ""
+
+msgid "male"
+msgstr "vyras"
+
+msgid "on"
+msgstr " "
+
+msgid "other"
+msgstr "kita"
+
