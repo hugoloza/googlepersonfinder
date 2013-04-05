@@ -237,6 +237,8 @@ class Person(Base):
     other methods return queries or generators for values.
     """
     # If you add any new fields, be sure they are handled in wipe_contents().
+    def __repr__(self):
+        return '<model.Person %r>' % self.full_name
 
     # entry_date should update every time a record is created or re-imported.
     entry_date = db.DateTimeProperty(required=True)
