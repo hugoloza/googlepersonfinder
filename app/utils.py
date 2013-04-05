@@ -25,7 +25,6 @@ import logging
 import os
 import random
 import re
-import sys
 import time
 import traceback
 import unicodedata
@@ -496,6 +495,10 @@ class Struct:
 # ==== Base Handler ============================================================
 
 class BaseHandler(webapp.RequestHandler):
+    def __repr__(self):
+        c = self.__class__
+        return '<%s.%s>' % (c.__module__, c.__name__)
+
     # Handlers that don't need a repository name can set this to False.
     repo_required = True
 
@@ -743,6 +746,8 @@ class BaseHandler(webapp.RequestHandler):
             return date
 
     def initialize(self, request, response, env):
+        import StringIO
+        import sys; sys.stderr = StringIO.StringIO(); del sys
         webapp.RequestHandler.initialize(self, request, response)
         self.params = Struct()
         self.env = env

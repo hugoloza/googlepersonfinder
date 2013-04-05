@@ -50,6 +50,9 @@ class TextQuery():
         # change the signature of TextQuery yet
         self.query_words = self.words
 
+    def __repr__(self):
+        return 'TextQuery(words=%r)' % self.words
+
 
 def normalize(string):
     """Normalize a string to all uppercase, remove accents, delete apostrophes,

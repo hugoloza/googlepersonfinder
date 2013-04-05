@@ -21,11 +21,15 @@ import indexing
 import jp_mobile_carriers
 import logging
 import prefix
+import resources
 
 MAX_RESULTS = 100
 
 
 class Handler(BaseHandler):
+    import q
+
+    @q
     def search(self, query):
         """Performs a search and adds view_url attributes to the results."""
         results = None
@@ -52,12 +56,14 @@ class Handler(BaseHandler):
             sanitize_urls(result)
         return results
 
+    @q
     def reject_query(self, query):
         # NOTE: Parameters such as 'ui' are automatically preserved in
         #       redirect().
         return self.redirect(
             '/query', role=self.params.role, error='error', query=query.query)
 
+    @q
     def get_results_url(self, query):
         return self.get_url(
             '/results',
@@ -66,6 +72,7 @@ class Handler(BaseHandler):
             given_name=self.params.given_name,
             family_name=self.params.family_name)
 
+    @q
     def get(self):
         create_url = self.get_url(
             '/create',
@@ -120,16 +127,19 @@ class Handler(BaseHandler):
                     return self.redirect('/create', **self.params.__dict__)
 
         if self.params.role == 'seek':
-            query = TextQuery(self.params.query) 
+            query = TextQuery(self.params.query)
+
+            import q; q/query
+
             # If a query looks like a phone number, show the user a result
             # of looking up the number in the carriers-provided BBS system.
             if self.config.jp_mobile_carrier_redirect:
                 if jp_mobile_carriers.handle_phone_number(self, query.query):
-                    return 
+                    return
 
             # Ensure that required parameters are present.
             if (len(query.query_words) == 0 or
-                max(map(len, query.query_words)) < min_query_word_length):
+                max(q/map(len, query.query_words)) < min_query_word_length):
                 logging.info('rejecting %s' % query.query)
                 return self.reject_query(query)
 
@@ -143,3 +153,23 @@ class Handler(BaseHandler):
                                num_results=len(results),
                                results_url=results_url,
                                create_url=create_url)
+
+    @q
+    def render_to_string(self, name, language_override=None, cache_seconds=0,
+                         get_vars=lambda: {}, **vars):
+        """Renders a template to a string, passing in the variables specified
+        in **vars as well as any additional variables returned by get_vars().
+        Since this is intended for use by a dynamic page handler, caching is
+        off by default; if cache_seconds is positive, then get_vars() will be
+        called only when cached content is unavailable."""
+        # TODO(kpy): Make the contents of extra_key overridable by callers?
+        lang = language_override or self.env.lang
+        extra_key = (self.env.repo, self.env.charset, self.request.query_string)
+        def get_all_vars():
+            vars['env'] = self.env  # pass along application-wide context
+            vars['config'] = self.config  # pass along the configuration
+            vars['params'] = self.params  # pass along the query parameters
+            vars.update(get_vars())
+            return vars
+        return resources.get_rendered(
+            name, lang, extra_key, get_all_vars, cache_seconds)
