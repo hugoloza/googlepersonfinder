@@ -24,6 +24,19 @@ indexes:
 
 - kind: ApiActionLog
   properties:
+  - name: repo
+  - name: action
+  - name: timestamp
+    direction: desc
+
+- kind: ApiActionLog
+  properties:
+  - name: repo
+  - name: timestamp
+    direction: desc
+
+- kind: ApiActionLog
+  properties:
   - name: action
   - name: api_key
   - name: timestamp
@@ -34,6 +47,19 @@ indexes:
   - name: api_key
   - name: timestamp
     direction: desc
+
+- kind: ApiActionLog
+  properties:
+  - name: api_key
+  - name: repo
+  - name: timestamp
+    direction: desc
+
+- kind: ApiActionLog
+  properties:
+  - name: api_key
+  - name: repo
+  - name: timestamp
 
 - kind: ApiActionLog
   properties:
