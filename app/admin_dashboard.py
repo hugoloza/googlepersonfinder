@@ -62,7 +62,9 @@ class Handler(BaseHandler):
             blanks = []
             for repo in active_repos:
                 query = Counter.all_finished_counters(repo, scan_name)
-                counters = query.filter('timestamp >', min_time).fetch(1000)
+                counters = reversed(
+                    query.filter('timestamp >', min_time)
+                         .order('-timestamp').fetch(1000))
                 data[scan_name] += [
                     {'c': [{'v': c.timestamp}] + blanks + [{'v': c.get('all')}]}
                     for c in counters
