@@ -166,3 +166,25 @@ def download_resources(filename):
     file = open(filename, 'w')
     pickle.dump(get_all_resources(), file)
     file.close()
+
+def count_all(query):
+    """Counts all the entities for the given query."""
+    count = 0
+    batch = query.fetch(1000, keys_only=True)
+    while batch:
+        count += len(batch)
+        print count
+        query = query.with_cursor(query.cursor())
+        batch = query.fetch(1000, keys_only=True)
+    return count
+
+def fetch_all(query):
+    """Fetches all the entities for the given query."""
+    results = []
+    batch = query.fetch(1000)
+    while batch:
+        results += batch
+        print len(results)
+        query = query.with_cursor(query.cursor())
+        batch = query.fetch(1000)
+    return results
