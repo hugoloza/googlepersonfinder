@@ -782,7 +782,7 @@ msgid "PLEASE NOTE: On active Person Finder sites, all data entered is available
 msgstr "कृपया ध्यान दें: सक्रिय व्यक्ति खोजक साइटों पर, सारी सुचना सभी को और किसी को भी उपलब्ध है. गूगल किसी सुचना की न समीक्षा करता है न सही होने की पुष्टि करता है"
 
 msgid "Person Finder"
-msgstr "व्यक्ति फ़ाइंडर: "
+msgstr "व्यक्ति फ़ाइंडर"
 
 msgid "Phone"
 msgstr "फ़ोन"
