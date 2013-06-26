@@ -32,3 +32,5 @@ handlers:
   login: admin
 - url: .*
   script: main.py
+
+#  secure: always
