@@ -638,6 +638,15 @@ class BaseHandler(webapp.RequestHandler):
         'version': validate_version,
     }
 
+    # List all query parameters that should be preserved in cookies.
+    # If any of the parameters below is not provided in the request but present
+    # in the cookies, the value from the cookies will be used.
+    preserved_params = [
+        'author_name',
+        'author_phone',
+        'author_email',
+    ]
+
     def redirect(self, path, repo=None, permanent=False, **params):
         # This will prepend the repo to the path to create a working URL,
         # unless the path has a global prefix or is an absolute URL.
@@ -804,6 +813,23 @@ class BaseHandler(webapp.RequestHandler):
             except Exception, e:
                 setattr(self.params, name, validator(None))
                 return self.error(400, 'Invalid parameter %s: %s' % (name, e))
+
+        # Store / retrieve the selected query parameters to / from the cookies.
+        if self.request.method == 'POST':
+            for name in self.preserved_params:
+                value = getattr(self.params, name, None)
+                if type(value) in [str, unicode]:
+                    quoted_value = urllib.quote_plus(encode(value, 'utf-8'))
+                    response.headers.add_header(
+                        'Set-Cookie', '%s=%s; path=%s' % (
+                            name, quoted_value, self.env.path))
+        else:
+            for name in self.preserved_params:
+                value_from_params = getattr(self.params, name, None)
+                value_from_cookies = self.request.cookies.get(name, None)
+                if not value_from_params and value_from_cookies:
+                    unquoted = urllib.unquote_plus(str(value_from_cookies))
+                    setattr(self.params, name, unquoted.decode('utf-8'))
 
         # Log the User-Agent header.
         sample_rate = float(
