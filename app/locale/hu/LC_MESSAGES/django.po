@@ -889,6 +889,9 @@ msgstr "API-kulcsok listázása"
 msgid "Mark records as duplicate"
 msgstr "Bejegyzések megjelölése duplikátumként"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Üzenet (szükséges)"
 
@@ -973,6 +976,9 @@ msgstr "A megjegyzés szerzője"
 
 msgid "Note text"
 msgstr "A megjegyzés szövege"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Megjegyzések ehhez a személyhez"
@@ -1077,6 +1083,9 @@ msgstr "Kérjük, érvényes e-mail címet adjon meg."
 
 msgid "Possible duplicates"
 msgstr "Lehetséges duplikátumok"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Postai irányítószám"
@@ -1210,14 +1219,8 @@ msgstr "Feliratkozás az ezzel a személlyel kapcsolatos frissítésekre"
 msgid "Switch to address"
 msgstr "Váltás a címre"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Váltás az ismétlődésmegjelölési módra"
-
 msgid "Switch to lat/long"
 msgstr "Váltás a szélességi/hosszúsági adatokra"
-
-msgid "Switch to normal view mode"
-msgstr "Váltás normál nézetre"
 
 msgid "Tell us the status of this person"
 msgstr "Ossza meg velünk a személy állapotát"

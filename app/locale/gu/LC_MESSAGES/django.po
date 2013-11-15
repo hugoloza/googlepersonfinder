@@ -881,6 +881,9 @@ msgstr "સૂચિ API કીઝ"
 msgid "Mark records as duplicate"
 msgstr "રેકોર્ડ્સને ડુપ્લિકેટ તરીકે માર્ક કરો"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "સંદેશ (આવશ્યક)"
 
@@ -963,6 +966,9 @@ msgstr "નોટના લેખક"
 
 msgid "Note text"
 msgstr "નોટનો ટેક્સ્ટ"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "આ વ્યક્તિ માટે નોટ્સ"
@@ -1071,6 +1077,9 @@ msgstr "કૃપા કરીને એક માન્ય ઇમેઇલ સ�
 
 msgid "Possible duplicates"
 msgstr "સંભવિત ડુપ્લિકેટ્સ"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "પોસ્ટલ અથવા ઝીપ કોડ"
@@ -1202,14 +1211,8 @@ msgstr "આ વ્યક્તિ વિશેના અપડેટ્સ પ�
 msgid "Switch to address"
 msgstr "સરનામા પર સ્વિચ કરો"
 
-msgid "Switch to duplicate marking mode"
-msgstr "ડુપ્લિકેટ માર્કિંગ મોડ પર સ્વિચ કરો"
-
 msgid "Switch to lat/long"
 msgstr "lat/long પર સ્વિચ કરો"
-
-msgid "Switch to normal view mode"
-msgstr "સામાન્ય દૃશ્ય મોડ પર સ્વિચ કરો"
 
 msgid "Tell us the status of this person"
 msgstr "અમને આ વ્યક્તિની સ્થિતિ જણાવો"

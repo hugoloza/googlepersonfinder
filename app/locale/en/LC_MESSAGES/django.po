@@ -700,6 +700,9 @@ msgstr ""
 msgid "Mark records as duplicate"
 msgstr ""
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr ""
 
@@ -777,6 +780,9 @@ msgid "Note author"
 msgstr ""
 
 msgid "Note text"
+msgstr ""
+
+msgid "Notes for a possible duplicate"
 msgstr ""
 
 msgid "Notes for this person"
@@ -871,6 +877,9 @@ msgid "Please provide an valid email address."
 msgstr ""
 
 msgid "Possible duplicates"
+msgstr ""
+
+msgid "Possible duplicates found."
 msgstr ""
 
 msgid "Postal or zip code"
@@ -1003,13 +1012,7 @@ msgstr ""
 msgid "Switch to address"
 msgstr ""
 
-msgid "Switch to duplicate marking mode"
-msgstr ""
-
 msgid "Switch to lat/long"
-msgstr ""
-
-msgid "Switch to normal view mode"
 msgstr ""
 
 msgid "Tell us the status of this person"

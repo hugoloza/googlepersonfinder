@@ -883,6 +883,9 @@ msgstr "Enumerar claves de API"
 msgid "Mark records as duplicate"
 msgstr "Marcar registros como duplicados"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Mensaje (obligatorio)"
 
@@ -967,6 +970,9 @@ msgstr "Autor de la nota"
 
 msgid "Note text"
 msgstr "Texto de la nota"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Notas para esta persona"
@@ -1076,6 +1082,9 @@ msgstr "Proporciona una dirección de correo electrónico válida."
 
 msgid "Possible duplicates"
 msgstr "Posibles duplicados"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Código ZIP o postal"
@@ -1207,14 +1216,8 @@ msgstr "Suscribirse para recibir actualizaciones acerca de esta persona"
 msgid "Switch to address"
 msgstr "Cambiar a dirección"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Cambiar al modo de marcado de duplicados"
-
 msgid "Switch to lat/long"
 msgstr "Cambiar a latitud/longitud"
-
-msgid "Switch to normal view mode"
-msgstr "Cambiar al modo de vista normal"
 
 msgid "Tell us the status of this person"
 msgstr "Indícanos el estado de esta persona."
