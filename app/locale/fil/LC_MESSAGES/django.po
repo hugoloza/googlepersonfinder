@@ -900,6 +900,9 @@ msgstr "Ilista ang mga API key"
 msgid "Mark records as duplicate"
 msgstr "Markahan ang mga talaan bilang kapareho"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Mensahe (kinakailangan)"
 
@@ -986,6 +989,9 @@ msgstr "May-akda ng tala"
 
 msgid "Note text"
 msgstr "Teksto ng tala"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Mga tala para sa taong ito"
@@ -1088,6 +1094,9 @@ msgstr "Mangyaring magbigay ng wastong email address."
 
 msgid "Possible duplicates"
 msgstr "Mga posibleng duplicate"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Postal o zip code"
@@ -1219,14 +1228,8 @@ msgstr "Mag-subscribe sa mga update tungkol sa taong ito"
 msgid "Switch to address"
 msgstr "Lumipat sa address"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Lumipat sa mode na pagmamarka ng duplicate"
-
 msgid "Switch to lat/long"
 msgstr "Lumipat sa lat/long"
-
-msgid "Switch to normal view mode"
-msgstr "Lumipat sa mode na normal na view"
 
 msgid "Tell us the status of this person"
 msgstr "Sabihin sa amin ang status ng taong ito"

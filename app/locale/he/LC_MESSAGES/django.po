@@ -855,6 +855,9 @@ msgstr "הצג רשימה של מפתחות API"
 msgid "Mark records as duplicate"
 msgstr "סמן רשומות ככפולות"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "הודעה (חובה)"
 
@@ -935,6 +938,9 @@ msgstr "מחבר ההערה"
 
 msgid "Note text"
 msgstr "טקסט הערה"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "הערות עבור האדם הזה"
@@ -1035,6 +1041,9 @@ msgstr "ספק כתובת דוא\"ל חוקית."
 
 msgid "Possible duplicates"
 msgstr "כפילויות אפשריות"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "דואר או מיקוד"
@@ -1166,14 +1175,8 @@ msgstr "הירשם לקבלת עדכונים על האדם הזה"
 msgid "Switch to address"
 msgstr "עבור לכתובת"
 
-msgid "Switch to duplicate marking mode"
-msgstr "עבור למצב סימון של רשומות כפולות"
-
 msgid "Switch to lat/long"
 msgstr "עבור לקווי רוחב/אורך"
-
-msgid "Switch to normal view mode"
-msgstr "עבור למצב תצוגה רגיל"
 
 msgid "Tell us the status of this person"
 msgstr "ספר לנו מה הסטטוס של האדם הזה"

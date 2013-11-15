@@ -897,6 +897,9 @@ msgstr "Skoða forritaskilalykla"
 msgid "Mark records as duplicate"
 msgstr "Merkja færslur sem tvíteknar"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Skilaboð (nauðsynlegt)"
 
@@ -981,6 +984,9 @@ msgstr "Höfundur athugasemdar"
 
 msgid "Note text"
 msgstr "Texti athugasemdar"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Athugasemdir fyrir þessa manneskju"
@@ -1083,6 +1089,9 @@ msgstr "Skráðu gilt netfang."
 
 msgid "Possible duplicates"
 msgstr "Mögulegar tvítekningar"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Póstnúmer"
@@ -1216,14 +1225,8 @@ msgstr "Gerast áskrifandi að fréttum af þessari manneskju"
 msgid "Switch to address"
 msgstr "Skipta yfir í heimilisfang"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Skipta yfir í merkingu tvítekninga"
-
 msgid "Switch to lat/long"
 msgstr "Skipta yfir í lengdar-/breiddargráðu"
-
-msgid "Switch to normal view mode"
-msgstr "Skipta yfir í venjulegt yfirlit"
 
 msgid "Tell us the status of this person"
 msgstr "Segðu okkur hver staða þessarar manneskju er"

@@ -885,6 +885,9 @@ msgstr "Lav en liste over API-nøgler"
 msgid "Mark records as duplicate"
 msgstr "Markér disse journaler som kopier"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Besked (påkrævet)"
 
@@ -969,6 +972,9 @@ msgstr "Notens forfatter"
 
 msgid "Note text"
 msgstr "Notetekst"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Noter for denne person"
@@ -1071,6 +1077,9 @@ msgstr "Angiv en gyldig e-mailadresse."
 
 msgid "Possible duplicates"
 msgstr "Mulige kopier"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Postnummer"
@@ -1202,14 +1211,8 @@ msgstr "Abonner på opdateringer om denne person"
 msgid "Switch to address"
 msgstr "Skift til adresse"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Skift til tilstanden kopimarkering"
-
 msgid "Switch to lat/long"
 msgstr "Skift til breddegrad/længdegrad"
-
-msgid "Switch to normal view mode"
-msgstr "Skift til tilstanden normal visning"
 
 msgid "Tell us the status of this person"
 msgstr "Fortæl os om denne persons status"

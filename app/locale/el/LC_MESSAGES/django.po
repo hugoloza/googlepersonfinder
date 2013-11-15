@@ -919,6 +919,9 @@ msgstr "Κλειδιά API λίστας"
 msgid "Mark records as duplicate"
 msgstr "Επισημάνετε τις εγγραφές ως διπλότυπες"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Μήνυμα (απαιτείται)"
 
@@ -1007,6 +1010,9 @@ msgstr "Συντάκτης σημειώσεων"
 
 msgid "Note text"
 msgstr "Κείμενο σημείωσης"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Σημειώσεις για αυτό το άτομο"
@@ -1114,6 +1120,9 @@ msgstr "Εισαγάγετε μια έγκυρη διεύθυνση ηλεκτρ
 
 msgid "Possible duplicates"
 msgstr "Πιθανά διπλότυπα"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Ταχυδρομικός κώδικας"
@@ -1247,14 +1256,8 @@ msgstr "Εγγραφείτε στις ενημερώσεις σχετικά με
 msgid "Switch to address"
 msgstr "Εναλλαγή σε διεύθυνση"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Μετάβαση σε λειτουργία επισήμανσης διπλότυπων"
-
 msgid "Switch to lat/long"
 msgstr "Εναλλαγή σε πλάτος/μήκος"
-
-msgid "Switch to normal view mode"
-msgstr "Μετάβαση σε κανονική λειτουργία προβολής"
 
 msgid "Tell us the status of this person"
 msgstr "Ενημερώστε μας για την κατάσταση αυτού του ατόμου"

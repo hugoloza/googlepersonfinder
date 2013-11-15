@@ -680,7 +680,7 @@ class PersonNoteTests(TestsBase):
         for label, value in details.iteritems():
             assert fields[label].text.strip() == value
 
-        actual_num_notes = len(details_page.all(class_='view note'))
+        actual_num_notes = len(details_page.first(class_='self-notes').all(class_='view note'))
         assert actual_num_notes == num_notes, \
             'expected %s notes, instead was %s' % (num_notes, actual_num_notes)
 
@@ -715,7 +715,7 @@ class PersonNoteTests(TestsBase):
         # Do not assert params.  Upon reaching the details page, you've lost
         # the difference between seekers and providers and the param is gone.
         details_page = self.s.doc
-        num_initial_notes = len(details_page.all(class_='view note'))
+        num_initial_notes = len(details_page.first(class_='self-notes').all(class_='view note'))
         note_form = details_page.first('form')
 
         params = dict(kwargs)
@@ -728,7 +728,7 @@ class PersonNoteTests(TestsBase):
             expected['status'] = str(NOTE_STATUS_TEXT.get(status))
 
         details_page = self.s.submit(note_form, **params)
-        notes = details_page.all(class_='view note')
+        notes = details_page.first(class_='self-notes').all(class_='view note')
         assert len(notes) == num_initial_notes + 1
         new_note = notes[-1]
         for field, text in expected.iteritems():
@@ -1503,7 +1503,7 @@ http://www.foo.com/_account_1''',
         # Ask for detailed information on the duplicate markings.
         doc = self.s.follow('Show who marked these duplicates')
         assert '_full_name_1' in doc.content
-        notes = doc.all('div', class_='view note')
+        notes = doc.first(class_='self-notes').all('div', class_='view note')
         assert len(notes) == 2, str(doc.content.encode('ascii', 'ignore'))
         # We don't know which note comes first as they are created almost
         # simultaneously.
@@ -1641,6 +1641,50 @@ http://www.foo.com/_account_1''',
         doc = self.go('/haiti/view?lang=en&id=mytestdomain.com/person.21009')
         assert 'Provided by: mytestdomain.com' in doc.content
         assert '_test_last_name' in doc.content
+
+    def test_referer(self):
+        """Follow the "I have information" flow with a referrer set."""
+        config.set_for_repo('haiti', referrer_whitelist=['a.org'])
+
+        # Set utcnow to match source date
+        SOURCE_DATETIME = datetime.datetime(2001, 1, 1, 0, 0, 0)
+        self.set_utcnow_for_test(SOURCE_DATETIME)
+        test_source_date = SOURCE_DATETIME.strftime('%Y-%m-%d')
+
+        # Shorthand to assert the correctness of our URL
+        def assert_params(url=None):
+            assert_params_conform(
+                url or self.s.url, {'role': 'provide', 'referrer': 'a.org'},
+                {'ui': 'small'})
+
+        self.go('/haiti?referrer=a.org')
+        search_page = self.s.follow('I have information about someone')
+        search_form = search_page.first('form')
+        assert 'I have information about someone' in search_form.content
+
+        self.s.submit(search_form,
+                      given_name='_test_given_name',
+                      family_name='_test_family_name')
+        assert_params()
+        # Because the datastore is empty, should go straight to the create page
+
+        self.verify_create_form(prefilled_params={
+            'given_name': '_test_given_name',
+            'family_name': '_test_family_name'})
+        self.verify_note_form()
+
+        # Submit the create form with minimal information
+        create_form = self.s.doc.first('form')
+        self.s.submit(create_form,
+                      given_name='_test_given_name',
+                      family_name='_test_family_name',
+                      author_name='_test_author_name',
+                      text='_test A note body')
+
+        netloc = urlparse.urlparse(self.s.url).netloc
+        self.verify_details_page(1, details={
+            'Original site name:': '%s (referred by a.org)' % netloc
+            })
 
     def test_global_domain_key(self):
         """Test that we honor global domain keys."""
@@ -3661,7 +3705,7 @@ _feed_profile_url2</pfif:profile_urls>
         assert not extend_button, 'Didn\'t expect to find expiry extend button'
 
         # Check that the deletion confirmation page shows the right message.
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
         assert 'we might later receive another copy' in doc.text
 
         # Click the button to delete a record.
@@ -3813,7 +3857,7 @@ _feed_profile_url2</pfif:profile_urls>
         doc = self.s.submit(button, url=extend_url)
         assert 'extend the expiration' in doc.text
         # Click the extend button.
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
         assert 'extend the expiration' in doc.text
         # Click the button on the confirmation page.
         button = doc.firsttag('input', value='Yes, extend the record')
@@ -3840,7 +3884,7 @@ _feed_profile_url2</pfif:profile_urls>
         doc = self.go('/haiti/view?' + 'id=' + p123_id)
         button = doc.firsttag('input',
                               value='Disable notes on this record')
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
         assert 'disable notes on ' \
                '"_test_given_name _test_family_name"' in doc.text
         button = doc.firsttag(
@@ -3921,7 +3965,7 @@ _feed_profile_url2</pfif:profile_urls>
         # page with a CAPTCHA.
         button = doc.firsttag('input',
                               value='Enable notes on this record')
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
         assert 'enable notes on ' \
                '"_test_given_name _test_family_name"' in doc.text
         button = doc.firsttag(
@@ -4180,7 +4224,7 @@ _feed_profile_url2</pfif:profile_urls>
         # Visit the page and click the button to delete a record.
         doc = self.go('/haiti/view?' + 'id=' + p123_id)
         button = doc.firsttag('input', value='Delete this record')
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
         assert 'delete the record for "_test_given_name ' + \
                '_test_family_name"' in doc.text, utils.encode(doc.text)
         button = doc.firsttag('input', value='Yes, delete the record')
@@ -4942,7 +4986,7 @@ _feed_profile_url2</pfif:profile_urls>
         doc = self.go('/haiti/view?id=test.google.com/person.111')
         assert 'Subscribe to updates about this person' in doc.text
         button = doc.firsttag('input', id='subscribe_btn')
-        doc = self.s.follow(button.enclosing('a'))
+        doc = self.s.follow_button(button)
 
         # Empty email is an error.
         button = doc.firsttag('input', value='Subscribe')

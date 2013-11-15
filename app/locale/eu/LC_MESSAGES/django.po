@@ -879,6 +879,9 @@ msgstr "Zerrendatu APIaren gakoak"
 msgid "Mark records as duplicate"
 msgstr "Markatu erregistroak bikoiztu gisa"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Mezua (beharrezkoa)"
 
@@ -963,6 +966,9 @@ msgstr "Oharraren egilea"
 
 msgid "Note text"
 msgstr "Oharraren testua"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Pertsona honen oharrak"
@@ -1067,6 +1073,9 @@ msgstr "Eman baliozko helbide elektroniko bat."
 
 msgid "Possible duplicates"
 msgstr "Bikoiztu posibleak"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Posta-kodea edo zip kodea"
@@ -1198,14 +1207,8 @@ msgstr "Harpidetu pertsona honi buruzko eguneratzeetara"
 msgid "Switch to address"
 msgstr "Aldatu helbidera"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Aldatu bikoiztuak markatutako modura"
-
 msgid "Switch to lat/long"
 msgstr "Aldatu latitude eta longitudera"
-
-msgid "Switch to normal view mode"
-msgstr "Aldatu ikuspegi normalera"
 
 msgid "Tell us the status of this person"
 msgstr "Emaguzu pertsona horren egoeraren berri"

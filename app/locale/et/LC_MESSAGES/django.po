@@ -878,6 +878,9 @@ msgstr "API-võtmete loend"
 msgid "Mark records as duplicate"
 msgstr "Märkige kirjed kui duplikaadid"
 
+msgid "Mark the selected records as duplicate"
+msgstr ""
+
 msgid "Message (required)"
 msgstr "Sõnum (nõutav)"
 
@@ -960,6 +963,9 @@ msgstr "Märkme autor"
 
 msgid "Note text"
 msgstr "Märkme tekst"
+
+msgid "Notes for a possible duplicate"
+msgstr ""
 
 msgid "Notes for this person"
 msgstr "Seda inimest puudutavad märkmed"
@@ -1060,6 +1066,9 @@ msgstr "Edastage kehtiv e-posti aadress."
 
 msgid "Possible duplicates"
 msgstr "Võimalikud koopiad"
+
+msgid "Possible duplicates found."
+msgstr ""
 
 msgid "Postal or zip code"
 msgstr "Sihtnumber"
@@ -1191,14 +1200,8 @@ msgstr "Telli värskendused selle isiku kohta"
 msgid "Switch to address"
 msgstr "Lülitu aadressile"
 
-msgid "Switch to duplicate marking mode"
-msgstr "Lülitu koopiate märgistamise režiimile"
-
 msgid "Switch to lat/long"
 msgstr "Lülitu laius-/pikkuskraadile"
-
-msgid "Switch to normal view mode"
-msgstr "Lülitu tavalisele vaaterežiimile"
 
 msgid "Tell us the status of this person"
 msgstr "Nimetage selle inimese olek"
