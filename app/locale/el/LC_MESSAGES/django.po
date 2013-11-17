@@ -722,7 +722,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Λήψη ήχου ως MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -739,11 +739,6 @@ msgstr "Ενσωμάτωση της εφαρμογής"
 
 msgid "Enable notes on this record"
 msgstr "Ενεργοποίηση σημειώσεων σε αυτήν την εγγραφή"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Διασφαλίστε ότι όλες οι ημερομηνίες είναι σε μορφή "
-"ηη-μμ-εεεε-μμTωω:λλ:δδZ σε UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Εισαγάγετε ως ΗΗ-ΜΜ-ΕΕΕΕ"
@@ -1385,7 +1380,9 @@ msgstr ""
 "Αυτά τα gadget διατίθενται βάσει της %(apache_link_html)sάδειας Apache "
 "2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

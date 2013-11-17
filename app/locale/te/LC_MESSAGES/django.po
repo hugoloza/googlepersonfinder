@@ -694,7 +694,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "శబ్దాన్ని MP3 వలె డౌన్‌లోడ్ చేయి"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -711,9 +711,6 @@ msgstr "అనువర్తనాన్ని పొందుపరచడం"
 
 msgid "Enable notes on this record"
 msgstr "ఈ రికార్డ్‌లో గమనికలను ప్రారంభించు"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "UTCలో తేదీలన్నీ dd-mm-yyyyThh:mm:ssZ ఆకృతిలో ఉన్నాయని నిర్ధారించుకోండి"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "DD-MM-YYYY వలె నమోదు చేయండి"
@@ -1338,7 +1335,9 @@ msgstr ""
 "ఈ గాడ్జెట్‌లు %(apache_link_html)sApache 2.0 లైసెన్స్‌%(link_end_html)sతో"
 " అందుబాటులో ఉన్నాయి."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

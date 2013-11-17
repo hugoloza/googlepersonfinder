@@ -672,7 +672,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "ድምጹን እንደ MP3 አውርድ"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -689,9 +689,6 @@ msgstr "መተግበሪያውን በመክተት ላይ"
 
 msgid "Enable notes on this record"
 msgstr "በዚህ መዝገብ ላይ ማስታወሻዎችን ያንቁ"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "ሁሉም ቀናት በUTC ውስጥ በ yyyy-mm-ddThh:mm:ssZ ቅርጸት መሆናቸውን ያረጋግጡ"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "እንደ ዓዓዓዓ-ወወ-ቀቀ ያስገቡ"
@@ -1287,7 +1284,9 @@ msgstr ""
 "እነዚህ መሣሪያዎች %(apache_link_html)sApache 2.0 ፍቃድ%(link_end_html)s መሠረት ነው "
 "የሚገኙት።"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

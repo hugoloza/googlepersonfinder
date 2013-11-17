@@ -695,7 +695,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Lataa ääni MP3-tiedostona"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -712,11 +712,6 @@ msgstr "Sovelluksen upottaminen"
 
 msgid "Enable notes on this record"
 msgstr "Ota muistiinpanot käyttöön näissä tiedoissa"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Varmista, että kaikki päivämäärät ovat muodossa vvvv-kk-ppTtt:mm:ssZ UTC-"
-"ajassa"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Anna muodossa VVVV-KK-PP"
@@ -1336,7 +1331,9 @@ msgstr ""
 "Nämä gadgetit tarjotaan käyttöön %(apache_link_html)sApache 2.0 "
 "-käyttöluvan%(link_end_html)s alaisena."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

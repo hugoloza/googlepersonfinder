@@ -685,7 +685,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Laai die klank af as MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -702,9 +702,6 @@ msgstr "Bed die program in"
 
 msgid "Enable notes on this record"
 msgstr "Aktiveer notas oor hierdie rekord"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "Maak seker alle datums is in UTC-tyd in die formaat jjjj-mm-ddTuu:mm:ssZ"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Voer in as JJJJ-MM-DD"
@@ -1316,7 +1313,9 @@ msgstr ""
 "Hierdie apparate word beskikbaar gestel ingevolge die "
 "%(apache_link_html)sApache 2.0-lisensie%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -687,7 +687,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Pakua sauti kama MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -704,11 +704,6 @@ msgstr "Upachikaji wa Programu"
 
 msgid "Enable notes on this record"
 msgstr "Onyesha ujumbe ulioachwa kwenye rekodi hii"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Hakikisha tarehe zote ziko katika muundo wa yyyy-mm-ddThh:mm:ssZ katika "
-"UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Ingiza kama YYYY-MM-DD"
@@ -1331,7 +1326,9 @@ msgstr ""
 "Vifaa hivi huwa vinapatikana chini ya %(apache_link_html)sleseni ya "
 "Apache 2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

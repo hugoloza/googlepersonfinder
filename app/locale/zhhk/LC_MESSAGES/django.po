@@ -656,7 +656,7 @@ msgstr ""
 msgid "Download the sound as MP3"
 msgstr "以 MP3 格式下載聲音"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -673,9 +673,6 @@ msgstr "嵌入應用程式"
 
 msgid "Enable notes on this record"
 msgstr "啟用這項記錄的註解功能"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "確定所有日期格式皆為 yyyy-mm-ddThh:mm:ssZ (年年年年-月月-日日時時:分分:秒秒)，並以世界標準時間為準"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "輸入格式為 YYYY-MM-DD (年年年年-月月-日日)"
@@ -1249,7 +1246,9 @@ msgid ""
 " license%(link_end_html)s."
 msgstr "這些小工具是根據 %(apache_link_html)sApache 2.0 授權%(link_end_html)s條款提供使用。"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -695,7 +695,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Atsisiųsti garsą MP3 formatu"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -712,9 +712,6 @@ msgstr "Programos įterpimas"
 
 msgid "Enable notes on this record"
 msgstr "Įgalinti pastabas apie šį įrašą"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "Įsitikinkite, kad visos datos nurodytos mmmm-mm-ddThh:mm:ssZ formatu UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Įveskite MMMM-MM-DD formatu"
@@ -1331,7 +1328,9 @@ msgstr ""
 "Šios programėlės naudojamos pagal %(apache_link_html)s„Apache 2.0“ "
 "licenciją%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -714,7 +714,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "အသံကို MP3 အေနျဖင့္ ေဒါင္းလုပ္ လုပ္ပါ။"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -733,11 +733,6 @@ msgstr ""
 
 msgid "Enable notes on this record"
 msgstr "ဤမွတ္တမ္းေပၚတြင္ မွတ္စုမ်ားကို Enable လုပ္ပါ။"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"UTC ထဲတြင္ ရက္စြဲမ်ားအားလံုးသည္ yyyy-mm-ddThh:mm:ssZ ပံုစံ\n"
-"ျဖစ္ရန္၊ ေသခ်ာေအာင္လုပ္ပါ။"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "ခုႏွစ္-လ-ရက္ (YYYY-MM-DD) ကို႐ိုက္ထည့္ပါ။"
@@ -1422,7 +1417,9 @@ msgstr ""
 "gadgets မ်ားကို  %(apache_link_html)sApache 2.0 "
 "လိုင္စင္%(link_end_html)s.ေအာက္တြင္ အသံုးျပဳႏိုင္ပါသည္။"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

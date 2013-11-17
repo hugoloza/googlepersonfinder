@@ -698,7 +698,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "ಧ್ವನಿಯನ್ನು MP3 ರೂಪದಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -715,11 +715,6 @@ msgstr "ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಎಂಬೆಡ್ ಮಾ
 
 msgid "Enable notes on this record"
 msgstr "ರೆಕಾರ್ಡ್‌ನಲ್ಲಿ ಟಿಪ್ಪಣಿಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"ಎಲ್ಲಾ ದಿನಾಂಕಗಳು UTC ಯಲ್ಲಿ yyyy-mm-ddThh:mm:ssZ ಸ್ವರೂಪದಲ್ಲಿವೆಯೇ ಎಂಬುದನ್ನು "
-"ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "YYYY-MM-DD ರೂಪದಲ್ಲಿ ನಮೂದಿಸಿ"
@@ -1346,7 +1341,9 @@ msgstr ""
 "ಈ ಗ್ಯಾಜೆಟ್‌ಗಳನ್ನು %(apache_link_html)sApache 2.0 ಪರವಾನಗಿ%(link_end_html)s"
 " ಅಡಿಯಲ್ಲಿ ಲಭ್ಯಗೊಳಿಸಲಾಗಿದೆ."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

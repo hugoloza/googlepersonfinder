@@ -646,7 +646,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "以 MP3 格式下载声音"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -663,9 +663,6 @@ msgstr "嵌入应用"
 
 msgid "Enable notes on this record"
 msgstr "启用此记录的注释功能"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "所有日期都必须采用 yyyy-mm-ddThh:mm:ssZ (UTC) 格式"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "输入格式为 YYYY-MM-DD"
@@ -1241,7 +1238,9 @@ msgid ""
 " license%(link_end_html)s."
 msgstr "这些小工具按 %(apache_link_html)sApache 2.0 许可%(link_end_html)s提供。"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

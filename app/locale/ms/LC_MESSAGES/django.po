@@ -698,7 +698,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Muat turun bunyi sebagai MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -715,9 +715,6 @@ msgstr "Membenamkan Aplikasi"
 
 msgid "Enable notes on this record"
 msgstr "Dayakan nota pada rekod ini"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "Pastikan semua tarikh dalam format dd-mm-yyyyThh:mm:ssZ dalam UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Masukkan sebagai DD-MM-YYYY"
@@ -1338,7 +1335,9 @@ msgstr ""
 "Alat ini disediakan di bawah %(apache_link_html)slesen Apache "
 "2.0%(link_end_html)s"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

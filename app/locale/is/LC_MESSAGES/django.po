@@ -703,7 +703,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Sækja hljóðið sem MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -720,11 +720,6 @@ msgstr "Forritið fellt inn"
 
 msgid "Enable notes on this record"
 msgstr "Gera athugasemdir við færsluna virkar"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Gakktu úr skugga um að allar dagsetningar séu á sniðinu áááá-mm-"
-"ddTkk:mm:ssZ í UTC-tímabeltinu"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Færðu inn sem ÁÁÁÁ-MM-DD"
@@ -1347,7 +1342,9 @@ msgstr ""
 "Þessar græjur eru veittar samkvæmt %(apache_link_html)sApache 2.0 "
 "leyfinu%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

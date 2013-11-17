@@ -505,7 +505,7 @@ msgstr ""
 msgid "Download the sound as MP3"
 msgstr ""
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -521,9 +521,6 @@ msgid "Embedding the Application"
 msgstr ""
 
 msgid "Enable notes on this record"
-msgstr ""
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
 msgstr ""
 
 msgid "Enter as YYYY-MM-DD"
@@ -1101,7 +1098,9 @@ msgid ""
 " license%(link_end_html)s."
 msgstr ""
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."
