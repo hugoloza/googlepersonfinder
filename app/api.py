@@ -150,7 +150,7 @@ def convert_time_fields(rows, default_offset=0):
 
 
 class Import(utils.BaseHandler):
-    https_required = True
+    #https_required = True
 
     def get(self):
         self.render('import.html',
