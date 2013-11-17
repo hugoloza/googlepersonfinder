@@ -548,6 +548,9 @@ msgstr "การบริหารจัดการ"
 msgid "Age"
 msgstr "อายุ"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "นามสกุลสำรอง"
 
@@ -681,6 +684,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ดาวน์โหลดเสียงในรูปแบบ MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "อีเมล"
@@ -1161,6 +1167,12 @@ msgstr "เพศ"
 msgid "Show Map"
 msgstr "แสดงแผนที่"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "แสดงข้อมูลที่ละเอียดอ่อน"
 
@@ -1299,6 +1311,9 @@ msgid ""
 msgstr ""
 "แกดเจ็ตเหล่านี้สามารถใช้งานได้ภายใต้ %(apache_link_html)sสัญญาอนุญาต "
 "Apache 2.0%(link_end_html)s"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "นี่เป็นบันทึกใหม่"

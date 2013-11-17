@@ -544,6 +544,9 @@ msgstr "පරිපාලනය"
 msgid "Age"
 msgstr "වයස"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "විකල්ප පවුල් නාම"
 
@@ -679,6 +682,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "MP3 ලෙස හඬ බාගන්න"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ඊ-තැපෑල"
@@ -1165,6 +1171,12 @@ msgstr "ලිංගිකත්වය"
 msgid "Show Map"
 msgstr "සිතියම පෙන්වන්න"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "සංවේදී තොරතුරු පෙන්වන්න"
 
@@ -1307,6 +1319,9 @@ msgid ""
 msgstr ""
 "%(apache_link_html)sApache 2.0 license%(link_end_html)s යටතේ මෙම ගැජට් "
 "ලබාගත හැකි කර ඇත."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "මෙය නව වාර්තාවකි."

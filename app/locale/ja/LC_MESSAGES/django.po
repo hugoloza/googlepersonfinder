@@ -536,6 +536,9 @@ msgstr "管理"
 msgid "Age"
 msgstr "年齢"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "姓（よみがな）"
 
@@ -665,6 +668,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "MP3 として音声をダウンロード"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "メール"
@@ -1120,6 +1126,12 @@ msgstr "性別"
 msgid "Show Map"
 msgstr "地図を表示"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "個人情報を表示"
 
@@ -1251,6 +1263,9 @@ msgid ""
 "These gadgets are made available under the %(apache_link_html)sApache 2.0"
 " license%(link_end_html)s."
 msgstr "これらのガジェットは %(apache_link_html)sApache 2.0 ライセンス%(link_end_html)sで使用できます。"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "これは新しい記録です。"

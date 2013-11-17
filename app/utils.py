@@ -554,6 +554,7 @@ class BaseHandler(webapp.RequestHandler):
     auto_params = {
         'add_note': validate_yes,
         'age': validate_age,
+        'allow_overwrite': validate_checkbox_as_bool,
         'alternate_family_names': strip,
         'alternate_given_names': strip,
         'author_email': strip,
@@ -570,6 +571,7 @@ class BaseHandler(webapp.RequestHandler):
         'date_of_birth': validate_approximate_date,
         'description': strip,
         'domain_write_permission': strip,
+        'dry_run': validate_checkbox_as_bool,
         'dupe_notes': validate_yes,
         'email_of_found_person': strip,
         'error': strip,

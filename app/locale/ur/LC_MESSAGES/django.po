@@ -549,6 +549,9 @@ msgstr "انتظامیہ"
 msgid "Age"
 msgstr "عمر"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "متبادل خاندانی نام"
 
@@ -681,6 +684,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "‏آواز MP3 کے بطور ڈاؤن لوڈ کریں"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ای میل"
@@ -1168,6 +1174,12 @@ msgstr "جنس"
 msgid "Show Map"
 msgstr "نقشہ دکھائیں"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "حساس معلومات دکھائیں"
 
@@ -1309,6 +1321,9 @@ msgid ""
 msgstr ""
 "‏یہ گیجٹس %(apache_link_html)sApache 2.0 لائسنس%(link_end_html)s کے تحت "
 "دستیاب کرائے گئے ہیں۔"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "یہ ایک نیا ریکارڈ ہے۔"

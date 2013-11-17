@@ -570,6 +570,9 @@ msgstr "അഡ്‌മിനിസ്‌ട്രേഷൻ"
 msgid "Age"
 msgstr "പ്രായം"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "കുടുംബത്തിന്റെ ഇതര നാമങ്ങൾ"
 
@@ -707,6 +710,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ശബ്‌ദം MP3 ആയി ഡൗൺലോഡുചെയ്യുക"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ഇമെയിൽ"
@@ -1207,6 +1213,12 @@ msgstr "ലിംഗം"
 msgid "Show Map"
 msgstr "മാപ്പ് കാണിക്കുക"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "തന്ത്രപ്രധാന വിവരങ്ങൾ കാണിക്കുക"
 
@@ -1351,6 +1363,9 @@ msgid ""
 msgstr ""
 "ഈ ഗാഡ്‌ജറ്റുകൾ %(apache_link_html)sApache 2.0 ലൈസൻസിന്%(link_end_html)s "
 "കീഴിൽ ലഭ്യമാക്കിയിരിക്കുന്നു."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "ഇതൊരു പുതിയ റെക്കോർഡാണ്."

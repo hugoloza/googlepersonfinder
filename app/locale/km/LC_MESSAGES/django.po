@@ -563,6 +563,9 @@ msgstr "រដ្ឋបាល"
 msgid "Age"
 msgstr "អាយុ"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "ឈ្មោះ​គ្រួសារ​ជំនួស"
 
@@ -704,6 +707,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ទាញ​យក​សំឡេង​ជា MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "អ៊ីមែល"
@@ -1199,6 +1205,12 @@ msgstr "ភេទ"
 msgid "Show Map"
 msgstr "បង្ហាញ​ផែនទី"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "បង្ហាញ​ព័ត៌មាន​សម្ងាត់"
 
@@ -1349,6 +1361,9 @@ msgid ""
 msgstr ""
 "ឧបករណ៍​ទាំង​នេះ​ត្រូវ​បាន​ធ្វើ​ឲ​រក​បាន​នៅ​ក្រោម​ "
 "%(apache_link_html)sអាជ្ញា​ប័ណ្ណ Apache 2.0%(link_end_html)s។"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "នេះ​គឺ​ជា​កំណត់​ត្រា​ថ្មី​មួយ​។"

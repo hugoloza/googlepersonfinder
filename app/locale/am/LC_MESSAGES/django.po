@@ -536,6 +536,9 @@ msgstr "አስተዳደር"
 msgid "Age"
 msgstr "እድሜ"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "ተለዋጭ የቤተሰብ ስሞች"
 
@@ -668,6 +671,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ድምጹን እንደ MP3 አውርድ"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ኢሜይል"
@@ -1137,6 +1143,12 @@ msgstr "ጾታ"
 msgid "Show Map"
 msgstr "ካርታ አሳይ"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "ስስ መረጃ አሳይ"
 
@@ -1274,6 +1286,9 @@ msgid ""
 msgstr ""
 "እነዚህ መሣሪያዎች %(apache_link_html)sApache 2.0 ፍቃድ%(link_end_html)s መሠረት ነው "
 "የሚገኙት።"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "ይህ አዲስ መዝገብ ነው።"

@@ -536,6 +536,9 @@ msgstr "ניהול"
 msgid "Age"
 msgstr "גיל"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "שמות משפחה חלופיים"
 
@@ -668,6 +671,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "‏הורד את הצליל כ-MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "דוא\"ל"
@@ -1138,6 +1144,12 @@ msgstr "מין"
 msgid "Show Map"
 msgstr "הצג מפה"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "הצג מידע רגיש"
 
@@ -1275,6 +1287,9 @@ msgid ""
 msgstr ""
 "‏הגאדג'טים האלה זמינים ב%(apache_link_html)sרישיון Apache, גרסה "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "זו רשומה חדשה."

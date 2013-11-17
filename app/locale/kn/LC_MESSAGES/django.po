@@ -557,6 +557,9 @@ msgstr "ನಿರ್ವಹಣೆ"
 msgid "Age"
 msgstr "ವಯಸ್ಸು"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "ಪರ್ಯಾಯ ಕುಟುಂಬ ಹೆಸರುಗಳು"
 
@@ -694,6 +697,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ಧ್ವನಿಯನ್ನು MP3 ರೂಪದಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ಇ-ಮೇಲ್"
@@ -1190,6 +1196,12 @@ msgstr "ಲಿಂಗ"
 msgid "Show Map"
 msgstr "ನಕ್ಷೆ ತೋರಿಸು"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "ಸೂಕ್ಷ್ಮ ಮಾಹಿತಿಯನ್ನು ತೋರಿಸು"
 
@@ -1333,6 +1345,9 @@ msgid ""
 msgstr ""
 "ಈ ಗ್ಯಾಜೆಟ್‌ಗಳನ್ನು %(apache_link_html)sApache 2.0 ಪರವಾನಗಿ%(link_end_html)s"
 " ಅಡಿಯಲ್ಲಿ ಲಭ್ಯಗೊಳಿಸಲಾಗಿದೆ."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "ಇದು ಹೊಸ ರೆಕಾರ್ಡ್ ಆಗಿದೆ."

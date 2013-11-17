@@ -550,6 +550,9 @@ msgstr "Администрација"
 msgid "Age"
 msgstr "Узраст"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Алтернативна презимена"
 
@@ -685,6 +688,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Преузми звук као MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Е-пошта"
@@ -1169,6 +1175,12 @@ msgstr "Пол"
 msgid "Show Map"
 msgstr "Прикажи мапу"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Прикажи осетљиве информације"
 
@@ -1307,6 +1319,9 @@ msgid ""
 msgstr ""
 "Ови гаџети су доступни на основу %(apache_link_html)sлиценце за Apache "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Ово је нови запис."

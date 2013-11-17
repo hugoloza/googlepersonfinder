@@ -549,6 +549,9 @@ msgstr "Správa"
 msgid "Age"
 msgstr "Vek"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Ďalšie priezviská"
 
@@ -686,6 +689,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Prevziať zvuk v podobe súboru MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-mail"
@@ -1178,6 +1184,12 @@ msgstr "Pohlavie"
 msgid "Show Map"
 msgstr "Zobraziť mapu"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Zobraziť citlivé informácie"
 
@@ -1316,6 +1328,9 @@ msgid ""
 msgstr ""
 "Tieto moduly gadget sú sprístupnené pod %(apache_link_html)slicenciou "
 "Apache 2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Toto je nový záznam."

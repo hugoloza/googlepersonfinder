@@ -27,6 +27,7 @@ import sys
 
 from google.appengine.api import datastore_errors
 
+import pfif
 import subscribe
 from model import *
 from utils import validate_sex, validate_status, validate_approximate_date, \
@@ -56,11 +57,11 @@ def put_batch(batch, retries=DEFAULT_PUT_RETRIES):
         try:
             db.put(batch)
             logging.info('Imported records: %d' % len(batch))
-            return len(batch)
+            return True
         except:
             type, value, traceback = sys.exc_info()
             logging.warn('Retrying batch: %s' % value)
-    return 0
+    return False
 
 date_re = re.compile(r'^(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)Z$')
 
@@ -196,19 +197,34 @@ def send_notifications(handler, persons, notes):
         subscribe.send_notifications(handler, person, [note])
 
 
-def notes_match(a, b):
-    fields = ['person_record_id', 'author_name', 'author_email', 'author_phone',
-              'source_date', 'status', 'author_made_contact',
-              'email_of_found_person', 'phone_of_found_person',
-              'last_known_location', 'text', 'photo_url']
+def persons_match(a, b):
+    fields = (pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['person']
+              - ['person_record_id', 'entry_date'])
     return [getattr(a, f) for f in fields] == [getattr(b, f) for f in fields]
+
+
+def notes_match(a, b):
+    fields = (pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['note']
+              - ['note_record_id', 'entry_date'])
+    return [getattr(a, f) for f in fields] == [getattr(b, f) for f in fields]
+
+
+def entity_to_dict(entity):
+    pfif_version = pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION]
+    if type(entity) == Person:
+        return pfif_version.person_to_dict(entity)
+    if type(entity) == Note:
+        return pfif_version.note_to_dict(entity)
 
 
 def import_records(repo, domain, converter, records,
                    mark_notes_reviewed=False,
                    believed_dead_permission=False,
                    handler=None,
-                   omit_duplicate_notes=False):
+                   omit_duplicate_persons=False,
+                   omit_duplicate_notes=False,
+                   allow_overwrite=True,
+                   dry_run=False):
     """Convert and import a list of entries into a respository.
 
     Args:
@@ -226,19 +242,24 @@ def import_records(repo, domain, converter, records,
             as 'believed_dead'; otherwise skip the note and return an error.
         handler: Handler to use to send e-mail notification for notes.  If this
             is None, then we do not send e-mail.
+        omit_duplicate_persons: If true, skip any Persons that are identical to
+            existing Persons.
         omit_duplicate_notes: If true, skip any Notes that are identical to
             existing Notes on the same Person.
+        allow_overwrite: If false, skip any records that have existing records
+            with the same ID.
+        dry_run: If true, don't actually commit changes to the repository.
 
     Returns:
-        The number of passed-in records that were written (not counting other
-        Person records that were updated because they have new Notes), a list
-        of (error_message, record) pairs for the skipped records, and the
-        number of records processed in total.
+        A list of passed-in records that were written (not counting other Person
+        records that were updated because they have new Notes), a list of of
+        (error_message, record) pairs for the skipped records, and the number of
+        records processed in total.
     """
     persons = {}  # Person entities to write
     notes = {}  # Note entities to write
     skipped = []  # entities skipped due to an error
-    total = 0  # total number of entities for which conversion was attempted
+    total = 0
     for fields in records:
         total += 1
         try:
@@ -252,6 +273,23 @@ def import_records(repo, domain, converter, records,
                 ('Not in authorized domain: %r' % entity.record_id, fields))
             continue
         if isinstance(entity, Person):
+            # Check whether the person is a duplicate.
+            if omit_duplicate_persons:
+                other_persons = Person.generate_with_query(
+                    Person.all_in_repo(repo, filter_expired=False
+                    ).filter('family_name =', entity.family_name
+                    ).filter('given_name =', entity.given_name
+                    ).filter('full_name =', entity.full_name))
+                if any(persons_match(entity, p) for p in other_persons):
+                    skipped.append(
+                        ('This is a duplicate of an existing person', fields))
+                    continue
+            # Check whether there is an existing record with the same ID.
+            if not allow_overwrite:
+                if Person.get(repo, entity.record_id, filter_expired=False):
+                    skipped.append(
+                        ('This overwrites an existing person', fields))
+                    continue
             entity.update_index(['old', 'new'])
             persons[entity.record_id] = entity
         if isinstance(entity, Note):
@@ -277,6 +315,11 @@ def import_records(repo, domain, converter, records,
                 if any(notes_match(entity, note) for note in other_notes):
                     skipped.append(
                         ('This is a duplicate of an existing note', fields))
+                    continue
+            if not allow_overwrite:
+                if Note.get(repo, entity.record_id, filter_expired=False):
+                    skipped.append(
+                        ('This overwrites an existing note', fields))
                     continue
             entity.reviewed = mark_notes_reviewed
             notes[entity.record_id] = entity
@@ -312,21 +355,34 @@ def import_records(repo, domain, converter, records,
 
     # Now store the imported Persons and Notes, and count them.
     entities = persons.values() + notes.values()
+
+    if dry_run:
+        # Don't actually commit anything.
+        return [entity_to_dict(e) for e in entities], skipped
+
     all_persons = dict(persons, **extra_persons)
-    written = 0
+    written = []
     while entities:
+        entities_to_put = entities[:MAX_PUT_BATCH]
+        entities[:MAX_PUT_BATCH] = []
+
         # The presence of a handler indicates we should notify subscribers 
         # for any new notes being written. We do not notify on 
         # "re-imported" existing notes to avoid spamming subscribers.
         new_notes = []
         if handler:
-            new_notes = filter_new_notes(entities[:MAX_PUT_BATCH], repo)
-        written_batch = put_batch(entities[:MAX_PUT_BATCH])
-        written += written_batch
+            new_notes = filter_new_notes(entities_to_put, repo)
+
+        put_success = put_batch(entities_to_put)
+        if put_success:
+            written += [entity_to_dict(e) for e in entities_to_put]
+        else:
+            skipped += [('Failed to commit', entity_to_dict(e))
+                        for e in entities_to_put]
+
         # If we have new_notes and results did not fail then send notifications.
-        if new_notes and written_batch:
+        if new_notes and put_success:
             send_notifications(handler, all_persons, new_notes)
-        entities[:MAX_PUT_BATCH] = []
 
     # Also store the other updated Persons, but don't count them.
     entities = extra_persons.values()

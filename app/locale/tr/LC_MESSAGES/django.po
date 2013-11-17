@@ -563,6 +563,9 @@ msgstr "Yönetim"
 msgid "Age"
 msgstr "Yaş"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Alternatif soyadları"
 
@@ -698,6 +701,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Sesi MP3 olarak indir"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-posta"
@@ -1184,6 +1190,12 @@ msgstr "Cinsiyet"
 msgid "Show Map"
 msgstr "Haritayı Göster"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Hassas bilgileri göster"
 
@@ -1324,6 +1336,9 @@ msgid ""
 msgstr ""
 "Bu gadget'lar %(apache_link_html)sApache 2.0 lisansı%(link_end_html)s "
 "altında sunulmaktadır."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Bu yeni bir kayıt."

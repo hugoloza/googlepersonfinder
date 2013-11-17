@@ -558,6 +558,9 @@ msgstr "Pentadbiran"
 msgid "Age"
 msgstr "Umur"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Nama keluarga gantian"
 
@@ -694,6 +697,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Muat turun bunyi sebagai MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-mel"
@@ -1186,6 +1192,12 @@ msgstr "Jantina"
 msgid "Show Map"
 msgstr "Tunjukkan Peta"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Tunjukkan maklumat sensitif"
 
@@ -1325,6 +1337,9 @@ msgid ""
 msgstr ""
 "Alat ini disediakan di bawah %(apache_link_html)slesen Apache "
 "2.0%(link_end_html)s"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Ini merupakan rekod baharu."

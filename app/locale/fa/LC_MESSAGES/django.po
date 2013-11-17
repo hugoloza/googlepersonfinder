@@ -527,6 +527,9 @@ msgstr "سرپرستی"
 msgid "Age"
 msgstr "سن"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "نام‌های خانوادگی دیگر"
 
@@ -662,6 +665,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "‏‫دانلود صدا بصورت MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ایمیل"
@@ -1148,6 +1154,12 @@ msgstr "جنسیت"
 msgid "Show Map"
 msgstr "نمایش نقشه"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "نمایش اطلاعات مهم"
 
@@ -1289,6 +1301,9 @@ msgid ""
 msgstr ""
 "‏‫این ابزارک‌ها تحت %(apache_link_html)sمجوزApache 2.0%(link_end_html)s "
 "در دسترس قرار می‌گیرند."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "این سابقه جدید است."

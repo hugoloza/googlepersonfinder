@@ -543,6 +543,9 @@ msgstr "Haldus"
 msgid "Age"
 msgstr "Vanus"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Teised perekonnanimed"
 
@@ -680,6 +683,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Laadi heli alla MP3-formaadis"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-post"
@@ -1166,6 +1172,12 @@ msgstr "Sugu"
 msgid "Show Map"
 msgstr "Kuva kaart"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Kuva tundlik teave"
 
@@ -1304,6 +1316,9 @@ msgid ""
 msgstr ""
 "Need vidinad on saadaval %(apache_link_html)sApache 2.0 "
 "litsentsi%(link_end_html)s alusel."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "See on uus kirje."

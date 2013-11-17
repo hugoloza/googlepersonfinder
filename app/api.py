@@ -200,13 +200,16 @@ Sorry, the uploaded file is too large.  Try splitting it into smaller files
         notes_written, notes_skipped, notes_total = importer.import_records(
             self.repo, source_domain, importer.create_note, records,
             believed_dead_permission=self.auth.believed_dead_permission,
-            omit_duplicate_notes=True)
+            omit_duplicate_notes=True,
+            allow_overwrite=self.params.allow_overwrite,
+            dry_run=self.params.dry_run)
 
         utils.log_api_action(self, ApiActionLog.WRITE,
-                             0, notes_written, 0, len(notes_skipped))
+                             0, len(notes_written), 0, len(notes_skipped))
 
         self.render('import.html',
                     formats=get_requested_formats(self.env.path),
+                    dry_run=self.params.dry_run,
                     stats=[
                         Struct(type='Note',
                                written=notes_written,
@@ -233,17 +236,24 @@ Sorry, the uploaded file is too large.  Try splitting it into smaller files
         notes = [r for r in records if is_not_empty(r.get('note_record_id'))]
 
         people_written, people_skipped, people_total = importer.import_records(
-            self.repo, source_domain, importer.create_person, persons)
+            self.repo, source_domain, importer.create_person, persons,
+            omit_duplicate_persons=True,
+            allow_overwrite=self.params.allow_overwrite,
+            dry_run=self.params.dry_run)
         notes_written, notes_skipped, notes_total = importer.import_records(
             self.repo, source_domain, importer.create_note, notes,
-            believed_dead_permission=self.auth.believed_dead_permission)
+            believed_dead_permission=self.auth.believed_dead_permission,
+            omit_duplicate_notes=True,
+            allow_overwrite=self.params.allow_overwrite,
+            dry_run=self.params.dry_run)
 
         utils.log_api_action(self, ApiActionLog.WRITE,
-                             people_written, notes_written,
+                             len(people_written), len(notes_written),
                              len(people_skipped), len(notes_skipped))
 
         self.render('import.html',
                     formats=get_requested_formats(self.env.path),
+                    dry_run=self.params.dry_run,
                     stats=[
                         Struct(type='Person',
                                written=people_written,
@@ -319,23 +329,23 @@ class Write(utils.BaseHandler):
         self.write('<status:status>\n')
 
         create_person = importer.create_person
-        num_people_written, people_skipped, total = importer.import_records(
+        people_written, people_skipped, total = importer.import_records(
             self.repo, source_domain, create_person, person_records)
         self.write_status(
-            'person', num_people_written, people_skipped, total, 
+            'person', people_written, people_skipped, total, 
             'person_record_id')
 
         create_note = importer.create_note
-        num_notes_written, notes_skipped, total = importer.import_records(
+        notes_written, notes_skipped, total = importer.import_records(
             self.repo, source_domain, create_note, note_records,
             mark_notes_reviewed, believed_dead_permission, self)
 
         self.write_status(
-            'note', num_notes_written, notes_skipped, total, 'note_record_id')
+            'note', notes_written, notes_skipped, total, 'note_record_id')
 
         self.write('</status:status>\n')
         utils.log_api_action(self, ApiActionLog.WRITE,          
-                             num_people_written, num_notes_written,  
+                             len(people_written), len(notes_written),  
                              len(people_skipped), len(notes_skipped))
 
 
@@ -358,7 +368,7 @@ class Write(utils.BaseHandler):
 %s
     </status:skipped>
   </status:write>
-''' % (type, total, written, ''.join(skipped_records).rstrip()))
+''' % (type, total, len(written), ''.join(skipped_records).rstrip()))
 
 class Search(utils.BaseHandler):
     https_required = False

@@ -548,6 +548,9 @@ msgstr "Адміністрування"
 msgid "Age"
 msgstr "Вік"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Додаткові прізвища"
 
@@ -684,6 +687,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Завантажити звук у форматі MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Електронна адреса"
@@ -1176,6 +1182,12 @@ msgstr "Стать"
 msgid "Show Map"
 msgstr "Показати карту"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Показати конфіденційну інформацію"
 
@@ -1320,6 +1332,9 @@ msgid ""
 msgstr ""
 "Ці гаджети надаються за %(apache_link_html)sліцензією Apache "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Це новий запис."

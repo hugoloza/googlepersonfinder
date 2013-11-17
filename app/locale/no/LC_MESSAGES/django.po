@@ -552,6 +552,9 @@ msgstr "Administrasjon"
 msgid "Age"
 msgstr "Alder"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Alternative familienavn"
 
@@ -689,6 +692,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Last ned lyden som MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-postadresse"
@@ -1175,6 +1181,12 @@ msgstr "Kjønn"
 msgid "Show Map"
 msgstr "Vis kartet"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Vis sensitiv informasjon"
 
@@ -1319,6 +1331,9 @@ msgid ""
 msgstr ""
 "Disse modulene er tilgjengelig under lisensen %(apache_link_html)sApache "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Dette er en ny oppføring."
