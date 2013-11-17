@@ -76,7 +76,7 @@
           <td><input type="checkbox" name="allow_overwrite"></td>
         </tr>
         <tr>
-          <td>{% trans "Dry run" %}:</td>
+          <td>{% trans "Dry run mode" %}:</td>
           <td><input type="checkbox" name="dry_run" checked></td>
         </tr>
         <tr>
