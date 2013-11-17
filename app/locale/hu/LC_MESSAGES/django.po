@@ -556,6 +556,9 @@ msgstr "Adminisztráció"
 msgid "Age"
 msgstr "Kor"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Alternatív családnevek"
 
@@ -694,6 +697,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Hang letöltése MP3-ként"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-mail"
@@ -1188,6 +1194,12 @@ msgstr "Nem"
 msgid "Show Map"
 msgstr "Térkép megjelenítése"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Bizalmas adatok megjelenítése"
 
@@ -1333,6 +1345,9 @@ msgid ""
 msgstr ""
 "Ezek a modulok az %(apache_link_html)sApache 2.0 licenc%(link_end_html)s "
 "alatt állnak rendelkezésre."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Ez egy új bejegyzés."

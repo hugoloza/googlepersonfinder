@@ -546,6 +546,9 @@ msgstr "Quản trị"
 msgid "Age"
 msgstr "Tuổi"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Họ thay thế"
 
@@ -681,6 +684,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Tải xuống âm thanh dưới dạng MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Email"
@@ -1168,6 +1174,12 @@ msgstr "Giới tính"
 msgid "Show Map"
 msgstr "Hiển thị Bản đồ"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Hiển thị thông tin nhạy cảm"
 
@@ -1307,6 +1319,9 @@ msgid ""
 msgstr ""
 "Các tiện ích này được cung cấp theo %(apache_link_html)sgiấy phép Apache "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Đây là hồ sơ mới."

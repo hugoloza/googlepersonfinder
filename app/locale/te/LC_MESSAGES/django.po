@@ -551,6 +551,9 @@ msgstr "నిర్వహణ"
 msgid "Age"
 msgstr "వయస్సు"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "ప్రత్యామ్నాయ కుటుంబ పేర్లు"
 
@@ -690,6 +693,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "శబ్దాన్ని MP3 వలె డౌన్‌లోడ్ చేయి"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ఇ-మెయిల్"
@@ -1182,6 +1188,12 @@ msgstr "లింగం"
 msgid "Show Map"
 msgstr "మ్యాప్‌ను చూపు"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "సున్నితమైన సమాచారాన్ని చూపండి"
 
@@ -1325,6 +1337,9 @@ msgid ""
 msgstr ""
 "ఈ గాడ్జెట్‌లు %(apache_link_html)sApache 2.0 లైసెన్స్‌%(link_end_html)sతో"
 " అందుబాటులో ఉన్నాయి."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "ఇది క్రొత్త రికార్డ్."

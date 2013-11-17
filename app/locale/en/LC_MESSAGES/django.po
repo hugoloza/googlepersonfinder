@@ -372,6 +372,9 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr ""
 
@@ -500,6 +503,9 @@ msgid "Download %(begin_link)sthis Excel template%(end_link)s and add rows to it
 msgstr ""
 
 msgid "Download the sound as MP3"
+msgstr ""
+
+msgid "Dry run"
 msgstr ""
 
 msgid "E-mail"
@@ -957,6 +963,12 @@ msgstr ""
 msgid "Show Map"
 msgstr ""
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr ""
 
@@ -1087,6 +1099,9 @@ msgstr ""
 msgid ""
 "These gadgets are made available under the %(apache_link_html)sApache 2.0"
 " license%(link_end_html)s."
+msgstr ""
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
 msgstr ""
 
 msgid "This is a new record."

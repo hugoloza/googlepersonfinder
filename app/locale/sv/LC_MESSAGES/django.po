@@ -565,6 +565,9 @@ msgstr "Administration"
 msgid "Age"
 msgstr "Ålder"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Alternativa efternamn"
 
@@ -702,6 +705,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Hämta ljudet som MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-postadress"
@@ -1184,6 +1190,12 @@ msgstr "Kön"
 msgid "Show Map"
 msgstr "Visa karta"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Visa känslig information"
 
@@ -1327,6 +1339,9 @@ msgid ""
 msgstr ""
 "Dessa gadgetar är tillgängliga enligt %(apache_link_html)sApache "
 "2.0-licensen%(link_end_html)s"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Det här är en ny post."

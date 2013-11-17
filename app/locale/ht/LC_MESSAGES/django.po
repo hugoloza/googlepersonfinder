@@ -504,6 +504,9 @@ msgstr "Administrasyon"
 msgid "Age"
 msgstr "Laj"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Lòt non fanmi"
 
@@ -636,6 +639,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Telechaje son an nan fòm mp3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Imèl"
@@ -1114,6 +1120,12 @@ msgstr "Fi oswa Gason"
 msgid "Show Map"
 msgstr "Montre kat la"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Montre enfòmasyon ki delika"
 
@@ -1252,6 +1264,9 @@ msgid ""
 msgstr ""
 "Gadjèt sa yo disponib grasa %(apache_link_html)s lisans Apache 2.0 "
 "%(link_end_html)s a ."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Sa a se yon nouvo dosye."

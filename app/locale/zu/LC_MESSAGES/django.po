@@ -560,6 +560,9 @@ msgstr "Ukulawula"
 msgid "Age"
 msgstr "Ubudala"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Amanye amagama womndeni"
 
@@ -697,6 +700,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Landa umsindo njenge-MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "I-imeyili"
@@ -1189,6 +1195,12 @@ msgstr "Ubulili"
 msgid "Show Map"
 msgstr "Bonisa i-Map"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Bonisa ulwazi olubucayi"
 
@@ -1334,6 +1346,9 @@ msgid ""
 msgstr ""
 "Lawa magajethi enziwe watholakala ngaphansi "
 "%(apache_link_html)skwelayisense ye-Apache 2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Leli yirekhodi elisha."

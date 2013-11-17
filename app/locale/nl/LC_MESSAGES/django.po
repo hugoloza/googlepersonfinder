@@ -563,6 +563,9 @@ msgstr "Beheer"
 msgid "Age"
 msgstr "Leeftijd"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Alternatieve achternamen"
 
@@ -702,6 +705,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Het geluid downloaden als een MP3-bestand"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "E-mail"
@@ -1195,6 +1201,12 @@ msgstr "Geslacht"
 msgid "Show Map"
 msgstr "Kaart weergeven"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Gevoelige gegevens weergeven"
 
@@ -1338,6 +1350,9 @@ msgid ""
 msgstr ""
 "Deze gadgets zijn beschikbaar gesteld via de %(apache_link_html)slicentie"
 " voor Apache 2.00%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Dit is een nieuwe vermelding."

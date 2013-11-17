@@ -554,6 +554,9 @@ msgstr "Administravimas"
 msgid "Age"
 msgstr "Amžius"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Papildomos pavardės"
 
@@ -691,6 +694,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Atsisiųsti garsą MP3 formatu"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "El. paštas"
@@ -1175,6 +1181,12 @@ msgstr "Lytis"
 msgid "Show Map"
 msgstr "Rodyti žemėlapį"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Rodyti slaptą informaciją"
 
@@ -1318,6 +1330,9 @@ msgid ""
 msgstr ""
 "Šios programėlės naudojamos pagal %(apache_link_html)s„Apache 2.0“ "
 "licenciją%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Tai yra naujas įrašas."

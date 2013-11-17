@@ -822,11 +822,8 @@ table.api-keys td.empty {
   padding: 1em;
 }
 
-.import .stats .errors {
-  color: red;
-}
-
 .import .stats .error {
+  color: red;
   background: inherit;
   margin: 0.5em 0;
   padding: 0;

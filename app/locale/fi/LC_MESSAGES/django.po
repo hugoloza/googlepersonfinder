@@ -554,6 +554,9 @@ msgstr "Hallinto"
 msgid "Age"
 msgstr "Ikä"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Vaihtoehtoiset sukunimet"
 
@@ -691,6 +694,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Lataa ääni MP3-tiedostona"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Sähköpostiosoite"
@@ -1181,6 +1187,12 @@ msgstr "Sukupuoli"
 msgid "Show Map"
 msgstr "Näytä kartta"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Näytä arkaluonteiset tiedot"
 
@@ -1323,6 +1335,9 @@ msgid ""
 msgstr ""
 "Nämä gadgetit tarjotaan käyttöön %(apache_link_html)sApache 2.0 "
 "-käyttöluvan%(link_end_html)s alaisena."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Tämä on uusi tallenne."

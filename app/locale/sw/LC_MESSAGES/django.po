@@ -544,6 +544,9 @@ msgstr "Usimamizi"
 msgid "Age"
 msgstr "Umri"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Majina mbadala ya familia"
 
@@ -683,6 +686,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Pakua sauti kama MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Barua Pepe"
@@ -1175,6 +1181,12 @@ msgstr "Jinsia"
 msgid "Show Map"
 msgstr "Onyesha Ramani"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Onyesha maelezo nyeti"
 
@@ -1318,6 +1330,9 @@ msgid ""
 msgstr ""
 "Vifaa hivi huwa vinapatikana chini ya %(apache_link_html)sleseni ya "
 "Apache 2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Hii ni rekodi mpya."

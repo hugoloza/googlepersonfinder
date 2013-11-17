@@ -578,6 +578,9 @@ msgstr "Διαχείριση"
 msgid "Age"
 msgstr "Ηλικία"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Εναλλακτικά επώνυμα"
 
@@ -718,6 +721,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Λήψη ήχου ως MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
@@ -1225,6 +1231,12 @@ msgstr "Γένος"
 msgid "Show Map"
 msgstr "Προβολή χάρτη"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Προβολή ευαίσθητων δεδομένων"
 
@@ -1372,6 +1384,9 @@ msgid ""
 msgstr ""
 "Αυτά τα gadget διατίθενται βάσει της %(apache_link_html)sάδειας Apache "
 "2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Πρόκειται για νέα εγγραφή."

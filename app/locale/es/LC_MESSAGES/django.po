@@ -567,6 +567,9 @@ msgstr "Administración"
 msgid "Age"
 msgstr "Edad"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Apellidos alternativos"
 
@@ -704,6 +707,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Descargar el sonido en formato MP3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Correo electrónico"
@@ -1215,6 +1221,12 @@ msgstr "Sexo"
 msgid "Show Map"
 msgstr "Mostrar mapa"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Mostrar información confidencial"
 
@@ -1362,6 +1374,9 @@ msgid ""
 msgstr ""
 "Estos gadgets están disponibles con la %(apache_link_html)slicencia de "
 "Apache 2.0%(link_end_html)s."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Este registro es nuevo."

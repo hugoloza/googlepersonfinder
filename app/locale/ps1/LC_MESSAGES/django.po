@@ -558,6 +558,9 @@ msgstr "Åðmîñîšţråţîöñ"
 msgid "Age"
 msgstr "Åĝé"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Åļţérñåţé ƒåmîļý ñåméš"
 
@@ -693,6 +696,9 @@ msgstr ""
 
 msgid "Download the sound as MP3"
 msgstr "Ðöŵñļöåð ţĥé šöûñð åš MÞ3"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "É-måîļ"
@@ -1175,6 +1181,12 @@ msgstr "Šéx"
 msgid "Show Map"
 msgstr "Šĥöŵ Måþ"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Šĥöŵ šéñšîţîvé îñƒörmåţîöñ"
 
@@ -1316,6 +1328,9 @@ msgid ""
 msgstr ""
 "Ţĥéšé ĝåðĝéţš åré måðé åvåîļåbļé ûñðér ţĥé ᐅ%(apache_link_html)sᐊÅþåçĥé "
 "2.0 ļîçéñšéᐅ%(link_end_html)sᐊ."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Ţĥîš îš å ñéŵ réçörð."

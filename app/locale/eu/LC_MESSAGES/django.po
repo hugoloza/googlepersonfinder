@@ -550,6 +550,9 @@ msgstr "Administrazioa"
 msgid "Age"
 msgstr "Adina"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "Abizena"
 
@@ -683,6 +686,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "Deskargatu soinua MP3 gisa"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "Helbide elektronikoa"
@@ -1173,6 +1179,12 @@ msgstr "Sexua"
 msgid "Show Map"
 msgstr "Erakutsi mapa"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "Erakutsi isilpeko informazioa"
 
@@ -1313,6 +1325,9 @@ msgid ""
 msgstr ""
 "Gadget hauek %(apache_link_html)sApache 2.0 license%(link_end_html)s "
 "lizentzia dute."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "Erregistro berria da."

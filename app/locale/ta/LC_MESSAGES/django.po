@@ -562,6 +562,9 @@ msgstr "நிர்வாகம்"
 msgid "Age"
 msgstr "வயது"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "மாற்று குடும்பப் பெயர்கள்"
 
@@ -701,6 +704,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "ஒலியை MP3 ஆகப் பதிவிறக்கு"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "மின்னஞ்சல்"
@@ -1198,6 +1204,12 @@ msgstr "பாலினம்"
 msgid "Show Map"
 msgstr "வரைபடத்தைக் காட்டு"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "முக்கியமான தகவலைக் காட்டு"
 
@@ -1342,6 +1354,9 @@ msgid ""
 msgstr ""
 "இந்தக் கேஜெட்கள் %(apache_link_html)sApache 2.0 "
 "உரிமத்தின்%(link_end_html)s கீழ் கிடைக்கும்படி உருவாக்கப்பட்டவை."
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "இது புதிய பதிவாகும்."

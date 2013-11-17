@@ -224,6 +224,16 @@ class Base(db.Model):
         import into a home repository), hence the long method name."""
         return cls(key_name=repo + ':' + record_id, repo=repo, **kwargs)
 
+    @classmethod
+    def generate_with_query(cls, query, limit=None):
+        """Generates all the records matching the query."""
+        limit = limit or cls.FETCH_LIMIT
+        records = query.fetch(limit)
+        while records:
+            for record in records:
+                yield record
+            query.with_cursor(query.cursor())  # Continue where fetch left off.
+            records = query.fetch(limit)
 
 # All fields are either required, or have a default value.  For property
 # types that have a false value, the default is the false value.  For types
@@ -603,12 +613,7 @@ class Note(Base):
         query = Note.all_in_repo(repo, filter_expired=filter_expired
             ).filter('person_record_id =', person_record_id
             ).order('source_date')
-        notes = query.fetch(Note.FETCH_LIMIT)
-        while notes:
-            for note in notes:
-                yield note
-            query.with_cursor(query.cursor())  # Continue where fetch left off.
-            notes = query.fetch(Note.FETCH_LIMIT)
+        return Note.generate_with_query(query)
 
 class NoteWithBadWords(Note):
     # Spam score given by SpamDetector

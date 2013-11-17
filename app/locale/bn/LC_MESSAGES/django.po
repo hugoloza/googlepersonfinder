@@ -553,6 +553,9 @@ msgstr "প্রশাসন"
 msgid "Age"
 msgstr "বয়স"
 
+msgid "Allow overwrite"
+msgstr ""
+
 msgid "Alternate family names"
 msgstr "বিকল্প পদবিগুলি"
 
@@ -690,6 +693,9 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 
 msgid "Download the sound as MP3"
 msgstr "MP3 রূপে ধ্ব্নিটি ডাউনলোড করুন"
+
+msgid "Dry run"
+msgstr ""
 
 msgid "E-mail"
 msgstr "ইমেল"
@@ -1178,6 +1184,12 @@ msgstr "লিঙ্গ"
 msgid "Show Map"
 msgstr "মানচিত্র দেখান"
 
+msgid "Show all the skipped records"
+msgstr ""
+
+msgid "Show all the written records"
+msgstr ""
+
 msgid "Show sensitive information"
 msgstr "ব্যক্তিগত তথ্য দেখান"
 
@@ -1321,6 +1333,9 @@ msgid ""
 msgstr ""
 "এই গ্যাজেটগুলি %(apache_link_html)sApache 2.0 লাইসেন্সের%(link_end_html)s"
 " অধীনে উপলব্ধ করা হয়েছে৷"
+
+msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgstr ""
 
 msgid "This is a new record."
 msgstr "এটি একটি নতুন রেকর্ড৷"

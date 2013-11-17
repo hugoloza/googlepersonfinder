@@ -156,7 +156,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_person, records, False,
             True, None)
 
-        assert written == 15
+        assert len(written) == 15
         assert len(skipped) == 5
         assert skipped[0] == (
             'Not in authorized domain: u\'other_domain/0\'', {
@@ -216,7 +216,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_note, records, False,
             True, None)
 
-        assert written == 14
+        assert len(written) == 14
         assert len(skipped) == 6
         assert skipped[0] == (
             'Not in authorized domain: u\'other_domain/record_0\'', {
@@ -272,7 +272,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_note, records, False,
             False, None)
 
-        assert written == 17
+        assert len(written) == 17
         assert len(skipped) == 3
         assert skipped[0] == (
             'Not authorized to post notes with the status'
@@ -308,7 +308,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_note, records, False,
             True, None)
 
-        assert written == 20
+        assert len(written) == 20
         assert len(skipped) == 0
         assert model.Note.all().count() == 20
 
@@ -335,7 +335,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_note, records, True,
             True, None)
 
-        assert written == 3
+        assert len(written) == 3
         assert len(skipped) == 0
         assert total == 3
         # Confirm all records are marked reviewed.
@@ -367,7 +367,7 @@ class ImporterTests(unittest.TestCase):
             'haiti', 'test_domain', importer.create_person, records, False,
             True, None)
 
-        assert written == 2
+        assert len(written) == 2
         assert len(skipped) == 0
         assert total == 2
         assert model.Person.all().count() == 2
@@ -396,7 +396,7 @@ class ImporterTests(unittest.TestCase):
             True, None)
 
         # Check that the note associted with first person record is skipped.
-        assert written == 1
+        assert len(written) == 1
         assert len(skipped) == 1
         assert skipped[0] == (
             'The author has disabled new commenting on this record',
