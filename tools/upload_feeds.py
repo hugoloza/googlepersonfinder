@@ -4,6 +4,7 @@ import importer
 import remote_api
 import api
 
+# TODO(ryok): make these commandline flags.
 FILE = '/tmp/persons.csv'
 HOST = 'googlepersonfinder.appspot.com'
 REPO = '2013-yolanda'
