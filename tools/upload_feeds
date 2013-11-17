@@ -1,3 +1,0 @@
-pushd "$(dirname $0)" >/dev/null && source common.sh && popd >/dev/null
-
-$PYTHON $TOOLS_DIR/upload_feeds.py "$@"
