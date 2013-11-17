@@ -198,14 +198,14 @@ def send_notifications(handler, persons, notes):
 
 
 def persons_match(a, b):
-    fields = (pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['person']
-              - ['person_record_id', 'entry_date'])
+    fields = (set(pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['person'])
+              - set(['person_record_id', 'entry_date']))
     return [getattr(a, f) for f in fields] == [getattr(b, f) for f in fields]
 
 
 def notes_match(a, b):
-    fields = (pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['note']
-              - ['note_record_id', 'entry_date'])
+    fields = (set(pfif.PFIF_VERSIONS[pfif.PFIF_DEFAULT_VERSION].fields['note'])
+              - set(['note_record_id', 'entry_date']))
     return [getattr(a, f) for f in fields] == [getattr(b, f) for f in fields]
 
 
@@ -358,7 +358,7 @@ def import_records(repo, domain, converter, records,
 
     if dry_run:
         # Don't actually commit anything.
-        return [entity_to_dict(e) for e in entities], skipped
+        return [entity_to_dict(e) for e in entities], skipped, total
 
     all_persons = dict(persons, **extra_persons)
     written = []
