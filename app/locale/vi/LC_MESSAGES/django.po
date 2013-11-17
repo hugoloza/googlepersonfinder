@@ -685,7 +685,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Tải xuống âm thanh dưới dạng MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -702,9 +702,6 @@ msgstr "Nhúng Ứng dụng"
 
 msgid "Enable notes on this record"
 msgstr "Bật ghi chú trên hồ sơ này"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "Đảm bảo tất cả các ngày đều ở định dạng dd-mm-yyyyThh:mm:ssZ theo giờ UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Nhập dưới dạng DD-MM-YYYY"
@@ -1320,7 +1317,9 @@ msgstr ""
 "Các tiện ích này được cung cấp theo %(apache_link_html)sgiấy phép Apache "
 "2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

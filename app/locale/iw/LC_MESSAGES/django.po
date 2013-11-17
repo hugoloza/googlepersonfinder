@@ -672,7 +672,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "‏הורד את הצליל כ-MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -689,9 +689,6 @@ msgstr "הטמעת היישום"
 
 msgid "Enable notes on this record"
 msgstr "הפעל הערות ברשומה זו"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "‏ודא שכל התאריכים הם בתבנית yyyy-mm-ddThh:mm:ssZ ב-UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "‏הזן כ-YYYY-MM-DD"
@@ -1288,7 +1285,9 @@ msgstr ""
 "‏הגאדג'טים האלה זמינים ב%(apache_link_html)sרישיון Apache, גרסה "
 "2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -694,7 +694,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "MP3 রূপে ধ্ব্নিটি ডাউনলোড করুন"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -711,9 +711,6 @@ msgstr "অ্যাপ্লিকেশানটি এম্বেড কর�
 
 msgid "Enable notes on this record"
 msgstr "এই রেকর্ডে নোটগুলি সক্ষম করুন"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "সব তারিখ UTC অনুসারে yyyy-mm-ddThh:mm:ssZ ফর্ম্যাটে আছে তা নিশ্চিত করুন৷"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "YYYY-MM-DD হিসাবে লিখুন"
@@ -1334,7 +1331,9 @@ msgstr ""
 "এই গ্যাজেটগুলি %(apache_link_html)sApache 2.0 লাইসেন্সের%(link_end_html)s"
 " অধীনে উপলব্ধ করা হয়েছে৷"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

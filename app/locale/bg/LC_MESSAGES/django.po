@@ -690,7 +690,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Изтегляне на звука като MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -707,11 +707,6 @@ msgstr "Вграждане на приложението"
 
 msgid "Enable notes on this record"
 msgstr "Активиране на бележките за този запис"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Уверете се, че всички дати са във формат гггг.мм.дд.Tчч:мм:ссZ по "
-"координираното универсално време (UTC)"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Въведете във формат ГГГГ.ММ.ДД"
@@ -1329,7 +1324,9 @@ msgstr ""
 "Тези притурки се предоставят съгласно %(apache_link_html)sлиценз „Apache "
 "2.0“%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -685,7 +685,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "ดาวน์โหลดเสียงในรูปแบบ MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -702,9 +702,6 @@ msgstr "การฝังแอปพลิเคชันนี้"
 
 msgid "Enable notes on this record"
 msgstr "เปิดใช้งานข้อความในบันทึกนี้"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "ตรวจสอบว่าวันที่ทั้งหมดอยู่ในรูปแบบ ปปปป-ดด-ววTชช:นน:ววZ ในเวลา UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "ป้อนในรูปแบบ ปปปป-ดด-วว"
@@ -1312,7 +1309,9 @@ msgstr ""
 "แกดเจ็ตเหล่านี้สามารถใช้งานได้ภายใต้ %(apache_link_html)sสัญญาอนุญาต "
 "Apache 2.0%(link_end_html)s"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

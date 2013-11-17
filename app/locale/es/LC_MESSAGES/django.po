@@ -708,7 +708,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Descargar el sonido en formato MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -725,11 +725,6 @@ msgstr "Cómo insertar la aplicación"
 
 msgid "Enable notes on this record"
 msgstr "Habilitar notas en este registro"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Asegúrate de que todas las fechas tengan el formato aaaa-mm-ddThh:mm:ssZ "
-"en UTC"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "La fecha debe tener el formato AAAA-MM-DD."
@@ -1375,7 +1370,9 @@ msgstr ""
 "Estos gadgets están disponibles con la %(apache_link_html)slicencia de "
 "Apache 2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

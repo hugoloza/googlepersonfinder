@@ -690,7 +690,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "Prevziať zvuk v podobe súboru MP3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -707,11 +707,6 @@ msgstr "Vloženie aplikácie"
 
 msgid "Enable notes on this record"
 msgstr "Povoliť poznámky k tomuto záznamu"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr ""
-"Všetky dátumy v časovom pásme UTC musia byť uvedené vo formáte rrrr-mm-"
-"ddThh:mm:ssZ"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Zadajte v tvare RRRR-MM-DD"
@@ -1329,7 +1324,9 @@ msgstr ""
 "Tieto moduly gadget sú sprístupnené pod %(apache_link_html)slicenciou "
 "Apache 2.0%(link_end_html)s."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

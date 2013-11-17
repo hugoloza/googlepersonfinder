@@ -697,7 +697,7 @@ msgstr ""
 msgid "Download the sound as MP3"
 msgstr "Ðöŵñļöåð ţĥé šöûñð åš MÞ3"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -714,9 +714,6 @@ msgstr "Émbéððîñĝ ţĥé Åþþļîçåţîöñ"
 
 msgid "Enable notes on this record"
 msgstr "Éñåbļé ñöţéš öñ ţĥîš réçörð"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "Éñšûré åļļ ðåţéš åré îñ ýýýý-mm-ððŢĥĥ:mm:ššŽ ƒörmåţ îñ ÛŢÇ"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "Éñţér åš ÝÝÝÝ-MM-ÐÐ"
@@ -1329,7 +1326,9 @@ msgstr ""
 "Ţĥéšé ĝåðĝéţš åré måðé åvåîļåbļé ûñðér ţĥé ᐅ%(apache_link_html)sᐊÅþåçĥé "
 "2.0 ļîçéñšéᐅ%(link_end_html)sᐊ."
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."

@@ -669,7 +669,7 @@ msgstr "Download %(begin_link)sthis Excel template%(end_link)s and add rows to i
 msgid "Download the sound as MP3"
 msgstr "MP3 として音声をダウンロード"
 
-msgid "Dry run"
+msgid "Dry run mode"
 msgstr ""
 
 msgid "E-mail"
@@ -686,9 +686,6 @@ msgstr "このアプリケーションの埋め込み"
 
 msgid "Enable notes on this record"
 msgstr "この記録のメモを有効にする"
-
-msgid "Ensure all dates are in yyyy-mm-ddThh:mm:ssZ format in UTC"
-msgstr "日付がすべて UTC で yyyy-mm-ddThh:mm:ssZ の形式であることを確認してください"
 
 msgid "Enter as YYYY-MM-DD"
 msgstr "YYYY-MM-DD の形式で入力してください"
@@ -1264,7 +1261,9 @@ msgid ""
 " license%(link_end_html)s."
 msgstr "これらのガジェットは %(apache_link_html)sApache 2.0 ライセンス%(link_end_html)sで使用できます。"
 
-msgid "This is a dry run. In order to actually apply the changes, uncheck the "
+msgid ""
+"This is a dry run. In order to actually apply the changes, uncheck the "
+"dry run mode and resubmit."
 msgstr ""
 
 msgid "This is a new record."
