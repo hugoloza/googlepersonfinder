@@ -38,6 +38,9 @@
           <td>{% trans "CSV file" %}:</td>
           <td><input type="file" name="content"></td>
         </tr>
+        {# Hides them to avoid confusing the current external users. #}
+        {# TODO(ichikawa): Consider showing them after the on-going response. #}
+        <!--
         <tr>
           <td>{% trans "Allow overwrite" %}:</td>
           <td><input type="checkbox" name="allow_overwrite"></td>
@@ -46,8 +49,12 @@
           <td>{% trans "Dry run mode" %}:</td>
           <td><input type="checkbox" name="dry_run" checked></td>
         </tr>
+        -->
         <tr>
-          <td><input type="hidden" name="format" value="notes"></td>
+          <td>
+            <input type="hidden" name="format" value="notes">
+            <input type="hidden" name="allow_overwrite" value="on">
+          </td>
           <td><input type="submit" value="{% trans "Upload" %}"></td>
         </tr>
       </table>
@@ -70,6 +77,9 @@
           <td>{% trans "CSV file" %}:</td>
           <td><input type="file" name="content"></td>
         </tr>
+        {# Hides them to avoid confusing the current external users. #}
+        {# TODO(ichikawa): Consider showing them after the on-going response. #}
+        <!--
         <tr>
           <td>{% trans "Allow overwrite" %}:</td>
           <td><input type="checkbox" name="allow_overwrite"></td>
@@ -78,8 +88,9 @@
           <td>{% trans "Dry run mode" %}:</td>
           <td><input type="checkbox" name="dry_run" checked></td>
         </tr>
+        -->
         <tr>
-          <td></td>
+          <td><input type="hidden" name="allow_overwrite" value="on"></td>
           <td><input type="submit" value="{% trans "Upload" %}"></td>
         </tr>
       </table>
@@ -93,9 +104,10 @@
         <h3>{{stats.type}} records</h3>
         <p>Imported {{stats.written|length}} of {{stats.total}}.
         {% if stats.skipped %}
-          <input type="button" onclick="showNextElement()"
+          <input type="button"
+                 onclick="$('all-skipped-{{stats.type}}-records').style.display = '';"
                  value="{% trans "Show all the skipped records" %}">
-          <div class="errors" style="display: none">
+          <div id="all-skipped-{{stats.type}}-records" class="errors" style="display: none">
             Skipped {{stats.skipped|length}}:
             {% for error in stats.skipped %}
               <div class="error">
@@ -106,9 +118,10 @@
           </div>
         {% endif %}
         {% if stats.written %}
-          <input type="button" onclick="showNextElement()"
+          <input type="button"
+                 onclick="$('all-written-{{stats.type}}-records').style.display = '';"
                  value="{% trans "Show all the written records" %}">
-          <div style="display: none">
+          <div id="all-written-{{stats.type}}-records" style="display: none">
             Written {{stats.written|length}}:
             {% for record in stats.written %}
               <div class="data">{{record}}</div>

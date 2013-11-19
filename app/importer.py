@@ -137,6 +137,11 @@ def create_person(repo, fields):
     else:  # create a new original record
         return Person.create_original(repo, **person_fields)
 
+def create_person_with_full_name(repo, fields):
+    """Same as create_person(), but requires that full_name is specified."""
+    assert strip(fields.get('full_name')), 'full_name is required'
+    return create_person(repo, fields)
+
 def create_note(repo, fields):
     """Creates a Note entity in the given repository with the given field
     values.  If 'fields' contains a 'note_record_id', calling put() on the
@@ -171,6 +176,11 @@ def create_note(repo, fields):
                 repo, record_id, **note_fields)
     else:  # create a new original record
         return Note.create_original(repo, **note_fields)
+
+def create_note_with_note_record_id(repo, fields):
+    """Same as create_note(), but requires that note_record_id is specified."""
+    assert strip(fields.get('note_record_id')), 'note_record_id is required'
+    return create_note(repo, fields)
 
 def filter_new_notes(entities, repo):
     """Filter the notes which are new."""

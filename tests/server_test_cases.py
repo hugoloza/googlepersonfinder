@@ -6408,9 +6408,9 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 1
         assert Note.all().count() == 0
+        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         person = Person.all().get()
         assert person.record_id == 'test.google.com/person1'
         assert person.source_date == datetime.datetime(2013, 2, 26, 9, 10, 0)
@@ -6427,9 +6427,9 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 0
         assert Note.all().count() == 1
+        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         note = Note.all().get()
         assert note.record_id == 'test.google.com/note1'
         assert note.person_record_id == 'test.google.com/person1'
@@ -6448,9 +6448,9 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 1
         assert Note.all().count() == 0
+        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         person = Person.all().get()
         assert person.record_id == 'test.google.com/1'
         assert person.source_date == datetime.datetime(2013, 2, 26, 9, 10, 0)
@@ -6467,10 +6467,10 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Person records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
-        assert 'Not in authorized domain' in doc.text
         assert Person.all().count() == 0
         assert Note.all().count() == 0
+        assert 'Person records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'Not in authorized domain' in doc.text
         verify_api_log(ApiActionLog.WRITE)
 
     def test_import_one_person_and_note_on_separate_rows(self):
@@ -6485,10 +6485,10 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
-        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 1
         assert Note.all().count() == 1
+        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         person = Person.all().get()
         assert person.record_id == 'test.google.com/person1'
         assert person.source_date == datetime.datetime(2013, 2, 26, 9, 10, 0)
@@ -6511,10 +6511,10 @@ class ImportTests(TestsBase):
         doc = self.go('/haiti/api/import')
         form = doc.last('form')
         doc = self.s.submit(form, key='test_key', content=open(self.filename))
-        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
-        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 1
         assert Note.all().count() == 1
+        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'Note records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
         person = Person.all().get()
         assert person.record_id == 'test.google.com/person1'
         assert person.source_date == datetime.datetime(2013, 2, 26, 9, 10, 0)
@@ -6525,6 +6525,87 @@ class ImportTests(TestsBase):
         assert note.author_name == '_test_author_name'
         assert note.source_date == datetime.datetime(2013, 2, 26, 9, 10, 0)
         verify_api_log(ApiActionLog.WRITE, person_records=1, note_records=1)
+
+    def test_import_full_name_missing(self):
+        """Verifies we reject a Person entry without full_name."""
+        self._write_csv_file([
+            'person_record_id,source_date,full_name',
+            'test.google.com/person1,2013-02-26T09:10:00Z,',
+            ])
+        doc = self.go('/haiti/api/import')
+        form = doc.last('form')
+        doc = self.s.submit(form, key='test_key', content=open(self.filename))
+        assert Person.all().count() == 0
+        assert Note.all().count() == 0
+        assert 'Person records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'full_name is required' in doc.text
+        verify_api_log(ApiActionLog.WRITE)
+
+    def test_import_note_record_id_missing(self):
+        """Verifies we reject a row with fields for Note (e.g., status) but
+        without note_record_id."""
+        self._write_csv_file([
+            'person_record_id,source_date,full_name,note_record_id,status',
+            'test.google.com/person1,2013-02-26T09:10:00Z,_test_full_name,,believed_alive',
+            ])
+        doc = self.go('/haiti/api/import')
+        form = doc.last('form')
+        doc = self.s.submit(form, key='test_key', content=open(self.filename))
+        assert Person.all().count() == 1
+        assert Note.all().count() == 0
+        assert 'Person records Imported 1 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'Note records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'note_record_id is required' in doc.text
+        verify_api_log(ApiActionLog.WRITE, person_records=1)
+
+    def test_import_one_person_with_error_and_note_on_single_row(self):
+        """Verifies that we don't add Note entry when we fail to add Person
+        entry in the same row."""
+        self._write_csv_file([
+            'person_record_id,full_name,source_date,note_record_id,author_name',
+            'test.google.com/person1,_test_full_name,_bad_format_date,' +
+            'test.google.com/note1,_test_author_name',
+            ])
+        doc = self.go('/haiti/api/import')
+        form = doc.last('form')
+        doc = self.s.submit(form, key='test_key', content=open(self.filename))
+        assert Person.all().count() == 0
+        assert Note.all().count() == 0
+        assert 'Person records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'Note records Imported 0 of 0' in re.sub('\\s+', ' ', doc.text)
+        assert 'Bad datetime' in doc.text
+        verify_api_log(ApiActionLog.WRITE)
+
+    def test_import_only_entry_date(self):
+        """Verifies that we report an error on a row only with entry_date,
+        which is a field both for Person and Note."""
+        self._write_csv_file([
+            'person_record_id,source_date,full_name,entry_date',
+            ',,,2013-02-26T09:10:00Z',
+            ])
+        doc = self.go('/haiti/api/import')
+        form = doc.last('form')
+        doc = self.s.submit(form, key='test_key', content=open(self.filename))
+        assert Person.all().count() == 0
+        assert Note.all().count() == 0
+        assert 'Person records Imported 0 of 1' in re.sub('\\s+', ' ', doc.text)
+        assert 'full_name is required' in doc.text
+        verify_api_log(ApiActionLog.WRITE)
+
+    def test_import_empty_row(self):
+        """Verifies that we silently skips an empty row."""
+        self._write_csv_file([
+            'person_record_id,source_date,full_name',
+            ',,',
+            ])
+        doc = self.go('/haiti/api/import')
+        form = doc.last('form')
+        doc = self.s.submit(form, key='test_key', content=open(self.filename))
+        assert Person.all().count() == 0
+        assert Note.all().count() == 0
+        assert 'Person records Imported 0 of 0' in re.sub('\\s+', ' ', doc.text)
+        assert 'Note records Imported 0 of 0' in re.sub('\\s+', ' ', doc.text)
+        verify_api_log(ApiActionLog.WRITE)
 
 # TODO(ryok): fix go_as_operator() and re-enable the tests.
 #class ApiKeyManagementTests(TestsBase):
