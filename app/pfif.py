@@ -416,6 +416,8 @@ PFIF_DEFAULT_VERSION = '1.4'
 
 assert PFIF_DEFAULT_VERSION in PFIF_VERSIONS
 
+PFIF_DEFAULT_VERSION_SPEC = PFIF_VERSIONS[PFIF_DEFAULT_VERSION]
+
 def check_pfif_tag(name, parent=None):
     """Recognizes a PFIF XML tag from any version of PFIF."""
     return PFIF_1_4.check_tag(name, parent) or \

@@ -150,7 +150,7 @@ def convert_time_fields(rows, default_offset=0):
 
 
 class Import(utils.BaseHandler):
-    #https_required = True
+    https_required = True
 
     def get(self):
         self.render('import.html',
@@ -230,18 +230,68 @@ Sorry, the uploaded file is too large.  Try splitting it into smaller files
             return
 
         is_not_empty = lambda x: (x or '').strip()
-        persons = [r for r in records if is_not_empty(r.get('full_name'))]
-        notes = [r for r in records if is_not_empty(r.get('note_record_id'))]
+        version = pfif.PFIF_DEFAULT_VERSION_SPEC
+        person_fields = set(version.fields['person'])
+        note_fields = set(version.fields['note'])
+        person_or_note_fields = person_fields | note_fields
+        person_specific_fields = person_fields - note_fields
+        note_specific_fields = note_fields - person_fields
+
+        persons = []
+        notes = []
+        for r in records:
+            # If the record has any of the fields specific to Person, considers
+            # the record contains Person information.
+            is_person = any(
+                is_not_empty(r.get(f)) for f in person_specific_fields)
+            # If the record has any of the fields specific to Note, considers
+            # the record contains Note information.
+            is_note = any(
+                is_not_empty(r.get(f)) for f in note_specific_fields)
+            # If the record only contains fields shared between Person and
+            # Note, considers it as Person. The record is anyway an error
+            # because it misses full_name and note_record_id. But we want to
+            # put it in persons so that it reports an error message.
+            # If the row is completely empty, silently skips it.
+            if (not is_person and not is_note and
+                    any(is_not_empty(r.get(f)) for f in person_or_note_fields)):
+                is_person = True
+            if is_person:
+                persons.append(r)
+            if is_note:
+                notes.append(r)
 
         people_written, people_skipped, people_total = importer.import_records(
-            self.repo, source_domain, importer.create_person, persons,
-            omit_duplicate_persons=True,
+            self.repo, source_domain,
+            importer.create_person_with_full_name,
+            persons,
+            # This is temporarily disabled because it reports an error even
+            # when the user specifies an existing person_record_id to
+            # update a record, which should be allowed.
+            # TODO(ichikawa) Fix this.
+            omit_duplicate_persons=False,
             allow_overwrite=self.params.allow_overwrite,
             dry_run=self.params.dry_run)
+
+        # If the row contains both Person and Note information, and we have
+        # failed to import the Person, we skip the corresponding Note.
+        # This is to avoid adding a Note for a Person which doesn't exist.
+        skipped_person_record_ids = set(
+            f.get('person_record_id') for _, f in people_skipped
+            if f.get('person_record_id', '').strip())
+        notes = [r for r in notes
+            if r.get('person_record_id') not in skipped_person_record_ids]
+
         notes_written, notes_skipped, notes_total = importer.import_records(
-            self.repo, source_domain, importer.create_note, notes,
+            self.repo, source_domain,
+            importer.create_note_with_note_record_id,
+            notes,
             believed_dead_permission=self.auth.believed_dead_permission,
-            omit_duplicate_notes=True,
+            # This is temporarily disabled because it reports an error even
+            # when the user specifies an existing note_record_id to
+            # update a record, which should be allowed.
+            # TODO(ichikawa) Fix this.
+            omit_duplicate_notes=False,
             allow_overwrite=self.params.allow_overwrite,
             dry_run=self.params.dry_run)
 
