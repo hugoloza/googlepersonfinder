@@ -22,7 +22,6 @@ import const
 import model
 import utils
 
-NOTES_PER_PAGE = 50
 STATUS_CODES = {
   None: 'u',
   '': 'u',
@@ -43,6 +42,7 @@ class Handler(utils.BaseHandler):
         # Make the navigation links.
         status = self.request.get('status') or 'all'
         source = self.request.get('source') or 'all'
+        count = int(self.request.get('count', '50'))
 
         status_nav_html = ''
         for option in [
@@ -89,8 +89,8 @@ class Handler(utils.BaseHandler):
             query.order('-entry_date')
 
         skip = self.params.skip or 0
-        notes = query.fetch(NOTES_PER_PAGE + 1, skip)
-        for note in notes[:NOTES_PER_PAGE]:
+        notes = query.fetch(count + 1, skip)
+        for note in notes[:count]:
             person = model.Person.get(self.repo, note.person_record_id)
             if person:
                 # Copy in the fields of the associated Person.
@@ -106,9 +106,9 @@ class Handler(utils.BaseHandler):
                     status_codes += code
                 note.person_status_codes = status_codes
 
-        if len(notes) > NOTES_PER_PAGE:
-            notes = notes[:NOTES_PER_PAGE]
-            next_skip = skip + NOTES_PER_PAGE
+        if len(notes) > count:
+            notes = notes[:count]
+            next_skip = skip + count
             next_url = self.get_url(
                 '/admin/review', skip=str(next_skip),
                 status=status, source=source)
@@ -122,7 +122,7 @@ class Handler(utils.BaseHandler):
             source_nav_html=source_nav_html,
             next_url=next_url,
             first=skip + 1,
-            last=skip + len(notes[:NOTES_PER_PAGE]))
+            last=skip + len(notes[:count]))
 
     def post(self):
         if not self.is_current_user_authorized():
