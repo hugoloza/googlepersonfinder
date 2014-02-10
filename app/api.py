@@ -30,6 +30,7 @@ import pfif
 import simplejson
 import subscribe
 import utils
+import xlrd
 from model import Person, Note, ApiActionLog
 from text_query import TextQuery
 from utils import Struct
@@ -149,6 +150,37 @@ def convert_time_fields(rows, default_offset=0):
             setting_names = [name.lower().strip() for name in row]
 
 
+def convert_xsl_to_csv(contents):
+    """Converts data in xsl (or xslx) format to CSV."""
+    book = xlrd.open_workbook(file_contents=contents)
+    if book.nsheets == 0:
+        return None, 'The uploaded file contains no sheets.'
+    sheet = book.sheet_by_index(0)
+    table = []
+    for row in xrange(sheet.nrows):
+        table_row = []
+        for col in xrange(sheet.ncols):
+            value = None
+            cell_value = sheet.cell_value(row, col)
+            cell_type = sheet.cell_type(row, col)
+            if cell_type == xlrd.XL_CELL_TEXT:
+                value = cell_value
+            elif cell_type == xlrd.XL_CELL_NUMBER:
+                value = str(int(cell_value))
+            elif cell_type == xlrd.XL_CELL_BOOLEAN:
+                value = 'true' if cell_value else 'false'
+            elif cell_type == xlrd.XL_CELL_DATE:
+                # TODO(ryok): support date type.
+                pass
+            table_row.append(cell_value)
+        table.append(table_row)
+
+    csv_output = StringIO.StringIO()
+    csv_writer = csv.writer(csv_output)
+    csv_writer.writerows(table)
+    return csv_output.getvalue(), None
+
+
 class Import(utils.BaseHandler):
     https_required = True
 
@@ -170,6 +202,15 @@ class Import(utils.BaseHandler):
             self.write('Please specify at least one CSV file.')
             return
 
+        # Handle Excel sheets.
+        filename = self.request.POST['content'].filename
+        if filename.endswith('.xlsx') or filename.endswith('.xls'):
+            content, error = convert_xsl_to_csv(content)
+            if error:
+                self.response.set_status(400)
+                self.write(error)
+                return
+                        
         try:
             lines = content.splitlines()  # handles \r, \n, or \r\n
             if self.request.get('format') == 'notes':
