@@ -172,7 +172,7 @@ def convert_xsl_to_csv(contents):
             elif cell_type == xlrd.XL_CELL_DATE:
                 # TODO(ryok): support date type.
                 pass
-            table_row.append(cell_value)
+            table_row.append(value)
         table.append(table_row)
 
     csv_output = StringIO.StringIO()

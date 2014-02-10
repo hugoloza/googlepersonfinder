@@ -6522,7 +6522,7 @@ class ImportTests(TestsBase):
         assert 'Person records Imported 3 of 3' in re.sub('\\s+', ' ', doc.text)
         assert Person.all().count() == 3
         person = Person.all().get()  # check the first Person
-        assert person.record_id == 'test.google.com/12345.0'
+        assert person.record_id == 'test.google.com/12345'
         assert person.source_date == datetime.datetime(2013, 11, 12, 7, 26, 0)
         assert person.full_name == 'Mary Example'
         verify_api_log(ApiActionLog.WRITE, person_records=3, note_records=0)
