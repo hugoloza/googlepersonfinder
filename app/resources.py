@@ -166,21 +166,27 @@ class Resource(db.Model):
     content = db.BlobProperty()  # binary data or UTF8-encoded template text
     last_modified = db.DateTimeProperty(auto_now=True)  # for bookkeeping
 
-    RESOURCE_DIR = 'resources'  # directory containing resource files
+    # directory containing resource files. It looks for files in the directories
+    # in the order they are listed here.
+    RESOURCE_DIRS = ['resources/v2', 'resources']
 
     @staticmethod
     def list_files():
         """Returns a list of the files in the resource directory."""
-        return os.listdir(Resource.RESOURCE_DIR)
+        files = []
+        for directory in Resource.RESOURCE_DIRS:
+            files += os.listdir(directory)
+        return files
 
     @staticmethod
     def load_from_file(name):
         """Creates a Resource from a file, or returns None if no such file."""
-        try:
-            file = open(Resource.RESOURCE_DIR + '/' + name)
-            return Resource(key_name=name, content=file.read())
-        except IOError:
-            return None
+        for directory in Resource.RESOURCE_DIRS:
+            try:
+                file = open(directory + '/' + name)
+                return Resource(key_name=name, content=file.read())
+            except IOError:
+                pass
 
     @staticmethod
     def get(name, bundle_name=None):
