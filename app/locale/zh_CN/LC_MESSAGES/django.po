@@ -146,6 +146,18 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
+"          %(search_engine_name)s has search result(s) matching this "
+"query.\n"
+"        "
+msgstr ""
+"\n"
+"          %(search_engine_name)s has search result(s) matching this "
+"query.\n"
+"        "
+
+#, python-format
+msgid ""
+"\n"
 "        Records Similar to: %(full_name)s\n"
 "      "
 msgstr ""
@@ -955,7 +967,6 @@ msgstr "原始发布网站的名称"
 msgid "Other website"
 msgstr "其他网站"
 
-#, fuzzy
 msgid ""
 "PLEASE NOTE: On active Person Finder sites, all data entered is available"
 " to the public and usable by anyone.  Google does not review or verify "
