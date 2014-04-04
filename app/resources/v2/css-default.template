@@ -14,26 +14,105 @@
  * limitations under the License.
  */
 
+body {
+  font: 14px Arial, Helvetica, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+body > .container {
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  margin: 25px 35px;
+  padding: 20px;
+}
+
+a {
+  color: #3e82f7;
+}
+
+.repo-header h1 {
+  font-size: 25px;
+  font-weight: initial;
+}
+
+.repo-header h1 a {
+  color: #333;
+  text-decoration: none;
+}
+
+hr {
+  background-color: #ddd;
+  border: 0;
+  height: 1px;
+  margin: 15px 0;
+}
+
+.footer {
+  color: #666;
+  font-size: smaller;
+}
+
 /* start.html.template */
 
 .action {
-  margin: 10px;
-  padding: 25px 20px;
-  width: 400px;
+  margin: 18px;
+  padding: 30px 200px 30px 20px;
+  width: 150px;
+  background-position: 95% center;
+  background-repeat: no-repeat;
+  background-size: 22px;
 }
 
 .action a {
   color: white;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.seek {
-  background-color: green;
+.start .seek {
+  background-color: #00a146;
+  background-image: url('/global/right-arrow-green.png');
 }
 
-.provide {
-  background-color: blue;
+.start .provide {
+  background-color: #3e82f7;
+  background-image: url('/global/right-arrow-blue.png');
 }
 
 .message {
   margin: 10px 0;
+}
+
+.field {
+  margin: 5px 0;
+}
+
+.input {
+  border: 1px solid #bbb;
+  padding: 3px;
+  height: 22px;
+  margin: 0;
+}
+
+input {
+  border: 0;
+  outline: none;
+}
+
+.button {
+}
+
+.button .search {
+  /* background-position: 0 -1786px; */
+  /* background-image: url('http://ssl.gstatic.com/gb/images/v2_0b3bd130.png'); */
+  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+  border-radius: 2px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  height: 30px;
+  width: 60px;
 }
