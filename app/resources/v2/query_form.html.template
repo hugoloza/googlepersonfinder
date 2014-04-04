@@ -28,7 +28,7 @@
             {% endif %}
           </div>
         {% else %}
-          <h3 class="sub_title">{% trans "I'm looking for someone" %}</h3>
+          <h3 class="sub_title">{% trans "Look for someone" %}</h3>
           <div class="{{params.error}}">
             {% if config.jp_mobile_carrier_redirect %}
               {% trans "Enter the person's name, parts of the name, or mobile phone number." %}
@@ -115,9 +115,16 @@
                 class="short-text-input"
                 value="{{params.query}}">
           {% else %}
-            <input id="query" name="query"
-                class="long-text-input"
-                value="{{params.query}}">
+            <div class="input" style="float: left">
+              <input id="query" name="query"
+                  class="long-text-input"
+                  value="{{params.query}}" size="50">
+            </div>
+            <div class="button" style="float: left">
+              <span class="search">
+              </span>
+            </div>
+            <div style="clear: both"></div>
           {% endif %}
       </div>
     {% endifequal %}
@@ -136,6 +143,7 @@
             <input type="submit" value="{% trans "Provide information about this person" %}">
           {% endif %}
         {% else %}
+          <!--
           {% if env.ui == "facebook" %}
             <div style="margin-left: -70px"
             <input type="submit" value="{% trans "Search for this person" %}">
@@ -143,6 +151,7 @@
           {% else %}
             <input type="submit" value="{% trans "Search for this person" %}">
           {% endif %}
+          -->
         {% endifequal %}
       </div>
   </div>

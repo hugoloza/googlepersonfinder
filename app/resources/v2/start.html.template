@@ -15,26 +15,28 @@
 
 {% block content %}
 
-<div class="action seek">
-  <a href="{{seek_url}}" tabindex="1">
-    {% trans "I'm looking for someone" %}
-  </a>
-</div>
-<div class="action provide">
-  <a href="{{provide_url}}" tabindex="2">
-    {% trans "I have information about someone" %}
-  </a>
-</div>
-<div class="message">
-  A mobile version of this tool is available.
-</div>
-<div class="message">
-  {% if num_people %}
-    {% blocktrans %}Currently tracking about {{num_people}} records.{% endblocktrans %}
-  {% endif %}
-</div>
-<div class="message">
-  {{env.start_page_custom_html|default:""|safe}}
+<div class="start">
+  <div class="action seek">
+    <a href="{{seek_url}}" tabindex="1">
+      {% trans "I'm looking for someone" %}
+    </a>
+  </div>
+  <div class="action provide">
+    <a href="{{provide_url}}" tabindex="2">
+      {% trans "I have information about someone" %}
+    </a>
+  </div>
+  <div class="message">
+    A <a href="?ui=light">simplified</a> version of this tool is available.
+  </div>
+  <div class="message">
+    {% if num_people %}
+      {% blocktrans %}Currently tracking about {{num_people}} records.{% endblocktrans %}
+    {% endif %}
+  </div>
+  <div class="message">
+    {{env.start_page_custom_html|default:""|safe}}
+  </div>
 </div>
 
 {% endblock %}
