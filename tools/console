@@ -1,3 +1,5 @@
+hello world.
+
 #!/bin/bash
 
 pushd "$(dirname $0)" >/dev/null && source common.sh && popd >/dev/null
