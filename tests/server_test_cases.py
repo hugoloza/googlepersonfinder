@@ -4606,25 +4606,35 @@ _feed_profile_url2</pfif:profile_urls>
                       'id=haiti.personfinder.google.org/person.123')  # PFIF 1.4
         expected_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <pfif:pfif xmlns:pfif="http://zesty.ca/pfif/1.4">
-  <pfif:person_record_id>haiti.personfinder.google.org/person.123</pfif:person_record_id>
-  <pfif:entry_date>2010-01-03T00:00:00Z</pfif:entry_date>
-  <pfif:expiry_date>2010-03-03T00:00:00Z</pfif:expiry_date>
-  <pfif:author_name>_test_author_name</pfif:author_name>
-  <pfif:source_date>2010-01-02T00:00:00Z</pfif:source_date>
-  <pfif:full_name>_test_given_name _test_family_name</pfif:full_name>
-  <pfif:given_name>_test_given_name</pfif:given_name>
-  <pfif:family_name>_test_family_name</pfif:family_name>
-  <pfif:photo_url>_test_photo_url</pfif:photo_url>
-  <pfif:note>
-    <pfif:note_record_id>haiti.personfinder.google.org/note.456</pfif:note_record_id>
+  <pfif:person>
     <pfif:person_record_id>haiti.personfinder.google.org/person.123</pfif:person_record_id>
-    <pfif:entry_date>2010-01-01T00:00:00Z</pfif:entry_date>
-    <pfif:author_name></pfif:author_name>
-    <pfif:source_date>2010-01-01T00:00:00Z</pfif:source_date>
-    <pfif:text>Testing</pfif:text>
-  </pfif:note>
+    <pfif:entry_date>2010-01-03T00:00:00Z</pfif:entry_date>
+    <pfif:expiry_date>2010-03-04T00:00:00Z</pfif:expiry_date>
+    <pfif:author_name>_test_author_name</pfif:author_name>
+    <pfif:source_date>2010-01-03T00:00:00Z</pfif:source_date>
+    <pfif:full_name>_test_given_name _test_family_name</pfif:full_name>
+    <pfif:given_name>_test_given_name</pfif:given_name>
+    <pfif:family_name>_test_family_name</pfif:family_name>
+    <pfif:sex>female</pfif:sex>
+    <pfif:age>52</pfif:age>
+    <pfif:home_city>_test_home_city</pfif:home_city>
+    <pfif:home_state>_test_home_state</pfif:home_state>
+    <pfif:photo_url>_test_photo_url</pfif:photo_url>
+    <pfif:note>
+      <pfif:note_record_id>haiti.personfinder.google.org/note.456</pfif:note_record_id>
+      <pfif:person_record_id>haiti.personfinder.google.org/person.123</pfif:person_record_id>
+      <pfif:entry_date>2010-01-01T00:00:00Z</pfif:entry_date>
+      <pfif:author_name></pfif:author_name>
+      <pfif:source_date>2010-01-01T00:00:00Z</pfif:source_date>
+      <pfif:status>believed_alive</pfif:status>
+      <pfif:text>Testing</pfif:text>
+      <pfif:photo_url>_test_photo_url_for_note</pfif:photo_url>
+    </pfif:note>
+  </pfif:person>
 </pfif:pfif>
 '''
+        assert expected_content == doc.content, (
+            text_diff(expected_content, doc.content))
 
         # The outgoing feed should contain a complete record also.
         doc = self.go('/haiti/feeds/person')  # PFIF 1.4
