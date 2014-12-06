@@ -3100,10 +3100,10 @@ _read_profile_url2</pfif:profile_urls>
                 '_test_given_name _test_family_name / '
                 'Someone has received information that this person is alive / '
                 'female / 52 / From: _test_home_city _test_home_state ## '
-                'More at: http://g.co/pf/haiti ## '
+                'More at: g.co/pf/haiti ## '
                 'All data entered in Person Finder is available to the public '
                 'and usable by anyone. Google does not review or verify the '
-                'accuracy of this data http://goo.gl/UCAXa'
+                'accuracy of this data g.co/pf/global/tos.html'
                 '</message_text>\n'
             '</response>\n')
         assert expected == doc.content, text_diff(expected, actual)
@@ -3117,10 +3117,10 @@ _read_profile_url2</pfif:profile_urls>
             '<response>\n'
             '  <message_text>'
                 'No results found for: _non_existent_family_name ## '
-                'More at: http://g.co/pf/haiti ## '
+                'More at: g.co/pf/haiti ## '
                 'All data entered in Person Finder is available to the public '
                 'and usable by anyone. Google does not review or verify the '
-                'accuracy of this data http://goo.gl/UCAXa'
+                'accuracy of this data g.co/pf/global/tos.html'
                 '</message_text>\n'
             '</response>\n')
         assert expected == doc.content, text_diff(expected, actual)
