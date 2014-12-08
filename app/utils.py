@@ -17,6 +17,7 @@ __author__ = 'kpy@google.com (Ka-Ping Yee) and many other Googlers'
 
 from django_setup import ugettext as _  # always keep this first
 
+import base64
 import calendar
 import cgi
 from datetime import datetime, timedelta
@@ -25,13 +26,14 @@ import logging
 import os
 import random
 import re
+import socket
+import struct
 import sys
 import time
 import traceback
 import unicodedata
 import urllib
 import urlparse
-import base64
 
 import django.utils.html
 from google.appengine.api import images
@@ -477,6 +479,32 @@ def strip_url_scheme(url):
     _, netloc, path, query, segment = urlparse.urlsplit(url)
     return urlparse.urlunsplit(('', netloc, path, query, segment))
 
+def is_ip_address_in_one_of_networks(ip, networks):
+    """e.g., is_ip_address_in_one_of_networks('127.0.0.1', ['127.0.0.0/24'])
+    => True
+    """
+    if not networks:
+        return False
+    for network in networks:
+        if is_ip_address_in_network(ip, network):
+            return True
+    return False
+
+def is_ip_address_in_network(ip, network):
+    """e.g., is_ip_address_in_network('127.0.0.1', '127.0.0.0/24')
+    => True
+    """
+    ipaddr = ip_address_str_to_int(ip)
+    netaddr, bits = network.split('/')
+    netmask = ip_address_str_to_int(netaddr)
+    ipaddr_masked = ipaddr & (0xffffffff << (32 - int(bits)))
+    return ipaddr_masked == netmask
+
+def ip_address_str_to_int(ip):
+    """e.g., ip_address_str_to_int('127.0.0.1') => 0x7f000001
+    """
+    # '>L' means big-endian unsigned long.
+    return struct.unpack('>L', socket.inet_aton(ip))[0]
 
 # ==== Struct ==================================================================
 
