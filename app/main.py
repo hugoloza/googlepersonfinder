@@ -251,9 +251,25 @@ def setup_env(request):
     env.test_mode = (request.remote_addr == '127.0.0.1' and
                      request.get('test_mode'))
 
+    # We sometimes want to disable analytics/maps for requests from a specific
+    # mobile carrier (specified by IP ranges).
+    # In this way, we can avoid requests to sites outside google.org, and
+    # allow the carrier to zero-rate access to Person Finder.
+    # TODO(ichikawa): Add server test for this feature.
+    #
     # TODO(kpy): Make these global config settings and get rid of get_secret().
-    env.analytics_id = get_secret('analytics_id')
-    env.maps_api_key = get_secret('maps_api_key')
+
+    if utils.is_ip_address_in_one_of_networks(
+            request.remote_addr, env.config.ip_networks_to_disable_analytics):
+        env.analytics_id = None
+    else:
+        env.analytics_id = get_secret('analytics_id')
+
+    if utils.is_ip_address_in_one_of_networks(
+            request.remote_addr, env.config.ip_networks_to_disable_maps):
+        env.maps_api_key = None
+    else:
+        env.maps_api_key = get_secret('maps_api_key')
 
     # Internationalization-related stuff.
     env.charset = select_charset(request)
