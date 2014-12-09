@@ -483,7 +483,7 @@ def is_ip_address_in_one_of_networks(ip, networks):
     """e.g., is_ip_address_in_one_of_networks('127.0.0.1', ['127.0.0.0/24'])
     => True
     """
-    if not networks:
+    if networks is None:
         return False
     for network in networks:
         if is_ip_address_in_network(ip, network):
