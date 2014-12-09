@@ -167,20 +167,32 @@ class UtilsTests(unittest.TestCase):
         assert utils.get_utcnow() != test_time
 
     def test_is_ip_address_in_network(self):
-        assert utils.is_ip_address_in_network('192.168.0.1', '192.168.0.0/24')
-        assert utils.is_ip_address_in_network('192.168.0.2', '192.168.0.0/24')
-        assert not utils.is_ip_address_in_network('192.168.1.1', '192.168.0.0/24')
-        assert not utils.is_ip_address_in_network('192.200.1.1', '192.168.0.0/24')
+        assert utils.is_ip_address_in_network(
+            '192.168.0.1', '192.168.0.0/24')
+        assert utils.is_ip_address_in_network(
+            '192.168.0.2', '192.168.0.0/24')
+        assert not utils.is_ip_address_in_network(
+            '192.168.1.1', '192.168.0.0/24')
+        assert not utils.is_ip_address_in_network(
+            '192.200.1.1', '192.168.0.0/24')
 
-        assert not utils.is_ip_address_in_network('192.168.0.1', '192.168.1.0/24')
-        assert not utils.is_ip_address_in_network('192.168.0.2', '192.168.1.0/24')
-        assert utils.is_ip_address_in_network('192.168.1.1', '192.168.1.0/24')
-        assert not utils.is_ip_address_in_network('192.200.1.1', '192.168.1.0/24')
+        assert not utils.is_ip_address_in_network(
+            '192.168.0.1', '192.168.1.0/24')
+        assert not utils.is_ip_address_in_network(
+            '192.168.0.2', '192.168.1.0/24')
+        assert utils.is_ip_address_in_network(
+            '192.168.1.1', '192.168.1.0/24')
+        assert not utils.is_ip_address_in_network(
+            '192.200.1.1', '192.168.1.0/24')
 
-        assert utils.is_ip_address_in_network('192.168.0.1', '192.168.0.0/16')
-        assert utils.is_ip_address_in_network('192.168.0.2', '192.168.0.0/16')
-        assert utils.is_ip_address_in_network('192.168.1.1', '192.168.0.0/16')
-        assert not utils.is_ip_address_in_network('192.200.1.1', '192.168.0.0/16')
+        assert utils.is_ip_address_in_network(
+            '192.168.0.1', '192.168.0.0/16')
+        assert utils.is_ip_address_in_network(
+            '192.168.0.2', '192.168.0.0/16')
+        assert utils.is_ip_address_in_network(
+            '192.168.1.1', '192.168.0.0/16')
+        assert not utils.is_ip_address_in_network(
+            '192.200.1.1', '192.168.0.0/16')
 
         # Bad network spec, should be '192.168.0.0/24'.
         assert not utils.is_ip_address_in_network('192.168.0.1', '192.168.0.1/24')
