@@ -1,0 +1,1 @@
+<font color='red' size='4'>The code repository and all the wiki articles have been migrated to GitHub (<a href='https://github.com/google/personfinder/wiki/TermsOfService'>direct link</a>).</font>
